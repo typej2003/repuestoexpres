@@ -1,0 +1,194 @@
+    /* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+:root {
+    --main-bg-color:  #4447eb;
+    --main-btn-color: #FC5E27;
+	--main-primary-color: #201E1F;
+    --main-secundary-color: #FFCC2A;
+}
+
+.bg-zona{
+	background-color: var(--main-secundary-color);
+	margin-top: 10px;
+}
+
+.bodyCarousel {
+	display: flex;
+	padding: 0 35px;
+	align-items: center;
+	justify-content: center;
+	min-height: 180px;
+	background-color: var(--main-secundary-color);
+	/*background: linear-gradient(to left top, #031a9a, #8b53ff);*/
+}
+.wrapperCarousel {
+	max-width: 2100px;
+	width: 100%;
+	position: relative;
+}
+.wrapperCarousel .arrow {
+	top: 50%;
+	height: 50px;
+	width: 50px;
+	cursor: pointer;
+	font-size: 1.25rem;
+	position: absolute;
+	text-align: center;
+	line-height: 50px;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+	transform: translateY(-50%);
+	transition: transform 0.1s linear;
+}
+.wrapperCarousel .arrow:active {
+	transform: translateY(-50%) scale(0.85);
+}
+.wrapperCarousel .arrow:first-child {
+	left: -22px;
+	z-index: 100;
+}
+.wrapperCarousel .arrow:last-child {
+	right: -22px;
+	z-index: 100;
+}
+.wrapperCarousel .carouselInfinite {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: calc((100% / 4) - 12px);
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	gap: 16px;
+	border-radius: 8px;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+}
+.carouselInfinite::-webkit-scrollbar {
+	display: none;
+}
+.carouselInfinite.no-transition {
+	scroll-behavior: auto;
+}
+.carouselInfinite.dragging {
+	scroll-snap-type: none;
+	scroll-behavior: auto;
+}
+.carouselInfinite.dragging .card {
+	cursor: grab;
+	user-select: none;
+}
+.carouselInfinite :where(.card, .img) {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.carouselInfinite .card {
+	margin-top: 10px;
+	scroll-snap-align: start;
+	height: 242px;
+	list-style: none;
+	background: #fff;
+	cursor: pointer;
+	padding-bottom: 15px;
+	flex-direction: column;
+	border-radius: 8px;
+}
+.carouselInfinite .card .img {
+	background: #8b53ff;
+	height: 128px;
+	width: 128px;
+	border-radius: 50%;
+}
+.card .img img {
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 4px solid #fff;
+}
+.carouselInfinite .card h2 {
+	font-weight: 500;
+	font-size: 1.56rem;
+	margin: 30px 0 5px;
+}
+.carouselInfinite .card span {
+	color: #6a6d78;
+	font-size: 1.31rem;
+}
+
+@media screen and (max-width: 900px) {
+	.wrapperCarousel .carouselInfinite {
+		grid-auto-columns: calc((100% / 2) - 9px);
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.wrapperCarousel .carouselInfinite {
+		grid-auto-columns: 100%;
+	}
+}
+
+/****** Card dentro del slider y star  ******/
+.cardProductsOffer{
+	margin-left: 200px!important;
+	font-size: 0.8rem!important;
+	width: 20rem!important; 
+	height: auto!important; 
+	padding: 0px!important;
+}
+
+.textProductOffer{
+	margin-left: 25px!important;
+	font-size: .8rem!important;
+}
+
+.cardProductsOffer img {
+	width: 140px; 
+	align-self: center;
+}
+.starRating{
+	display: flex;
+	list-style: none;
+}
+.star{
+	font-size: 20px;
+	color:#cfcfcf;
+	margin: 0;
+	margin-top: 5px;
+	padding: 1px;
+}
+.star a {
+	text-decoration: none!important;
+}
+.over{
+	color:#f7c56a;
+}
+.fix{
+	color:#ffa600;
+}
+.rating{
+	margin: 10px 0;
+	font-weight:bold;
+}
+.btn-sale{
+	background-color: #28221B;
+	color: #FFCC2A;
+	width: 120px!important;
+	height: 45px;
+	font-size: .8rem!important;
+	margin-top: 5px;
+	margin-left: 25px!important;
+}
+.btn-sale:hover {
+	background-color: #332c24;
+	color: #FFCC2A;
+}
+.btn-sale:active { 
+	transform: scale(0.98); 
+	/* Scaling button to 0.98 to its original size */ 
+	box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+	/* Lowering the shadow */ 
+	color: #FFCC2A!important;
+	background-color: #3d362d!important;
+}
