@@ -75,19 +75,19 @@ class CreateProductsTable extends Migration
             $table->string('in_pedido')->nullable();
             $table->string('tx_adicionales')->nullable();
             $table->string('tx_alergenos')->nullable();
-            $table->string('in_envio_gratis')->nullable();
-            $table->string('in_oferta')->nullable();
+            $table->string('in_envio_gratis')->nullable()->default('0');
+            $table->string('on_offer')->nullable()->default('0');
             $table->string('tx_datos_vencimiento')->nullable();
             $table->string('tx_valores_nutricionales')->nullable();
             $table->string('tx_conservacion')->nullable();
             $table->string('tx_recomendacion_consumo')->nullable();
             $table->string('tx_envase_embalaje')->nullable();
-            $table->string('in_fragil')->nullable();
-            $table->string('in_por_encargo')->nullable();
-            $table->string('in_olor_fuerte')->nullable();
+            $table->string('in_fragil')->nullable()->default('0');
+            $table->string('in_por_encargo')->nullable()->default('0');
+            $table->string('in_olor_fuerte')->nullable()->default('0');
             $table->string('ca_valoracion')->nullable();
             $table->string('tx_vencimiento')->nullable();
-            $table->string('in_valido')->nullable();
+            $table->string('in_valido')->nullable()->default('1');
             $table->timestamps();
         });
     }

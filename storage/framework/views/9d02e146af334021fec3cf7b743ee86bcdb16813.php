@@ -11,7 +11,9 @@
     <!-- Bootstrap CSS -->
 	    <title>Laravel JQuery UI Autocomplete Search Example - ItSolutionStuff.com</title>
 	    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+        <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
 
         
 	    
@@ -38,15 +40,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('layouts.navbar')->html();
-} elseif ($_instance->childHasBeenRendered('KhXF0x2')) {
-    $componentId = $_instance->getRenderedChildComponentId('KhXF0x2');
-    $componentTag = $_instance->getRenderedChildComponentTagName('KhXF0x2');
+} elseif ($_instance->childHasBeenRendered('c4b1oVl')) {
+    $componentId = $_instance->getRenderedChildComponentId('c4b1oVl');
+    $componentTag = $_instance->getRenderedChildComponentTagName('c4b1oVl');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('KhXF0x2');
+    $_instance->preserveRenderedChild('c4b1oVl');
 } else {
     $response = \Livewire\Livewire::mount('layouts.navbar');
     $html = $response->html();
-    $_instance->logRenderedChild('KhXF0x2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('c4b1oVl', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -55,15 +57,15 @@ echo $html;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('layouts.navbar-in')->html();
-} elseif ($_instance->childHasBeenRendered('TLqvc3J')) {
-    $componentId = $_instance->getRenderedChildComponentId('TLqvc3J');
-    $componentTag = $_instance->getRenderedChildComponentTagName('TLqvc3J');
+} elseif ($_instance->childHasBeenRendered('qd2tuvS')) {
+    $componentId = $_instance->getRenderedChildComponentId('qd2tuvS');
+    $componentTag = $_instance->getRenderedChildComponentTagName('qd2tuvS');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('TLqvc3J');
+    $_instance->preserveRenderedChild('qd2tuvS');
 } else {
     $response = \Livewire\Livewire::mount('layouts.navbar-in');
     $html = $response->html();
-    $_instance->logRenderedChild('TLqvc3J', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('qd2tuvS', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -116,8 +118,8 @@ echo $html;
 
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" /> -->
 
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery-3.6.4.min.js"></script>
-
+<!-- <script src="/js/bootstrap.min.js"></script> -->
+<!-- <script src="/js/bootstrap.bundle.min.js"></script> -->
+<!-- <script src="/js/jquery-3.6.4.min.js"></script> -->
 
 <?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/layouts/app.blade.php ENDPATH**/ ?>

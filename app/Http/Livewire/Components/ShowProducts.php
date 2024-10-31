@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Components;
 
-use Livewire\Component;
+use App\Http\Livewire\Admin\AdminComponent;
 
-class ShowProducts extends Component
+class ShowProducts extends AdminComponent
 {
     public function render()
     {

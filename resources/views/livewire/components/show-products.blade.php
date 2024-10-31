@@ -193,14 +193,36 @@
         </div>
     </div>
 </div>
-       
-  <script>
-        $(".slider-products").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        autoplay: false,
-        });
-  </script>
-  </div>
+
+    <script>
+        function loadSlider(){
+            $(".slider-products").slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: findSlides(),
+            slidesToScroll: 3,
+            autoplay: false,
+            });
+        }
+        
+        loadSlider()
+
+        function findSlides()
+        {
+            var ancho = window.innerWidth;
+            var alto = window.innerHeight;
+
+            if (window.innerWidth < 1024) 
+                return 1
+            else 
+            if (window.innerWidth < 1280) 
+                return 2
+            else 
+                return 3
+        }
+
+        window.addEventListener('resize', () => {
+            location.reload()
+        })
+    </script>
+</div>

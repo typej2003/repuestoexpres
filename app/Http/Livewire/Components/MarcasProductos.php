@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Components;
 
-use Livewire\Component;
+use App\Http\Livewire\Admin\AdminComponent;
+
 use App\Models\Subcategory;
 
-class MarcasProductos extends Component
+class MarcasProductos extends AdminComponent
 {
     public function render()
     {
