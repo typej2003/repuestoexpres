@@ -92,8 +92,12 @@
                                 </div>
                                 <div class="row">
                                 <div class="negrita textProductOffer" style="margin-left: 10px;">{{$product->name}}</div>
+                                    @if($product->on_offer)
                                     <div class="textProductOffer text-decoration-line-through">Precio: USD. {{ $product->price1 }}</div>
                                     <div class="textProductOffer">Promoción: USD. {{ $product->price_offer }}</div>
+                                    @else
+                                    <div class="textProductOffer">Precio: USD. {{ $product->price1 }}</div>
+                                    @endif
                                     <div style="display: flex; flex-direction: row;">
                                         <button class="btn btn-sale">Comprar ahora</button>
                                         <div>

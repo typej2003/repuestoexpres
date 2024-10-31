@@ -92,8 +92,12 @@
                                 </div>
                                 <div class="row">
                                 <div class="negrita textProductOffer" style="margin-left: 10px;"><?php echo e($product->name); ?></div>
+                                    <?php if($product->on_offer): ?>
                                     <div class="textProductOffer text-decoration-line-through">Precio: USD. <?php echo e($product->price1); ?></div>
                                     <div class="textProductOffer">Promoción: USD. <?php echo e($product->price_offer); ?></div>
+                                    <?php else: ?>
+                                    <div class="textProductOffer">Precio: USD. <?php echo e($product->price1); ?></div>
+                                    <?php endif; ?>
                                     <div style="display: flex; flex-direction: row;">
                                         <button class="btn btn-sale">Comprar ahora</button>
                                         <div>
