@@ -6,9 +6,66 @@
     <link rel="stylesheet" href="/css/slick.min.css">
     <link rel="stylesheet" href="/css/showProducts.css">
     <style>
-        .slider{
+        /* .slider{
             width: 90%!important;
-        }
+        } */
+        /* * {
+      box-sizing: border-box;
+    } */
+
+    .slider {
+        /*width: 50%;*/
+        width: 90%;
+        margin: 10px auto!important; */        
+        /* height: 300px; */
+    }
+
+    .slick-slide {
+      margin: 0px 20px; 
+    }
+
+    .slick-slide img {
+      width: 80%;
+      height: 200px;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+      color: black;
+    }
+
+    .slick-next.slick-arrow {
+        border: 1px solid black;
+        border-radius: 50px;
+        width: 35px;
+        height: 35px;
+        display: block;
+        background-image: url('/img/circle-right-regular.svg');
+        z-index: 1000;
+    }
+
+    .slick-prev.slick-arrow {
+        border: 1px solid black;
+        border-radius: 50px;
+        width: 35px;
+        height: 35px;
+        display: block;
+        background-image: url('/img/circle-left-regular.svg');
+        z-index: 1000;
+    }
+
+    .slick-slide {
+      transition: all ease-in-out .3s;
+      /* opacity: .2; */
+    }
+    
+    /* .slick-active {
+      opacity: .5;
+    }
+
+    .slick-current {
+      opacity: 1;
+    } */
     </style>  
 <div class="container-fluid showProductsP">
     <div class="row negrita">
@@ -24,172 +81,50 @@
     <div class="row">
         <div class="col-md-12">
             <section class="regular slider slider-products">
-                <div>
-                    <div class="card showProductCard mx-auto text-center">
-                        <card-body>
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <img src="/img/products/aceite.png" alt="">
-                                </div>
-                            </div>
-                            <div class="row">
-                            <div class="negrita textProductOffer" style="margin-left: 10px;">Aceite Mineral 15w40 Ultralub Api Sn</div>
-                                <div class="textProductOffer">Precio: USD. 9.48</div>
-                                <div class="textProductOffer">Promoción: USD. 8.00</div>
-                                <div style="display: flex; flex-direction: row;">
-                                    <button class="btn btn-sale">Comprar ahora</button>
-                                    <div>
-                                        <ul class="text-center starRating">
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                        </ul>
-                                        <div class="rating text-center">Rated</div>
+                @forelse ($products as $index => $product)
+                    <div>
+                        <div class="card showProductCard mx-auto text-center mx-2">
+                            <card-body>
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <img src="/img/products/aceite.png" alt="">
                                     </div>
                                 </div>
-                                <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                            </div>
-                        </card-body>
-                        <card-footer>
-                            <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-                        </card-footer>                    
+                                <div class="row">
+                                <div class="negrita textProductOffer" style="margin-left: 10px;">{{$product->name}}</div>
+                                    <div class="textProductOffer text-decoration-line-through">Precio: USD. {{ $product->price1 }}</div>
+                                    <div class="textProductOffer">Promoción: USD. {{ $product->price_offer }}</div>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <button class="btn btn-sale">Comprar ahora</button>
+                                        <div>
+                                            <ul class="text-center starRating">
+                                                <li class="star"><i class="fas fa-star"></i></li>
+                                                <li class="star"><i class="fas fa-star"></i></li>
+                                                <li class="star"><i class="fas fa-star"></i></li>
+                                                <li class="star"><i class="fas fa-star"></i></li>
+                                                <li class="star"><i class="fas fa-star"></i></li>
+                                            </ul>
+                                            <div class="rating text-center">Rated</div>
+                                        </div>
+                                    </div>
+                                    <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
+                                </div>
+                            </card-body>
+                            <card-footer>
+                                <span class="ml-3">Tienda: Auto Repuestos Fred</span>
+                            </card-footer>                    
+                        </div>
                     </div>
-                </div>
-                <div>
+                @empty
                     <div class="card showProductCard mx-auto text-center">
                         <card-body>
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <img src="/img/products/aceite.png" alt="">
-                                </div>
-                            </div>
-                            <div class="row">
-                            <div class="negrita textProductOffer" style="margin-left: 10px;">Aceite Mineral 15w40 Ultralub Api Sn</div>
-                                <div class="textProductOffer">Precio: USD. 9.48</div>
-                                <div class="textProductOffer">Promoción: USD. 8.00</div>
-                                <div style="display: flex; flex-direction: row;">
-                                    <button class="btn btn-sale">Comprar ahora</button>
-                                    <div>
-                                        <ul class="text-center starRating">
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                        </ul>
-                                        <div class="rating text-center">Rated</div>
-                                    </div>
-                                </div>
-                                <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                            </div>
+                            <span>No tiene Ofertas Disponibles</span>
                         </card-body>
-                        <card-footer>
-                            <span class="ml-3">Tienda: Auto Repuestos Fred</span>
+                        <card-footer>                    
                         </card-footer>                    
                     </div>
-                </div>
-                <div>
-                    <div class="card showProductCard mx-auto text-center">
-                        <card-body>
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <img src="/img/products/aceite.png" alt="">
-                                </div>
-                            </div>
-                            <div class="row">
-                            <div class="negrita textProductOffer" style="margin-left: 10px;">Aceite Mineral 15w40 Ultralub Api Sn</div>
-                                <div class="textProductOffer">Precio: USD. 9.48</div>
-                                <div class="textProductOffer">Promoción: USD. 8.00</div>
-                                <div style="display: flex; flex-direction: row;">
-                                    <button class="btn btn-sale">Comprar ahora</button>
-                                    <div>
-                                        <ul class="text-center starRating">
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                        </ul>
-                                        <div class="rating text-center">Rated</div>
-                                    </div>
-                                </div>
-                                <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                            </div>
-                        </card-body>
-                        <card-footer>
-                            <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-                        </card-footer>                    
-                    </div>
-                </div>
-                <div>
-                    <div class="card showProductCard mx-auto text-center">
-                        <card-body>
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <img src="/img/products/aceite.png" alt="">
-                                </div>
-                            </div>
-                            <div class="row">
-                            <div class="negrita textProductOffer" style="margin-left: 10px;">Aceite Mineral 15w40 Ultralub Api Sn</div>
-                                <div class="textProductOffer">Precio: USD. 9.48</div>
-                                <div class="textProductOffer">Promoción: USD. 8.00</div>
-                                <div style="display: flex; flex-direction: row;">
-                                    <button class="btn btn-sale">Comprar ahora</button>
-                                    <div>
-                                        <ul class="text-center starRating">
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                        </ul>
-                                        <div class="rating text-center">Rated</div>
-                                    </div>
-                                </div>
-                                <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                            </div>
-                        </card-body>
-                        <card-footer>
-                            <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-                        </card-footer>                    
-                    </div>
-                </div>
-                <div>
-                    <div class="card showProductCard mx-auto text-center">
-                        <card-body>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <img class="" src="/img/products/aceite.png" alt="">
-                                </div>
-                            </div>
-                            <div class="row">
-                            <div class="negrita " style="margin-left: 10px;">Aceite Mineral 15w40 Ultralub Api Sn</div>
-                                <div class="">Precio: USD. 9.48</div>
-                                <div class="">Promoción: USD. 8.00</div>
-                                <div style="display: flex; flex-direction: row;">
-                                    <button class="btn btn-sale">Comprar ahora</button>
-                                    <div>
-                                        <ul class="text-center starRating">
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                            <li class="star"><i class="fas fa-star"></i></li>
-                                        </ul>
-                                        <div class="rating text-center">Rated</div>
-                                    </div>
-                                </div>
-                                <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                            </div>
-                        </card-body>
-                        <card-footer>
-                            <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-                        </card-footer>                    
-                    </div>
-                </div>
-            </section>        
+                @endforelse
+            </section>       
         </div>
     </div>
 </div>

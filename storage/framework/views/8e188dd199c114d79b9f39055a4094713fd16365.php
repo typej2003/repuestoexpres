@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="/css/carouselOffer.css">
     <style>
         .slider{
-            width: 90%!important;
+            width: 80%!important;
+        }
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: black!important;
         }
     </style>  
 
