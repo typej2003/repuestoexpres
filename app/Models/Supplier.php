@@ -20,11 +20,7 @@ class Supplier extends Model
         'email',
         'phone',
         'address',
+        'comercio_id',
     ];
 
 }
-
-$table->string('name');
-            $table->string('rif');
-            $table->string('address');
-            $table->string('phone');

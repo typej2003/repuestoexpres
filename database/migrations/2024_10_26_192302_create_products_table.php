@@ -81,7 +81,7 @@ class CreateProductsTable extends Migration
             $table->string('tx_valores_nutricionales')->nullable();
             $table->string('tx_conservacion')->nullable();
             $table->string('tx_recomendacion_consumo')->nullable();
-            $table->string('tx_envase_enbalaje')->nullable();
+            $table->string('tx_envase_embalaje')->nullable();
             $table->string('in_fragil')->nullable();
             $table->string('in_por_encargo')->nullable();
             $table->string('in_olor_fuerte')->nullable();

@@ -15,6 +15,11 @@ class CreateComerciosTable extends Migration
     {
         Schema::create('comercios', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('area_id');
+            $table->foreign('area_id')->references('id')
+                ->on('areas')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')
                 ->on('users')

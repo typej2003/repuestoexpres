@@ -155,7 +155,7 @@ class ListUsers extends AdminComponent
     		->where('name', 'like', '%'.$this->searchTerm.'%')
     		->orWhere('email', 'like', '%'.$this->searchTerm.'%')
             ->orderBy($this->sortColumnName, $this->sortDirection)
-            ->paginate(5);
+            ->paginate(15);
 
         return view('livewire.admin.users.list-users', [
         	'users' => $users,

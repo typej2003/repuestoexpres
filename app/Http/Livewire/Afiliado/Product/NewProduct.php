@@ -22,19 +22,22 @@ class NewProduct extends AdminComponent
     use WithFileUploads;
     
     public $comercioId; 
-    public $showEditModal = true;
+    public $editModal;
+    public $controlActivity = true;
+    public $state = [];
 
     public $photo;
 
-    public function mount($comercioId, $showEditModal)
+    public function mount($comercioId, $editModal )
     {
 
         $this->comercioId = $comercioId;
+        $this->editModal = $editModal;
 
         // dd($this->showEditModal);
 
-        if($showEditModal == 'false'){
-            $this->showEditModal = false;
+        if($editModal == 'false'){
+            $this->controlActivity = false;
         }
         
     }
@@ -43,13 +46,15 @@ class NewProduct extends AdminComponent
 	{	
 		$subcategories = Subcategory::where('category_id', $categoryId)->get();	
 
-		if(!$subcategories){
+		if($subcategories->count() > 0){
 			$msg = 'Seleccione una opción';
 			$this->state['subcategory_id'] = 0;
 		}else{
 			$msg = 'No posee Subcategoria';
 			$this->state['subcategory_id'] = 0;
 		}
+
+        $this->skipRender();
         		
 		$this->dispatchBrowserEvent('sendSubcategories', ['subcategories' => $subcategories, 'subcategory' => $subcategory, 'msg' => $msg]);
 	}
@@ -59,11 +64,16 @@ class NewProduct extends AdminComponent
         $comercio = Comercio::find($this->comercioId);
         $brands = Brand::where('comercio_id', $this->comercioId)->get();
         $categories = Category::where('comercio_id', $this->comercioId)->get();
+        $containers = Container::where('comercio_id', $this->comercioId)->get();
+        $suppliers = Supplier::where('comercio_id', $this->comercioId)->get();
+        
 
         return view('livewire.afiliado.product.new-product', [
             'comercio' => $comercio,
-            'brands' => $brands,
             'categories' => $categories,
+            'brands' => $brands,            
+            'containers' => $containers,
+            'suppliers' => $suppliers,            
         ]);
     }
 }

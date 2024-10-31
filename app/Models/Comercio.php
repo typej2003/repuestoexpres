@@ -20,6 +20,8 @@ class Comercio extends Model
      */
     protected $fillable = [
         'name',
+        'keyword',
+        'area_id',
         'user_id',
         'avatar',
     ];
@@ -56,6 +58,11 @@ class Comercio extends Model
             ->where('comercio_id', $this->id)
             ->where('status', 'norevisado')
             ->count();
+    }
+
+    public function area ()
+    {
+        return $this->hasOne(Area::class);
     }
 
     public function categories ()

@@ -35,7 +35,6 @@ class Product extends Model
         'description',
         'price1',
         'price2',
-        'price', //precio al detal
         'profit_price', // porcentaje de ganancia
         'price_mayor', //precio al mayor
         'profit_mayor', // porcentaje de ganancia
@@ -74,7 +73,7 @@ class Product extends Model
         'tx_valores_nutricionales',
         'tx_conservacion',
         'tx_recomendacion_consumo',
-        'tx_envase_enbalaje',
+        'tx_envase_embalaje',
         'in_fragil',
         'in_por_encargo',
         'in_olor_fuerte',

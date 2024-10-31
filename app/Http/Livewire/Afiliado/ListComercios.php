@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Afiliado;
 use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\User;
 use App\Models\Comercio;
+use App\Models\Area;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\WithFileUploads;
@@ -33,6 +34,10 @@ class ListComercios extends AdminComponent
     public $userId = 0;
 
 	public $photo;
+
+	protected $listeners = [
+		'generarKeyword'
+   		];
 
     public function mount($userId = 0)
     {
@@ -66,9 +71,19 @@ class ListComercios extends AdminComponent
 		$this->dispatchBrowserEvent('show-form');
 	}
 
+	public function generarKeyword($name)
+	{
+		$this->state['keyword'] = strtolower(str_replace(' ', '', $this->state['name']));
+
+		$this->dispatchBrowserEvent('getKeyword', ['keyword' => $this->state['keyword']]);
+		
+
+	}
+
 	public function createComercio()
 	{
 		$validatedData = Validator::make($this->state, [
+			'area_id'=> 'required|not_in:0',
 			'name' => 'required',
 		])->validate();
 
@@ -77,6 +92,8 @@ class ListComercios extends AdminComponent
 		}
 
         $validatedData['user_id'] = $this->userId;
+
+		$validatedData['keyword'] = $this->state['keyword'];
 
 		Comercio::create($validatedData);
 
@@ -105,8 +122,11 @@ class ListComercios extends AdminComponent
 	public function updateComercio()
 	{
 		$validatedData = Validator::make($this->state, [
-			'name' => 'required',
+			'name' => 'required',			
+			'area_id' => 'required',
 		])->validate();
+
+		$validatedData['keyword'] = $this->state['keyword'];
 
 		if ($this->photo) {
 			$validatedData['avatar'] = $this->photo->store('/', 'avatarscomercios');
@@ -168,12 +188,15 @@ class ListComercios extends AdminComponent
                 $q->where('name', 'like', '%'.$this->searchTerm.'%');                
             })
     		->orderBy($this->sortColumnName, $this->sortDirection)
-            ->paginate(5);
+            ->paginate(15);
         
         $user = User::find($this->userId);
+
+		$areas = Area::all();
 		
         return view('livewire.afiliado.list-comercios', [
             'user'  => $user,
+			'areas'  => $areas,
         	'comercios' => $comercios,
         ]);
     }

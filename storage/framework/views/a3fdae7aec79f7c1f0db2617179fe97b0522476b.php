@@ -129,29 +129,29 @@
                             <li class="nav-item p-3 py-md-1">
                                 <a href="" class="nav-link">ABOUT</a>
                             </li>
-                            @auth
+                            <?php if(auth()->guard()->check()): ?>
                             <li class="nav-item p-3 py-md-1">
                             <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
                                         <a class="nav-link active dropdown-toggle titulo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span class="ml-1" x-ref="username">{{ auth()->user()->name }}</span>
+                                            <span class="ml-1" x-ref="username"><?php echo e(auth()->user()->name); ?></span>
                                         </a>
                                         <div class="dropdown-menu p-4" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ route('admin.profile.edit') }}" x-ref="profileLink">Perfil</a>
-                                            <a class="dropdown-item" href="{{ route('admin.dashboard') }}" x-ref="profileLink">Escritorio</a>
-                                            <a class="dropdown-item" href="{{ route('admin.profile.edit') }}" x-ref="changePasswordLink">Cambiar Contraseña</a>
-                                            <a class="dropdown-item" href="{{ route('admin.settings') }}">Configuración</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="profileLink">Perfil</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.dashboard')); ?>" x-ref="profileLink">Escritorio</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="changePasswordLink">Cambiar Contraseña</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.settings')); ?>">Configuración</a>
                                             <div class="dropdown-divider"></div>
-                                            <form method="POST" action="{{ route('logout') }}">
-                                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
+                                            <form method="POST" action="<?php echo e(route('logout')); ?>">
+                                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
                                             </form>
                                         </div>
                                     </li>
                                 </ul>
                             </li>
-                            @endauth
+                            <?php endif; ?>
                                 
-                            @guest
+                            <?php if(auth()->guard()->guest()): ?>
                             <li class="nav-item p-3 py-md-1">
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item dropdown" style="position: relative!important; z-index: 9001!important;">
@@ -178,7 +178,7 @@
                                     </li>
                                 </ul>
                             </li>  
-                            @endguest
+                            <?php endif; ?>
                             </ul>
                         </div>
                         </section>
@@ -192,43 +192,45 @@
                         <!-- OFF CANVAS MENU LINKS  START-->
                         <div class="d-flex flex-row justify-content-between px-0 " >
                             <ul class="w-60 nav nav-pills nav-fill d-flex">
-                                <!-- @foreach($categories as $category)
+                                <!-- <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <li class="nav-item dropdown">            
-                                    <a class="categoryMenu dropdownLink my-1 nav-link">{{$category->name}}</a>
+                                    <a class="categoryMenu dropdownLink my-1 nav-link"><?php echo e($category->name); ?></a>
                                     <div class="subcategoryMenu dropdown-content-link">
-                                        @foreach($category->subcategories as $subcategory)
-                                            <a class="subcategoryLink" href="#">{{ $subcategory->name }}</a>
-                                        @endforeach
+                                        <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <a class="subcategoryLink" href="#"><?php echo e($subcategory->name); ?></a>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </div>            
                                 </li>
-                                @endforeach -->
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> -->
 
-                                <!-- @foreach($categories as $category)
+                                <!-- <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <li class="nav-item dropdown">
-                                    <button class="btn btnCategoria">{{$category->name}}<i class="bx bx-chevron-down arrowCategoria"></i></button>
+                                    <button class="btn btnCategoria"><?php echo e($category->name); ?><i class="bx bx-chevron-down arrowCategoria"></i></button>
                                     <div class="dropdownCategoria itemCategoria">
-                                        @foreach($category->subcategories as $subcategory)
+                                        <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <a href="#create" style="">
                                                 <i class="bx bx-plus-circle"></i>
-                                                {{ $subcategory->name }}
+                                                <?php echo e($subcategory->name); ?>
+
                                             </a>    
-                                        @endforeach                                    
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                                    
                                     </div>
                                 </li>
-                                @endforeach -->
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> -->
 
-                                @foreach($categories as $category)
+                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            {{$category->name}}
+                                            <?php echo e($category->name); ?>
+
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            @foreach($category->subcategories as $subcategory)
-                                                <li><a class="dropdown-item" href="{{$subcategory->id}}">{{$subcategory->name}}</a></li>
-                                            @endforeach
+                                            <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <li><a class="dropdown-item" href="<?php echo e($subcategory->id); ?>"><?php echo e($subcategory->name); ?></a></li>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
                                     </li>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 
                                 
 
@@ -243,14 +245,14 @@
                                     <span>Moneda: </span>
                                     <div class="currency mx-1">
                                         <select class="form-control" wire:change="changeCurrent($event.target.value)">
-                                            <option value="Bs" {{ (config('app.currencyGlobal') === 'Bs') ? 'selected' : '' }}>Bs</option>
-                                            <option value="$" {{ (config('app.currencyGlobal') === '$') ? 'selected' : '' }}>$</option>
-                                            <option value="€" {{ (config('app.currencyGlobal') === '€') ? 'selected' : '' }}>€</option>
+                                            <option value="Bs" <?php echo e((config('app.currencyGlobal') === 'Bs') ? 'selected' : ''); ?>>Bs</option>
+                                            <option value="$" <?php echo e((config('app.currencyGlobal') === '$') ? 'selected' : ''); ?>>$</option>
+                                            <option value="€" <?php echo e((config('app.currencyGlobal') === '€') ? 'selected' : ''); ?>>€</option>
                                         </select>
                                     </div>
                                     
                                 </li>
-                                <li class="nav-item dropdown ms-auto"><span class="nav-link">$: {{$tasacambio}} Bs.</span></li>
+                                <li class="nav-item dropdown ms-auto"><span class="nav-link">$: <?php echo e($tasacambio); ?> Bs.</span></li>
                                 
                                 
                             </ul>                            
@@ -294,4 +296,4 @@
     
   </body>
 </html>
-</div>
+</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/layouts/navbar.blade.php ENDPATH**/ ?>

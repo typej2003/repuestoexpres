@@ -15,6 +15,7 @@ class ComercioSeeder extends Seeder
     public function run()
     {
         DB::table('comercios')->insert([
+            'area_id' => '2',
             'user_id' => '1',
             'keyword' => 'comercio1',
             'name' => 'Comercio 1',

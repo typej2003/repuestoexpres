@@ -23,7 +23,7 @@ Route::get('/listProducts/{comercioId}', ListProducts::class)->name('listProduct
 
 Route::get('/listTasas/{comercioId}', ListTasas::class)->name('listTasas')->middleware('auth');
 
-Route::get('/newProduct/{comercioId}/{showEditModal}', NewProduct::class)->name('newProduct')->middleware('auth');
+Route::get('/newProduct/{comercioId}/{editModal}', NewProduct::class)->name('newProduct')->middleware('auth');
 
 Route::get('/listBrand/{comercioId}', ListBrand::class)->name('listBrand')->middleware('auth');
 
