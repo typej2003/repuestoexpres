@@ -13,6 +13,7 @@ class brand extends Model
         'name',
         'user_id',
         'comercio_id',
+        
     ];
 
     public function product()
