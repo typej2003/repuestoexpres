@@ -12,12 +12,16 @@ class brand extends Model
     protected $fillable = [
         'name',
         'user_id',
-        'comercio_id',
-        
+        'comercio_id',        
     ];
 
     public function product()
     {
         return $this->hasOne(Product::class);
-    }    
+    } 
+
+    public function isActive()
+    {
+        return 1;
+    }
 }
