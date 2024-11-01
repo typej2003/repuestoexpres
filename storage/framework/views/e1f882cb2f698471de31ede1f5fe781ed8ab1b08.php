@@ -81,23 +81,23 @@
     <div class="row">
         <div class="col-md-12">
             <section class="regular slider slider-products">
-                @forelse ($products as $index => $product)
+                <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div>
                         <div class="card showProductCard mx-auto text-center mx-2">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="">
-                                        <img class="mx-auto" src="{{$product->avatar_url}}" alt="">
+                                        <img class="mx-auto" src="<?php echo e($product->avatar_url); ?>" alt="">
                                     </div>
                                 </div>
                                 <div class="row text-left">
-                                    <div class="negrita">{{$product->name}}</div>
-                                        @if($product->on_offer)
-                                            <div class="text-decoration-line-through">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
-                                            <div class="">Promoción: {{$currencyValue}}. {{ $product->getPrice_offer() }}</div>
-                                        @else
-                                            <div class="">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
-                                        @endif
+                                    <div class="negrita"><?php echo e($product->name); ?></div>
+                                        <?php if($product->on_offer): ?>
+                                            <div class="text-decoration-line-through">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                            <div class="">Promoción: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice_offer()); ?></div>
+                                        <?php else: ?>
+                                            <div class="">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                        <?php endif; ?>
                                         <div style="display: flex; flex-direction: row;">
                                             <button class="btn btn-sale">Comprar ahora</button>
                                             <div>
@@ -112,16 +112,16 @@
                                             </div>
                                         </div>
                                 </div>
-                                @if($product->in_envio_gratis)
+                                <?php if($product->in_envio_gratis): ?>
                                 <div class="text-left" style="color: blue;">Envío Gratis</div>
-                                @endif
+                                <?php endif; ?>
                             </div>
                             <div class="card-footer">
                                 <span class="">Tienda: Auto Repuestos Fred</span>
                             </div>
                         </div>
                     </div>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <div class="card showProductCard mx-auto text-center">
                         <card-body>
                             <span>No tiene productos destacados</span>
@@ -129,7 +129,7 @@
                         <card-footer>                    
                         </card-footer>                    
                     </div>
-                @endforelse
+                <?php endif; ?>
             </section>       
         </div>
     </div>
@@ -166,4 +166,4 @@
             location.reload()
         })
     </script>
-</div>
+</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/repuestoexpres/list-masdestacado.blade.php ENDPATH**/ ?>

@@ -86,7 +86,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="">
-                                        <img class="mx-auto" src="/img/products/aceite.png" alt="">
+                                        <img class="mx-auto" src="{{$product->avatar_url}}" alt="">
                                     </div>
                                 </div>
                                 <div class="row text-left">

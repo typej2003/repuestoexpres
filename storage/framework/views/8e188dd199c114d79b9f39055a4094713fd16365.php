@@ -87,16 +87,16 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="">
-                                        <img class="mx-auto" src="/img/products/aceite.png" alt="">
+                                        <img class="mx-auto" src="<?php echo e($product->avatar_url); ?>" alt="">
                                     </div>
                                 </div>
                                 <div class="row text-left">
                                     <div class="negrita"><?php echo e($product->name); ?></div>
                                         <?php if($product->on_offer): ?>
-                                            <div class="text-decoration-line-through">Precio: USD. <?php echo e($product->price1); ?></div>
-                                            <div class="">Promoción: USD. <?php echo e($product->price_offer); ?></div>
+                                            <div class="text-decoration-line-through">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                            <div class="">Promoción: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice_offer()); ?></div>
                                         <?php else: ?>
-                                            <div class="">Precio: USD. <?php echo e($product->price1); ?></div>
+                                            <div class="">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
                                         <?php endif; ?>
                                         <div style="display: flex; flex-direction: row;">
                                             <button class="btn btn-sale">Comprar ahora</button>

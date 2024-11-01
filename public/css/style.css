@@ -361,8 +361,8 @@ textarea {
 }
 
 .showProductCard img{
-    width: 40%!important;
-    height: 80%!important;
+    width: 120px!important;
+    height: 150px!important;
     text-align: center!important;
     align-items: center;
 }
