@@ -17,6 +17,7 @@ class Setting extends Model
         'footer_text',
         'sidebar_collapse',
         'api_bcv',
+        'currency',
     ];
 
     protected $casts = [

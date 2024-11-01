@@ -4,6 +4,24 @@
 <!doctype html>
 <html lang="es">
   <head>
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <title>{{ setting('site_title') }} | {{ setting('site_name') }}</title>
+
+    <!-- Bootstrap CSS -->
+	    <title>Laravel JQuery UI Autocomplete Search Example - ItSolutionStuff.com</title>
+	    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+        
+	    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/infiniteSlider.css">
+
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,75 +36,41 @@
     <!-- <link rel="stylesheet" href="/css/modopago.css" class="rel"> -->
     <!-- <link rel="stylesheet" href="/cs/swiper-bundle.min.css"> -->
     
-    <title><?php echo e(config('app.name')); ?></title>
+    <title>{{config('app.name')}}</title>
     <style>
       
     </style>
   </head>
   <body class="">
    <!--ENCABEZADO--> 
-    <?php if(!Auth::check()): ?> 
-      <?php
-if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('layouts.navbar')->html();
-} elseif ($_instance->childHasBeenRendered('l1081249218-0')) {
-    $componentId = $_instance->getRenderedChildComponentId('l1081249218-0');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l1081249218-0');
-    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l1081249218-0');
-} else {
-    $response = \Livewire\Livewire::mount('layouts.navbar');
-    $html = $response->html();
-    $_instance->logRenderedChild('l1081249218-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
-}
-echo $html;
-?>
-    <?php endif; ?>
-    <?php echo $__env->make('livewire.components.slider-principal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <div class="my-2"></div>
-    <section class="body">
-        <div class="my-2"></div>
-        <?php
-if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('components.carousel-offer')->html();
-} elseif ($_instance->childHasBeenRendered('l1081249218-1')) {
-    $componentId = $_instance->getRenderedChildComponentId('l1081249218-1');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l1081249218-1');
-    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l1081249218-1');
-} else {
-    $response = \Livewire\Livewire::mount('components.carousel-offer');
-    $html = $response->html();
-    $_instance->logRenderedChild('l1081249218-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
-}
-echo $html;
-?>
-        <div class="my-2"></div>
-        <?php
-if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('components.show-products')->html();
-} elseif ($_instance->childHasBeenRendered('l1081249218-2')) {
-    $componentId = $_instance->getRenderedChildComponentId('l1081249218-2');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l1081249218-2');
-    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l1081249218-2');
-} else {
-    $response = \Livewire\Livewire::mount('components.show-products');
-    $html = $response->html();
-    $_instance->logRenderedChild('l1081249218-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
-}
-echo $html;
-?>
+    
+        @livewire('layouts.navbar')
+    
+        @include('livewire.components.slider-principal')
+    <div class="container-fluid my-2"></div>
+    <section class="">
+        <div class="row">
+            <div class="col-md-2">
+                <span>Detalles</span>
+            </div>
+            <div class="col-md-10">
+            <div class="my-2"></div>
+                @livewire('components.repuestoexpres.list-masdestacado')
+                <div class="my-2"></div>
+                @livewire('components.results-products', ['parametro' => $parametro])        
+            </div>
+        </div>
+        
+        <div class="my-5"></div>
     </section>
     
-    <?php echo $__env->make('livewire.components.navigation-map', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    @include('livewire.components.navigation-map')
 
-    <?php if(!Auth::check()): ?> 
-      <?php echo $__env->make('layouts.partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <?php endif; ?>
+    @include('layouts.partials.footer')
+    
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
-    <script src="/js/bootstrap.bundle.min.js"></script>
+    
     
   </body>
 </html>
@@ -114,13 +98,13 @@ echo $html;
                         <p class="text-center textoreg">¿Todavía no te has registrado? <span><a href="#" class="c-n">Crea tu cuenta Aquí</a></span></p>
                     </div>
             
-                    <form action="<?php echo e(route('login')); ?>" method="POST">
-                      <?php echo csrf_field(); ?>
+                    <form action="{{ route('login') }}" method="POST">
+                      @csrf
                       <div class="form-group">
                         <div class="row mx-auto">
                             <div class="col-xs-6 col-md-4 col-sm-4 col-4">
                                 <label for="tipodocumento">Tipo </label>
-                                <select class="form-control inputForm inputType" name="" id="identificationNac" placeholder="Tipo">
+                                <select class="form-control inputForm inputType" name="" id="identificationNacW" placeholder="Tipo">
                                     <option value="J">J-</option>
                                     <option value="E">E-</option>
                                     <option value="G">G-</option>
@@ -130,7 +114,7 @@ echo $html;
                             </div>
                             <div class="col-xs-6 col-md-8 col=sm-8 col-8">
                                 <label for="documento">Documento</label>
-                                <input type="text" id="identificationNumber" class="form-control inputForm" placeholder="Documento">
+                                <input type="text" id="identificationNumberW" class="form-control inputForm" placeholder="Documento">
                             </div>
                         </div>
                         
@@ -140,26 +124,19 @@ echo $html;
                             <div class="row mx-auto" >
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <label for="email">Correo Electrónico</label>
-                                    <input type="email" name="email" class="form-control inputForm" placeholder="Correo Electrónico" id="email">
+                                    <input type="email" name="email" class="form-control inputForm" placeholder="Correo Electrónico" id="emailW">
                                 </div>
                             </div>
-                            <?php $__errorArgs = ['email'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                              <span class="text-danger"><?php echo e($message); ?></span>
-                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                            @error('email')
+                              <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
             
                         <div class="form-group">
                             <div class="row mx-auto">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <label for="password">Contraseña</label>
-                                    <input type="password" name="password" id="password-field" class="form-control inputForm" placeholder="Contraseña" value="12345678"/>
+                                    <input type="password" name="password" id="password-fieldW" class="form-control inputForm" placeholder="Contraseña" value="12345678"/>
                                 </div>
                             </div>                
                         </div>
@@ -210,13 +187,13 @@ unset($__errorArgs, $__bag); ?>
                       <p class="texto text-center">¿Ya tienes una cuenta? <span class="c-n">click Aquí</span></p>
                   </div>
         
-                  <form action="<?php echo e(route('register')); ?>" method="post">
-                    <?php echo csrf_field(); ?>
+                  <form action="{{ route('register') }}" method="post">
+                    @csrf
                     <div class="form-group">
                         <div class="row mx-auto">
                             <div class="col-xs-6 col-md-4 col-sm-4 col-4">
                                 <label for="tipodocumento">Tipo </label>
-                                <select class="form-control inputForm inputType" name="" id="identificationNac" placeholder="Tipo">
+                                <select class="form-control inputForm inputType" name="" id="identificationNacR" placeholder="Tipo">
                                     <option value="J">J-</option>
                                     <option value="E">E-</option>
                                     <option value="G">G-</option>
@@ -226,7 +203,7 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="col-xs-6 col-md-8 col=sm-8 col-8">
                                 <label for="documento">Documento</label>
-                                <input type="text" id="identificationNumber" class="form-control inputForm" placeholder="Documento">
+                                <input type="text" id="identificationNumberR" class="form-control inputForm" placeholder="Documento">
                             </div>
                         </div>
                         
@@ -289,4 +266,19 @@ unset($__errorArgs, $__bag); ?>
 </div>
 
 
-<?php /**PATH C:\Users\Personal\Documents\Proyectos\repuestos\resources\views/livewire/welcome-wire.blade.php ENDPATH**/ ?>
+<script src="/js/app.js"></script>
+<script src="/js/backend.js"></script>
+@stack('js')
+@stack('before-livewire-scripts')
+<livewire:scripts />
+@stack('after-livewire-scripts')
+
+@stack('alpine-plugins')
+<!-- Alpine Core -->
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" /> -->
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+<script src="/js/jquery-3.6.4.min.js"></script>

@@ -12,6 +12,10 @@
     width: 100%;
 }
 
+.showProductCard {
+    width: 32rem!important;
+}
+
 .bodyCarouselOffer {
     width: 100%;
 }

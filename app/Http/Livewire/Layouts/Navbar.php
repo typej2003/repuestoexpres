@@ -13,6 +13,9 @@ class Navbar extends Component
 
     public $categories;
 
+    public $comercio;
+    public $comercioId = 1;
+
     public $tasacambio = 1;
 
     public $currenciesP = [
@@ -26,15 +29,17 @@ class Navbar extends Component
 
     protected $listeners = ['sendCategories' => 'sendCategories'];
 
-    public function mount($comercioId=1){
+    public function mount($comercioId = 1){
+
+        $this->comercioId = $comercioId;
 
         $this->categories = Category::where('comercio_id', $comercioId)
                                     ->where('itemMenu', 1)
                                     ->get();
         
-        $comercio = Comercio::find($comercioId);
+        $this->comercio = Comercio::find($comercioId);
         
-        $setting = Setting::where('user_id', $comercio->user_id)->first();
+        $setting = Setting::where('user_id', $this->comercio->user_id)->first();
 
         if($setting){
             if($setting->api_bcv=="SI"){
@@ -45,7 +50,7 @@ class Navbar extends Component
                 $this->tasacambio = $dolar;
             }else{
                 $tasa = Tasa::where('status','activo')
-                    ->where('user_id', $comercio->user_id)
+                    ->where('user_id', $this->comercio->user_id)
                     ->first();
                     
                 if($tasa){
@@ -54,16 +59,21 @@ class Navbar extends Component
                     $this->tasacambio = 1;
                 }
             }
-
+            
+            $this->currencyValue = $setting->currency;
         }
         
     }
 
-    public function changeCurrent($currency)
+    public function changeCurrency($currency)
     {
         $this->currencyValue = $currency;
 
-        $this->dispatchBrowserEvent('sendCurrency', ['currencyValue' => $this->currencyValue, 'message' => 'variable enviada satisfactoriamente!']);        
+        $setting = Setting::where('user_id', $this->comercio->user_id)->first();
+
+        $setting->update(['currency' => $currency]);
+
+        $this->dispatchBrowserEvent('refreshPage', ['message' => 'Refresh pagina!']);        
     }
 
     public function render()

@@ -124,7 +124,7 @@
         <div class="modal-dialog" role="document">
             <form autocomplete="off" wire:submit.prevent="{{ $showEditModal ? 'updateTasa' : 'createTasa' }}">
                 <div class="modal-content">
-                    <div class="modal-header text-white" style="background-color: #6C2689;">
+                    <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
                             @if($showEditModal)
                             <span>Editar Tasa</span>
@@ -132,14 +132,14 @@
                             <span>Nuevo Tasa</span>
                             @endif
                         </h5>
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="tasa">Tasa</label>
-                            <input type="text" wire:model.defer="state.tasa" autofocus class="bg-success font-costo form-control @error('tasa') is-invalid @enderror" id="tasa" min="0" step="0.01" onkeypress="return check(this, event)">
+                            <input type="text" wire:model.defer="state.tasa" autofocus class="form-control @error('tasa') is-invalid @enderror" id="tasa" min="0" step="0.01" onkeypress="return check(this, event)">
                             @error('tasa')
                             <div class="invalid-feedback">
                                 {{ $message }}

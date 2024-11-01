@@ -93,4 +93,54 @@ class Product extends Model
         }
         return asset('noimage.png');
     }
+
+    public function getPrice1()
+    {
+        $settings = Setting::where('user_id', $this->user_id)->first();
+
+        $tasaValues = Tasa::where('user_id', $this->user_id)->first();
+
+        if(!$tasaValues){
+            $tasa = 1;
+        }else{
+            $tasa = $tasaValues->tasa;
+        }
+
+        switch ($settings->currency) {
+            case 'Bs':
+                return round($tasa * $this->price1, 2);
+                break;            
+            case '$':
+                return round($this->price1, 2);
+                break;
+            case '€':
+                return 0;
+                break;
+        }
+    }
+
+    public function getPrice_offer()
+    {
+        $settings = Setting::where('user_id', $this->user_id)->first();
+
+        $tasaValues = Tasa::where('user_id', $this->user_id)->first();
+
+        if(!$tasaValues){
+            $tasa = 1;
+        }else{
+            $tasa = $tasaValues->tasa;
+        }
+
+        switch ($settings->currency) {
+            case 'Bs':
+                return round($tasa * $this->price_offer, 2);
+                break;            
+            case '$':
+                return round($this->price_offer, 2);
+                break;
+            case '€':
+                return 0;
+                break;
+        }
+    }
 }

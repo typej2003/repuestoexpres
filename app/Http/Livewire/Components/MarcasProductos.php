@@ -10,7 +10,7 @@ class MarcasProductos extends AdminComponent
 {
     public function render()
     {
-        $subcategorias = Subcategory::where('comercio_id', 1)->get();
+        $subcategorias = Subcategory::where('comercio_id', 1)->where('category_id', 1)->get();
 
         return view('livewire.components.marcas-productos', [
             'subcategorias' => $subcategorias,

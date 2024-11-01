@@ -15,38 +15,5 @@
 
 }
 
-.showProductsP{
-        width: 100%;
-        margin-bottom: auto!important;
- 
-}
-
-.showProductCard {
-    width: 20rem!important;
-    border-radius: 15px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
-}
-
-.showProductCard:hover {
-    box-shadow: 0 3px 3px var(--main-bg-color);
-}
-
-.showProductCard img{
-    width: 30%;
-    text-align: center!important;
-}
-
-.btn-sale {
-    height: 35px;
-    width: 35px;
-    color: var(--main-footer-color);
-    background-color: rgb(109, 109, 109);
-    cursor: pointer;
-    border: 2px solid #5372F0;
-}
-.btn-sale:hover {
-    background-color: rgb(78, 78, 78);
-    color: white;
-}
 
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingsTable extends Migration
+class CreatePreferencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,19 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('preferences', function (Blueprint $table) {
             $table->id();
+            $table->string('preference')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('site_name')->nullable()->default(null);
-            $table->string('site_email')->nullable()->default(null);
-            $table->string('site_title')->nullable()->default(null);
-            $table->string('footer_text')->nullable()->default(null);
-            $table->boolean('sidebar_collapse')->default(false);
-            $table->string('currency')->nullable()->default('$');
-            $table->string('api_bcv')->nullable()->default('NO');
+            $table->unsignedBigInteger('comercio_id');
+            $table->foreign('comercio_id')->references('id')
+                ->on('comercios')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -38,6 +37,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('preferences');
     }
 }

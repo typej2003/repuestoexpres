@@ -9,72 +9,73 @@
             width: 90%!important;
         } */
         /* * {
-      box-sizing: border-box;
-    } */
+         box-sizing: border-box;
+        } */
 
-    .slider {
-        /*width: 50%;*/
-        width: 90%;
-        margin: 10px auto!important; */        
-        /* height: 300px; */
-    }
+        .slider {
+            /*width: 50%;*/
+            width: 90%;
+            margin: 10px auto!important; */        
+            /* height: 300px; */
+        }
 
-    .slick-slide {
-      margin: 0px 20px; 
-    }
+        .slick-slide {
+        margin: 0px 20px; 
+        }
 
-    .slick-slide img {
-      width: 80%;
-      height: 200px;
-    }
+        .slick-slide img {
+        width: 20%;
+        height: 200px;
+        }
 
-    .slick-prev:before,
-    .slick-next:before {
-      color: black;
-    }
+        .slick-prev:before,
+        .slick-next:before {
+        color: black;
+        }
 
-    .slick-next.slick-arrow {
-        border: 1px solid black;
-        border-radius: 50px;
-        width: 35px;
-        height: 35px;
-        display: block;
-        /* background-image: url('/img/circle-right-regular.svg'); */
-        z-index: 1000;
-    }
+        .slick-next.slick-arrow {
+            border: 1px solid black;
+            border-radius: 50px;
+            width: 35px;
+            height: 35px;
+            display: block;
+            /* background-image: url('/img/circle-right-regular.svg'); */
+            z-index: 1000;
+        }
 
-    .slick-prev.slick-arrow {
-        border: 1px solid black;
-        border-radius: 50px;
-        width: 35px;
-        height: 35px;
-        display: block;
-        /* background-image: url('/img/circle-left-regular.svg'); */
-        z-index: 1000;
-    }
+        .slick-prev.slick-arrow {
+            border: 1px solid black;
+            border-radius: 50px;
+            width: 35px;
+            height: 35px;
+            display: block;
+            /* background-image: url('/img/circle-left-regular.svg'); */
+            z-index: 1000;
+        }
 
-    .slick-slide {
-      transition: all ease-in-out .3s;
-      /* opacity: .2; */
-    }
-    
-    /* .slick-active {
-      opacity: .5;
-    }
+        .slick-slide {
+        transition: all ease-in-out .3s;
+        /* opacity: .2; */
+        }
+        
+        /* .slick-active {
+        opacity: .5;
+        }
 
-    .slick-current {
-      opacity: 1;
-    } */
-    </style>  
+        .slick-current {
+        opacity: 1;
+        } */
+        
+    </style> 
 <div class="container-fluid showProductsP">
     <div class="row negrita">
         <div class="col-12">
-            <img class="mx-3" width="45px" src="/img/icon-motor.png" alt=""><span class="h3 text-dark">Motor</span>
+            <span class="h3 text-dark"></span>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <span class="h4 text-white"></span>  
+            <span class="h4">Lo Mas Destacados</span>  
         </div>
     </div>    
     <div class="row">
@@ -92,10 +93,10 @@
                                 <div class="row text-left">
                                     <div class="negrita">{{$product->name}}</div>
                                         @if($product->on_offer)
-                                            <div class="text-decoration-line-through">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
-                                            <div class="">Promoción: {{$currencyValue}}. {{ $product->getPrice_offer() }}</div>
+                                            <div class="text-decoration-line-through">Precio: USD. {{ $product->price1 }}</div>
+                                            <div class="">Promoción: USD. {{ $product->price_offer }}</div>
                                         @else
-                                            <div class="">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
+                                            <div class="">Precio: USD. {{ $product->price1 }}</div>
                                         @endif
                                         <div style="display: flex; flex-direction: row;">
                                             <button class="btn btn-sale">Comprar ahora</button>
@@ -123,7 +124,7 @@
                 @empty
                     <div class="card showProductCard mx-auto text-center">
                         <card-body>
-                            <span>No tiene Ofertas Disponibles</span>
+                            <span>No tiene productos destacados</span>
                         </card-body>
                         <card-footer>                    
                         </card-footer>                    

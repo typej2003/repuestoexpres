@@ -216,14 +216,22 @@
                                 </li>
                                 @endforeach -->
 
+                                <?php $x = -1; ?>
+
                                 @foreach($categories as $category)
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             {{$category->name}}
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             @foreach($category->subcategories as $subcategory)
-                                                <li><a class="dropdown-item" href="{{$subcategory->id}}">{{$subcategory->name}}</a></li>
+                                                <?php $x += 1; ?>
+                                                <li data-subcategory="{{$subcategory->name}}"><a class="dropdown-item subcategory{{$x}}" style="cursor:pointer;" data-subcategory="{{$subcategory->name}}" href="/cat/{{$subcategory->name}}">{{$subcategory->name}}</a></li>
+                                                <script>
+                                                    document.querySelector('.subcategory{{$x}}').addEventListener('click', function(){
+                                                        console.log(this.dataset.subcategory)
+                                                    })
+                                                </script>
                                             @endforeach
                                         </ul>
                                     </li>
@@ -241,16 +249,21 @@
                                 <li class="nav-item dropdown">
                                     <span>Moneda: </span>
                                     <div class="currency mx-1">
-                                        <select class="form-control" wire:change="changeCurrent($event.target.value)">
-                                            <option value="Bs" {{ (config('app.currencyGlobal') === 'Bs') ? 'selected' : '' }}>Bs</option>
-                                            <option value="$" {{ (config('app.currencyGlobal') === '$') ? 'selected' : '' }}>$</option>
-                                            <option value="€" {{ (config('app.currencyGlobal') === '€') ? 'selected' : '' }}>€</option>
+                                        <select class="form-control" wire:change="changeCurrency($event.target.value)">
+                                            <option value="Bs" {{ ($currencyValue === 'Bs') ? 'selected' : '' }}>Bs</option>
+                                            <option value="$" {{ ($currencyValue === '$') ? 'selected' : '' }}>$</option>
+                                            <option value="€" {{ ($currencyValue === '€') ? 'selected' : '' }}>€</option>
                                         </select>
                                     </div>
                                     
                                 </li>
                                 <li class="nav-item dropdown ms-auto"><span class="nav-link">$: {{$tasacambio}} Bs.</span></li>
-                                
+                                <!-- <script>
+                                    let selectCurrency = document.querySelector('.selectCurrency')
+                                    selectCurrency.addEventListener('change', function(e){
+                                        Livewire.emit('changeCurrency', e.target.value)
+                                    })
+                                </script> -->
                                 
                             </ul>                            
                         </div>
@@ -265,28 +278,37 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
 
     <script>
-        const dropdownBtn = document.querySelector(".btnCategoria");
-        const dropdownMenu = document.querySelector(".itemCategoria");
-        const toggleArrow = document.querySelector(".arrowCategoria");
+        // const dropdownBtn = document.querySelector(".btnCategoria");
+        // const dropdownMenu = document.querySelector(".itemCategoria");
+        // const toggleArrow = document.querySelector(".arrowCategoria");
         
 
-        const toggleDropdown = function () {
-        dropdownMenu.classList.toggle("show");
-        toggleArrow.classList.toggle("arrow");
-        };
+        // const toggleDropdown = function () {
+        // dropdownMenu.classList.toggle("show");
+        // toggleArrow.classList.toggle("arrow");
+        // };
 
-        dropdownBtn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        toggleDropdown();
-        });
+        // dropdownBtn.addEventListener("click", function (e) {
+        // e.stopPropagation();
+        // toggleDropdown();
+        // });
 
-        document.documentElement.addEventListener("click", function () {
-        if (dropdownMenu.classList.contains("show")) {
-            toggleDropdown();
-        }
-        });
+        // document.documentElement.addEventListener("click", function () {
+        // if (dropdownMenu.classList.contains("show")) {
+        //     toggleDropdown();
+        // }
+        // });
+    
+        window.addEventListener('refreshPage', event => {
+            
+            let message = event.detail.message
+
+            location.reload()
+        
+        }) 
     </script>
     
   </body>
 </html>
+
 </div>

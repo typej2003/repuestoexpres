@@ -139,7 +139,7 @@
         <div class="modal-dialog" role="document">
             <form autocomplete="off" wire:submit.prevent="<?php echo e($showEditModal ? 'updateTasa' : 'createTasa'); ?>">
                 <div class="modal-content">
-                    <div class="modal-header text-white" style="background-color: #6C2689;">
+                    <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
                             <?php if($showEditModal): ?>
                             <span>Editar Tasa</span>
@@ -147,14 +147,14 @@
                             <span>Nuevo Tasa</span>
                             <?php endif; ?>
                         </h5>
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="tasa">Tasa</label>
-                            <input type="text" wire:model.defer="state.tasa" autofocus class="bg-success font-costo form-control <?php $__errorArgs = ['tasa'];
+                            <input type="text" wire:model.defer="state.tasa" autofocus class="form-control <?php $__errorArgs = ['tasa'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

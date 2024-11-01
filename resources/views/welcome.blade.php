@@ -47,6 +47,7 @@
       @livewire('layouts.navbar')
     
     @include('livewire.components.slider-principal')
+    @livewire('components.marcas-productos')
     <div class="my-2"></div>
     <section class="">
         <div class="my-2"></div>
@@ -62,7 +63,7 @@
     
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
-    <script src="/js/bootstrap.bundle.min.js"></script>
+    
     
   </body>
 </html>
@@ -96,7 +97,7 @@
                         <div class="row mx-auto">
                             <div class="col-xs-6 col-md-4 col-sm-4 col-4">
                                 <label for="tipodocumento">Tipo </label>
-                                <select class="form-control inputForm inputType" name="" id="identificationNac" placeholder="Tipo">
+                                <select class="form-control inputForm inputType" name="" id="identificationNacW" placeholder="Tipo">
                                     <option value="J">J-</option>
                                     <option value="E">E-</option>
                                     <option value="G">G-</option>
@@ -106,7 +107,7 @@
                             </div>
                             <div class="col-xs-6 col-md-8 col=sm-8 col-8">
                                 <label for="documento">Documento</label>
-                                <input type="text" id="identificationNumber" class="form-control inputForm" placeholder="Documento">
+                                <input type="text" id="identificationNumberW" class="form-control inputForm" placeholder="Documento">
                             </div>
                         </div>
                         
@@ -116,7 +117,7 @@
                             <div class="row mx-auto" >
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <label for="email">Correo Electrónico</label>
-                                    <input type="email" name="email" class="form-control inputForm" placeholder="Correo Electrónico" id="email">
+                                    <input type="email" name="email" class="form-control inputForm" placeholder="Correo Electrónico" id="emailW">
                                 </div>
                             </div>
                             @error('email')
@@ -128,7 +129,7 @@
                             <div class="row mx-auto">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <label for="password">Contraseña</label>
-                                    <input type="password" name="password" id="password-field" class="form-control inputForm" placeholder="Contraseña" value="12345678"/>
+                                    <input type="password" name="password" id="password-fieldW" class="form-control inputForm" placeholder="Contraseña" value="12345678"/>
                                 </div>
                             </div>                
                         </div>
@@ -185,7 +186,7 @@
                         <div class="row mx-auto">
                             <div class="col-xs-6 col-md-4 col-sm-4 col-4">
                                 <label for="tipodocumento">Tipo </label>
-                                <select class="form-control inputForm inputType" name="" id="identificationNac" placeholder="Tipo">
+                                <select class="form-control inputForm inputType" name="" id="identificationNacR" placeholder="Tipo">
                                     <option value="J">J-</option>
                                     <option value="E">E-</option>
                                     <option value="G">G-</option>
@@ -195,7 +196,7 @@
                             </div>
                             <div class="col-xs-6 col-md-8 col=sm-8 col-8">
                                 <label for="documento">Documento</label>
-                                <input type="text" id="identificationNumber" class="form-control inputForm" placeholder="Documento">
+                                <input type="text" id="identificationNumberR" class="form-control inputForm" placeholder="Documento">
                             </div>
                         </div>
                         
@@ -271,6 +272,6 @@
 
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" /> -->
 
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery-3.6.4.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
 
+<script src="/js/jquery-3.6.4.min.js"></script>

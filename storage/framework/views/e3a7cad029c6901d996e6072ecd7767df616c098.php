@@ -47,35 +47,50 @@
       <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('layouts.navbar')->html();
-} elseif ($_instance->childHasBeenRendered('la0Qw3f')) {
-    $componentId = $_instance->getRenderedChildComponentId('la0Qw3f');
-    $componentTag = $_instance->getRenderedChildComponentTagName('la0Qw3f');
+} elseif ($_instance->childHasBeenRendered('RZdKMJT')) {
+    $componentId = $_instance->getRenderedChildComponentId('RZdKMJT');
+    $componentTag = $_instance->getRenderedChildComponentTagName('RZdKMJT');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('la0Qw3f');
+    $_instance->preserveRenderedChild('RZdKMJT');
 } else {
     $response = \Livewire\Livewire::mount('layouts.navbar');
     $html = $response->html();
-    $_instance->logRenderedChild('la0Qw3f', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('RZdKMJT', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
     
     <?php echo $__env->make('livewire.components.slider-principal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.marcas-productos')->html();
+} elseif ($_instance->childHasBeenRendered('aaz1BpW')) {
+    $componentId = $_instance->getRenderedChildComponentId('aaz1BpW');
+    $componentTag = $_instance->getRenderedChildComponentTagName('aaz1BpW');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('aaz1BpW');
+} else {
+    $response = \Livewire\Livewire::mount('components.marcas-productos');
+    $html = $response->html();
+    $_instance->logRenderedChild('aaz1BpW', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
     <div class="my-2"></div>
     <section class="">
         <div class="my-2"></div>
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.carousel-offer')->html();
-} elseif ($_instance->childHasBeenRendered('8CeFabt')) {
-    $componentId = $_instance->getRenderedChildComponentId('8CeFabt');
-    $componentTag = $_instance->getRenderedChildComponentTagName('8CeFabt');
+} elseif ($_instance->childHasBeenRendered('kzOg8DM')) {
+    $componentId = $_instance->getRenderedChildComponentId('kzOg8DM');
+    $componentTag = $_instance->getRenderedChildComponentTagName('kzOg8DM');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('8CeFabt');
+    $_instance->preserveRenderedChild('kzOg8DM');
 } else {
     $response = \Livewire\Livewire::mount('components.carousel-offer');
     $html = $response->html();
-    $_instance->logRenderedChild('8CeFabt', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('kzOg8DM', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -83,15 +98,15 @@ echo $html;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.show-products')->html();
-} elseif ($_instance->childHasBeenRendered('KS3ve2C')) {
-    $componentId = $_instance->getRenderedChildComponentId('KS3ve2C');
-    $componentTag = $_instance->getRenderedChildComponentTagName('KS3ve2C');
+} elseif ($_instance->childHasBeenRendered('5zcVEla')) {
+    $componentId = $_instance->getRenderedChildComponentId('5zcVEla');
+    $componentTag = $_instance->getRenderedChildComponentTagName('5zcVEla');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('KS3ve2C');
+    $_instance->preserveRenderedChild('5zcVEla');
 } else {
     $response = \Livewire\Livewire::mount('components.show-products');
     $html = $response->html();
-    $_instance->logRenderedChild('KS3ve2C', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('5zcVEla', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -104,7 +119,7 @@ echo $html;
     
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
-    <script src="/js/bootstrap.bundle.min.js"></script>
+    
     
   </body>
 </html>
@@ -138,7 +153,7 @@ echo $html;
                         <div class="row mx-auto">
                             <div class="col-xs-6 col-md-4 col-sm-4 col-4">
                                 <label for="tipodocumento">Tipo </label>
-                                <select class="form-control inputForm inputType" name="" id="identificationNac" placeholder="Tipo">
+                                <select class="form-control inputForm inputType" name="" id="identificationNacW" placeholder="Tipo">
                                     <option value="J">J-</option>
                                     <option value="E">E-</option>
                                     <option value="G">G-</option>
@@ -148,7 +163,7 @@ echo $html;
                             </div>
                             <div class="col-xs-6 col-md-8 col=sm-8 col-8">
                                 <label for="documento">Documento</label>
-                                <input type="text" id="identificationNumber" class="form-control inputForm" placeholder="Documento">
+                                <input type="text" id="identificationNumberW" class="form-control inputForm" placeholder="Documento">
                             </div>
                         </div>
                         
@@ -158,7 +173,7 @@ echo $html;
                             <div class="row mx-auto" >
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <label for="email">Correo Electrónico</label>
-                                    <input type="email" name="email" class="form-control inputForm" placeholder="Correo Electrónico" id="email">
+                                    <input type="email" name="email" class="form-control inputForm" placeholder="Correo Electrónico" id="emailW">
                                 </div>
                             </div>
                             <?php $__errorArgs = ['email'];
@@ -177,7 +192,7 @@ unset($__errorArgs, $__bag); ?>
                             <div class="row mx-auto">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <label for="password">Contraseña</label>
-                                    <input type="password" name="password" id="password-field" class="form-control inputForm" placeholder="Contraseña" value="12345678"/>
+                                    <input type="password" name="password" id="password-fieldW" class="form-control inputForm" placeholder="Contraseña" value="12345678"/>
                                 </div>
                             </div>                
                         </div>
@@ -234,7 +249,7 @@ unset($__errorArgs, $__bag); ?>
                         <div class="row mx-auto">
                             <div class="col-xs-6 col-md-4 col-sm-4 col-4">
                                 <label for="tipodocumento">Tipo </label>
-                                <select class="form-control inputForm inputType" name="" id="identificationNac" placeholder="Tipo">
+                                <select class="form-control inputForm inputType" name="" id="identificationNacR" placeholder="Tipo">
                                     <option value="J">J-</option>
                                     <option value="E">E-</option>
                                     <option value="G">G-</option>
@@ -244,7 +259,7 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="col-xs-6 col-md-8 col=sm-8 col-8">
                                 <label for="documento">Documento</label>
-                                <input type="text" id="identificationNumber" class="form-control inputForm" placeholder="Documento">
+                                <input type="text" id="identificationNumberR" class="form-control inputForm" placeholder="Documento">
                             </div>
                         </div>
                         
@@ -321,7 +336,7 @@ unset($__errorArgs, $__bag); ?>
 
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" /> -->
 
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery-3.6.4.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
 
+<script src="/js/jquery-3.6.4.min.js"></script>
 <?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/welcome.blade.php ENDPATH**/ ?>

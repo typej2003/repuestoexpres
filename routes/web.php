@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\WelcomeController;
 use App\Http\Livewire\WelcomeWire;
 
+use App\Http\Controllers\MainSearch;
+
 use App\Http\Controllers\SearchController;
 
 use App\Http\Controllers\Admin\SearchAfiliado;
@@ -31,6 +33,8 @@ use App\Http\Livewire\Recursos\EmailExample;
  Route::get('/', function () {
      return view('welcome');
  });
+
+ Route::get('/cat/{parametro}', [MainSearch::class, 'index'])->name('mainSearch'); 
 
 
 // Route::get('/com/{comercio}', WelcomeController::class)->name('welcomecomercio');

@@ -1,48 +1,103 @@
 <div>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <script src="./js/jquery-3.6.4.min.js"></script>
+    <script src="/js/jquery-3.6.4.min.js"></script>
     <script src="/js/slick.min.js"></script>
     <link rel="stylesheet" href="/css/slick-theme.min.css">
     <link rel="stylesheet" href="/css/slick.min.css">
     <link rel="stylesheet" href="/css/carouselOffer.css">
     <style>
-        .slider{
-            width: 80%!important;
+        /* .slider{
+            width: 90%!important;
+        } */
+        /* * {
+         box-sizing: border-box;
+        } */
+
+        .slider {
+            /*width: 50%;*/
+            width: 90%;
+            margin: 10px auto!important; */        
+            /* height: 300px; */
+        }
+
+        .slick-slide {
+        margin: 0px 20px; 
+        }
+
+        .slick-slide img {
+        width: 20%;
+        height: 200px;
         }
 
         .slick-prev:before,
         .slick-next:before {
-            color: black!important;
+        color: black;
         }
-    </style>  
 
-    <div class="container-fluid carouselOffer">
-        <div class="row negrita">
-            <div class="col-12">
-            <img class="mx-1" width="45px" src="/img/icon-sales.png" alt=""><span class="h3 text-dark">Ofertas</span>
-            </div>
+        .slick-next.slick-arrow {
+            border: 1px solid black;
+            border-radius: 50px;
+            width: 35px;
+            height: 35px;
+            display: block;
+            /* background-image: url('/img/circle-right-regular.svg'); */
+            z-index: 1000;
+        }
+
+        .slick-prev.slick-arrow {
+            border: 1px solid black;
+            border-radius: 50px;
+            width: 35px;
+            height: 35px;
+            display: block;
+            /* background-image: url('/img/circle-left-regular.svg'); */
+            z-index: 1000;
+        }
+
+        .slick-slide {
+        transition: all ease-in-out .3s;
+        /* opacity: .2; */
+        }
+        
+        /* .slick-active {
+        opacity: .5;
+        }
+
+        .slick-current {
+        opacity: 1;
+        } */
+        
+    </style>
+<div class="container-fluid carouselOffer">
+    <div class="row negrita">
+        <div class="col-12">
+            <img class="mx-3" width="45px" src="/img/icon-sales.png" alt=""><span class="h3 text-dark">Ofertas</span>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <span class="h4 text-white mx-4">Mira y aprovecha estos descuentos</span>  
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <span class="h4 text-white mx-4">Mira y aprovecha estos descuentos</span>  
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <section class="regular slider slider-oferta">
-                    @forelse ($offers as $index => $offer)
-                        <div>
-                            <div class="card showProductCard mx-auto text-center">
-                                <card-body>
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <img src="/img/products/aceite.png" alt="">
-                                        </div>
+    </div>   
+    <div class="row">
+        <div class="col-md-12">
+            <section class="regular slider slider-products-offers">
+                @forelse ($offers as $index => $product)
+                    <div>
+                        <div class="card showProductCard mx-auto text-center mx-2">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="">
+                                        <img class="mx-auto" src="/img/products/aceite.png" alt="">
                                     </div>
-                                    <div class="row">
-                                    <div class="negrita textProductOffer" style="margin-left: 10px;">{{$offer->name}}</div>
-                                        <div class="textProductOffer text-decoration-line-through">Precio: USD. {{ $offer->price1 }}</div>
-                                        <div class="textProductOffer">Promoción: USD. {{ $offer->price_offer }}</div>
+                                </div>
+                                <div class="row text-left">
+                                    <div class="negrita">{{$product->name}}</div>
+                                        @if($product->on_offer)
+                                            <div class="text-decoration-line-through">Precio: USD. {{ $product->price1 }}</div>
+                                            <div class="">Promoción: USD. {{ $product->price_offer }}</div>
+                                        @else
+                                            <div class="">Precio: USD. {{ $product->price1 }}</div>
+                                        @endif
                                         <div style="display: flex; flex-direction: row;">
                                             <button class="btn btn-sale">Comprar ahora</button>
                                             <div>
@@ -56,227 +111,59 @@
                                                 <div class="rating text-center">Rated</div>
                                             </div>
                                         </div>
-                                        <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                                    </div>
-                                </card-body>
-                                <card-footer>
-                                    <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-                                </card-footer>                    
+                                </div>
+                                @if($product->in_envio_gratis)
+                                <div class="text-left" style="color: blue;">Envío Gratis</div>
+                                @endif
+                            </div>
+                            <div class="card-footer">
+                                <span class="">Tienda: Auto Repuestos Fred</span>
                             </div>
                         </div>
-                    @empty
-                        <div class="card showProductCard mx-auto text-center">
-                            <card-body>
-                                <span>No tiene Ofertas Disponibles</span>
-                            </card-body>
-                            <card-footer>                    
-                            </card-footer>                    
-                        </div>
-                    @endforelse
-                </section>
-                
-            </div>
+                    </div>
+                @empty
+                    <div class="card showProductCard mx-auto text-center">
+                        <card-body>
+                            <span>No tiene Ofertas Disponibles</span>
+                        </card-body>
+                        <card-footer>                    
+                        </card-footer>                    
+                    </div>
+                @endforelse
+            </section>       
         </div>
-
-        <script>
-            function loadSlider(){
-                $(".slider-oferta").slick({
-                dots: true,
-                infinite: true,
-                slidesToShow: findSlides(),
-                slidesToScroll: 3,
-                autoplay: true,
-                });
-            }
-            
-            loadSlider()
-
-            function findSlides()
-            {
-                var ancho = window.innerWidth;
-                var alto = window.innerHeight;
-
-                if (window.innerWidth < 1024) 
-                    return 1
-                else 
-                if (window.innerWidth < 1280) 
-                    return 2
-                else 
-                    return 3
-            }
-
-            window.addEventListener('resize', () => {
-                location.reload()
-            })
-        </script>
     </div>
 </div>
 
+    <script>
+        function loadSlider(){
+            $(".slider-products-offers").slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: findSlides(),
+            slidesToScroll: 3,
+            autoplay: false,
+            });
+        }
+        
+        loadSlider()
 
-<!-- <section class="regular slider slider-oferta">
-    <div>
-        <div class="card showProductCard mx-auto text-center">
-            <card-body>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <img src="/img/products/aceite.png" alt="">
-                    </div>
-                </div>
-                <div class="row">
-                <div class="negrita textProductOffer" style="margin-left: 10px;">Aceite Mineral 15w40 Ultralub Api Sn</div>
-                    <div class="textProductOffer">Precio: USD. 9.48</div>
-                    <div class="textProductOffer">Promoción: USD. 8.00</div>
-                    <div style="display: flex; flex-direction: row;">
-                        <button class="btn btn-sale">Comprar ahora</button>
-                        <div>
-                            <ul class="text-center starRating">
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                            </ul>
-                            <div class="rating text-center">Rated</div>
-                        </div>
-                    </div>
-                    <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                </div>
-            </card-body>
-            <card-footer>
-                <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-            </card-footer>                    
-        </div>
-    </div>
-    <div>
-        <div class="card showProductCard mx-auto text-center">
-            <card-body>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <img src="/img/products/aceite.png" alt="">
-                    </div>
-                </div>
-                <div class="row">
-                <div class="negrita textProductOffer" style="margin-left: 10px;">Aceite Mineral 15w40 Ultralub Api Sn</div>
-                    <div class="textProductOffer">Precio: USD. 9.48</div>
-                    <div class="textProductOffer">Promoción: USD. 8.00</div>
-                    <div style="display: flex; flex-direction: row;">
-                        <button class="btn btn-sale">Comprar ahora</button>
-                        <div>
-                            <ul class="text-center starRating">
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                            </ul>
-                            <div class="rating text-center">Rated</div>
-                        </div>
-                    </div>
-                    <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                </div>
-            </card-body>
-            <card-footer>
-                <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-            </card-footer>                    
-        </div>
-    </div>
-    <div>
-        <div class="card showProductCard mx-auto text-center">
-            <card-body>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <img src="/img/products/aceite.png" alt="">
-                    </div>
-                </div>
-                <div class="row">
-                <div class="negrita textProductOffer" style="margin-left: 10px;">Aceite Mineral 15w40 Ultralub Api Sn</div>
-                    <div class="textProductOffer">Precio: USD. 9.48</div>
-                    <div class="textProductOffer">Promoción: USD. 8.00</div>
-                    <div style="display: flex; flex-direction: row;">
-                        <button class="btn btn-sale">Comprar ahora</button>
-                        <div>
-                            <ul class="text-center starRating">
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                            </ul>
-                            <div class="rating text-center">Rated</div>
-                        </div>
-                    </div>
-                    <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                </div>
-            </card-body>
-            <card-footer>
-                <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-            </card-footer>                    
-        </div>
-    </div>
-    <div>
-        <div class="card showProductCard mx-auto text-center">
-            <card-body>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <img src="/img/products/aceite.png" alt="">
-                    </div>
-                </div>
-                <div class="row">
-                <div class="negrita textProductOffer" style="margin-left: 10px;">Aceite Mineral 15w40 Ultralub Api Sn</div>
-                    <div class="textProductOffer">Precio: USD. 9.48</div>
-                    <div class="textProductOffer">Promoción: USD. 8.00</div>
-                    <div style="display: flex; flex-direction: row;">
-                        <button class="btn btn-sale">Comprar ahora</button>
-                        <div>
-                            <ul class="text-center starRating">
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                            </ul>
-                            <div class="rating text-center">Rated</div>
-                        </div>
-                    </div>
-                    <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                </div>
-            </card-body>
-            <card-footer>
-                <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-            </card-footer>                    
-        </div>
-    </div>
-    <div>
-        <div class="card showProductCard mx-auto text-center">
-            <card-body>
-                <div class="row">
-                    <div class="col-md-12">
-                        <img class="" src="/img/products/aceite.png" alt="">
-                    </div>
-                </div>
-                <div class="row">
-                <div class="negrita " style="margin-left: 10px;">Aceite Mineral 15w40 Ultralub Api Sn</div>
-                    <div class="">Precio: USD. 9.48</div>
-                    <div class="">Promoción: USD. 8.00</div>
-                    <div style="display: flex; flex-direction: row;">
-                        <button class="btn btn-sale">Comprar ahora</button>
-                        <div>
-                            <ul class="text-center starRating">
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                                <li class="star"><i class="fas fa-star"></i></li>
-                            </ul>
-                            <div class="rating text-center">Rated</div>
-                        </div>
-                    </div>
-                    <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
-                </div>
-            </card-body>
-            <card-footer>
-                <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-            </card-footer>                    
-        </div>
-    </div>
-</section>   -->
+        function findSlides()
+        {
+            var ancho = window.innerWidth;
+            var alto = window.innerHeight;
+
+            if (window.innerWidth < 1024) 
+                return 1
+            else 
+            if (window.innerWidth < 1280) 
+                return 2
+            else 
+                return 3
+        }
+
+        window.addEventListener('resize', () => {
+            location.reload()
+        })
+    </script>
+</div>

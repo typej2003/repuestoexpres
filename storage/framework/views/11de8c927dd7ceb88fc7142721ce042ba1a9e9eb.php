@@ -1,6 +1,5 @@
 <div>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <script src="./js/jquery-3.6.4.min.js"></script>
+    <script src="/js/jquery-3.6.4.min.js"></script>
     <script src="/js/slick.min.js"></script>
     <link rel="stylesheet" href="/css/slick-theme.min.css">
     <link rel="stylesheet" href="/css/slick.min.css">
@@ -40,7 +39,7 @@
         width: 35px;
         height: 35px;
         display: block;
-        background-image: url('/img/circle-right-regular.svg');
+        /* background-image: url('/img/circle-right-regular.svg'); */
         z-index: 1000;
     }
 
@@ -50,7 +49,7 @@
         width: 35px;
         height: 35px;
         display: block;
-        background-image: url('/img/circle-left-regular.svg');
+        /* background-image: url('/img/circle-left-regular.svg'); */
         z-index: 1000;
     }
 
@@ -84,39 +83,41 @@
                 <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div>
                         <div class="card showProductCard mx-auto text-center mx-2">
-                            <card-body>
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <img src="/img/products/aceite.png" alt="">
+                                    <div class="">
+                                        <img class="mx-auto" src="/img/products/aceite.png" alt="">
                                     </div>
                                 </div>
-                                <div class="row">
-                                <div class="negrita textProductOffer" style="margin-left: 10px;"><?php echo e($product->name); ?></div>
-                                    <?php if($product->on_offer): ?>
-                                    <div class="textProductOffer text-decoration-line-through">Precio: USD. <?php echo e($product->price1); ?></div>
-                                    <div class="textProductOffer">Promoción: USD. <?php echo e($product->price_offer); ?></div>
-                                    <?php else: ?>
-                                    <div class="textProductOffer">Precio: USD. <?php echo e($product->price1); ?></div>
-                                    <?php endif; ?>
-                                    <div style="display: flex; flex-direction: row;">
-                                        <button class="btn btn-sale">Comprar ahora</button>
-                                        <div>
-                                            <ul class="text-center starRating">
-                                                <li class="star"><i class="fas fa-star"></i></li>
-                                                <li class="star"><i class="fas fa-star"></i></li>
-                                                <li class="star"><i class="fas fa-star"></i></li>
-                                                <li class="star"><i class="fas fa-star"></i></li>
-                                                <li class="star"><i class="fas fa-star"></i></li>
-                                            </ul>
-                                            <div class="rating text-center">Rated</div>
+                                <div class="row text-left">
+                                    <div class="negrita"><?php echo e($product->name); ?></div>
+                                        <?php if($product->on_offer): ?>
+                                            <div class="text-decoration-line-through">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                            <div class="">Promoción: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice_offer()); ?></div>
+                                        <?php else: ?>
+                                            <div class="">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                        <?php endif; ?>
+                                        <div style="display: flex; flex-direction: row;">
+                                            <button class="btn btn-sale">Comprar ahora</button>
+                                            <div>
+                                                <ul class="text-center starRating">
+                                                    <li class="star"><i class="fas fa-star"></i></li>
+                                                    <li class="star"><i class="fas fa-star"></i></li>
+                                                    <li class="star"><i class="fas fa-star"></i></li>
+                                                    <li class="star"><i class="fas fa-star"></i></li>
+                                                    <li class="star"><i class="fas fa-star"></i></li>
+                                                </ul>
+                                                <div class="rating text-center">Rated</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="textProductOffer" style="color: blue;">Envío Gratis</div>
                                 </div>
-                            </card-body>
-                            <card-footer>
-                                <span class="ml-3">Tienda: Auto Repuestos Fred</span>
-                            </card-footer>                    
+                                <?php if($product->in_envio_gratis): ?>
+                                <div class="text-left" style="color: blue;">Envío Gratis</div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="card-footer">
+                                <span class="">Tienda: Auto Repuestos Fred</span>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
