@@ -132,6 +132,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="<?php echo e(route('listCategorieslist', 1)); ?>" class="nav-link <?php echo e(request()->is('listCategorieslist') ? 'active' : ''); ?>">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Categorieslist
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="<?php echo e(route('listMetodosPagosC', 1)); ?>" class="nav-link <?php echo e(request()->is('listMetodosPagosC') ? 'active' : ''); ?>">
               <i class="nav-icon fas fa-comments"></i>
               <p>
@@ -142,7 +151,7 @@
 
           <li class="nav-item">
             <a href="<?php echo e(route('listTransacciones', 1)); ?>" class="nav-link <?php echo e(request()->is('listTransacciones') ? 'active' : ''); ?>">
-              <i class="nav-icon fas fa-comments"></i>
+              <i class="fa fa-solid fa-file-invoice-dollar"></i>
               <p>
                 Transacciones
               </p>

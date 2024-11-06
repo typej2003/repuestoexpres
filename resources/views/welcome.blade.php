@@ -51,7 +51,7 @@
     <div class="my-2"></div>
     <section class="">
         <div class="my-2"></div>
-        @livewire('components.carousel-offer')
+        @livewire('components.component-search')
         <div class="my-2"></div>
         @livewire('components.show-products')
         <div class="my-5"></div>

@@ -14,7 +14,7 @@
   <style>
     
     .img-logo {
-        width: 300px!important;
+        width: 250px!important;
     }
     nav,
     .offcanvas {
