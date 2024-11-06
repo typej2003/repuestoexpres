@@ -12,7 +12,6 @@ use Illuminate\Validation\Rule;
 
 class ListCategorieslist extends AdminComponent
 {
-
 	public $state = [];
 
 	public $category;
@@ -80,6 +79,7 @@ class ListCategorieslist extends AdminComponent
 
     public function addNewList($category_id, $categoryname)
 	{   
+        dd($categoryname);
         $categoryId = $this->categoryId;
         $userId = $this->userId;
         $comercioId = $this->comercioId;
@@ -202,6 +202,22 @@ class ListCategorieslist extends AdminComponent
 		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Categoría eliminada satisfactoriamente!']);
 	}
 
+    public function confirmCategoryListRemoval($categoryId, $categoryname)
+	{
+		$this->categoryIdBeingRemoved = $categoryId;
+
+		$this->dispatchBrowserEvent('show-delete-modalList', ['name' => $categoryname]);
+	}
+
+	public function deleteCategoryList()
+	{
+		$category = Categorylist::findOrFail($this->categoryIdBeingRemoved);
+
+		$category->delete();
+
+		$this->dispatchBrowserEvent('hide-delete-modalList', ['message' => 'Categoría eliminada satisfactoriamente!']);
+	}
+
     public function sortBy($columnName)
     {
         if ($this->sortColumnName === $columnName) {
@@ -225,7 +241,6 @@ class ListCategorieslist extends AdminComponent
 
     public function listar(CategoryList $category)
     {       
-        if($category->id==1){
             $this->lista = array();
 
             $categoryId = $category->id;
@@ -248,7 +263,6 @@ class ListCategorieslist extends AdminComponent
             else{
                 return $this->lista;
             }
-        }
         
     }
 
@@ -281,22 +295,13 @@ class ListCategorieslist extends AdminComponent
 
     public function visualizarListado(CategoryList $category, $listado)
     {                
-        $i = -1;
-        foreach($listado as $li)
-        {
-            ++$i;
-            echo "($i)" . $li['name'];   
-            echo "<br>";
-        }
-        
-        if($category->id==1){
             $listado = $this->lista;
             if($listado !== ""){
                 echo "<ul class='my-2'>";                
                 $this->recursivaUl($listado, 0, 1);                
                 echo "</ul>";
             }
-        }     
+      
     }
 
     public function recursivaUl($listado, $x, $nivel)
@@ -306,12 +311,12 @@ class ListCategorieslist extends AdminComponent
             for ($i = 0; $i < count($listado); $i++){
                 if($listado[$i]['nivel'] == $nivel)
                 {                    
-                    $this->contenido($listado[$i]['name'], $listado[$i]['nivel'], $i);
+                    $this->contenido($listado[$i]['name'], $listado[$i]['id']);
                 }else{                
                     if($listado[$i]['nivel'] > $nivel)
                     {
                         echo "<ul>";
-                        $this->contenido($listado[$i]['name'], $listado[$i]['nivel'], $i);
+                        $this->contenido($listado[$i]['name'], $listado[$i]['id']);
                         $nivel = $nivel + 1;
                     }
                     else{
@@ -320,7 +325,7 @@ class ListCategorieslist extends AdminComponent
                             echo "</ul>";
                             $nivel = $nivel - 1;
                         }
-                        $this->contenido($listado[$i]['name'], $listado[$i]['nivel'], $i);                        
+                        $this->contenido($listado[$i]['name'], $listado[$i]['id']);                        
                         
                     }
                 }
@@ -332,12 +337,19 @@ class ListCategorieslist extends AdminComponent
 
     
 
-    public function contenido($name, $nivel, $i)
-    {
-        
-        echo "<li>";
-                    echo '('.$i.') ' . ' name: ' . $name . '   nivel: '. $nivel;
-        echo "</li>";
+    public function contenido($name, $id)
+    {   
+        echo "<li class='form-control my-1 p-auto h-auto border border-secundary d-flex  justify-content-between'>
+            <div class=''>".$name."</div>";
+        echo "<div class=''>
+                <a class='' href='' wire:click.prevent='addNewList( ".$id.", $name)'>
+                    <i class='fa fa-plus-circle'></i>
+                </a>";
+            echo "<a class='' href='' wire:click.prevent='confirmCategoryListRemoval( ".$id.",'". $name ."')'>
+            <i class='fa fa-trash text-danger '></i>
+        </a>";
+        echo "</div></li>";
+
         return 0;
     }
 

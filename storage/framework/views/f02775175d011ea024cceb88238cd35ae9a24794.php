@@ -1,4 +1,17 @@
 <div>
+    <style>
+        ul{
+            list-style:none;
+            width: auto!important;
+            
+        }
+
+        @media  screen and (max-width: 768px) {
+
+
+        }
+
+    </style>
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -61,7 +74,7 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-hover table-bordered">
+                            <table class="table table-hover table-bordered table-responsive">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -74,7 +87,7 @@
                                             </span>
                                         </th>
                                         <th>Item Menú</th>
-                                        <th>SubCategoria</th>
+                                        <th class="subcategoria">SubCategoria</th>
                                         <th>Point</th>
                                         <th>Nivel</th>
                                         <th scope="col">Fecha de Registro</th>
@@ -96,7 +109,7 @@
                                                 <option value="1" <?php echo e(($categoria->itemMenu === '1') ? 'selected' : ''); ?>>SI</option>
                                             </select>
                                         </td>
-                                        <td>
+                                        <td class="subcategoria">
                                             <?php $listado = $this->listar($categoria); ?>
                                             
                                             <a class = "mb-2" wire:click.prevent="addNewList(<?php echo e($categoria->id); ?>, '<?php echo e($categoria->name); ?>')" href="">
@@ -252,6 +265,26 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="confirmationModalList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Eliminar Categoria <span class="categoryname"></span></h5>
+                </div>
+
+                <div class="modal-body">
+                    <h4>Esta seguro de querer eliminar esta categoria <span class="categoryname"></span>?</h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
+                    <button type="button" wire:click.prevent="deleteCategory" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Eliminar Categoria</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="formList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
@@ -351,8 +384,15 @@ unset($__errorArgs, $__bag); ?>
             document.querySelector('.categoryname').innerTxt = event.detail.name
         });
 
-        window.addEventListener('categoryname', function (event) {
-            
+        window.addEventListener('hide-delete-modalList', function (event) {
+            $('#confirmationModalList').modal('hide');
+            toastr.success(event.detail.message, 'Success!');
+        });
+
+        window.addEventListener('show-delete-modalList', function (event) {
+            $('#confirmationModalList').modal('show');
+
+            document.querySelector('.categoryname').innerTxt = event.detail.name
         });
     </script>
 </div>
