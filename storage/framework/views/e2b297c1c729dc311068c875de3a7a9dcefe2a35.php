@@ -89,7 +89,7 @@
                                     <tr>
                                         <th scope="row"><?php echo e($products->firstItem() + $index); ?></th>
                                         <td>
-                                            <img src="<?php echo e($product->avatar_url); ?>" style="width: 50px;" class="img img-circle mr-1" alt="">
+                                            <img src="<?php echo e($product->image1_url); ?>" style="width: 50px;" class="img img-circle mr-1" alt="">
                                             <?php echo e($product->name); ?>
 
                                         </td>
@@ -176,7 +176,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </div>
 
-                        <div class="form-group" wire:ignore>
+                        <div class="form-group">
                             <label for="name">Subcategoría</label>
                             <select wire:model.defer="state.subcategory_id" class="subcategory form-control <?php $__errorArgs = ['subcategory_id'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -251,7 +251,7 @@ unset($__errorArgs, $__bag); ?>
                             <?php if($photo): ?>
                             <img src="<?php echo e($photo->temporaryUrl()); ?>" class="img d-block mt-2 w-100 rounded">
                             <?php else: ?>
-                            <img src="<?php echo e($state['avatar_url'] ?? ''); ?>" class="img d-block mb-2 w-100 rounded">
+                            <img src="<?php echo e($state['image1_url'] ?? ''); ?>" class="img d-block mb-2 w-100 rounded">
                             <?php endif; ?>
                         </div>
 

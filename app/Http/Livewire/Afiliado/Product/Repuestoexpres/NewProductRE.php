@@ -84,6 +84,7 @@ class NewProductRE extends AdminComponent
             'code_lote' => 'nullable',
             'code' => 'required',
 			'name' => 'required',
+            'manufacturer_id' => 'nullable',
             'brand_id'  => 'nullable',
             'model_id' => 'nullable',
             'motor_id' => 'nullable',
@@ -132,27 +133,27 @@ class NewProductRE extends AdminComponent
 
 		if ($this->photo1) {
 			//$validatedData['image_path1'] = $this->photo->store('/', 'avatarsproducts');
-            $validatedData['image_path1'] = $this->photo->storeAs(
-                'avatarsproducts', $filename . '-1.png'
-            );            
+            $validatedData['image_path1'] = $this->photo->storeAs(null,
+                $filename . '-1.png', 'avatarsproducts'
+            ); 
 		}
         if ($this->photo2) {
 			//$validatedData['image_path1'] = $this->photo->store('/', 'avatarsproducts');
-            $validatedData['image_path2'] = $this->photo->storeAs(
-                'avatarsproducts', $filename . '-2.png'
-            );
+            $validatedData['image_path2'] = $this->photo->storeAs(null,
+                $filename . '-1.png', 'avatarsproducts'
+            ); 
 		}
         if ($this->photo3) {
 			//$validatedData['image_path1'] = $this->photo->store('/', 'avatarsproducts');
-            $validatedData['image_path3'] = $this->photo->storeAs(
-                'avatarsproducts', $filename . '-3.png'
-            );
+            $validatedData['image_path3'] = $this->photo->storeAs(null,
+                $filename . '-1.png', 'avatarsproducts'
+            ); 
 		}
         if ($this->photo4) {
 			//$validatedData['image_path1'] = $this->photo->store('/', 'avatarsproducts');
-            $validatedData['image_path4'] = $this->photo->storeAs(
-                'avatarsproducts', $filename . '-4.png'
-            );
+            $validatedData['image_path4'] = $this->photo->storeAs(null,
+                $filename . '-1.png', 'avatarsproducts'
+            ); 
 		}
 
         $comercio = Comercio::find($this->comercioId);

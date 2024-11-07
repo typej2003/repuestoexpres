@@ -78,7 +78,7 @@
                                     <tr>
                                         <th scope="row">{{ $products->firstItem() + $index }}</th>
                                         <td>
-                                            <img src="{{ $product->avatar_url }}" style="width: 50px;" class="img img-circle mr-1" alt="">
+                                            <img src="{{ $product->image1_url }}" style="width: 50px;" class="img img-circle mr-1" alt="">
                                             {{ $product->name }}
                                         </td>
                                         <td>{{ $product->created_at->toFormattedDate() ?? 'N/A' }}</td>
@@ -148,7 +148,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group" wire:ignore>
+                        <div class="form-group">
                             <label for="name">Subcategoría</label>
                             <select wire:model.defer="state.subcategory_id" class="subcategory form-control @error('subcategory_id') is-invalid @enderror" id="subcategory_id" wire:ignore>
                             </select>
@@ -192,7 +192,7 @@
                             @if ($photo)
                             <img src="{{ $photo->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded">
                             @else
-                            <img src="{{ $state['avatar_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded">
+                            <img src="{{ $state['image1_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded">
                             @endif
                         </div>
 

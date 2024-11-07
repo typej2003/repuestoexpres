@@ -150,6 +150,8 @@ class ListProducts extends AdminComponent
 		$this->changeCategory($this->state['category_id'], $subcategory->name);
 
 		$this->dispatchBrowserEvent('show-form');
+
+		$this->state['subcategory_id'] = $subcategory->id;
 	}
 
 	public function updateProduct()
@@ -160,8 +162,13 @@ class ListProducts extends AdminComponent
             'subcategory_id' => 'required',
 		])->validate();
 
+		$filename = $this->state['code'].'-'.$this->comercioId;
+
 		if ($this->photo) {
-			$validatedData['avatar'] = $this->photo->store('/', 'avatarsproducts');
+			//$validatedData['image_path1'] = $this->photo->store('/', 'avatarsproducts');
+            $validatedData['image_path1'] = $this->photo->storeAs(null,
+                $filename . '-1.png', 'avatarsproducts'
+            );            
 		}
 
 		$this->product->update($validatedData);

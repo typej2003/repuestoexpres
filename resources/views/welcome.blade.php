@@ -136,8 +136,8 @@
                         
                         <div class="form-group">
                             <div class="row mx-auto my-3">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <button class="btn boton1 w-100">Iniciar Sesión Aquí</button>
+                                <div class="col-xs-12 col-sm-12 col-md-12 d-flex">
+                                    <button class="btn btn-app w-100 mx-auto">Iniciar Sesión</button>
                                 </div>
                             </div>                
                         </div>
