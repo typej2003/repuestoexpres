@@ -22,7 +22,10 @@ class DatabaseSeeder extends Seeder
             ComercioSeeder::class,
             CategorySeeder::class,
             SupplierSeeder::class,
+            ManufacturersSeeder::class,
             BrandSeeder::class,
+            ModeloSeeder::class,
+            MotorSeeder::class,
             ContainerSeeder::class,
             ProductsSeeder::class,
         ]);

@@ -29,7 +29,7 @@ class CarouselOffer extends AdminComponent
     public function render()
     {
         $offers = Product::where('comercio_id', $this->comercioId)
-                            ->where('on_offer', '1')
+                            ->where('in_offer', '1')
                             ->paginate();
 
         return view('livewire.components.carousel-offer',[

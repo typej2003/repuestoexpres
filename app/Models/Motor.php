@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class brand extends Model
+class Motor extends Model
 {
     use HasFactory;
 
@@ -14,15 +14,7 @@ class brand extends Model
         'user_id',
         'area_id',
         'comercio_id',
+        'brand_id',
+        'modelo_id',
     ];
-
-    public function product()
-    {
-        return $this->hasOne(Product::class);
-    } 
-
-    public function isActive()
-    {
-        return 1;
-    }
 }

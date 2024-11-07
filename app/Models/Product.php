@@ -22,6 +22,10 @@ class Product extends Model
         'code_lote',
         'code',
         'name',
+        'manufacturer_id', //Fabricante
+        'brand_id',
+        'model_id',
+        'motor_id',
         'avatar',
         'brand_id', // marca
         'image_path1',
@@ -48,11 +52,10 @@ class Product extends Model
         'stock', // cant en almacen
         'user_id',
         'comercio_id',
+        'area_id',
         'category_id',
         'subcategory_id',
-        'subcategory_id',
         'supplier_id', //proveedor
-        'afiliado_id',
         'pack_products_id',
         'pack_price',
         'tx_peso',
@@ -68,7 +71,7 @@ class Product extends Model
         'tx_adicionales',
         'tx_alergenos',
         'in_envio_gratis',
-        'on_offer',
+        'in_offer',
         'tx_datos_vencimiento',
         'tx_valores_nutricionales',
         'tx_conservacion',
@@ -79,17 +82,55 @@ class Product extends Model
         'in_olor_fuerte',
         'ca_valoracion',
         'tx_vencimiento',
-        'in_valido'
+        'in_valido',
+        'userCreated_at',
+        'userUpdated_at',
     ];
 
     protected $appends = [
         'avatar_url',
+        'image1_url',
+        'image2_url',
+        'image3_url',
+        'image4_url',
     ];
 
     public function getAvatarUrlAttribute()
     {
         if ($this->avatar && Storage::disk('avatarsproducts')->exists($this->avatar)) {   
             return Storage::disk('avatarsproducts')->url($this->avatar);
+        }
+        return asset('noimage.png');
+    }
+
+    public function getImage1UrlAttribute()
+    {
+        if ($this->image_path1 && Storage::disk('avatarsproducts')->exists($this->image_path1)) {   
+            return Storage::disk('avatarsproducts')->url($this->image_path1);
+        }
+        return asset('noimage.png');
+    }
+
+    public function getImage2UrlAttribute()
+    {
+        if ($this->image_path2 && Storage::disk('avatarsproducts')->exists($this->image_path2)) {   
+            return Storage::disk('avatarsproducts')->url($this->image_path2);
+        }
+        return asset('noimage.png');
+    }
+
+    public function getImage3UrlAttribute()
+    {
+        if ($this->image_path3 && Storage::disk('avatarsproducts')->exists($this->image_path3)) {   
+            return Storage::disk('avatarsproducts')->url($this->image_path3);
+        }
+        return asset('noimage.png');
+    }
+
+    public function getImage4UrlAttribute()
+    {
+        if ($this->image_path4 && Storage::disk('avatarsproducts')->exists($this->image_path4)) {   
+            return Storage::disk('avatarsproducts')->url($this->image_path4);
         }
         return asset('noimage.png');
     }

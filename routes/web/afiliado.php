@@ -8,7 +8,7 @@ use App\Http\Livewire\Afiliado\ListCategorieslist;
 use App\Http\Livewire\Afiliado\ListSubcategories;
 use App\Http\Livewire\Afiliado\ListProducts;
 use App\Http\Livewire\Afiliado\ListTasas;
-use App\Http\Livewire\Afiliado\Product\NewProduct;
+use App\Http\Livewire\Afiliado\Product\Repuestoexpres\NewProductRE;
 use App\Http\Livewire\Afiliado\ListBrand;
 use App\Http\Livewire\Afiliado\ListContainers;
 
@@ -26,7 +26,7 @@ Route::get('/listProducts/{comercioId}', ListProducts::class)->name('listProduct
 
 Route::get('/listTasas/{comercioId}', ListTasas::class)->name('listTasas')->middleware('auth');
 
-Route::get('/newProduct/{comercioId}/{editModal}', NewProduct::class)->name('newProduct')->middleware('auth');
+Route::get('/newProductRE/{comercioId}/{editModal}', NewProductRE::class)->name('newProductRE')->middleware('auth');
 
 Route::get('/listBrand/{comercioId}', ListBrand::class)->name('listBrand')->middleware('auth');
 

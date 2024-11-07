@@ -20,6 +20,7 @@ class ProductsSeeder extends Seeder
             'name' => 'ACEITE MINERAL 1',
             'description' => 'ACEITE DE MOTOR 15 40',
             'avatar' => 'aceite.png',
+            'manufacturer_id' => 1, //marca
             'brand_id' => 1, //marca
             'container_id' => 1, //envase
             'currency' => '$', //moneda
@@ -35,10 +36,13 @@ class ProductsSeeder extends Seeder
             'stock_max' => 100,
             'stock' => 50, // cant en almacen
             'user_id' => 1,
+            'area_id' => 2,
             'comercio_id' => 1,
             'category_id' => 2,
             'subcategory_id' => 10,
             'supplier_id' => 1, //proveedor
+            'userCreated_at' => 1,
+            'userUpdated_at' => 1,
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
         ]);
@@ -49,6 +53,7 @@ class ProductsSeeder extends Seeder
             'name' => 'ACEITE S',
             'description' => 'ACEITE DE MOTOR 15 40',
             'avatar' => 'aceite1.png',
+            'manufacturer_id' => 1, //marca
             'brand_id' => 1, //marca
             'container_id' => 1, //envase
             'currency' => '$', //moneda
@@ -64,10 +69,13 @@ class ProductsSeeder extends Seeder
             'stock_max' => 100,
             'stock' => 50, // cant en almacen
             'user_id' => 1,
+            'area_id' => 2,
             'comercio_id' => 1,
             'category_id' => 2,
             'subcategory_id' => 11,
             'supplier_id' => 1, //proveedor
+            'userCreated_at' => 1,
+            'userUpdated_at' => 1,
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
         ]);
@@ -78,6 +86,7 @@ class ProductsSeeder extends Seeder
             'name' => 'LIMPIADOR S',
             'description' => 'LIMPIA Y LIMPIA Y NO SE CANSA DE LIMPIAR',
             'avatar' => 'limpiador.png',
+            'manufacturer_id' => 1, //marca
             'brand_id' => 2, //marca
             'container_id' => 1, 
             'currency' => '$', 
@@ -93,10 +102,13 @@ class ProductsSeeder extends Seeder
             'stock_max' => 100,
             'stock' => 50, 
             'user_id' => 1,
+            'area_id' => 2,
             'comercio_id' => 1,
             'category_id' => 3,
             'subcategory_id' => 1,
             'supplier_id' => 1, 
+            'userCreated_at' => 1,
+            'userUpdated_at' => 1,
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
         ]);
@@ -107,6 +119,7 @@ class ProductsSeeder extends Seeder
             'name' => 'EMPACADURA',
             'description' => 'EMPACADURA DURADERA DE LA MEJOR',
             'avatar' => 'empacadura.png',
+            'manufacturer_id' => 1, //marca
             'brand_id' => 1, //marca
             'container_id' => 1,
             'currency' => '$', 
@@ -123,9 +136,12 @@ class ProductsSeeder extends Seeder
             'stock' => 50, 
             'user_id' => 1,
             'comercio_id' => 1,
+            'area_id' => 2,
             'category_id' => 4,
             'subcategory_id' => 1,
             'supplier_id' => 1, 
+            'userCreated_at' => 1,
+            'userUpdated_at' => 1,
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
         ]);
@@ -136,6 +152,7 @@ class ProductsSeeder extends Seeder
             'name' => 'MOTOR EXPRES',
             'description' => 'MOTOR EXPRES NUEVO UN SOLO USO',
             'avatar' => 'motor.png',
+            'manufacturer_id' => 1, //marca
             'brand_id' => 1, //marca
             'container_id' => 1,
             'currency' => '$', 
@@ -151,10 +168,13 @@ class ProductsSeeder extends Seeder
             'stock_max' => 1,
             'stock' => 50, 
             'user_id' => 1,
+            'area_id' => 2,
             'comercio_id' => 1,
             'category_id' => 5,
             'subcategory_id' => 1,
             'supplier_id' => 1, 
+            'userCreated_at' => 1,
+            'userUpdated_at' => 1,
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
         ]);

@@ -14,6 +14,7 @@ class Category extends Model
         'name',
         'avatar',
         'user_id',
+        'area_id',
         'comercio_id',
         'itemMenu',
         'posicionMenu',

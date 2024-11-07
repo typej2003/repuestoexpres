@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SupplierSeeder extends Seeder
+class ModeloSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,14 +14,12 @@ class SupplierSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('suppliers')->insert([
-            'name' => 'PROVEEDOR 1',
-            'rif' => 'J-20111222',
-            'email' => 'luis@gmail.com',
-            'address' => 'CARACAS VENEZUELA',
-            'phone' => '04165080408',
+        DB::table('modelos')->insert([
+            'name' => 'CLIO I',
+            'user_id' => 1,
             'area_id' => 2,
-            'comercio_id' => 1,
+            'comercio_id' => '1',
+            'brand_id' => 1,
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
         ]);

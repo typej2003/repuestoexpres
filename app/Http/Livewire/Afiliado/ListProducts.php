@@ -102,7 +102,7 @@ class ListProducts extends AdminComponent
 		}elseif ($this->screenResolution < 1280) {
 			$this->dispatchBrowserEvent('show-form');
 		}else {
-			return redirect()->route('newProduct', ['comercioId' => $this->comercioId, 'editModal' => $editModal] );
+			return redirect()->route('newProductRE', ['comercioId' => $this->comercioId, 'editModal' => $editModal] );
 		}
 		
 	}

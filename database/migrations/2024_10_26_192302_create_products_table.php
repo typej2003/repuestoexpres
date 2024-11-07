@@ -18,8 +18,11 @@ class CreateProductsTable extends Migration
             $table->string('code_lote')->nullable();
             $table->string('code')->nullable();
             $table->string('name')->nullable();
+            $table->bigInteger('manufacturer_id')->nullable();
+            $table->bigInteger('brand_id')->nullable();
+            $table->bigInteger('model_id')->nullable();
+            $table->bigInteger('motor_id')->nullable();
             $table->string('avatar')->nullable();
-            $table->bigInteger('brand_id')->nullable(); // marca
             $table->string('image_path1')->nullable();
             $table->string('image_path2')->nullable();
             $table->string('image_path3')->nullable();
@@ -48,6 +51,11 @@ class CreateProductsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->unsignedBigInteger('area_id');
+            $table->foreign('area_id')->references('id')
+                ->on('areas')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->unsignedBigInteger('comercio_id');
             $table->foreign('comercio_id')->references('id')
                 ->on('comercios')
@@ -60,7 +68,6 @@ class CreateProductsTable extends Migration
                 ->onUpdate('cascade');
             $table->bigInteger('subcategory_id');
             $table->bigInteger('supplier_id')->nullable(); //proveedor
-            $table->bigInteger('afiliado_id')->nullable();
             $table->bigInteger('pack_products_id')->nullable();
             $table->decimal('pack_price')->nullable();
             $table->string('tx_peso')->nullable();
@@ -76,7 +83,7 @@ class CreateProductsTable extends Migration
             $table->string('tx_adicionales')->nullable();
             $table->string('tx_alergenos')->nullable();
             $table->string('in_envio_gratis')->nullable()->default('0');
-            $table->string('on_offer')->nullable()->default('0');
+            $table->string('in_offer')->nullable()->default('0');
             $table->string('tx_datos_vencimiento')->nullable();
             $table->string('tx_valores_nutricionales')->nullable();
             $table->string('tx_conservacion')->nullable();
@@ -88,11 +95,11 @@ class CreateProductsTable extends Migration
             $table->string('ca_valoracion')->nullable();
             $table->string('tx_vencimiento')->nullable();
             $table->string('in_valido')->nullable()->default('1');
+            $table->bigInteger('userCreated_at');
+            $table->bigInteger('userUpdated_at');
             $table->timestamps();
         });
     }
-
-
 
     
     /**
