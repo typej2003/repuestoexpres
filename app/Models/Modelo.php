@@ -14,7 +14,7 @@ class Modelo extends Model
         'user_id',
         'area_id',
         'comercio_id',
-        'brand_id',
+        'manufacturer_id',
     ];
     
 }

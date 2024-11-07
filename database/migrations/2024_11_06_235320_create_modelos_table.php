@@ -19,7 +19,7 @@ class CreateModelosTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('area_id');
             $table->bigInteger('comercio_id');
-            $table->bigInteger('brand_id');
+            $table->bigInteger('manufacturer_id');
             $table->timestamps();
         });
     }

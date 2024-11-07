@@ -70,5 +70,11 @@ class Comercio extends Model
         return $this->hasMany(Category::class);
     }
 
+    public function manufacturersOriginal()
+    {
+        return Manufacturer::where('comercio_id', $this->id)->where('mercado', 'original')->get();
+        //return $this->hasMany(Manufacturer::class);
+    }
+
     
 }
