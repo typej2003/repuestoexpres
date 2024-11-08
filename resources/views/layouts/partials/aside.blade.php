@@ -132,6 +132,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{ route('listCombos', 1) }}" class="nav-link {{ request()->is('listCombos') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Afiliado / Combos
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{ route('listCategorieslist', 1) }}" class="nav-link {{ request()->is('listCategorieslist') ? 'active' : '' }}">
               <i class="nav-icon fas fa-comments"></i>
               <p>

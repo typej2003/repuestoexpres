@@ -30,6 +30,8 @@ class ListProducts extends AdminComponent
 
 	public $productIdBeingRemoved = null;
 
+	public $categoryIdBeingRemoved = null;
+
 	public $searchTerm = null;
 
     protected $queryString = ['searchTerm' => ['except' => '']];
@@ -38,7 +40,7 @@ class ListProducts extends AdminComponent
 
     public $sortDirection = 'desc';
 
-    public $comercioId = 0;
+    public $comercio_id = 0;
 
 	public $photo;
 
@@ -69,9 +71,10 @@ class ListProducts extends AdminComponent
 
     public function mount($comercioId = 0)
     {
-        $this->comercioId = $comercioId;
+        $this->comercio_id = $comercioId;
 
-		$this->categories = Category::all();
+		$this->categories = Category::where('comercio_id', $this->comercio_id)->get();
+		
 		$this->subcategories = collect();
     }
 
@@ -113,12 +116,12 @@ class ListProducts extends AdminComponent
 
 	public function addNew()
 	{   
-        $comercioId = $this->comercioId;
+        $comercio_id = $this->comercio_id;
 		$screenResolution = $this->screenResolution;
 
 		$this->reset();		
 
-        $this->comercioId = $comercioId;
+        $this->comercio_id = $comercio_id;
 		$this->screenResolution = $screenResolution;
 
 		$this->showEditModal = false;
@@ -130,7 +133,7 @@ class ListProducts extends AdminComponent
 		}elseif ($this->screenResolution < 1280) {
 			$this->dispatchBrowserEvent('show-form');
 		}else {
-			return redirect()->route('newProductRE', ['comercioId' => $this->comercioId, 'editModal' => $editModal] );
+			return redirect()->route('newProductRE', ['comercioId' => $this->comercio_id, 'editModal' => $editModal] );
 		}
 		
 	}
@@ -147,10 +150,10 @@ class ListProducts extends AdminComponent
 			$validatedData['avatar'] = $this->photo->store('/', 'avatarsproducts');
 		}
 
-        $comercio = Comercio::find($this->comercioId);
+        $comercio = Comercio::find($this->comercio_id);
 
         $validatedData['user_id'] = $comercio->user_id;
-        $validatedData['comercio_id'] = $this->comercioId;
+        $validatedData['comercio_id'] = $this->comercio_id;
 
 		Product::create($validatedData);
 
@@ -161,11 +164,11 @@ class ListProducts extends AdminComponent
 
 	public function edit(Product $product)
 	{
-		$comercioId = $this->comercioId;
+		$comercio_id = $this->comercio_id;
 
 		$this->reset();
 
-        $this->comercioId = $comercioId;
+        $this->comercio_id = $comercio_id;
 
 		$this->showEditModal = true;
 
@@ -190,7 +193,7 @@ class ListProducts extends AdminComponent
             'subcategory_id' => 'required',
 		])->validate();
 
-		$filename = $this->state['code'].'-'.$this->comercioId;
+		$filename = $this->state['code'].'-'.$this->comercio_id;
 
 		if ($this->photo) {
 			//$validatedData['image_path1'] = $this->photo->store('/', 'avatarsproducts');
@@ -204,11 +207,20 @@ class ListProducts extends AdminComponent
 		$this->dispatchBrowserEvent('hide-form', ['message' => 'Producto actualizado satisfactoriamente!']);
 	}
 
-	public function confirmProductRemoval($productId)
+	public function confirmProductRemoval($product_id)
 	{
-		$this->productIdBeingRemoved = $productId;
+		$this->productIdBeingRemoved = $product_id;
 
 		$this->dispatchBrowserEvent('show-delete-modal');
+	}
+
+	public function deleteProduct()
+	{
+		$product = Product::findOrFail($this->productIdBeingRemoved);
+
+		$product->delete();
+
+		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Producto eliminado satisfactoriamente!']);
 	}
 
 	// Category
@@ -217,18 +229,18 @@ class ListProducts extends AdminComponent
 		// dd($product_id);
 		if($product_id)
 		{
-        $comercioId = $this->comercioId;
+        $comercio_id = $this->comercio_id;
 		$screenResolution = $this->screenResolution;
 		$prod_id = $this->product_id;
 
 		$this->reset();		
 
 		$this->product_id = $prod_id;
-		$this->categories = Category::where('comercio_id', $comercioId)->get();
+		$this->categories = Category::where('comercio_id', $comercio_id)->get();
 		$this->subcategories = collect();
 		$this->product_id = $product_id;
 
-        $this->comercioId = $comercioId;
+        $this->comercio_id = $comercio_id;
 		$this->screenResolution = $screenResolution;
 
 		$this->showEditModal = false;
@@ -246,10 +258,10 @@ class ListProducts extends AdminComponent
 			
 		// ])->validate();
 		$this->validate();
-		$comercio = Comercio::find($this->comercioId);
+		$comercio = Comercio::find($this->comercio_id);
 
         $validatedData['user_id'] = $comercio->user_id;
-        $validatedData['comercio_id'] = $this->comercioId;
+        $validatedData['comercio_id'] = $this->comercio_id;
 		$validatedData['product_id'] = $this->product_id;
 		$validatedData['category_id'] = $this->category;
 		$validatedData['subcategory_id'] = $this->subcategory;
@@ -273,14 +285,23 @@ class ListProducts extends AdminComponent
 		$this->dispatchBrowserEvent('hide-formCategory', ['message' => 'Categoria agregada satisfactoriamente!']);
 	}
 
-
-	public function deleteProduct()
+	public function confirmProductCategories($category_id)
 	{
-		$product = Product::findOrFail($this->productIdBeingRemoved);
+		
+		$this->categoryIdBeingRemoved = $category_id;
+		
+		$this->dispatchBrowserEvent('show-delete-modalformCategory');
+	}
 
-		$product->delete();
 
-		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Producto eliminado satisfactoriamente!']);
+	public function deleteProductCategories()
+	{
+		
+		$category = CategoriesProduct::findOrFail($this->categoryIdBeingRemoved);
+
+		$category->delete();
+
+		$this->dispatchBrowserEvent('hide-delete-modalformCategory', ['message' => 'Categoria eliminada satisfactoriamente!']);
 	}
 
     public function sortBy($columnName)
@@ -306,9 +327,9 @@ class ListProducts extends AdminComponent
 
     public function render()
     {
-        if($this->comercioId > 0 ){
+        if($this->comercio_id > 0 ){
             $products = Product::query()
-                ->where('comercio_id', $this->comercioId);
+                ->where('comercio_id', $this->comercio_id);
         }else{
             $products = Product::query();
         }
@@ -320,8 +341,8 @@ class ListProducts extends AdminComponent
     		->orderBy($this->sortColumnName, $this->sortDirection)
             ->paginate(15);
         
-        if($this->comercioId > 0) {
-            $comercio = Comercio::find($this->comercioId);
+        if($this->comercio_id > 0) {
+            $comercio = Comercio::find($this->comercio_id);
             $user = User::find($comercio->user_id);
         }else{
             $comercio = Comercio::find(1);

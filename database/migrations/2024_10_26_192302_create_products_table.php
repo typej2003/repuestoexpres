@@ -97,6 +97,7 @@ class CreateProductsTable extends Migration
             $table->string('ca_valoracion')->nullable();
             $table->string('tx_vencimiento')->nullable();
             $table->string('in_valido')->nullable()->default('1');
+            $table->string('in_combo')->nullable()->default('0');
             $table->bigInteger('userCreated_at');
             $table->bigInteger('userUpdated_at');
             $table->timestamps();

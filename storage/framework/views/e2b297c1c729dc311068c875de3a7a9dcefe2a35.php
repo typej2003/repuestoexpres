@@ -106,9 +106,11 @@
                                             <a wire:click.prevent="addNewCategory(<?php echo e($product->id); ?>)" style="cursor:pointer" ><i class="fa fa-plus-circle mr-1"></i> Nueva Categoria</a>
                                             <ul>
                                             <?php $__currentLoopData = $product->showSubcategories(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categorias): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <li>
-                                                    <?php echo e($categorias->subcategory()->name); ?>
-
+                                                <li class="d-flex justify-content-between">
+                                                    <div class="mx-2"><?php echo e($categorias->subcategory()->name); ?></div>
+                                                    <a href="" wire:click.prevent="confirmProductCategories(<?php echo e($categorias->id); ?>)">
+                                                        <i class="fa fa-trash text-danger"></i>
+                                                    </a>
                                                 </li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </ul>
@@ -414,7 +416,7 @@ unset($__errorArgs, $__bag); ?>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="confirmationModalCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+    <div class="modal fade" id="confirmationModalformCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -422,12 +424,12 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
                 <div class="modal-body">
-                    <h4>Esta seguro de querer eliminar este producto?</h4>
+                    <h4>Esta seguro de querer eliminar esta categoria?</h4>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
-                    <button type="button" wire:click.prevent="deleteProduct" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Eliminar Producto</button>
+                    <button type="button" wire:click.prevent="deleteProductCategories" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Eliminar Producto</button>
                 </div>
             </div>
         </div>
@@ -518,6 +520,10 @@ unset($__errorArgs, $__bag); ?>
 
             window.addEventListener('show-delete-modalformCategory', event => {
                 $('#confirmationModalformCategory').modal('show');
+            })
+
+            window.addEventListener('hide-delete-modalformCategory', event => {
+                $('#confirmationModalformCategory').modal('hide');
             })
         }
     </script>

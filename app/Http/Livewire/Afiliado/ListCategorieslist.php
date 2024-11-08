@@ -79,7 +79,6 @@ class ListCategorieslist extends AdminComponent
 
     public function addNewList($category_id, $categoryname)
 	{   
-        dd($categoryname);
         $categoryId = $this->categoryId;
         $userId = $this->userId;
         $comercioId = $this->comercioId;

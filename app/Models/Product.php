@@ -88,6 +88,7 @@ class Product extends Model
         'ca_valoracion',
         'tx_vencimiento',
         'in_valido',
+        'in_combo',
         'userCreated_at',
         'userUpdated_at',
     ];
@@ -192,22 +193,15 @@ class Product extends Model
 
     public function showSubcategories()
     {
-        $ul = "";
-        
         $categorias = CategoriesProduct::where('product_id', $this->id)->where('comercio_id', $this->comercio_id)->get();
-        // if(count($categorias))
-        // {
-        //     $ul .= "<ul>";
-        //     foreach($categorias as $cat)  { 
-        //         $ul .= "<li>";
-        //         $ul .= "<a href=''>" . $cat->name . "</a>";
-        //         $ul .= "</li>";
-        //     }    
-        //     $ul .= "</ul>";
-        // }
-
-        // return $ul;
         return $categorias;
+        
+    }
+
+    public function showProducts()
+    {
+        $products = ProductsCombo::where('product_id', $this->id)->where('comercio_id', $this->comercio_id)->get();
+        return $products;
         
     }
 }
