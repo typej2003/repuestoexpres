@@ -15,6 +15,12 @@
         </div><!-- /.container-fluid -->
     </div>
 
+    <div class="row">
+        <div class="col-md-6">
+            
+        </div>
+    </div>
+
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
@@ -80,6 +86,8 @@
                                                 <i class="fa fa-arrow-down <?php echo e($sortColumnName === 'name' && $sortDirection === 'desc' ? '' : 'text-muted'); ?>"></i>
                                             </span>
                                         </th>
+                                        <th scope="col">Categorias</th>
+                                        <th scope="col">SubCategorias</th>
                                         <th scope="col">Fecha de Registro</th>
                                         <th scope="col">Opciones</th>
                                     </tr>
@@ -92,6 +100,18 @@
                                             <img src="<?php echo e($product->image1_url); ?>" style="width: 50px;" class="img img-circle mr-1" alt="">
                                             <?php echo e($product->name); ?>
 
+                                        </td>
+                                        <td><?php echo e($product->category_id); ?></td>
+                                        <td>
+                                            <a wire:click.prevent="addNewCategory(<?php echo e($product->id); ?>)" style="cursor:pointer" ><i class="fa fa-plus-circle mr-1"></i> Nueva Categoria</a>
+                                            <ul>
+                                            <?php $__currentLoopData = $product->showSubcategories(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categorias): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <li>
+                                                    <?php echo e($categorias->subcategory()->name); ?>
+
+                                                </li>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </ul>
                                         </td>
                                         <td><?php echo e($product->created_at->toFormattedDate() ?? 'N/A'); ?></td>
                                         <td>
@@ -127,6 +147,7 @@
     </div>
     <!-- /.content -->
 
+    <!-- Modal Product -->
     <!-- Modal -->
     <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
@@ -291,6 +312,128 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
+
+    <!-- Modal Category -->
+    <!-- Modal -->
+    <div class="modal fade" id="formCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <form autocomplete="off" wire:submit.prevent="<?php echo e($showEditModal ? 'updateCategories' : 'createCategories'); ?>">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <?php if($showEditModal): ?>
+                            <span>Editar Category</span>
+                            <?php else: ?>
+                            <span>Nueva Categoria</span>
+                            <?php endif; ?>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="category">Categoría</label>
+                            <select wire:model="category" class="form-control <?php $__errorArgs = ['category'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <option value="0">Seleccione una opción</option>
+                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                            <?php $__errorArgs = ['category'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback">
+                                <?php echo e($message); ?>
+
+                            </div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subcategoryP_id">Subcategoría</label>
+                            <select wire:model="subcategory" class="subcategoryP form-control <?php $__errorArgs = ['subcategoryP_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" >
+                                <?php if($subcategories->count() == 0 ): ?>    
+                                    <option value="0">Seleccione una opción</option>
+                                <?php else: ?>
+                                <option value="0">Seleccione una opción</option>
+                                <?php endif; ?>
+                                <?php $__currentLoopData = $subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($subcategory->id); ?>"><?php echo e($subcategory->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                            <?php $__errorArgs = ['subcategoryP_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback">
+                                <?php echo e($message); ?>
+
+                            </div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
+                            <?php if($showEditModal): ?>
+                            <span>Guardar Cambios</span>
+                            <?php else: ?>
+                            <span>Guardar</span>
+                            <?php endif; ?>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmationModalCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Eliminar Producto</h5>
+                </div>
+
+                <div class="modal-body">
+                    <h4>Esta seguro de querer eliminar este producto?</h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
+                    <button type="button" wire:click.prevent="deleteProduct" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Eliminar Producto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script>
 
         window.onpageshow = function() {
@@ -322,18 +465,66 @@ unset($__errorArgs, $__bag); ?>
                 select.innerHTML = option
             
             }) 
+
+            window.addEventListener('sendSubcategoriesP', event => {
+                toastr.success(event.detail.message, 'Success!');
+                alert('ok')
+                let subcategoriesP = event.detail.subcategoriesP
+
+                let subcategoryP = event.detail.subcategoryP
+
+                let msg = event.detail.msg
+
+                let selectP = document.querySelector('.subcategoryP')
+                
+                selectP.innerHTML = ''
+
+                var optionP = `<option value="0">${msg}</option>`
+                
+                subcategoriesP.forEach(function(numero) {
+                    
+                    if(numero['name'] == subcategoryP){
+                        optionP += `<option value="${numero['id']}" selected>${numero['name']}</option>`
+                    }else{
+                        optionP += `<option value="${numero['id']}">${numero['name']}</option>`
+                    }
+                    
+                });
+                
+                selectP.innerHTML = optionP
+            
+            }) 
         }
     </script>
+
+    <script>
+        
+        document.addEventListener('livewire:load', () => {
+
+            Livewire.emit('sendResolution', screen.width);
+
+        });
+
+        window.onpageshow = function() {
+            window.addEventListener('show-formCategory', event => {
+                
+                $('#formCategory').modal('show');
+            })
+
+            window.addEventListener('hide-formCategory', event => {
+                
+                $('#formCategory').modal('hide');
+            })
+
+            window.addEventListener('show-delete-modalformCategory', event => {
+                $('#confirmationModalformCategory').modal('show');
+            })
+        }
+    </script>
+
 </div>
 
-<script>
-    
-    document.addEventListener('livewire:load', () => {
 
-        Livewire.emit('sendResolution', screen.width);
-
-    });
-</script>
 
    
 <?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/afiliado/list-products.blade.php ENDPATH**/ ?>

@@ -26,7 +26,7 @@
     <div class="card  mx-auto" style="width: 32rem;">
         <div class="card-body">
             <div class="row">
-                <div class="col-lg-12 titulo c-a text-center h2 pt-3">Ingresa a tu PagoExprés</div>
+                <div class="col-lg-12 titulo c-a text-center h2 pt-3">Ingresa a tu RepuestoExpres</div>
                 <p class="text-center textoreg">¿Todavía no te has registrado? <span><a href="#" class="c-n">Crea tu cuenta Aquí</a></span></p>
             </div>
     
@@ -57,8 +57,8 @@
                 
                 <div class="form-group">
                     <div class="row mx-auto my-3">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <button class="btn btn-app w-100">Iniciar Sesión</button>
+                        <div class="col-xs-12 col-sm-12 col-md-12 d-flex">
+                            <button class="btn btn-app w-100 mx-auto">Iniciar Sesión</button>
                         </div>
                     </div>                
                 </div>

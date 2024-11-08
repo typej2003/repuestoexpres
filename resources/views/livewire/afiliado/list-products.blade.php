@@ -15,6 +15,12 @@
         </div><!-- /.container-fluid -->
     </div>
 
+    <div class="row">
+        <div class="col-md-6">
+            
+        </div>
+    </div>
+
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
@@ -69,6 +75,8 @@
                                                 <i class="fa fa-arrow-down {{ $sortColumnName === 'name' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
                                             </span>
                                         </th>
+                                        <th scope="col">Categorias</th>
+                                        <th scope="col">SubCategorias</th>
                                         <th scope="col">Fecha de Registro</th>
                                         <th scope="col">Opciones</th>
                                     </tr>
@@ -80,6 +88,17 @@
                                         <td>
                                             <img src="{{ $product->image1_url }}" style="width: 50px;" class="img img-circle mr-1" alt="">
                                             {{ $product->name }}
+                                        </td>
+                                        <td>{{ $product->category_id }}</td>
+                                        <td>
+                                            <a wire:click.prevent="addNewCategory({{ $product->id }})" style="cursor:pointer" ><i class="fa fa-plus-circle mr-1"></i> Nueva Categoria</a>
+                                            <ul>
+                                            @foreach ($product->showSubcategories() as $categorias)
+                                                <li>
+                                                    {{ $categorias->subcategory()->name }}
+                                                </li>
+                                            @endforeach
+                                            </ul>
                                         </td>
                                         <td>{{ $product->created_at->toFormattedDate() ?? 'N/A' }}</td>
                                         <td>
@@ -114,6 +133,7 @@
     </div>
     <!-- /.content -->
 
+    <!-- Modal Product -->
     <!-- Modal -->
     <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
@@ -232,6 +252,98 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Category -->
+    <!-- Modal -->
+    <div class="modal fade" id="formCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <form autocomplete="off" wire:submit.prevent="{{ $showEditModal ? 'updateCategories' : 'createCategories' }}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            @if($showEditModal)
+                            <span>Editar Category</span>
+                            @else
+                            <span>Nueva Categoria</span>
+                            @endif
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="category">Categoría</label>
+                            <select wire:model="category" class="form-control @error('category') is-invalid @enderror">
+                                <option value="0">Seleccione una opción</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subcategoryP_id">Subcategoría</label>
+                            <select wire:model="subcategory" class="subcategoryP form-control @error('subcategoryP_id') is-invalid @enderror" >
+                                @if($subcategories->count() == 0 )    
+                                    <option value="0">Seleccione una opción</option>
+                                @else
+                                <option value="0">Seleccione una opción</option>
+                                @endif
+                                @foreach($subcategories as $subcategory)
+                                    <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('subcategoryP_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
+                            @if($showEditModal)
+                            <span>Guardar Cambios</span>
+                            @else
+                            <span>Guardar</span>
+                            @endif
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmationModalCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Eliminar Producto</h5>
+                </div>
+
+                <div class="modal-body">
+                    <h4>Esta seguro de querer eliminar este producto?</h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
+                    <button type="button" wire:click.prevent="deleteProduct" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Eliminar Producto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script>
 
         window.onpageshow = function() {
@@ -263,17 +375,65 @@
                 select.innerHTML = option
             
             }) 
+
+            window.addEventListener('sendSubcategoriesP', event => {
+                toastr.success(event.detail.message, 'Success!');
+                alert('ok')
+                let subcategoriesP = event.detail.subcategoriesP
+
+                let subcategoryP = event.detail.subcategoryP
+
+                let msg = event.detail.msg
+
+                let selectP = document.querySelector('.subcategoryP')
+                
+                selectP.innerHTML = ''
+
+                var optionP = `<option value="0">${msg}</option>`
+                
+                subcategoriesP.forEach(function(numero) {
+                    
+                    if(numero['name'] == subcategoryP){
+                        optionP += `<option value="${numero['id']}" selected>${numero['name']}</option>`
+                    }else{
+                        optionP += `<option value="${numero['id']}">${numero['name']}</option>`
+                    }
+                    
+                });
+                
+                selectP.innerHTML = optionP
+            
+            }) 
         }
     </script>
+
+    <script>
+        
+        document.addEventListener('livewire:load', () => {
+
+            Livewire.emit('sendResolution', screen.width);
+
+        });
+
+        window.onpageshow = function() {
+            window.addEventListener('show-formCategory', event => {
+                
+                $('#formCategory').modal('show');
+            })
+
+            window.addEventListener('hide-formCategory', event => {
+                
+                $('#formCategory').modal('hide');
+            })
+
+            window.addEventListener('show-delete-modalformCategory', event => {
+                $('#confirmationModalformCategory').modal('show');
+            })
+        }
+    </script>
+
 </div>
 
-<script>
-    
-    document.addEventListener('livewire:load', () => {
 
-        Livewire.emit('sendResolution', screen.width);
-
-    });
-</script>
 
    

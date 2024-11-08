@@ -15,6 +15,29 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->unsignedBigInteger('area_id');
+            $table->foreign('area_id')->references('id')
+                ->on('areas')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->unsignedBigInteger('comercio_id');
+            $table->foreign('comercio_id')->references('id')
+                ->on('comercios')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')
+                ->on('categories')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->bigInteger('subcategory_id');
+            $table->json('subcategories')->nullable();
+            $table->bigInteger('supplier_id')->nullable(); //proveedor
             $table->string('code_lote')->nullable();
             $table->string('code')->unique();
             $table->string('name')->nullable();
@@ -46,28 +69,7 @@ class CreateProductsTable extends Migration
             $table->decimal('stock_min',12,2)->nullable();
             $table->decimal('stock_max',12,2)->nullable();
             $table->decimal('stock')->nullable(); // cant en almacen
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->unsignedBigInteger('area_id');
-            $table->foreign('area_id')->references('id')
-                ->on('areas')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->unsignedBigInteger('comercio_id');
-            $table->foreign('comercio_id')->references('id')
-                ->on('comercios')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')
-                ->on('categories')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->bigInteger('subcategory_id');
-            $table->bigInteger('supplier_id')->nullable(); //proveedor
+            
             $table->bigInteger('pack_products_id')->nullable();
             $table->decimal('pack_price')->nullable();
             $table->string('tx_peso')->nullable();

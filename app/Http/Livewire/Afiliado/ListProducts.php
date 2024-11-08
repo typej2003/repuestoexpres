@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Afiliado;
 
+use Livewire\Attributes\Validate;
 use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\User;
 use App\Models\Comercio;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\CategoriesProduct;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +21,8 @@ class ListProducts extends AdminComponent
 	use WithFileUploads;
 
 	public $state = [];
+
+	public $stateP = [];
 
 	public $product;
 
@@ -40,6 +44,21 @@ class ListProducts extends AdminComponent
 
 	public $screenResolution;
 
+	#[Validate] 
+	public $category;
+	public function rules()
+    {
+        return [
+            'category' => 'required|not_in:0',
+        ];
+    }
+
+    public $content = '';
+	public $subcategory;
+	public $categories = [], $subcategories = [];
+
+	public $product_id = 0;
+
 	protected $listeners = [
 		'sendResolution'
    		];
@@ -51,7 +70,16 @@ class ListProducts extends AdminComponent
     public function mount($comercioId = 0)
     {
         $this->comercioId = $comercioId;
+
+		$this->categories = Category::all();
+		$this->subcategories = collect();
     }
+
+	public function updatedCategory($value)
+	{
+		$this->subcategories = Subcategory::where('category_id', $value)->get();
+		// $this->subcategory = $this->subcategories->first()->id ?? null;
+	}
 
 	public function changeRole(Comercio $product, $status)
 	{
@@ -182,6 +210,69 @@ class ListProducts extends AdminComponent
 
 		$this->dispatchBrowserEvent('show-delete-modal');
 	}
+
+	// Category
+	public function addNewCategory($product_id)
+	{   
+		// dd($product_id);
+		if($product_id)
+		{
+        $comercioId = $this->comercioId;
+		$screenResolution = $this->screenResolution;
+		$prod_id = $this->product_id;
+
+		$this->reset();		
+
+		$this->product_id = $prod_id;
+		$this->categories = Category::where('comercio_id', $comercioId)->get();
+		$this->subcategories = collect();
+		$this->product_id = $product_id;
+
+        $this->comercioId = $comercioId;
+		$this->screenResolution = $screenResolution;
+
+		$this->showEditModal = false;
+
+		$editModal = 'false';
+		
+		$this->dispatchBrowserEvent('show-formCategory');	
+		}
+		
+	}
+
+	public function createCategories()
+	{
+		// $validatedData = Validator::make($this->state, [
+			
+		// ])->validate();
+		$this->validate();
+		$comercio = Comercio::find($this->comercioId);
+
+        $validatedData['user_id'] = $comercio->user_id;
+        $validatedData['comercio_id'] = $this->comercioId;
+		$validatedData['product_id'] = $this->product_id;
+		$validatedData['category_id'] = $this->category;
+		$validatedData['subcategory_id'] = $this->subcategory;
+
+		if($this->subcategory == 0)
+		{
+			$validatedData['primary'] = 'primary';
+			$validatedData['subcategory_id'] = 0;
+		}
+		else{
+			$validatedData['primary'] = 'secundary';
+		}
+
+        // 'order',
+
+
+		CategoriesProduct::create($validatedData);
+
+		// session()->flash('message', 'User added successfully!');
+
+		$this->dispatchBrowserEvent('hide-formCategory', ['message' => 'Categoria agregada satisfactoriamente!']);
+	}
+
 
 	public function deleteProduct()
 	{

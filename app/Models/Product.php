@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class Product extends Model
 {
     use HasFactory;
+    
 
     const STATUS_ACTIVE = 'active';
     const STATUS_NOACTIVE = 'noactive';
@@ -19,6 +21,14 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
+        'comercio_id',
+        'area_id',
+        'category_id',
+        'subcategory_id',
+        'subcategories',
+        'supplier_id', //proveedor
+
         'code_lote',
         'code',
         'name',
@@ -50,12 +60,7 @@ class Product extends Model
         'stock_min',
         'stock_max',
         'stock', // cant en almacen
-        'user_id',
-        'comercio_id',
-        'area_id',
-        'category_id',
-        'subcategory_id',
-        'supplier_id', //proveedor
+        
         'pack_products_id',
         'pack_price',
         'tx_peso',
@@ -183,5 +188,26 @@ class Product extends Model
                 return 0;
                 break;
         }
+    }
+
+    public function showSubcategories()
+    {
+        $ul = "";
+        
+        $categorias = CategoriesProduct::where('product_id', $this->id)->where('comercio_id', $this->comercio_id)->get();
+        // if(count($categorias))
+        // {
+        //     $ul .= "<ul>";
+        //     foreach($categorias as $cat)  { 
+        //         $ul .= "<li>";
+        //         $ul .= "<a href=''>" . $cat->name . "</a>";
+        //         $ul .= "</li>";
+        //     }    
+        //     $ul .= "</ul>";
+        // }
+
+        // return $ul;
+        return $categorias;
+        
     }
 }
