@@ -81,53 +81,53 @@
     <div class="row">
         <div class="col-md-12">
             <section class="regular slider slider-products" wire:ignore>
-                @forelse ($products as $index => $product)
+                <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div>
                         <div class="card showProductCard mx-auto text-center mx-2" wire:ignore>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="">
-                                        <img class="mx-auto" src="{{$product->avatar_url}}" alt="">
+                                        <img class="mx-auto" src="<?php echo e($product->avatar_url); ?>" alt="">
                                     </div>
                                 </div>
                                 <div class="row text-left">
-                                    <div class="negrita">{{$product->name}}</div>
-                                        @if($product->on_offer)
-                                            <div class="text-decoration-line-through">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
-                                            <div class="">Promoción: {{$currencyValue}}. {{ $product->getPrice_offer() }}</div>
-                                        @else
-                                            <div class="">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
-                                        @endif
+                                    <div class="negrita"><?php echo e($product->name); ?></div>
+                                        <?php if($product->on_offer): ?>
+                                            <div class="text-decoration-line-through">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                            <div class="">Promoción: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice_offer()); ?></div>
+                                        <?php else: ?>
+                                            <div class="">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                        <?php endif; ?>
                                         <div style="display: flex; flex-direction: row;">
                                             <a class="btn btn-sale text-center">Comprar ahora</a>
                                             <?php $valoracion = $product->getvaloracion(0, $product->id)['ca_valoracion']; ?>
                                             <?php $class = $product->valoracionClass($valoracion); ?>
                                             <br>
                                                      
-                                            <div class="cardStar" product="{{$product->id}}" wire:ignore>
-                                                @for ($i = 1; $i <=5; $i++)
-                                                    @if($valoracion >= $i)
-                                                        <span wire:click.prevent="valorar(0, {{$product->id}}, {{$i}})" product="{{ $product->id }}" star = "{{$i}}" class="star {{$class}}">★</span>
-                                                    @else
-                                                        <span wire:click.prevent="valorar(0, {{$product->id}}, {{$i}})" product="{{ $product->id }}" star = "{{$i}}" class="star">★</span>
-                                                    @endif
-                                                @endfor
-                                                <h5 class="output" output="show{{ $product->id }}">
-                                                    Puntuación: {{$valoracion}}/5
+                                            <div class="cardStar" product="<?php echo e($product->id); ?>" wire:ignore>
+                                                <?php for($i = 1; $i <=5; $i++): ?>
+                                                    <?php if($valoracion >= $i): ?>
+                                                        <span wire:click.prevent="valorar(0, <?php echo e($product->id); ?>, <?php echo e($i); ?>)" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star <?php echo e($class); ?>">★</span>
+                                                    <?php else: ?>
+                                                        <span wire:click.prevent="valorar(0, <?php echo e($product->id); ?>, <?php echo e($i); ?>)" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star">★</span>
+                                                    <?php endif; ?>
+                                                <?php endfor; ?>
+                                                <h5 class="output" output="show<?php echo e($product->id); ?>">
+                                                    Puntuación: <?php echo e($valoracion); ?>/5
                                                 </h5>
                                             </div>
                                         </div>
                                 </div>
-                                @if($product->in_envio_gratis)
+                                <?php if($product->in_envio_gratis): ?>
                                 <div class="text-left" style="color: blue;">Envío Gratis</div>
-                                @endif
+                                <?php endif; ?>
                             </div>
                             <div class="card-footer">
                                 <span class="">Tienda: Auto Repuestos Fred</span>
                             </div>
                         </div>
                     </div>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <div class="card showProductCard mx-auto text-center">
                         <card-body>
                             <span>No tiene Ofertas Disponibles</span>
@@ -135,7 +135,7 @@
                         <card-footer>                    
                         </card-footer>                    
                     </div>
-                @endforelse
+                <?php endif; ?>
             </section>       
         </div>
     </div>
@@ -156,26 +156,41 @@
                         <?php $class = 'star'; ?>
                         <br>                                    
                         <div class="cardStar" wire:ignore>
-                            @for ($i = 1; $i <=5; $i++)
-                                @if($valoracion >= $i)
-                                    <span wire:click.prevent="valorar1( {{$i}} )" star = "{{$i}}" class="starV {{$class}}" product="{{ $state['product_id'] }}">★</span>
-                                @else
-                                    <span wire:click.prevent="valorar1( {{$i}})" product="{{ $state['product_id'] }}" star = "{{$i}}" class="starV">★</span>
-                                @endif
-                            @endfor
-                            <h5 class="output" output="{{ $state['product_id'] }}">
-                                Puntuación: {{$valoracion}}/5
+                            <?php for($i = 1; $i <=5; $i++): ?>
+                                <?php if($valoracion >= $i): ?>
+                                    <span wire:click.prevent="valorar1( <?php echo e($i); ?> )" star = "<?php echo e($i); ?>" class="starV <?php echo e($class); ?>" product="<?php echo e($state['product_id']); ?>">★</span>
+                                <?php else: ?>
+                                    <span wire:click.prevent="valorar1( <?php echo e($i); ?>)" product="<?php echo e($state['product_id']); ?>" star = "<?php echo e($i); ?>" class="starV">★</span>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+                            <h5 class="output" output="<?php echo e($state['product_id']); ?>">
+                                Puntuación: <?php echo e($valoracion); ?>/5
                             </h5>
                         </div>
                     </div>
                     <div class="form-control">
                         <label for="comment"></label>
-                        <input type="text" wire:model.defer="state.comment" autofocus class="form-control @error('comment') is-invalid @enderror" id="comment">
-                        @error('comment')
+                        <input type="text" wire:model.defer="state.comment" autofocus class="form-control <?php $__errorArgs = ['comment'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="comment">
+                        <?php $__errorArgs = ['comment'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                         <div class="invalid-feedback">
-                            {{ $message }}
+                            <?php echo e($message); ?>
+
                         </div>
-                        @enderror
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
                     
                 </div>
@@ -211,8 +226,8 @@
                         <p class="text-center textoreg">¿Todavía no te has registrado? <span><a href="#" class="c-n">Crea tu cuenta Aquí</a></span></p>
                     </div>
             
-                    <form action="{{ route('login') }}" method="POST">
-                        @csrf
+                    <form action="<?php echo e(route('login')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                       <div class="form-group">
                         <div class="row mx-auto">
                             <div class="col-xs-6 col-md-4 col-sm-4 col-4">
@@ -240,9 +255,16 @@
                                     <input type="email" name="email" class="form-control inputForm" placeholder="Correo Electrónico" id="emailW">
                                 </div>
                             </div>
-                            @error('email')
-                              <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                              <span class="text-danger"><?php echo e($message); ?></span>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
             
                         <div class="form-group">
@@ -328,4 +350,4 @@
 
     </script>
 
-</div>
+</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/show-products.blade.php ENDPATH**/ ?>

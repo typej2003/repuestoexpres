@@ -9,6 +9,11 @@
     background-color: white;
 }
 
+.starV {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
 .star {
     font-size: 1.5rem;
     cursor: pointer;

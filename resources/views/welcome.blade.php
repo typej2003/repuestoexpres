@@ -92,7 +92,7 @@
                     </div>
             
                     <form action="{{ route('login') }}" method="POST">
-                      @csrf
+                        @csrf
                       <div class="form-group">
                         <div class="row mx-auto">
                             <div class="col-xs-6 col-md-4 col-sm-4 col-4">
@@ -137,7 +137,7 @@
                         <div class="form-group">
                             <div class="row mx-auto my-3">
                                 <div class="col-xs-12 col-sm-12 col-md-12 d-flex">
-                                    <button class="btn btn-app w-100 mx-auto">Iniciar Sesión</button>
+                                    <button type="submit" class="btn btn-app w-100 mx-auto">IIniciar Sesión</button>
                                 </div>
                             </div>                
                         </div>

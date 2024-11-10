@@ -40,7 +40,7 @@ class Valoracion extends Model
                 break;
         }
 
-        return 'star';
+        return '';
             
     }
 
