@@ -47,15 +47,15 @@
       <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('layouts.navbar')->html();
-} elseif ($_instance->childHasBeenRendered('MAcmmEo')) {
-    $componentId = $_instance->getRenderedChildComponentId('MAcmmEo');
-    $componentTag = $_instance->getRenderedChildComponentTagName('MAcmmEo');
+} elseif ($_instance->childHasBeenRendered('VvVFy5o')) {
+    $componentId = $_instance->getRenderedChildComponentId('VvVFy5o');
+    $componentTag = $_instance->getRenderedChildComponentTagName('VvVFy5o');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('MAcmmEo');
+    $_instance->preserveRenderedChild('VvVFy5o');
 } else {
     $response = \Livewire\Livewire::mount('layouts.navbar');
     $html = $response->html();
-    $_instance->logRenderedChild('MAcmmEo', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('VvVFy5o', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -64,15 +64,15 @@ echo $html;
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.marcas-productos')->html();
-} elseif ($_instance->childHasBeenRendered('av41qbN')) {
-    $componentId = $_instance->getRenderedChildComponentId('av41qbN');
-    $componentTag = $_instance->getRenderedChildComponentTagName('av41qbN');
+} elseif ($_instance->childHasBeenRendered('HGz9uHd')) {
+    $componentId = $_instance->getRenderedChildComponentId('HGz9uHd');
+    $componentTag = $_instance->getRenderedChildComponentTagName('HGz9uHd');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('av41qbN');
+    $_instance->preserveRenderedChild('HGz9uHd');
 } else {
     $response = \Livewire\Livewire::mount('components.marcas-productos');
     $html = $response->html();
-    $_instance->logRenderedChild('av41qbN', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('HGz9uHd', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -82,15 +82,15 @@ echo $html;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.component-search')->html();
-} elseif ($_instance->childHasBeenRendered('SY24C21')) {
-    $componentId = $_instance->getRenderedChildComponentId('SY24C21');
-    $componentTag = $_instance->getRenderedChildComponentTagName('SY24C21');
+} elseif ($_instance->childHasBeenRendered('x8j6WRh')) {
+    $componentId = $_instance->getRenderedChildComponentId('x8j6WRh');
+    $componentTag = $_instance->getRenderedChildComponentTagName('x8j6WRh');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('SY24C21');
+    $_instance->preserveRenderedChild('x8j6WRh');
 } else {
     $response = \Livewire\Livewire::mount('components.component-search');
     $html = $response->html();
-    $_instance->logRenderedChild('SY24C21', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('x8j6WRh', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -98,15 +98,15 @@ echo $html;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.show-products')->html();
-} elseif ($_instance->childHasBeenRendered('6v8ErEH')) {
-    $componentId = $_instance->getRenderedChildComponentId('6v8ErEH');
-    $componentTag = $_instance->getRenderedChildComponentTagName('6v8ErEH');
+} elseif ($_instance->childHasBeenRendered('VW1aF9F')) {
+    $componentId = $_instance->getRenderedChildComponentId('VW1aF9F');
+    $componentTag = $_instance->getRenderedChildComponentTagName('VW1aF9F');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('6v8ErEH');
+    $_instance->preserveRenderedChild('VW1aF9F');
 } else {
     $response = \Livewire\Livewire::mount('components.show-products');
     $html = $response->html();
-    $_instance->logRenderedChild('6v8ErEH', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('VW1aF9F', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

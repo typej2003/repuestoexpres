@@ -1,4 +1,5 @@
 <div>
+    <link rel="stylesheet" href="/css/star.css">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -14,7 +15,6 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
@@ -50,7 +50,7 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-hover table-bordered">
+                            <table class="table table-hover table-bordered table-responsive">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -62,7 +62,9 @@
                                             </span>
                                         </th>
                                         <th scope="col">No Confirmada</th>
-                                        <th scope="col">Registerd Date</th>
+                                        <th scope="col">Valoración</th>
+                                        <td scope="col">Estrella</td>
+                                        <th scope="col">Fecha de Registro</th>
                                         <th scope="col">Opciones</th>
                                     </tr>
                                 </thead>
@@ -75,6 +77,23 @@
                                             {{ $comercio->name }}
                                         </td>
                                         <td>{{ $comercio->OperacionNoConfirmada() }}</td>
+                                        <?php $valoracion = $comercio->getvaloracion(1, $comercio->id)['ca_valoracion']; ?>
+                                        <?php $class = $comercio->valoracionClass($valoracion); ?>
+                                        <td>{{ $valoracion }}</td>
+                                        <td>
+                                            <div class="cardStar" product="{{$comercio->id}}" wire:ignore>
+                                                @for ($i = 1; $i <=5; $i++)
+                                                    @if($valoracion >= $i)
+                                                        <span wire:click.prevent="valorar(1, {{$comercio->id}}, {{$i}})" product="{{ $comercio->id }}" star = "{{$i}}" class="star {{$class}}">★</span>
+                                                    @else
+                                                        <span wire:click.prevent="valorar(1, {{$comercio->id}}, {{$i}})" product="{{ $comercio->id }}" star = "{{$i}}" class="star">★</span>
+                                                    @endif
+                                                @endfor
+                                                <h5 class="output" output="{{ $comercio->id }}">
+                                                    Puntuación: {{$valoracion}}/5
+                                                </h5>
+                                            </div>
+                                        </td>
                                         <td>{{ $comercio->created_at->toFormattedDate() ?? 'N/A' }}</td>
                                         <td class="fs-2">
                                             <a href="/listTransacciones/{{$comercio->id }}">
@@ -260,4 +279,30 @@
             </div>
         </div>
     </div>
+    <script>
+
+        window.addEventListener('updateStar', event => {
+                    
+            let comercio_id = event.detail.comercio_id
+            let puntuacion = event.detail.puntuacion
+            let class = event.detail.class
+
+            let div = `
+                <div class="cardStar" product="${comercio_id}" wire:ignore>`
+                    for ($i = 1; $i <=5; $i++){
+                        if(puntuacion >= $i){
+                div +=    `<span wire:click.prevent="valorar(1, ${comercio_id}, ${i})" product="${ comercio_id }" star = "${i}" class="star ${class}">★</span>`
+                        }else{
+                div +=    `<span wire:click.prevent="valorar(1, ${comercio_id}, ${i})" product="${ comercio_id }" star = "${i}" class="star">★</span>`
+                        }
+                    }
+                div +=    `
+                    <h5 class="output" output="${ comercio_id }">
+                        Puntuación: ${puntuacion}/5
+                    </h5>
+                </div>
+            `
+        }
+    </script>
+    <script src="/js/star.js"></script>
 </div>

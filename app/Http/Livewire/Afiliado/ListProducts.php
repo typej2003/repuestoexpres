@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\CategoriesProduct;
+use App\Models\Valoracion;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -302,6 +303,26 @@ class ListProducts extends AdminComponent
 		$category->delete();
 
 		$this->dispatchBrowserEvent('hide-delete-modalformCategory', ['message' => 'Categoria eliminada satisfactoriamente!']);
+	}
+
+	public function valorar($referred, $product_id, $puntuacion)
+	{
+		$valoracion = Valoracion::where('referred', $referred)->where('user_id', auth()->user()->id)->first();
+		if($valoracion){
+			$valoracion->update(['ca_valoracion' => $puntuacion]);
+		}else{
+			Valoracion::create([
+				'user_id' => auth()->user()->id,
+				'comercio_id' => $comercio_id,
+				'product_id' => 0,
+				'ca_valoracion' => $puntuacion,
+				'referred' => $referred,
+				'comment' => '',
+			]);
+		}
+
+		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Valoración actualizada satisfactoriamente!']);
+		// $this->dispatchBrowserEvent('updateStar', ['comercio_id' => $comercio_id, 'puntuacion' => $puntuacion, 'class' => $class,]);
 	}
 
     public function sortBy($columnName)

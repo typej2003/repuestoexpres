@@ -7,6 +7,7 @@ use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\Product;
 use App\Models\Comercio;
 use App\Models\Setting;
+use App\Models\Valoracion;
 
 class ShowProducts extends AdminComponent
 {
@@ -26,6 +27,28 @@ class ShowProducts extends AdminComponent
             $this->currencyValue = $setting->currency;
         }
     }
+
+    public function valorar($referred, $product_id, $puntuacion)
+	{
+		$valoracion = Valoracion::where('referred', $referred)->where('user_id', auth()->user()->id)->where('product_id', $product_id)->first();
+		if($valoracion){
+			$valoracion->update(['ca_valoracion' => $puntuacion]);
+		}else{
+			Valoracion::create([
+				'user_id' => auth()->user()->id,
+				'comercio_id' => 0,
+				'product_id' => $product_id,
+				'ca_valoracion' => $puntuacion,
+				'referred' => $referred,
+				'comment' => '',
+			]);
+		}
+
+        $this->skipRender();
+
+		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Gracias por la valoración!']);
+		// $this->dispatchBrowserEvent('updateStar', ['comercio_id' => $comercio_id, 'puntuacion' => $puntuacion, 'class' => $class,]);
+	}
 
     public function render()
     {

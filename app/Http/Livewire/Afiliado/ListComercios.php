@@ -6,6 +6,7 @@ use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\User;
 use App\Models\Comercio;
 use App\Models\Area;
+use App\Models\Valoracion;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\WithFileUploads;
@@ -151,6 +152,26 @@ class ListComercios extends AdminComponent
 		$comercio->delete();
 
 		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Comercio eliminado satisfactoriamente!']);
+	}
+
+	public function valorar($referred, $comercio_id, $puntuacion)
+	{
+		$valoracion = Valoracion::where('referred', $referred)->where('user_id', auth()->user()->id)->where('comercio_id', $comercio_id)->first();
+		if($valoracion){
+			$valoracion->update(['ca_valoracion' => $puntuacion]);
+		}else{
+			Valoracion::create([
+				'user_id' => auth()->user()->id,
+				'comercio_id' => $comercio_id,
+				'product_id' => 0,
+				'ca_valoracion' => $puntuacion,
+				'referred' => $referred,
+				'comment' => '',
+			]);
+		}
+
+		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Valoración actualizada satisfactoriamente!']);
+		// $this->dispatchBrowserEvent('updateStar', ['comercio_id' => $comercio_id, 'puntuacion' => $puntuacion, 'class' => $class,]);
 	}
 
     public function sortBy($columnName)

@@ -76,5 +76,33 @@ class Comercio extends Model
         //return $this->hasMany(Manufacturer::class);
     }
 
+    public function getvaloracion($referred = 0, $id = 0)
+    {        
+        
+            if($referred == 0){
+                $valoracion = Valoracion::where('user_id', auth()->user()->id)->where('product_id', $id)->where('referred', $referred)->first();
+            }
+            if($referred == 1){
+                $valoracion = Valoracion::where('user_id', auth()->user()->id)->where('comercio_id', $id)->where('referred', $referred)->first();    
+                
+            }
+            
+            if($valoracion){
+                return $valoracion;
+            }else{
+                return [
+                    'ca_valoracion' => 0,
+                    'comment' => '',
+                ];
+            }
+            
+        
+    }
+
+    public function valoracionClass($ca_valoracion){
+        $valoracion = new Valoracion;
+        $class = $valoracion->valoracionClass($ca_valoracion);
+        return $class;
+    }
     
 }

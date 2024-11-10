@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/css/slick-theme.min.css">
     <link rel="stylesheet" href="/css/slick.min.css">
     <link rel="stylesheet" href="/css/showProducts.css">
+    <link rel="stylesheet" href="/css/star.css">
     <style>
         /* .slider{
             width: 90%!important;
@@ -79,10 +80,10 @@
     </div>    
     <div class="row">
         <div class="col-md-12">
-            <section class="regular slider slider-products">
+            <section class="regular slider slider-products" wire:ignore>
                 @forelse ($products as $index => $product)
                     <div>
-                        <div class="card showProductCard mx-auto text-center mx-2">
+                        <div class="card showProductCard mx-auto text-center mx-2" wire:ignore>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="">
@@ -98,16 +99,17 @@
                                             <div class="">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
                                         @endif
                                         <div style="display: flex; flex-direction: row;">
-                                            <button class="btn btn-sale">Comprar ahora</button>
-                                            <div>
-                                                <ul class="text-center starRating">
-                                                    <li class="star"><i class="fas fa-star"></i></li>
-                                                    <li class="star"><i class="fas fa-star"></i></li>
-                                                    <li class="star"><i class="fas fa-star"></i></li>
-                                                    <li class="star"><i class="fas fa-star"></i></li>
-                                                    <li class="star"><i class="fas fa-star"></i></li>
-                                                </ul>
-                                                <div class="rating text-center">Rated</div>
+                                            <a class="btn btn-sale text-center">Comprar ahora</a>
+                                            <?php $valoracion = $product->getvaloracion(0, $product->id)['ca_valoracion']; ?>
+                                            <?php $class = $product->valoracionClass($valoracion); ?>
+                                            <br>
+                                            <div class="cardStar" product="{{$product->id}}">
+                                                @for ($x = 1; $x <= 5; $x++)
+                                                    {{$x}}
+                                                @endfor
+                                                <h5 class="output" output="{{ $product->id }}">
+                                                    Puntuación: {{$valoracion}}/5
+                                                </h5>
                                             </div>
                                         </div>
                                 </div>
@@ -140,7 +142,7 @@
             dots: true,
             infinite: true,
             slidesToShow: findSlides(),
-            slidesToScroll: 3,
+            slidesToScroll: findSlides(),
             autoplay: false,
             });
         }
@@ -165,4 +167,5 @@
             location.reload()
         })
     </script>
+    <script src="/js/star.js"></script>
 </div>

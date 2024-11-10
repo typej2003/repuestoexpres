@@ -94,7 +94,7 @@ class CreateProductsTable extends Migration
             $table->string('in_fragil')->nullable()->default('0');
             $table->string('in_por_encargo')->nullable()->default('0');
             $table->string('in_olor_fuerte')->nullable()->default('0');
-            $table->string('ca_valoracion')->nullable();
+            $table->integer('ca_valoracion')->nullable();
             $table->string('tx_vencimiento')->nullable();
             $table->string('in_valido')->nullable()->default('1');
             $table->string('in_combo')->nullable()->default('0');
