@@ -15,14 +15,23 @@ class ComponentSearch extends AdminComponent
 {
     public $comercio_id = 0;
 
-    #[Validate] 
+    #[Validate]
 	public $manufacturer;
 	public function rules()
     {
         return [
-            'manufacturer_id' => 'required|not_in:0',
+            'manufacturer' => 'required|not_in:0',
         ];
     }
+
+    public function messages() 
+    {
+        return [
+            'manufacturer.required' => 'Debe seleccionar una opcion.',
+            'manufacturer.not_in' => 'Debe seleccionar una opcion.',
+        ];
+    }
+   
 
     public $modelo;
     public $motor;
@@ -56,6 +65,14 @@ class ComponentSearch extends AdminComponent
 		$this->motores = Motor::where('manufacturer_id', $this->manufacturer_id)->where('modelo_id', $value)->get();
 		// $this->subcategory = $this->subcategories->first()->id ?? null;
 	}
+
+    public function searchMotor()
+    {
+        $this->validate();
+
+        $informacion = "Hola desde Componente A!";
+        $this->emit('infoRecibida', $informacion, $this->manufacturer);
+    }
 
     public function render()
     {

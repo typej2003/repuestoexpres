@@ -10,9 +10,20 @@ class ResultsProducts extends AdminComponent
 {
     public $parametro = '';
 
-    public function mount($parametro)
+    public $informacion = '';
+
+    protected $listeners = ['infoRecibida' => 'actualizarInfo'];
+
+    public function actualizarInfo($data, $manufacturer)
     {
-        $this->parametro = $parametro;
+        $this->parametro = $manufacturer;
+
+        $this->informacion = $data;
+    }
+
+    public function mount()
+    {
+        
     }
 
     public function render()

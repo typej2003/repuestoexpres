@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-6 col-md-6 col-12">
-            <form action="{{ route('searchMotor') }}" method="POST">
+            <form autocomplete="off" wire:submit.prevent="searchMotor">
               @csrf
             <div class="card w-75 p-1 mx-auto">
                 <div class="form-group">
