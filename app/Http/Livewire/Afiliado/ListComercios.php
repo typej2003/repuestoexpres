@@ -6,7 +6,7 @@ use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\User;
 use App\Models\Comercio;
 use App\Models\Area;
-use App\Models\Valoracion;
+use App\Models\ValoracionComercio;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\WithFileUploads;
@@ -154,18 +154,38 @@ class ListComercios extends AdminComponent
 		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Comercio eliminado satisfactoriamente!']);
 	}
 
-	public function valorar($referred, $comercio_id, $puntuacion)
+	public function searchClass($puntuacion)
+    {
+        switch ($variable) {
+            case '1':
+                return 'one';
+                break;
+            case '2':
+                return 'two';
+                break;
+            case '3':
+                return 'three';
+                break;
+            case '4':
+                return 'four';
+                break;
+            case '5':
+                return 'five';
+                break;
+        }
+    }
+
+	public function valorar($comercio_id, $puntuacion)
 	{
-		$valoracion = Valoracion::where('referred', $referred)->where('user_id', auth()->user()->id)->where('comercio_id', $comercio_id)->first();
+		$valoracion = ValoracionComercio::where('user_id', auth()->user()->id)->where('comercio_id', $comercio_id)->first();
 		if($valoracion){
-			$valoracion->update(['ca_valoracion' => $puntuacion]);
+			$valoracion->update(['ca_valoracion' => $puntuacion, 'class' => 'star',]);
 		}else{
-			Valoracion::create([
+			ValoracionComercio::create([
 				'user_id' => auth()->user()->id,
 				'comercio_id' => $comercio_id,
-				'product_id' => 0,
 				'ca_valoracion' => $puntuacion,
-				'referred' => $referred,
+				'class' => $this->searchClass($puntuacion),
 				'comment' => '',
 			]);
 		}

@@ -100,20 +100,17 @@
                                         <?php endif; ?>
                                         <div style="display: flex; flex-direction: row;">
                                             <a class="btn btn-sale text-center">Comprar ahora</a>
-                                            <?php $valoracion = $product->getvaloracion(0, $product->id)['ca_valoracion']; ?>
-                                            <?php $class = $product->valoracionClass($valoracion); ?>
-                                            <br>
-                                                     
+                                            <br>                                                     
                                             <div class="cardStar" product="<?php echo e($product->id); ?>" wire:ignore>
                                                 <?php for($i = 1; $i <=5; $i++): ?>
-                                                    <?php if($valoracion >= $i): ?>
-                                                        <span wire:click.prevent="valorar(0, <?php echo e($product->id); ?>, <?php echo e($i); ?>)" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star <?php echo e($class); ?>">★</span>
+                                                    <?php if($product->valoracionProduct->ca_valoracion >= $i): ?>
+                                                        <span wire:click.prevent="valorar(<?php echo e($product->id); ?>, <?php echo e($product->valoracionProduct->ca_valoracion); ?>, '<?php echo e($product->valoracionProduct->class); ?>')" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star <?php echo e($product->valoracionProduct->class); ?>">★</span>
                                                     <?php else: ?>
-                                                        <span wire:click.prevent="valorar(0, <?php echo e($product->id); ?>, <?php echo e($i); ?>)" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star">★</span>
+                                                        <span wire:click.prevent="valorar(<?php echo e($product->id); ?>, <?php echo e($product->valoracionProduct->ca_valoracion); ?>, '<?php echo e($product->valoracionProduct->class); ?>')" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star">★</span>
                                                     <?php endif; ?>
                                                 <?php endfor; ?>
                                                 <h5 class="output" output="show<?php echo e($product->id); ?>">
-                                                    Puntuación: <?php echo e($valoracion); ?>/5
+                                                    Puntuación: <?php echo e($product->valoracionProduct->ca_valoracion); ?>/5
                                                 </h5>
                                             </div>
                                         </div>
@@ -142,35 +139,85 @@
 </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="valoracionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form autocomplete="off" wire:submit.prevent="registrarValoracion">
-                <div class="modal-header">
-                    <h5>Valore el producto</h5>
-                </div>
 
-                <div class="modal-body">
-                    <div class="form-control">
-                        <?php $valoracion = 5; ?>
-                        <?php $class = 'star'; ?>
-                        <br>                                    
-                        <div class="cardStar" wire:ignore>
-                            <?php for($i = 1; $i <=5; $i++): ?>
-                                <?php if($valoracion >= $i): ?>
-                                    <span wire:click.prevent="valorar1( <?php echo e($i); ?> )" star = "<?php echo e($i); ?>" class="starV <?php echo e($class); ?>" product="<?php echo e($state['product_id']); ?>">★</span>
-                                <?php else: ?>
-                                    <span wire:click.prevent="valorar1( <?php echo e($i); ?>)" product="<?php echo e($state['product_id']); ?>" star = "<?php echo e($i); ?>" class="starV">★</span>
-                                <?php endif; ?>
-                            <?php endfor; ?>
-                            <h5 class="output" output="<?php echo e($state['product_id']); ?>">
-                                Puntuación: <?php echo e($valoracion); ?>/5
-                            </h5>
+    
+    <!-- Modal -->
+<div class="modal fade" id="valoracionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+  <div class="modal-dialog">
+        <form autocomplete="off" wire:submit.prevent="registrarValoracion">
+        <div class="modal-content modalFondo">
+            <div class="modal-header" style="background-color: #f8f8f8;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <section class="banner">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <img class="img_logo" src="./img/logo_repuestos.png" alt="">
                         </div>
                     </div>
-                    <div class="form-control">
-                        <label for="comment"></label>
-                        <input type="text" wire:model.defer="state.comment" autofocus class="form-control <?php $__errorArgs = ['comment'];
+                </section>
+                <div class="container-fluid d-flex flex-row">
+                    <div class="card  mx-auto" style="width: 32rem;">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="name">product_id</label>
+                                <input type="text" wire:model.defer="state.product_id" class="form-control" id="product_id" aria-describedby="nameHelp" placeholder="Enter full name">
+                            </div>
+                            <div class="form-group my-2">
+                                <div class="cardStar cardStarV" wire:ignore >
+                                    <span wire:click.prevent="valorar1(1)" star = "1" class= "starV <?php echo e(($state['ca_valoracion'] >= 1)? $state['class']:''); ?> " product="<?php echo e($state['product_id']); ?>">★</span>
+                                    <span wire:click.prevent="valorar1(2)" star = "2" class= "starV <?php echo e(($state['ca_valoracion'] >= 2)? $state['class']:''); ?> " product="<?php echo e($state['product_id']); ?>">★</span>
+                                    <span wire:click.prevent="valorar1(3)" star = "3" class= "starV <?php echo e(($state['ca_valoracion'] >= 3)? $state['class']:''); ?> " product="<?php echo e($state['product_id']); ?>">★</span>
+                                    <span wire:click.prevent="valorar1(4)" star = "4" class= "starV <?php echo e(($state['ca_valoracion'] >= 4)? $state['class']:''); ?> " product="<?php echo e($state['product_id']); ?>">★</span>
+                                    <span wire:click.prevent="valorar1(5)" star = "5" class= "starV <?php echo e(($state['ca_valoracion'] >= 5)? $state['class']:''); ?> " product="<?php echo e($state['product_id']); ?>">★</span>
+                                    <h5 class="output" output="<?php echo e($state['product_id']); ?>">
+                                        Puntuación: <?php echo e($state['ca_valoracion']); ?>/5
+                                    </h5>
+                                </div>
+
+                                <br>                               
+                                
+                                <!-- <div class="cardStar cardStarV" wire:ignore.self >
+                                    <?php for($i = 1; $i <=5; $i++): ?>
+                                        <?php if( $ca_valoracion >= $i): ?>
+                                            <span wire:click.prevent="valorar1( <?php echo e($i); ?> )" star = "<?php echo e($i); ?>" class="starV <?php echo e($state['class']); ?>" product="<?php echo e($state['product_id']); ?>">★</span>
+                                        <?php else: ?>
+                                            <span wire:click.prevent="valorar1( <?php echo e($i); ?>)" product="<?php echo e($state['product_id']); ?>" star = "<?php echo e($i); ?>" class="starV">★</span>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+                                    <h5 class="output" output="<?php echo e($state['product_id']); ?>">
+                                        Puntuación: <?php echo e($state['ca_valoracion']); ?>/5
+                                    </h5>
+                                </div> -->
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">ca_valoracion</label>
+                                <input type="text" wire:model.defer="state.ca_valoracion" autofocus class="form-control <?php $__errorArgs = ['ca_valoracion'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="ca_valoracion">
+                                <?php $__errorArgs = ['ca_valoracion'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="invalid-feedback">
+                                    <?php echo e($message); ?>
+
+                                </div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Comentario</label>
+                                <input type="text" wire:model.defer="state.comment" autofocus class="form-control <?php $__errorArgs = ['comment'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -178,125 +225,60 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="comment">
-                        <?php $__errorArgs = ['comment'];
+                                <?php $__errorArgs = ['comment'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                        <div class="invalid-feedback">
-                            <?php echo e($message); ?>
+                                <div class="invalid-feedback">
+                                    <?php echo e($message); ?>
 
-                        </div>
-                        <?php unset($message);
+                                </div>
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                    </div>
-                    
-                </div>
+                            </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
-                    <button type="submit" class="btn btn-app">Enviar</button>
-                </div>
+                            <div class="form-group">
+                                <label for="class">Class</label>
+                                <input type="text" wire:model.defer="state.class" autofocus class="form-control <?php $__errorArgs = ['class'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="class">
+                                <?php $__errorArgs = ['class'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="invalid-feedback">
+                                    <?php echo e($message); ?>
+
+                                </div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>        
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"> Cancelar</button>
+                <button type="submit" class="btn-app"><i class="fa fa-save mr-1"></i>
+                    <span>Guardar Cambios</span>
+                </button>
             </div>
         </div>
+        </form>
     </div>
-
-    <!-- Modal -->
-<div class="modal fade" id="loginModalShow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content modalFondo">
-      <div class="modal-header" style="background-color: #f8f8f8;">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <section class="banner">
-            <div class="row">
-                <div class="col-lg-12">
-                    <img class="img_logo" src="./img/logo_repuestos.png" alt="">
-                </div>
-            </div>
-        </section>
-        <div class="container-fluid d-flex flex-row">
-            <div class="card  mx-auto" style="width: 32rem;">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12 titulo c-a text-center h2 pt-3">Ingresa a tu RepuestoExpress</div>
-                        <p class="text-center textoreg">¿Todavía no te has registrado? <span><a href="#" class="c-n">Crea tu cuenta Aquí</a></span></p>
-                    </div>
-            
-                    <form action="<?php echo e(route('login')); ?>" method="POST">
-                        <?php echo csrf_field(); ?>
-                      <div class="form-group">
-                        <div class="row mx-auto">
-                            <div class="col-xs-6 col-md-4 col-sm-4 col-4">
-                                <label for="tipodocumento">Tipo </label>
-                                <select class="form-control inputForm inputType" name="" id="identificationNacW" placeholder="Tipo">
-                                    <option value="J">J-</option>
-                                    <option value="E">E-</option>
-                                    <option value="G">G-</option>
-                                    <option value="P">P-</option>
-                                    <option value="V" selected>V-</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-6 col-md-8 col=sm-8 col-8">
-                                <label for="documento">Documento</label>
-                                <input type="text" id="identificationNumberW" class="form-control inputForm" placeholder="Documento">
-                            </div>
-                        </div>
-                        
-                    </div>
-            
-                        <div class="form-group">
-                            <div class="row mx-auto" >
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <label for="email">Correo Electrónico</label>
-                                    <input type="email" name="email" class="form-control inputForm" placeholder="Correo Electrónico" id="emailW">
-                                </div>
-                            </div>
-                            <?php $__errorArgs = ['email'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                              <span class="text-danger"><?php echo e($message); ?></span>
-                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                        </div>
-            
-                        <div class="form-group">
-                            <div class="row mx-auto">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <label for="password">Contraseña</label>
-                                    <input type="password" name="password" id="password-fieldW" class="form-control inputForm" placeholder="Contraseña" value="12345678"/>
-                                </div>
-                            </div>                
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="row mx-auto my-3">
-                                <div class="col-xs-12 col-sm-12 col-md-12 d-flex">
-                                    <button type="submit" class="btn btn-app w-100 mx-auto">IIniciar Sesión</button>
-                                </div>
-                            </div>                
-                        </div>
-                        <p class="text-center c-a texto"><a href="#">¿Olvidé mi contraseña?</a></p>
-                        
-                    </form>
-                </div>
-            </div>
-
-        </div>        
-      </div>
-
-      <div class="modal-footer" style="background-color: #eb6c0e;">
-        Contactar a soporte si no puedes iniciar sesión
-      </div>
-    </div>
-  </div>
 </div>
 
     <script>
@@ -333,21 +315,27 @@ unset($__errorArgs, $__bag); ?>
     <script src="/js/star.js"></script>
 
     <script>
-        window.addEventListener('show-valoracionModal', function (event) {
-            $('#valoracionModal').modal('show');
-        });
-        window.addEventListener('hide-valoracionModal', function (event) {
-            $('#valoracionModal').modal('hide');
-        });
+        window.onpageshow = function() {
+            window.addEventListener('show-valoracionModal', function (event) {
+                $('#valoracionModal').modal('show');
+            });
 
-        window.addEventListener('show-loginModalShow', function (event) {
-            $('#loginModalShow').modal('show');
-        });
+            window.addEventListener('hide-valoracionModal', function (event) {
+                $('#valoracionModal').modal('hide');
+            });
 
-        window.addEventListener('hide-loginModalShow', function (event) {
-            $('#loginModalShow').modal('hide');
-        });
+            window.addEventListener('show-loginModalShow', function (event) {
+                $('#loginModalShow').modal('show');
+            });
 
+            window.addEventListener('hide-loginModalShow', function (event) {
+                $('#loginModalShow').modal('hide');
+            });
+
+            $('#valoracionModal').on('show.bs.modal', function(){
+                
+            });
+        }
     </script>
 
 </div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/show-products.blade.php ENDPATH**/ ?>

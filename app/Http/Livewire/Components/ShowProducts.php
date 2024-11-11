@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 use App\Models\Comercio;
 use App\Models\Setting;
-use App\Models\Valoracion;
+use App\Models\ValoracionProduct;
 
 class ShowProducts extends AdminComponent
 {
     public $comercio_id;
 
     public $state = [];
+
+    public $ca_valoracion = 0;
 
     public $currencyValue = 'Bs';
 
@@ -27,56 +29,78 @@ class ShowProducts extends AdminComponent
         $setting = Setting::where('user_id', $this->comercio->user_id)->first();
 
         $this->state['product_id'] = '0';
+        $this->state['ca_valoracion'] = 0;
+        $this->state['class'] = 'star';
 
         if($setting){
             $this->currencyValue = $setting->currency;
         }
     }
 
-    public function valorar1($puntuacion)
-	{
-        $this->state['puntuacion'] = $puntuacion;
+    
 
-	}
+    public function searchClass($puntuacion)
+    {
+        switch ($puntuacion) {
+            case '1':
+                return 'one';
+                break;
+            case '2':
+                return 'two';
+                break;
+            case '3':
+                return 'three';
+                break;
+            case '4':
+                return 'four';
+                break;
+            case '5':
+                return 'five';
+                break;
+        }
+    }
 
     public function registrarValoracion()
     {
         $validatedData = Validator::make($this->state, [
 			'comment' => 'nullable',
+            'product_id' => 'required',
 		])->validate();
-
 
         if(auth()->user())
         {
-            $valoracion = Valoracion::where('referred', $referred)->where('user_id', auth()->user()->id)->where('product_id', $product_id)->first();
+            $valoracion = ValoracionProduct::where('user_id', auth()->user()->id)->where('product_id', $validatedData['product_id'])->first();
             if($valoracion){
-                $valoracion->update(['ca_valoracion' => $puntuacion]);
+                $valoracion->update(['ca_valoracion' => $this->state['ca_valoracion'], 'class' => $this->searchClass($this->state['ca_valoracion']), 'comment' => $validatedData['comment']]);
             }else{
-                Valoracion::create([
+                ValoracionProduct::create([
                     'user_id' => auth()->user()->id,
-                    'comercio_id' => 0,
-                    'product_id' => $product_id,
-                    'ca_valoracion' => $puntuacion,
-                    'referred' => $referred,
-                    'comment' => '',
+                    'product_id' => $validatedData['product_id'],
+                    'ca_valoracion' => $this->state['ca_valoracion'],
+                    'class' => $this->searchClass($this->state['ca_valoracion']),
+                    'comment' => $validatedData['comment'],
                 ]);
             }
 
-            $this->skipRender();
+            // $this->skipRender();
 
-            $this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Gracias por la valoración!']);
+            $this->dispatchBrowserEvent('hide-valoracionModal', ['message' => 'Gracias por la valoración!']);
             // $this->dispatchBrowserEvent('updateStar', ['comercio_id' => $comercio_id, 'puntuacion' => $puntuacion, 'class' => $class,]);
         }
     }
 
-    public function valorar($referred, $product_id, $puntuacion)
+    public function valorar($product_id, $puntuacion, $classV)
 	{
         if (auth()->user()) {
+
             $this->state['product_id'] = $product_id;
+            $this->state['class'] = $classV;
+            $this->state['ca_valoracion'] = $puntuacion;
+            $this->state['comment'] = '';
 
-            $this->state['referred'] = $referred;
+            $this->ca_valoracion = $puntuacion;
 
-            $this->dispatchBrowserEvent('show-valoracionModal');
+            $this->dispatchBrowserEvent('show-valoracionModal', ['classV' => $classV, 'ca_valoracion' => $puntuacion, 'product_id' => $product_id]);
         }
         else{
             // $this->dispatchBrowserEvent('show-loginModalShow');
@@ -84,9 +108,17 @@ class ShowProducts extends AdminComponent
         }
 	}
 
+    public function valorar1($puntuacion)
+	{
+        $this->state['ca_valoracion'] = $puntuacion;
+        $this->ca_valoracion = $puntuacion;
+        $this->skipRender();
+	}
+
     public function render()
     {
         $products = Product::where('comercio_id', $this->comercio_id)
+                    ->with('valoracionProduct')
                             ->paginate();
 
         return view('livewire.components.show-products',[

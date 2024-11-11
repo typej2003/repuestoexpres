@@ -77,16 +77,14 @@
                                             {{ $comercio->name }}
                                         </td>
                                         <td>{{ $comercio->OperacionNoConfirmada() }}</td>
-                                        <?php $valoracion = $comercio->getvaloracion(1, $comercio->id)['ca_valoracion']; ?>
-                                        <?php $class = $comercio->valoracionClass($valoracion); ?>
-                                        <td>{{ $valoracion }}</td>
+                                        <td>{{ $comercio->valoracion() }}</td>
                                         <td>
                                             <div class="cardStar" product="{{$comercio->id}}" wire:ignore>
                                                 @for ($i = 1; $i <=5; $i++)
-                                                    @if($valoracion >= $i)
-                                                        <span wire:click.prevent="valorar(1, {{$comercio->id}}, {{$i}})" product="{{ $comercio->id }}" star = "{{$i}}" class="star {{$class}}">★</span>
+                                                    @if($comercio->valoracion->ca_valoracion >= $i)
+                                                        <span wire:click.prevent="valorar({{$comercio->id}}, {{$i}})" product="{{ $comercio->id }}" star = "{{$i}}" class="star {{$class}}">★</span>
                                                     @else
-                                                        <span wire:click.prevent="valorar(1, {{$comercio->id}}, {{$i}})" product="{{ $comercio->id }}" star = "{{$i}}" class="star">★</span>
+                                                        <span wire:click.prevent="valorar({{$comercio->id}}, {{$i}})" product="{{ $comercio->id }}" star = "{{$i}}" class="star">★</span>
                                                     @endif
                                                 @endfor
                                                 <h5 class="output" output="{{ $comercio->id }}">

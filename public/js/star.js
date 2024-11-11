@@ -4,12 +4,14 @@ var p
 var nE
 var n
 var container
+var container1
 var contar = 0;
         
-
+    var m = 0;
             document.querySelectorAll('.starV').forEach( elem => {
+                
                 elem.addEventListener('click', function(elem, e) {
-                    // console.log(elem);
+                    
                     gfg(elem)
                 });
             });
@@ -25,13 +27,9 @@ var contar = 0;
             // console.log(p.value)
             nE = elem.srcElement.attributes.star
             n = nE.value
-            container = document.querySelectorAll(`span[product='${p}']`);
-            console.log(container)
-            if(p==5)
-            {
-                console.log(container)
-            }
-
+            container1 = document.querySelectorAll(`span[product='${p}']`);
+            container = document.querySelectorAll(`.starV`);
+            
             // let container = document.querySelector(".star");
 
             remove(container);
@@ -44,7 +42,7 @@ var contar = 0;
                 else if (n == 5) cls = "five";
                 // stars[i].className = "star " + cls;
                 
-                container[i].className = "star " + cls;
+                container[i].className = "starV " + cls;
             }
             let output = document.querySelector(`h5[output='${p}']`);
             output.innerText = "Valoracion: " + n + "/5";
@@ -54,7 +52,7 @@ var contar = 0;
         function remove(container) {
             let i = 0;
             while (i < 5) {
-                container[i].className = "star";
+                container[i].className = "starV";
                 i++;
             }
         }

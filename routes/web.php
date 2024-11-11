@@ -18,7 +18,6 @@ use App\Http\Livewire\Recursos\ApiController;
 use App\Http\Livewire\Recursos\EmailExample;
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,7 +33,7 @@ use App\Http\Livewire\Recursos\EmailExample;
      return view('welcome');
  });
 
- Route::get('/cat/{parametro}', [MainSearch::class, 'index'])->name('mainSearch'); 
+ Route::post('/searchMotor', [MainSearch::class, 'index'])->name('searchMotor'); 
 
 
 // Route::get('/com/{comercio}', WelcomeController::class)->name('welcomecomercio');

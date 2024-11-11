@@ -66,6 +66,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'avatarsmanufacturers' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/avatarsmanufacturers'),
+            'url' => env('APP_URL').'/storage/avatarsmanufacturers',
+            'visibility' => 'public',
+        ],
+
         'avatarscategories' => [
             'driver' => 'local',
             'root' => storage_path('app/public/avatarscategories'),
@@ -107,6 +114,7 @@ return [
         public_path('storage/avatarscategories') => storage_path('app/public/avatarscategories'),
         public_path('storage/avatarssubcategories') => storage_path('app/public/avatarssubcategories'),
         public_path('storage/avatarsproducts') => storage_path('app/public/avatarsproducts'),
+        public_path('storage/avatarsmanufacturers') => storage_path('app/public/avatarsmanufacturers'),
     ],
 
 ];

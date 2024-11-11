@@ -100,20 +100,17 @@
                                         @endif
                                         <div style="display: flex; flex-direction: row;">
                                             <a class="btn btn-sale text-center">Comprar ahora</a>
-                                            <?php $valoracion = $product->getvaloracion(0, $product->id)['ca_valoracion']; ?>
-                                            <?php $class = $product->valoracionClass($valoracion); ?>
-                                            <br>
-                                                     
+                                            <br>                                                     
                                             <div class="cardStar" product="{{$product->id}}" wire:ignore>
                                                 @for ($i = 1; $i <=5; $i++)
-                                                    @if($valoracion >= $i)
-                                                        <span wire:click.prevent="valorar(0, {{$product->id}}, {{$i}})" product="{{ $product->id }}" star = "{{$i}}" class="star {{$class}}">★</span>
+                                                    @if($product->valoracionProduct->ca_valoracion >= $i)
+                                                        <span wire:click.prevent="valorar({{ $product->id }}, {{ $product->valoracionProduct->ca_valoracion }}, '{{ $product->valoracionProduct->class }}')" product="{{ $product->id }}" star = "{{ $i }}" class="star {{ $product->valoracionProduct->class }}">★</span>
                                                     @else
-                                                        <span wire:click.prevent="valorar(0, {{$product->id}}, {{$i}})" product="{{ $product->id }}" star = "{{$i}}" class="star">★</span>
+                                                        <span wire:click.prevent="valorar({{ $product->id }}, {{ $product->valoracionProduct->ca_valoracion }}, '{{ $product->valoracionProduct->class }}')" product="{{ $product->id }}" star = "{{ $i }}" class="star">★</span>
                                                     @endif
                                                 @endfor
                                                 <h5 class="output" output="show{{ $product->id }}">
-                                                    Puntuación: {{$valoracion}}/5
+                                                    Puntuación: {{ $product->valoracionProduct->ca_valoracion }}/5
                                                 </h5>
                                             </div>
                                         </div>
@@ -142,139 +139,101 @@
 </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="valoracionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form autocomplete="off" wire:submit.prevent="registrarValoracion">
-                <div class="modal-header">
-                    <h5>Valore el producto</h5>
-                </div>
 
-                <div class="modal-body">
-                    <div class="form-control">
-                        <?php $valoracion = 5; ?>
-                        <?php $class = 'star'; ?>
-                        <br>                                    
-                        <div class="cardStar" wire:ignore>
-                            @for ($i = 1; $i <=5; $i++)
-                                @if($valoracion >= $i)
-                                    <span wire:click.prevent="valorar1( {{$i}} )" star = "{{$i}}" class="starV {{$class}}" product="{{ $state['product_id'] }}">★</span>
-                                @else
-                                    <span wire:click.prevent="valorar1( {{$i}})" product="{{ $state['product_id'] }}" star = "{{$i}}" class="starV">★</span>
-                                @endif
-                            @endfor
-                            <h5 class="output" output="{{ $state['product_id'] }}">
-                                Puntuación: {{$valoracion}}/5
-                            </h5>
+    
+    <!-- Modal -->
+<div class="modal fade" id="valoracionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+  <div class="modal-dialog">
+        <form autocomplete="off" wire:submit.prevent="registrarValoracion">
+        <div class="modal-content modalFondo">
+            <div class="modal-header" style="background-color: #f8f8f8;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <section class="banner">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <img class="img_logo" src="./img/logo_repuestos.png" alt="">
                         </div>
                     </div>
-                    <div class="form-control">
-                        <label for="comment"></label>
-                        <input type="text" wire:model.defer="state.comment" autofocus class="form-control @error('comment') is-invalid @enderror" id="comment">
-                        @error('comment')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    
-                </div>
+                </section>
+                <div class="container-fluid d-flex flex-row">
+                    <div class="card  mx-auto" style="width: 32rem;">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="name">product_id</label>
+                                <input type="text" wire:model.defer="state.product_id" class="form-control" id="product_id" aria-describedby="nameHelp" placeholder="Enter full name">
+                            </div>
+                            <div class="form-group my-2">
+                                <div class="cardStar cardStarV" wire:ignore >
+                                    <span wire:click.prevent="valorar1(1)" star = "1" class= "starV {{ ($state['ca_valoracion'] >= 1)? $state['class']:''}} " product="{{ $state['product_id'] }}">★</span>
+                                    <span wire:click.prevent="valorar1(2)" star = "2" class= "starV {{ ($state['ca_valoracion'] >= 2)? $state['class']:''}} " product="{{ $state['product_id'] }}">★</span>
+                                    <span wire:click.prevent="valorar1(3)" star = "3" class= "starV {{ ($state['ca_valoracion'] >= 3)? $state['class']:''}} " product="{{ $state['product_id'] }}">★</span>
+                                    <span wire:click.prevent="valorar1(4)" star = "4" class= "starV {{ ($state['ca_valoracion'] >= 4)? $state['class']:''}} " product="{{ $state['product_id'] }}">★</span>
+                                    <span wire:click.prevent="valorar1(5)" star = "5" class= "starV {{ ($state['ca_valoracion'] >= 5)? $state['class']:''}} " product="{{ $state['product_id'] }}">★</span>
+                                    <h5 class="output" output="{{ $state['product_id'] }}">
+                                        Puntuación: {{ $state['ca_valoracion'] }}/5
+                                    </h5>
+                                </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
-                    <button type="submit" class="btn btn-app">Enviar</button>
-                </div>
+                                <br>                               
+                                
+                                <!-- <div class="cardStar cardStarV" wire:ignore.self >
+                                    @for ($i = 1; $i <=5; $i++)
+                                        @if( $ca_valoracion >= $i)
+                                            <span wire:click.prevent="valorar1( {{ $i }} )" star = "{{ $i }}" class="starV {{ $state['class'] }}" product="{{ $state['product_id'] }}">★</span>
+                                        @else
+                                            <span wire:click.prevent="valorar1( {{ $i }})" product="{{ $state['product_id'] }}" star = "{{ $i }}" class="starV">★</span>
+                                        @endif
+                                    @endfor
+                                    <h5 class="output" output="{{ $state['product_id'] }}">
+                                        Puntuación: {{ $state['ca_valoracion'] }}/5
+                                    </h5>
+                                </div> -->
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">ca_valoracion</label>
+                                <input type="text" wire:model.defer="state.ca_valoracion" autofocus class="form-control @error('ca_valoracion') is-invalid @enderror" id="ca_valoracion">
+                                @error('ca_valoracion')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Comentario</label>
+                                <input type="text" wire:model.defer="state.comment" autofocus class="form-control @error('comment') is-invalid @enderror" id="comment">
+                                @error('comment')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="class">Class</label>
+                                <input type="text" wire:model.defer="state.class" autofocus class="form-control @error('class') is-invalid @enderror" id="class">
+                                @error('class')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                </div>        
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"> Cancelar</button>
+                <button type="submit" class="btn-app"><i class="fa fa-save mr-1"></i>
+                    <span>Guardar Cambios</span>
+                </button>
             </div>
         </div>
+        </form>
     </div>
-
-    <!-- Modal -->
-<div class="modal fade" id="loginModalShow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content modalFondo">
-      <div class="modal-header" style="background-color: #f8f8f8;">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <section class="banner">
-            <div class="row">
-                <div class="col-lg-12">
-                    <img class="img_logo" src="./img/logo_repuestos.png" alt="">
-                </div>
-            </div>
-        </section>
-        <div class="container-fluid d-flex flex-row">
-            <div class="card  mx-auto" style="width: 32rem;">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12 titulo c-a text-center h2 pt-3">Ingresa a tu RepuestoExpress</div>
-                        <p class="text-center textoreg">¿Todavía no te has registrado? <span><a href="#" class="c-n">Crea tu cuenta Aquí</a></span></p>
-                    </div>
-            
-                    <form action="{{ route('login') }}" method="POST">
-                        @csrf
-                      <div class="form-group">
-                        <div class="row mx-auto">
-                            <div class="col-xs-6 col-md-4 col-sm-4 col-4">
-                                <label for="tipodocumento">Tipo </label>
-                                <select class="form-control inputForm inputType" name="" id="identificationNacW" placeholder="Tipo">
-                                    <option value="J">J-</option>
-                                    <option value="E">E-</option>
-                                    <option value="G">G-</option>
-                                    <option value="P">P-</option>
-                                    <option value="V" selected>V-</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-6 col-md-8 col=sm-8 col-8">
-                                <label for="documento">Documento</label>
-                                <input type="text" id="identificationNumberW" class="form-control inputForm" placeholder="Documento">
-                            </div>
-                        </div>
-                        
-                    </div>
-            
-                        <div class="form-group">
-                            <div class="row mx-auto" >
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <label for="email">Correo Electrónico</label>
-                                    <input type="email" name="email" class="form-control inputForm" placeholder="Correo Electrónico" id="emailW">
-                                </div>
-                            </div>
-                            @error('email')
-                              <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-            
-                        <div class="form-group">
-                            <div class="row mx-auto">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <label for="password">Contraseña</label>
-                                    <input type="password" name="password" id="password-fieldW" class="form-control inputForm" placeholder="Contraseña" value="12345678"/>
-                                </div>
-                            </div>                
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="row mx-auto my-3">
-                                <div class="col-xs-12 col-sm-12 col-md-12 d-flex">
-                                    <button type="submit" class="btn btn-app w-100 mx-auto">IIniciar Sesión</button>
-                                </div>
-                            </div>                
-                        </div>
-                        <p class="text-center c-a texto"><a href="#">¿Olvidé mi contraseña?</a></p>
-                        
-                    </form>
-                </div>
-            </div>
-
-        </div>        
-      </div>
-
-      <div class="modal-footer" style="background-color: #eb6c0e;">
-        Contactar a soporte si no puedes iniciar sesión
-      </div>
-    </div>
-  </div>
 </div>
 
     <script>
@@ -311,21 +270,27 @@
     <script src="/js/star.js"></script>
 
     <script>
-        window.addEventListener('show-valoracionModal', function (event) {
-            $('#valoracionModal').modal('show');
-        });
-        window.addEventListener('hide-valoracionModal', function (event) {
-            $('#valoracionModal').modal('hide');
-        });
+        window.onpageshow = function() {
+            window.addEventListener('show-valoracionModal', function (event) {
+                $('#valoracionModal').modal('show');
+            });
 
-        window.addEventListener('show-loginModalShow', function (event) {
-            $('#loginModalShow').modal('show');
-        });
+            window.addEventListener('hide-valoracionModal', function (event) {
+                $('#valoracionModal').modal('hide');
+            });
 
-        window.addEventListener('hide-loginModalShow', function (event) {
-            $('#loginModalShow').modal('hide');
-        });
+            window.addEventListener('show-loginModalShow', function (event) {
+                $('#loginModalShow').modal('show');
+            });
 
+            window.addEventListener('hide-loginModalShow', function (event) {
+                $('#loginModalShow').modal('hide');
+            });
+
+            $('#valoracionModal').on('show.bs.modal', function(){
+                
+            });
+        }
     </script>
 
 </div>

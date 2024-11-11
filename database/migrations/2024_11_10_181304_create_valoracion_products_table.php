@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateValoracionsTable extends Migration
+class CreateValoracionProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,21 @@ class CreateValoracionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('valoracions', function (Blueprint $table) {
+        Schema::create('valoracion_products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->unsignedBigInteger('comercio_id')->nullable();
-            $table->unsignedBigInteger('product_id')->nullable();
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')
+                ->on('products')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->integer('ca_valoracion')->default(0);
-            $table->integer('referred')->default(0); // 0 product 1 comercio
-            $table->string('comment')->nullable;
+            $table->string('class')->nullable()->default('star');
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +39,6 @@ class CreateValoracionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('valoracions');
+        Schema::dropIfExists('valoracion_products');
     }
 }

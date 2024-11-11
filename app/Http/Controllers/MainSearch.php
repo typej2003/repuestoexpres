@@ -8,8 +8,12 @@ class MainSearch extends Controller
 {
     public $parametro = '';
 
-    public function index($parametro)
+    public function index(Request $request)
     {
+
+
+        dd($request->post('modelo_id'));
+
         $this->parametro = $parametro;
 
         return view('MainSearch', [
