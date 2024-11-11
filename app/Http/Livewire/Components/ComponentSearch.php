@@ -10,6 +10,7 @@ use App\Models\Comercio;
 use App\Models\Manufacturer;
 use App\Models\Modelo;
 use App\Models\Motor;
+use App\Models\Product;
 
 class ComponentSearch extends AdminComponent
 {
@@ -71,7 +72,9 @@ class ComponentSearch extends AdminComponent
         $this->validate();
 
         $informacion = "Hola desde Componente A!";
-        $this->emit('infoRecibida', $informacion, $this->manufacturer);
+        $products = Product::all();
+
+        $this->emit('infoRecibida', $informacion, $this->manufacturer, $products);
     }
 
     public function render()

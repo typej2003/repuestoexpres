@@ -12,13 +12,17 @@ class ResultsProducts extends AdminComponent
 
     public $informacion = '';
 
+    public $productsRecibidos;
+
     protected $listeners = ['infoRecibida' => 'actualizarInfo'];
 
-    public function actualizarInfo($data, $manufacturer)
+    public function actualizarInfo($data, $manufacturer, $products)
     {
         $this->parametro = $manufacturer;
 
         $this->informacion = $data;
+
+        $this->productsRecibidos = $products;
     }
 
     public function mount()
@@ -29,7 +33,7 @@ class ResultsProducts extends AdminComponent
     public function render()
     {
 
-        $products = Product::all();
+        $products = $this->productsRecibidos;
 
         return view('livewire.components.results-products', [
             'products' => $products,

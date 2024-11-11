@@ -18,7 +18,7 @@
 
             @if($parametro)
                 @forelse ($products as $index => $product)
-                
+                    
                 @empty
                     <div class="card showProductCard mx-auto text-center">
                         <card-body>

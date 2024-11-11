@@ -29,6 +29,7 @@ class CreateCategoriesTable extends Migration
             $table->string('description')->nullable();
             $table->string('avatar')->nullable();
             $table->string('itemMenu')->default('0');
+            $table->string('itemSubmenu')->default('0');
             $table->integer('posicionMenu')->nullable('0');            
             $table->timestamps();
         });

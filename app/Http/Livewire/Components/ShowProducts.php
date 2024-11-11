@@ -20,6 +20,18 @@ class ShowProducts extends AdminComponent
 
     public $currencyValue = 'Bs';
 
+    public $parametro = null;
+
+    protected $listeners = ['infoRecibida' => 'actualizarInfo'];
+
+    public function actualizarInfo($data, $manufacturer, $products)
+    {
+        $this->parametro = $manufacturer;
+
+        $this->informacion = $data;
+
+    }
+
     public function mount($comercioId = 1)
     {
         $this->comercio_id = $comercioId;
@@ -120,9 +132,14 @@ class ShowProducts extends AdminComponent
         $products = Product::where('comercio_id', $this->comercio_id)
                     ->with('valoracionProduct')
                             ->paginate();
-
-        return view('livewire.components.show-products',[
-            'products' => $products 
-        ]);
+        
+        if($this->parametro == null){
+            return view('livewire.components.show-products',[
+                'products' => $products 
+            ]);
+        }else{
+            return '';
+        }
+        
     }
 }

@@ -54,6 +54,7 @@
         @livewire('components.component-search', ['comercioId' => 1])
         <div class="my-2"></div>
         @livewire('components.show-products')
+        
         @livewire('components.results-products')
         <div class="my-5"></div>
     </section>
