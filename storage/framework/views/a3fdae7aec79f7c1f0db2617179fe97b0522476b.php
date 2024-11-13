@@ -112,8 +112,8 @@
                         <div class="d-flex flex-row justify-content-between px-0 " >
                             <ul class="mx-3 w-100 navbar-nav fs-5 justify-content-start">
                                 <li class="nav-item p-3 py-md-1">
-                                    <form class="d-flex">
-                                        <input style="width: 350px;" class="form-control me-4 input-search" type="search" placeholder="Buscar" aria-label="Search">
+                                    <form action="<?php echo e(route('search')); ?>" method="GET" class="d-flex">
+                                        <input name="words" style="width: 350px;" class="form-control me-4 input-search" type="search" placeholder="Buscar" aria-label="Search">
                                         <button class="btn btn-outline-success input-form" type="submit">Buscar</button>
                                     </form>
                                 </li>

@@ -14,6 +14,8 @@ class ResultsProducts extends AdminComponent
 
     public $productsRecibidos;
 
+    public $comercio_id;
+
     protected $listeners = ['infoRecibida' => 'actualizarInfo'];
 
     public function actualizarInfo($data, $manufacturer, $products)
@@ -25,15 +27,18 @@ class ResultsProducts extends AdminComponent
         $this->productsRecibidos = $products;
     }
 
-    public function mount()
+    public function mount($comercioId = 1, $parametro)
     {
+        $this->comercio_id = $comercioId;
+
+        $this->parametro = $parametro;
         
     }
 
     public function render()
     {
 
-        $products = $this->productsRecibidos;
+        $products = Product::where('name', $this->parametro)->paginate(15);
 
         return view('livewire.components.results-products', [
             'products' => $products,

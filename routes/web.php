@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-// use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Livewire\WelcomeWire;
 
 use App\Http\Controllers\MainSearch;
@@ -29,9 +29,14 @@ use App\Http\Livewire\Recursos\EmailExample;
 |
 */
 
- Route::get('/', function () {
-     return view('welcome');
- });
+//  Route::get('/', function () {
+//      return view('welcome');
+//  });
+
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome'); 
+
+Route::get('/search', [WelcomeController::class, 'index'])->name('search'); 
+
 
  Route::post('/searchMotor', [MainSearch::class, 'index'])->name('searchMotor'); 
 

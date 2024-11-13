@@ -11,6 +11,8 @@ class WelcomeController extends Controller
 {
     protected $listeners = ['prueba' => 'prueba'];
 
+    public $words = '';
+
     public function __invoke(Request $request)
     {
         $comercio = null;
@@ -28,6 +30,8 @@ class WelcomeController extends Controller
             $categories = Category::where('comercio_id', 1)->get();
         }
 
+        dd($request);
+
         return view('welcome', [
             'existe' => $existe,
             'comercio' => $comercio,
@@ -36,8 +40,18 @@ class WelcomeController extends Controller
         
     }
 
-    public function index(){
-        return redirect()->route('welcome-wire');
+    public function index(Request $request){
+
+        $words = '';
+
+        if($request->get('words') !== ''){
+            $words = $request->get('words');
+        }
+
+        return view('welcome', [
+            'words' => $words,
+        ]);
+        return redirect()->route('welcome');
     }
 
 

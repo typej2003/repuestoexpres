@@ -52,10 +52,12 @@
     <section class="">
         <div class="my-2"></div>
         @livewire('components.component-search', ['comercioId' => 1])
-        <div class="my-2"></div>
-        @livewire('components.show-products')
-        
-        @livewire('components.results-products')
+
+        @if($words == '')
+            <div class="my-2"></div>
+            @livewire('components.show-products')
+        @endif
+        @livewire('components.results-products', ['comercioId' => 1, 'parametro' => $words])
         <div class="my-5"></div>
     </section>
     
