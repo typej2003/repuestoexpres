@@ -8570,7 +8570,7 @@ class SubCategorySeeder extends Seeder
             'comercio_id' => '1',
             'category_id' => '19',
             'itemMenu' => '0',
-            'itemSubmenu' => '1',6
+            'itemSubmenu' => '1',
             'posicionMenu' => 1,
             'posicionSubmenu' => 64,
             'created_at' => '2022-05-16 12:20:36',
@@ -8712,7 +8712,7 @@ class SubCategorySeeder extends Seeder
             'user_id' => '1',
             'comercio_id' => '1',
             'category_id' => '19',
-            'itemMenu' => '0',7
+            'itemMenu' => '0',
             'itemSubmenu' => '17',
             'posicionMenu' => 1,
             'posicionSubmenu' => 75,
