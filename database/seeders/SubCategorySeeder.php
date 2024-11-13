@@ -5942,7 +5942,7 @@ class SubCategorySeeder extends Seeder
             'itemSubmenu' => '1',
             'posicionMenu' => 1,
             'posicionSubmenu' => 84,
-            'created_at' => '2022-085-16 12:20:36',
+            'created_at' => '2022-08-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
         ]);
 
@@ -8560,7 +8560,7 @@ class SubCategorySeeder extends Seeder
             'itemSubmenu' => '1',
             'posicionMenu' => 1,
             'posicionSubmenu' => 63,
-            'created_at' => '2022-0665-16 12:20:36',
+            'created_at' => '2022-06-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
         ]);
         DB::table('subcategories')->insert([
@@ -8704,7 +8704,7 @@ class SubCategorySeeder extends Seeder
             'posicionMenu' => 1,
             'posicionSubmenu' => 74,
             'created_at' => '2022-05-16 12:20:36',
-            'updated_at' => '2022-075-16 12:20:36'
+            'updated_at' => '2022-05-16 12:20:36'
         ]);
         DB::table('subcategories')->insert([
             'name' => 'Soporte de batería',

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             AreaSeeder::class,
             ComercioSeeder::class,
             CategorySeeder::class,
+            SubCategorySeeder::class,
             SupplierSeeder::class,
             ManufacturersSeeder::class,
             BrandSeeder::class,

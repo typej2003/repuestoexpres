@@ -221,14 +221,20 @@
 
                                 <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <?php echo e($category->name); ?>
-
+                                        
+                                        <a class="dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">                                            
+                                                <?php echo e($category->name); ?>                                            
                                         </a>
+                                        <?php if($category->subcategories->count() > 0): ?>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php $x += 1; ?>
-                                                <li data-subcategory="<?php echo e($subcategory->name); ?>"><a class="dropdown-item subcategory<?php echo e($x); ?>" style="cursor:pointer;" data-subcategory="<?php echo e($subcategory->name); ?>" href="/cat/<?php echo e($subcategory->name); ?>"><?php echo e($subcategory->name); ?></a></li>
+                                                <li data-subcategory="<?php echo e($subcategory->name); ?>">
+                                                    <a class="dropdown-item subcategory<?php echo e($x); ?>" style="cursor:pointer;" data-subcategory="<?php echo e($subcategory->name); ?>" href="/cat/<?php echo e($subcategory->name); ?>">
+                                                        <?php echo e($subcategory->name); ?>
+
+                                                    </a>
+                                                </li>
                                                 <script>
                                                     document.querySelector('.subcategory<?php echo e($x); ?>').addEventListener('click', function(){
                                                         console.log(this.dataset.subcategory)
@@ -236,6 +242,8 @@
                                                 </script>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
+                                        <?php endif; ?>
+
                                     </li>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 
@@ -280,26 +288,6 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
 
     <script>
-        // const dropdownBtn = document.querySelector(".btnCategoria");
-        // const dropdownMenu = document.querySelector(".itemCategoria");
-        // const toggleArrow = document.querySelector(".arrowCategoria");
-        
-
-        // const toggleDropdown = function () {
-        // dropdownMenu.classList.toggle("show");
-        // toggleArrow.classList.toggle("arrow");
-        // };
-
-        // dropdownBtn.addEventListener("click", function (e) {
-        // e.stopPropagation();
-        // toggleDropdown();
-        // });
-
-        // document.documentElement.addEventListener("click", function () {
-        // if (dropdownMenu.classList.contains("show")) {
-        //     toggleDropdown();
-        // }
-        // });
     
         window.addEventListener('refreshPage', event => {
             
