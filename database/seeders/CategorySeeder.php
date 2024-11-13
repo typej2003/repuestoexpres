@@ -459,7 +459,7 @@ class CategorySeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Productos para cuidadao del auto',
+            'name' => 'Productos para cuidado del auto',
             'avatar' => '',
             'user_id' => '1',
             'comercio_id' => '1', 
