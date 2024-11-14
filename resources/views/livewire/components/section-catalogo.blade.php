@@ -12,7 +12,7 @@
          box-sizing: border-box;
         } */
 
-        .slider {
+        .sliderC {
             /*width: 50%;*/
             width: 200%;
             margin: auto!important;
@@ -80,7 +80,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <section class="regular slider slider-catalogo">
+            <section class="regular sliderC slider-catalogo">
                 @forelse ($catalogos as $index => $product)
                     <div>
                         <div class="card cardCatalogo mx-auto text-center mx-2">

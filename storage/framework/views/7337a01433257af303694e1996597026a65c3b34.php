@@ -12,7 +12,7 @@
          box-sizing: border-box;
         } */
 
-        .slider {
+        .sliderM {
             /*width: 50%;*/
             width: 200%;
             margin: auto!important;
@@ -79,7 +79,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <section class="regular slider slider-manufacturer">
+            <section class="regular sliderM slider-manufacturer">
                 <?php $__empty_1 = true; $__currentLoopData = $manufacturers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div>
                         <div class="card cardManufacture mx-auto text-center mx-2">

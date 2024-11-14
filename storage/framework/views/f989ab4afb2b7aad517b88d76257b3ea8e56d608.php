@@ -12,7 +12,7 @@
          box-sizing: border-box;
         } */
 
-        .slider {
+        .sliderC {
             /*width: 50%;*/
             width: 200%;
             margin: auto!important;
@@ -80,7 +80,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <section class="regular slider slider-catalogo">
+            <section class="regular sliderC slider-catalogo">
                 <?php $__empty_1 = true; $__currentLoopData = $catalogos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div>
                         <div class="card cardCatalogo mx-auto text-center mx-2">

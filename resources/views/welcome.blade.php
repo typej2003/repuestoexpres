@@ -64,7 +64,10 @@
             <div class="my-2"></div>
             @livewire('components.show-products')
         @endif
-        @livewire('components.results-products', ['comercioId' => 1, 'parametro' => $words])
+        {{ $words }}
+        @if($words != '' )
+            @livewire('components.results-products', ['comercioId' => 1, 'parametro' => $words])
+        @endif
         <div class="my-5"></div>
     </section>
     
