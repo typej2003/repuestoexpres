@@ -41,7 +41,7 @@
       
     </style>
   </head>
-  <body class="">
+  <body class="container-fluid">
    <!--ENCABEZADO--> 
     
       @livewire('layouts.navbar')
@@ -51,9 +51,16 @@
     <div class="my-2"></div>
     <section class="">
         <div class="my-2"></div>
-        @livewire('components.component-search', ['comercioId' => 1])
-
         @if($words == '')
+            <div class="row">
+                <div class="col-xl-6 col-md-6 col-sm-6">
+                    @livewire('components.component-search', ['comercioId' => 1])
+                </div>
+                <div class="col-xl-6 col-md-6 col-sm-6">
+                    @livewire('components.carousel-offer')
+                </div>
+            </div>
+        
             <div class="my-2"></div>
             @livewire('components.show-products')
         @endif
@@ -279,3 +286,5 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 
 <script src="/js/jquery-3.6.4.min.js"></script>
+
+        
