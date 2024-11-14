@@ -229,7 +229,7 @@
                                             @foreach($category->subcategories as $subcategory)
                                                 <?php $x += 1; ?>
                                                 <li data-subcategory="{{$subcategory->name}}">
-                                                    <a class="dropdown-item subcategory{{$x}}" style="cursor:pointer;" data-subcategory="{{$subcategory->name}}" href="/cat/{{$subcategory->name}}">
+                                                    <a class="dropdown-item subcategory{{$x}}" style="cursor:pointer;" data-subcategory="{{$subcategory->name}}" href="{{ route('cat', ['categ' => $subcategory->name ]) }}">
                                                         {{$subcategory->name}}
                                                     </a>
                                                 </li>

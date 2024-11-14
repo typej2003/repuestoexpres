@@ -230,7 +230,7 @@
                                             <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php $x += 1; ?>
                                                 <li data-subcategory="<?php echo e($subcategory->name); ?>">
-                                                    <a class="dropdown-item subcategory<?php echo e($x); ?>" style="cursor:pointer;" data-subcategory="<?php echo e($subcategory->name); ?>" href="/cat/<?php echo e($subcategory->name); ?>">
+                                                    <a class="dropdown-item subcategory<?php echo e($x); ?>" style="cursor:pointer;" data-subcategory="<?php echo e($subcategory->name); ?>" href="<?php echo e(route('cat', ['categ' => $subcategory->name ])); ?>">
                                                         <?php echo e($subcategory->name); ?>
 
                                                     </a>

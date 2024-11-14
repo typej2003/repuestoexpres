@@ -64,7 +64,7 @@
             <div class="my-2"></div>
             @livewire('components.show-products')
         @endif
-        {{ $words }}
+        
         @if($words != '' )
             @livewire('components.results-products', ['comercioId' => 1, 'parametro' => $words])
         @endif
