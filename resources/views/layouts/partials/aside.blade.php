@@ -105,6 +105,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{ route('listManufacturers', 1) }}" class="nav-link {{ request()->is('listManufacturers') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Fabricantes
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{ route('listBrand', 1) }}" class="nav-link {{ request()->is('listBrand') ? 'active' : '' }}">
               <i class="nav-icon fas fa-comments"></i>
               <p>
@@ -230,6 +239,15 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="{{ route('listManufacturers', $comercio->id) }}" class="nav-link">
+                  <i class="nav-icon fas fa-comments"></i>
+                  <p>
+                    Fabricantes
+                  </p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="/listCategories/{{$comercio->id}}" class="nav-link">

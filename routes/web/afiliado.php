@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Afiliado\ListComercios;
+use App\Http\Livewire\Afiliado\ListManufacturers;
 use App\Http\Livewire\Afiliado\ListMetodosPagosC;
 use App\Http\Livewire\Afiliado\ListCategories;
 use App\Http\Livewire\Afiliado\ListCategorieslist;
@@ -15,6 +16,8 @@ use App\Http\Livewire\Afiliado\ListBrand;
 use App\Http\Livewire\Afiliado\ListContainers;
 
 Route::get('/listComercios/{userId}', ListComercios::class)->name('listComercios')->middleware('auth');
+
+Route::get('/listManufacturers/{comercioId}', listManufacturers::class)->name('listManufacturers')->middleware('auth');
 
 Route::get('/listMetodosPagosC/{comercioId}', ListMetodosPagosC::class)->name('listMetodosPagosC')->middleware('auth');
 

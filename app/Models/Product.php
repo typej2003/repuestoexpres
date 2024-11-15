@@ -72,6 +72,7 @@ class Product extends Model
         'tx_contiene',
         'fe_vencimiento',
         'fe_expedicion',
+        'madein',
         'in_pedido',
         'tx_adicionales',
         'tx_alergenos',
@@ -212,5 +213,20 @@ class Product extends Model
             'class' => 'star',
             'comment' => '',
         ]);
+    }
+
+    public function manufacturer()
+    {
+        return $this->hasOne(Manufacturer::class, 'manufacturer_id', 'id');
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'category_id', 'id');
+    }
+
+    public function subcategories()
+    {
+        return $this->hasMany(Subcategory::class, 'subcategory_id', 'id');
     }
 }

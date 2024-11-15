@@ -24,14 +24,14 @@ echo $html;
                 <div class="col-md-12">
                     <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('components.section-catalogo', ['comercioId' => 1])->html();
+    $html = \Livewire\Livewire::mount('components.section-catalogo', ['comercioId' => 1, 'parametro' => $parametro])->html();
 } elseif ($_instance->childHasBeenRendered('l2730780222-1')) {
     $componentId = $_instance->getRenderedChildComponentId('l2730780222-1');
     $componentTag = $_instance->getRenderedChildComponentTagName('l2730780222-1');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
     $_instance->preserveRenderedChild('l2730780222-1');
 } else {
-    $response = \Livewire\Livewire::mount('components.section-catalogo', ['comercioId' => 1]);
+    $response = \Livewire\Livewire::mount('components.section-catalogo', ['comercioId' => 1, 'parametro' => $parametro]);
     $html = $response->html();
     $_instance->logRenderedChild('l2730780222-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }

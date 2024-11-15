@@ -13,6 +13,7 @@ class Manufacturer extends Model
 
     protected $fillable = [
         'name',
+        'address',
         'avatar',
         'mercado', //primario o secundario //originales o genericos
         'user_id',

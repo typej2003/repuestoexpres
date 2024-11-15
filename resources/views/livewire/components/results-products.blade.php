@@ -8,7 +8,7 @@
             <div class="row">
                 <!-- Sección de categoría -->
                 <div class="col-md-12">
-                    @livewire('components.section-catalogo', ['comercioId' => 1])
+                    @livewire('components.section-catalogo', ['comercioId' => 1, 'parametro' => $parametro])
                 </div>        
             </div>
 

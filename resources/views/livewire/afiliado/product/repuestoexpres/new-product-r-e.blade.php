@@ -723,6 +723,17 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
+                                                <label for="madein">Lugar de Elaboración</label>
+                                                <input type="text" wire:model.defer="state.madein" autofocus class="font-costo form-control @error('madein') is-invalid @enderror" id="madein">
+                                                @error('madein')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
                                                 <label for="tx_alergenos">Alergenos</label>
                                                 <input type="text" wire:model.defer="state.tx_alergenos" autofocus class="font-costo form-control @error('tx_alergenos') is-invalid @enderror" id="tx_alergenos">
                                                 @error('tx_alergenos')

@@ -51,6 +51,7 @@
     <div class="my-2"></div>
     <section class="">
         <div class="my-2"></div>
+        
         @if($words == '')
             <div class="row">
                 <div class="col-xl-6 col-md-6 col-sm-6">

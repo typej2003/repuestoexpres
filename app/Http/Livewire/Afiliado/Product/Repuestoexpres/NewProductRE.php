@@ -118,6 +118,7 @@ class NewProductRE extends AdminComponent
             'tx_tamanio_carga' => 'nullable',
             'tx_tamanio_venta' => 'nullable',
             'fe_expedicion' => 'nullable',
+            'madein' => 'nullable',
             'in_pedido' => 'nullable',
             'tx_adicionales' => 'nullable',
             'in_envio_gratis' => 'nullable',

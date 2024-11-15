@@ -90,9 +90,9 @@
                         </div>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                    <div class="card showProductCard mx-auto text-center">
+                    <div class="card cardCatalogo mx-auto text-center">
                         <card-body>
-                            <span>No tiene Ofertas Disponibles</span>
+                            <span>No tiene Catalogo para este producto</span>
                         </card-body>
                         <card-footer>                    
                         </card-footer>                    

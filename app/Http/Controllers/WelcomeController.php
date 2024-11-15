@@ -43,16 +43,21 @@ class WelcomeController extends Controller
     public function index(Request $request){
 
         $words = '';
-
-        if($request->get('words') !== ''){
-            $words = $request->get('words');
+        if($request->get('words'))
+        {
+            if($request->get('words') !== '')
+            {
+                $words = $request->get('words');
+                
+            }
         }
-        
-        if($request->get('categ') !== ''){
-            $words = $request->get('categ');
+        if($request->get('categ'))
+        {
+            if($request->get('categ') !== '')
+            {
+                $words .= $request->get('categ');
+            }
         }
-        
-        // dd($request);
 
         return view('welcome', [
             'words' => $words,

@@ -16,8 +16,9 @@ class CreateManufacturersTable extends Migration
         Schema::create('manufacturers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('avatar');
-            $table->string('mercado'); //primario o secundario //originales o genericos
+            $table->string('avatar')->nullable();
+            $table->string('address')->nullable();
+            $table->string('mercado')->default('original'); //primario o secundario //originales o genericos
             $table->bigInteger('user_id');
             $table->bigInteger('area_id');
             $table->bigInteger('comercio_id');

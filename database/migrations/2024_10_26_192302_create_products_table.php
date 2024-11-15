@@ -81,6 +81,8 @@ class CreateProductsTable extends Migration
             $table->string('tx_contiene')->nullable();
             $table->date('fe_vencimiento')->nullable();
             $table->date('fe_expedicion')->nullable();
+            
+            $table->string('madein')->nullable();
             $table->string('in_pedido')->nullable();
             $table->string('tx_adicionales')->nullable();
             $table->string('tx_alergenos')->nullable();
