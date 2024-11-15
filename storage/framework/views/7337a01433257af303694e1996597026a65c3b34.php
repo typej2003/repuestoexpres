@@ -66,7 +66,7 @@
         opacity: 1;
         } */
 
-        .cardManufacture {
+        .cardManufacturer {
             width: 150px;
             height: 150px;
         }
@@ -82,17 +82,19 @@
             <section class="regular sliderM slider-manufacturer">
                 <?php $__empty_1 = true; $__currentLoopData = $manufacturers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div>
-                        <div class="card cardManufacture mx-auto text-center mx-2">
+                        <div class="card cardManufacturer mx-auto text-center mx-2">
                             <div class="card-body">
-                                <img class="mx-auto border border-1" src="<?php echo e($manufacturer->avatar_url); ?>" alt="">
+                                <img class="mx-auto border border-1" src="<?php echo e($manufacturer->avatar_url); ?>" alt="">                                
                             </div>
                         </div>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                    <div class="card cardManufacture mx-auto text-center">
-                        <div class="card-body">
-                            <span>No tiene Ofertas Disponibles</span>
-                        </div>                    
+                    <div class="card cardManufacturer mx-auto text-center">
+                        <card-body>
+                            <span>No tiene Catalogo para este producto</span>
+                        </card-body>
+                        <card-footer>                    
+                        </card-footer>                    
                     </div>
                 <?php endif; ?>
             </section>       

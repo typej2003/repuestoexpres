@@ -33,4 +33,9 @@ class Manufacturer extends Model
 
         return asset('noimage.png');
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

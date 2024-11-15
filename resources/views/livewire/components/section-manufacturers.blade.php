@@ -66,7 +66,7 @@
         opacity: 1;
         } */
 
-        .cardManufacture {
+        .cardManufacturer {
             width: 150px;
             height: 150px;
         }
@@ -82,17 +82,19 @@
             <section class="regular sliderM slider-manufacturer">
                 @forelse ($manufacturers as $index => $manufacturer)
                     <div>
-                        <div class="card cardManufacture mx-auto text-center mx-2">
+                        <div class="card cardManufacturer mx-auto text-center mx-2">
                             <div class="card-body">
-                                <img class="mx-auto border border-1" src="{{$manufacturer->avatar_url}}" alt="">
+                                <img class="mx-auto border border-1" src="{{$manufacturer->avatar_url}}" alt="">                                
                             </div>
                         </div>
                     </div>
                 @empty
-                    <div class="card cardManufacture mx-auto text-center">
-                        <div class="card-body">
-                            <span>No tiene Ofertas Disponibles</span>
-                        </div>                    
+                    <div class="card cardManufacturer mx-auto text-center">
+                        <card-body>
+                            <span>No tiene Catalogo para este producto</span>
+                        </card-body>
+                        <card-footer>                    
+                        </card-footer>                    
                     </div>
                 @endforelse
             </section>       
