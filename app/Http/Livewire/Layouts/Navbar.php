@@ -13,6 +13,8 @@ class Navbar extends Component
 
     public $categories;
 
+    public $state = [];
+
     public $comercio;
     public $comercioId = 1;
 
@@ -27,7 +29,7 @@ class Navbar extends Component
 
     public $currencyValue = 'Bs';
 
-    protected $listeners = ['sendCategories' => 'sendCategories'];
+    protected $listeners = ['sendCategories' => 'sendCategories', 'receiveManufacturerS' => 'receiveManufacturerS', 'receiveModeloS' => 'receiveModeloS', 'receiveMotorS' => 'receiveMotorS'];
 
     public function mount($comercioId = 1){
 
@@ -84,5 +86,26 @@ class Navbar extends Component
     public function sendCategories ($postId=0)
     {
        $this->dispatchBrowserEvent('sendCategories', ['categories' => $this->categories, 'message' => 'variables enviadas satisfactoriamente!']);
+    }
+
+    public function receiveManufacturerS ($manufacturerS_id=0)
+    {
+        $this->state['manufacturerS_id'] = $manufacturerS_id;
+
+    //    $this->dispatchBrowserEvent('sendCategories', ['categories' => $this->categories, 'message' => 'variables enviadas satisfactoriamente!']);
+    }
+
+    public function receiveModeloS ($modeloS_id=0)
+    {
+        $this->state['modeloS_id'] = $modeloS_id;
+
+    //    $this->dispatchBrowserEvent('sendCategories', ['categories' => $this->categories, 'message' => 'variables enviadas satisfactoriamente!']);
+    }
+
+    public function receiveMotorS ($motorS_id=0)
+    {
+        $this->state['motorS_id'] = $motorS_id;
+
+    //    $this->dispatchBrowserEvent('sendCategories', ['categories' => $this->categories, 'message' => 'variables enviadas satisfactoriamente!']);
     }
 }

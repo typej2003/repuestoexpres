@@ -14,9 +14,13 @@
 
         .slider {
             /*width: 50%;*/
-            width: 90%;
+            width: 100%;
             margin: 10px auto!important; */        
             /* height: 300px; */
+        }
+
+        .slick-slide {
+        margin: 0px 10px; 
         }
 
         .slick-slide {
@@ -163,7 +167,7 @@
         }
 
         window.addEventListener('resize', () => {
-            location.reload()
+            //location.reload()
         })
     </script>
 </div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/carousel-offer.blade.php ENDPATH**/ ?>

@@ -130,7 +130,7 @@
         }
 
         window.addEventListener('resize', () => {
-            location.reload()
+            //location.reload()
         })
     </script>
 </div>

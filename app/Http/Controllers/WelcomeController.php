@@ -59,8 +59,22 @@ class WelcomeController extends Controller
             }
         }
 
+        $manufacturer_id = $request->get('manufacturer_id');
+        $modelo_id = $request->get('modelo_id');
+        $motor_id = $request->get('motor_id');
+
+        // dd($request);
+
+        if($request->get('manufacturer_id'))
+        {
+            $words .= ' ';
+        }
+
         return view('welcome', [
             'words' => $words,
+            'manufacturer_id' => $manufacturer_id,
+            'modelo_id' => $modelo_id,
+            'motor_id' => $motor_id,
         ]);
         return redirect()->route('welcome');
     }

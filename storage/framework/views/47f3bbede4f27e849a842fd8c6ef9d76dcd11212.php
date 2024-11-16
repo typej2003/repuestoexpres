@@ -4,14 +4,24 @@
             <!-- Sección de busqueda -->
             <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('components.component-search', ['comercioId' => 1])->html();
+    $html = \Livewire\Livewire::mount('components.component-search', [
+                'comercioId' => 1, 
+                'manufacturer_id' => $manufacturer_id,
+                'modelo_id' => $modelo_id,
+                'motor_id' => $motor_id,
+                ])->html();
 } elseif ($_instance->childHasBeenRendered('l2730780222-0')) {
     $componentId = $_instance->getRenderedChildComponentId('l2730780222-0');
     $componentTag = $_instance->getRenderedChildComponentTagName('l2730780222-0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
     $_instance->preserveRenderedChild('l2730780222-0');
 } else {
-    $response = \Livewire\Livewire::mount('components.component-search', ['comercioId' => 1]);
+    $response = \Livewire\Livewire::mount('components.component-search', [
+                'comercioId' => 1, 
+                'manufacturer_id' => $manufacturer_id,
+                'modelo_id' => $modelo_id,
+                'motor_id' => $motor_id,
+                ]);
     $html = $response->html();
     $_instance->logRenderedChild('l2730780222-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }

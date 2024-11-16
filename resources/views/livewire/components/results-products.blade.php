@@ -2,7 +2,12 @@
     <div class="row">
         <div class="col-md-3">
             <!-- Sección de busqueda -->
-            @livewire('components.component-search', ['comercioId' => 1])
+            @livewire('components.component-search', [
+                'comercioId' => 1, 
+                'manufacturer_id' => $manufacturer_id,
+                'modelo_id' => $modelo_id,
+                'motor_id' => $motor_id,
+                ])
         </div>
         <div class="col-md-9">
             <div class="row">

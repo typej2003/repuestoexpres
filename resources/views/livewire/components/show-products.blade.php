@@ -15,13 +15,13 @@
 
     .slider {
         /*width: 50%;*/
-        width: 90%;
+        width: 100%;
         margin: 10px auto!important; */        
         /* height: 300px; */
     }
 
     .slick-slide {
-      margin: 0px 20px; 
+      margin: 0px 10px; 
     }
 
     .slick-slide img {
@@ -175,21 +175,7 @@
                                         Puntuación: {{ $state['ca_valoracion'] }}/5
                                     </h5>
                                 </div>
-
-                                <br>                               
-                                
-                                <!-- <div class="cardStar cardStarV" wire:ignore.self >
-                                    @for ($i = 1; $i <=5; $i++)
-                                        @if( $ca_valoracion >= $i)
-                                            <span wire:click.prevent="valorar1( {{ $i }} )" star = "{{ $i }}" class="starV {{ $state['class'] }}" product="{{ $state['product_id'] }}">★</span>
-                                        @else
-                                            <span wire:click.prevent="valorar1( {{ $i }})" product="{{ $state['product_id'] }}" star = "{{ $i }}" class="starV">★</span>
-                                        @endif
-                                    @endfor
-                                    <h5 class="output" output="{{ $state['product_id'] }}">
-                                        Puntuación: {{ $state['ca_valoracion'] }}/5
-                                    </h5>
-                                </div> -->
+                            
                             </div>
                             <div class="form-group">
                                 <label for="comment">ca_valoracion</label>
@@ -264,7 +250,7 @@
         }
 
         window.addEventListener('resize', () => {
-            location.reload()
+            //location.reload()
         })
     </script>
     <script src="/js/star.js"></script>

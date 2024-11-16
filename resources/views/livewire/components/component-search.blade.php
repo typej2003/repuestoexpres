@@ -1,11 +1,12 @@
 <div>
         
-    <form autocomplete="off" wire:submit.prevent="searchMotor">
+    <!-- <form autocomplete="off" wire:submit.prevent="searchMotor"> -->
+    <form action="{{ route('searchMotor') }}" method="GET">
         @csrf
         <div class="card w-75 p-1 mx-auto">
             <div class="form-group">
                 <label for="manufacturer">Marca</label>
-                <select wire:model="manufacturer" class="form-control @error('manufacturer') is-invalid @enderror">
+                <select wire:model="manufacturer" name="manufacturer_id" id="manufacturer_id" class="form-control @error('manufacturer') is-invalid @enderror">
                     <option value="0">Seleccione una opción</option>
                     @foreach($comercio->manufacturersOriginal() as $manufacturer)
                         <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
@@ -39,7 +40,7 @@
 
             <div class="form-group">
                 <label for="motor">Motor</label>
-                <select wire:model="motor" class="motor form-control @error('motor') is-invalid @enderror" >
+                <select wire:model="motor" name="motor_id" id="motor_id" class="motor form-control @error('motor') is-invalid @enderror">
                     @if($motores->count() == 0 )    
                         <option value="0">Seleccione una opción</option>
                     @else
@@ -57,8 +58,36 @@
             </div>
 
             <div class="form-group mx-auto">
-                <button type="submit" class="btn-app">Buscar</button>
+                <button type="submit" class="btn-app" id="searchMotor">Buscar</button>
             </div>
         </div>            
     </form>
+
+    <script>
+        let manufacturer = document.getElementById('manufacturer_id');
+        let modelo = document.getElementById('modelo_id');
+        let motor = document.getElementById('motor_id');
+
+        let searchMotor = document.getElementById('searchMotor');
+
+        searchMotor.addEventListener('click', () =>
+        {
+            localStorage.setItem('serverManufacturer', manufacturer.value);
+            localStorage.setItem('serverModelo', modelo.value);
+            localStorage.setItem('serverMotor', motor.value);
+        });
+
+        window.addEventListener('DOMContentLoaded', () =>
+        {
+            let savedServer  = localStorage.getItem('serverManufacturer');
+
+            if (savedServer)
+            {
+                manufacturer_id.value = savedServer;
+                modelo_id.value = localStorage.getItem('serverModelo');
+                motor_id.value = localStorage.getItem('serverMotor');;
+            }
+        });
+
+    </script>
 </div>

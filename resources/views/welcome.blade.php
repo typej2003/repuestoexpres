@@ -55,7 +55,12 @@
         @if($words == '')
             <div class="row">
                 <div class="col-xl-6 col-md-6 col-sm-6">
-                    @livewire('components.component-search', ['comercioId' => 1])
+                    @livewire('components.component-search', [
+                        'comercioId' => 1,
+                        'manufacturer_id' => $manufacturer_id,
+                        'modelo_id' => $modelo_id,
+                        'motor_id' => $motor_id,
+                        ])
                 </div>
                 <div class="col-xl-6 col-md-6 col-sm-6">
                     @livewire('components.carousel-offer')
@@ -65,9 +70,14 @@
             <div class="my-2"></div>
             @livewire('components.show-products')
         @endif
-        
         @if($words != '' )
-            @livewire('components.results-products', ['comercioId' => 1, 'parametro' => $words])
+            @livewire('components.results-products', [
+                'comercioId' => 1, 
+                'parametro' => $words,
+                'manufacturer_id' => $manufacturer_id,
+                'modelo_id' => $modelo_id,
+                'motor_id' => $motor_id,
+                ] )
         @endif
         <div class="my-5"></div>
     </section>

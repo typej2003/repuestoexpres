@@ -1,11 +1,12 @@
 <div>
         
-    <form autocomplete="off" wire:submit.prevent="searchMotor">
+    <!-- <form autocomplete="off" wire:submit.prevent="searchMotor"> -->
+    <form action="<?php echo e(route('searchMotor')); ?>" method="GET">
         <?php echo csrf_field(); ?>
         <div class="card w-75 p-1 mx-auto">
             <div class="form-group">
                 <label for="manufacturer">Marca</label>
-                <select wire:model="manufacturer" class="form-control <?php $__errorArgs = ['manufacturer'];
+                <select wire:model="manufacturer" name="manufacturer_id" id="manufacturer_id" class="form-control <?php $__errorArgs = ['manufacturer'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -69,14 +70,14 @@ unset($__errorArgs, $__bag); ?>
 
             <div class="form-group">
                 <label for="motor">Motor</label>
-                <select wire:model="motor" class="motor form-control <?php $__errorArgs = ['motor'];
+                <select wire:model="motor" name="motor_id" id="motor_id" class="motor form-control <?php $__errorArgs = ['motor'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" >
+unset($__errorArgs, $__bag); ?>">
                     <?php if($motores->count() == 0 ): ?>    
                         <option value="0">Seleccione una opción</option>
                     <?php else: ?>
@@ -102,8 +103,36 @@ unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="form-group mx-auto">
-                <button type="submit" class="btn-app">Buscar</button>
+                <button type="submit" class="btn-app" id="searchMotor">Buscar</button>
             </div>
         </div>            
     </form>
+
+    <script>
+        let manufacturer = document.getElementById('manufacturer_id');
+        let modelo = document.getElementById('modelo_id');
+        let motor = document.getElementById('motor_id');
+
+        let searchMotor = document.getElementById('searchMotor');
+
+        searchMotor.addEventListener('click', () =>
+        {
+            localStorage.setItem('serverManufacturer', manufacturer.value);
+            localStorage.setItem('serverModelo', modelo.value);
+            localStorage.setItem('serverMotor', motor.value);
+        });
+
+        window.addEventListener('DOMContentLoaded', () =>
+        {
+            let savedServer  = localStorage.getItem('serverManufacturer');
+
+            if (savedServer)
+            {
+                manufacturer_id.value = savedServer;
+                modelo_id.value = localStorage.getItem('serverModelo');
+                motor_id.value = localStorage.getItem('serverMotor');;
+            }
+        });
+
+    </script>
 </div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/component-search.blade.php ENDPATH**/ ?>

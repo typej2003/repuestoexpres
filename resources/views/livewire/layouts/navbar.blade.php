@@ -112,7 +112,10 @@
                         <div class="d-flex flex-row justify-content-between px-0 " >
                             <ul class="mx-3 w-100 navbar-nav fs-5 justify-content-start">
                                 <li class="nav-item p-3 py-md-1">
-                                    <form action="{{ route('search') }}" method="GET" class="d-flex">
+                                    <form action="{{ route('search') }}" method="GET" class="d-flex" wire:ignore>
+                                        <input wire:model.defer="state.manufacturerS_id" type="text" id ="manufacturerS_id" name = "manufacturerS_id">
+                                        <input wire:model.defer="state.modeloS_id" type="text" id ="modeloS_id" name = "modeloS_id">
+                                        <input wire:model.defer="state.motorS_id" type="text" id ="motorS_id" name = "motorS_id">
                                         <input id="words" name="words" style="width: 350px;" class="form-control me-4 input-search" type="search" placeholder="Buscar" aria-label="Search">
                                         <button id="btn-search" class="btn btn-outline-success input-form" type="submit">Buscar</button>
                                     </form>
@@ -315,6 +318,22 @@
             if (savedServer)
             {
                 serverInput.value = savedServer;
+            }
+        });
+
+        let manufacturerS = document.getElementById('manufacturerS_id');
+        let modeloS = document.getElementById('modeloS_id');
+        let motorS = document.getElementById('motorS_id');
+
+        window.addEventListener('DOMContentLoaded', () =>
+        {
+            let savedServer  = localStorage.getItem('serverManufacturer');
+
+            if (savedServer)
+            {
+                manufacturerS.value = savedServer;
+                modeloS.value = localStorage.getItem('serverModelo');
+                motorS.value = localStorage.getItem('serverMotor');;
             }
         });
 

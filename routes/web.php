@@ -40,7 +40,7 @@ Route::get('/search', [WelcomeController::class, 'index'])->name('search');
 Route::get('/cat', [WelcomeController::class, 'index'])->name('cat'); 
 
 
- Route::post('/searchMotor', [MainSearch::class, 'index'])->name('searchMotor'); 
+ Route::get('/searchMotor', [WelcomeController::class, 'index'])->name('searchMotor'); 
 
 
 // Route::get('/com/{comercio}', WelcomeController::class)->name('welcomecomercio');

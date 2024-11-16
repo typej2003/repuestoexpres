@@ -40,15 +40,34 @@ class ComponentSearch extends AdminComponent
 
     public $manufacturer_id, $modelo_id, $motor_id;
 
-    public function mount($comercioId = 0)
+    public function mount($comercioId = 0, $manufacturer_id= 1, $modelo_id = 0, $motor_id = 0)
     {
         $this->comercio_id = $comercioId;
 
 		// $this->manufacturers = Manufacturer::where('comercio_id', $this->comercio_id)->get();
-		
-		$this->modelos = collect();
+        if($manufacturer_id == 0)
+		{
+		    $this->modelos = collect();
 
-        $this->motores = collect();
+            $this->motores = collect();
+        }else{
+
+            $this->modelos = Modelo::where('manufacturer_id', $manufacturer_id)->get();
+
+            $this->motores = Motor::where('manufacturer_id', $manufacturer_id)->where('modelo_id', $modelo_id)->get();
+
+            if (!$this->modelos){
+                $this->motores = collect();
+                $this->motores = collect();
+            }
+            else{
+                if (!$this->motores){
+                    $this->motores = collect();
+                }
+            }
+            
+
+        }
     }
 
     public function updatedManufacturer($value)
@@ -56,6 +75,7 @@ class ComponentSearch extends AdminComponent
         $this->manufacturer_id = $value;
 		$this->modelos = Modelo::where('manufacturer_id', $value)->get();
 		// $this->subcategory = $this->subcategories->first()->id ?? null;
+        $this->emit('receiveManufacturerS', $value);
 
         $this->updatedModelo(0);
 	}
@@ -65,6 +85,12 @@ class ComponentSearch extends AdminComponent
         $this->modelo_id = $value;
 		$this->motores = Motor::where('manufacturer_id', $this->manufacturer_id)->where('modelo_id', $value)->get();
 		// $this->subcategory = $this->subcategories->first()->id ?? null;
+        $this->emit('receiveModeloS', $value);
+	}
+
+    public function updatedMotor($value)
+	{
+        $this->emit('receiveMotorS', $value);
 	}
 
     public function searchMotor()

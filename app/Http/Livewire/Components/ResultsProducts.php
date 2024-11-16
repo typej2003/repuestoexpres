@@ -16,6 +16,8 @@ class ResultsProducts extends AdminComponent
 
     public $comercio_id;
 
+    public $manufacturer_id, $modelo_id, $motor_id;
+
     protected $listeners = ['infoRecibida' => 'actualizarInfo'];
 
     public function actualizarInfo($data, $manufacturer, $products)
@@ -27,11 +29,17 @@ class ResultsProducts extends AdminComponent
         $this->productsRecibidos = $products;
     }
 
-    public function mount($comercioId = 1, $parametro)
+    public function mount($comercioId = 1, $parametro, $manufacturer_id, $modelo_id, $motor_id)
     {
         $this->comercio_id = $comercioId;
 
         $this->parametro = $parametro;
+        
+        $this->manufacturer_id = $manufacturer_id;
+
+        $this->modelo_id = $modelo_id;
+
+        $this->motor_id = $motor_id;
         
     }
 

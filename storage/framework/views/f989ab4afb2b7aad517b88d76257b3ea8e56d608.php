@@ -130,7 +130,7 @@
         }
 
         window.addEventListener('resize', () => {
-            location.reload()
+            //location.reload()
         })
     </script>
 </div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/section-catalogo.blade.php ENDPATH**/ ?>
