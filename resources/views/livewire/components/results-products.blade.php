@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3" wire:ignore>
             <!-- Sección de busqueda -->
             @livewire('components.component-search', [
                 'comercioId' => 1, 

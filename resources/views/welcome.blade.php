@@ -43,16 +43,22 @@
   </head>
   <body class="container-fluid">
    <!--ENCABEZADO--> 
-    
-      @livewire('layouts.navbar')
+   
+    @livewire('layouts.navbar', [
+                        'comercioId' => 1,
+                        'manufacturer_id' => $manufacturer_id,
+                        'modelo_id' => $modelo_id,
+                        'motor_id' => $motor_id,
+                        ])
     
     @include('livewire.components.slider-principal')
     @livewire('components.marcas-productos')
-    <div class="my-2"></div>
+    <div class="my-2"></div>    
     <section class="">
         <div class="my-2"></div>
         
         @if($words == '')
+            
             <div class="row">
                 <div class="col-xl-6 col-md-6 col-sm-6">
                     @livewire('components.component-search', [

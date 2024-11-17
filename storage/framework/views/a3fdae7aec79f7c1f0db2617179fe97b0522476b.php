@@ -26,6 +26,7 @@
     
     .offcanvas {
         display: none !important;
+        overflow: auto;
     }
 
     .menuNormal {
@@ -41,6 +42,21 @@
     }
     
     @media (max-width: 768px) {
+        .offcanvas {
+            display: block!important;
+        }
+        .menuNormal {
+            display: none!important;
+        }
+        .menuCategories {
+            display: none!important;
+        }
+      .navbar-nav > li:hover {
+        background-color: #0dcaf0;
+      }
+    }
+
+    @media (max-width: 990px) {
         .offcanvas {
             display: block!important;
         }
@@ -76,19 +92,130 @@
           </div>
           <!-- OFF CANVAS MENU LINKS  START-->
           <div class="offcanvas-body d-flex flex-column justify-content-between px-0 " >
-            <ul class="navbar-nav fs-5 justify-content-evenly">
-              <li class="nav-item p-3 py-md-1">
-                <a href="" class="nav-link">INICIO RESPONSIVE</a>
-              </li>
-              <li class="nav-item p-3 py-md-1">
-                <a href="" class="nav-link">PROJECTS</a>
-              </li>
-              <li class="nav-item p-3 py-md-1">
-                <a href="" class="nav-link">ABOUT</a>
-              </li>
-              <li class="nav-item p-3 py-md-1">
-                <a href="" class="nav-link">CONTACT</a>
-              </li>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <?php if(auth()->guard()->check()): ?>
+                <li class="nav-item p-3 py-md-1">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown-toggle titulo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="ml-1" x-ref="username"><?php echo e(auth()->user()->name); ?></span>
+                            </a>
+                            <div class="dropdown-menu p-4" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="profileLink">Perfil</a>
+                                <a class="dropdown-item" href="<?php echo e(route('admin.dashboard')); ?>" x-ref="profileLink">Escritorio</a>
+                                <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="changePasswordLink">Cambiar Contraseña</a>
+                                <a class="dropdown-item" href="<?php echo e(route('admin.settings')); ?>">Configuración</a>
+                                <div class="dropdown-divider"></div>
+                                <form method="POST" action="<?php echo e(route('logout')); ?>">
+                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            <?php endif; ?>
+                
+            <?php if(auth()->guard()->guest()): ?>
+                <li class="nav-item p-3 py-md-1">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown" style="position: relative!important; z-index: 9001!important;">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="/img/icon_miperfil.png" id="profileImage" class="img-circle elevation-1" alt="User Image" style="height: 30px; width: 30px;">
+                                <span class="ml-1" x-ref="username">Perfil</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                <div class="d-flex justify-content-between mb-2 ml-3">
+                                    <img class="" src="/img/icon_soporte.png" style="width: 18px; height: 25px;">
+                                    <a class="dropdown-item" href="#">Soporte en Línea</a>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-2 ml-3">
+                                    <img src="/img/icon_registrarse.png" style="width: 18px; height: 25px;">                                        
+                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarse</a>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-2 ml-3">
+                                    <img src="/img/icon_entrar.png" style="width: 18px; height: 25px;">
+                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>  
+            <?php endif; ?>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-table"></i>
+                    <p>
+                        Menú de Usuario
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-comments"></i>
+                            <p>Menú 1</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Menú 2</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Menú 3</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-table"></i>
+                    <p>
+                        Categorías
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                <?php echo e($category->name); ?>
+
+                                <?php if( $category->subcategories->count() > 0 ): ?>
+                                <i class="fas fa-angle-left right"></i>
+                                <?php endif; ?>
+                            </p>
+                            </a>
+                            <?php if( $category->subcategories->count() > 0 ): ?>
+                            <ul class="nav nav-treeview">
+                                <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" style="cursor:pointer;" data-subcategory="<?php echo e($subcategory->name); ?>" href="<?php echo e(route('cat', [
+                                        'categ' => $subcategory->name,
+                                        'manufacturer_id' => $state['manufacturer_id'],
+                                        'modelo_id' => $state['modelo_id'],
+                                        'motor_id' => $state['motor_id'],
+                                            ])); ?>">
+                                        <i class="nav-icon fas fa-comments"></i>
+                                        <?php echo e($subcategory->name); ?>
+
+                                    </a>
+                                </li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
+                            <?php endif; ?>
+                        </li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </ul>
+                </li>
             </ul>
             <!-- enlaces redes sociales -->
 
@@ -113,9 +240,9 @@
                             <ul class="mx-3 w-100 navbar-nav fs-5 justify-content-start">
                                 <li class="nav-item p-3 py-md-1">
                                     <form action="<?php echo e(route('search')); ?>" method="GET" class="d-flex" wire:ignore>
-                                        <input wire:model.defer="state.manufacturerS_id" type="text" id ="manufacturerS_id" name = "manufacturerS_id">
-                                        <input wire:model.defer="state.modeloS_id" type="text" id ="modeloS_id" name = "modeloS_id">
-                                        <input wire:model.defer="state.motorS_id" type="text" id ="motorS_id" name = "motorS_id">
+                                        <input wire:model.defer="state.manufacturer_id" type="hidden" id ="manufacturerS_id" name = "manufacturerS_id">
+                                        <input wire:model.defer="state.modelo_id" type="hidden" id ="modeloS_id" name = "modeloS_id">
+                                        <input wire:model.defer="state.motor_id" type="hidden" id ="motorS_id" name = "motorS_id">
                                         <input id="words" name="words" style="width: 350px;" class="form-control me-4 input-search" type="search" placeholder="Buscar" aria-label="Search">
                                         <button id="btn-search" class="btn btn-outline-success input-form" type="submit">Buscar</button>
                                     </form>
@@ -132,54 +259,54 @@
                                 <a href="" class="nav-link">ABOUT</a>
                             </li>
                             <?php if(auth()->guard()->check()): ?>
-                            <li class="nav-item p-3 py-md-1">
-                            <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                        <a class="nav-link active dropdown-toggle titulo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span class="ml-1" x-ref="username"><?php echo e(auth()->user()->name); ?></span>
-                                        </a>
-                                        <div class="dropdown-menu p-4" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="profileLink">Perfil</a>
-                                            <a class="dropdown-item" href="<?php echo e(route('admin.dashboard')); ?>" x-ref="profileLink">Escritorio</a>
-                                            <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="changePasswordLink">Cambiar Contraseña</a>
-                                            <a class="dropdown-item" href="<?php echo e(route('admin.settings')); ?>">Configuración</a>
-                                            <div class="dropdown-divider"></div>
-                                            <form method="POST" action="<?php echo e(route('logout')); ?>">
-                                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
-                                            </form>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                                <li class="nav-item p-3 py-md-1">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link active dropdown-toggle titulo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span class="ml-1" x-ref="username"><?php echo e(auth()->user()->name); ?></span>
+                                            </a>
+                                            <div class="dropdown-menu p-4" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="profileLink">Perfil</a>
+                                                <a class="dropdown-item" href="<?php echo e(route('admin.dashboard')); ?>" x-ref="profileLink">Escritorio</a>
+                                                <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="changePasswordLink">Cambiar Contraseña</a>
+                                                <a class="dropdown-item" href="<?php echo e(route('admin.settings')); ?>">Configuración</a>
+                                                <div class="dropdown-divider"></div>
+                                                <form method="POST" action="<?php echo e(route('logout')); ?>">
+                                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
+                                                </form>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
                             <?php endif; ?>
                                 
                             <?php if(auth()->guard()->guest()): ?>
-                            <li class="nav-item p-3 py-md-1">
-                                <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item dropdown" style="position: relative!important; z-index: 9001!important;">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="/img/icon_miperfil.png" id="profileImage" class="img-circle elevation-1" alt="User Image" style="height: 30px; width: 30px;">
-                                            <span class="ml-1" x-ref="username">Perfil</span>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                            <div class="d-flex justify-content-between mb-2 ml-3">
-                                                <img class="" src="/img/icon_soporte.png" style="width: 18px; height: 25px;">
-                                                <a class="dropdown-item" href="#">Soporte en Línea</a>
-                                            </div>
+                                <li class="nav-item p-3 py-md-1">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item dropdown" style="position: relative!important; z-index: 9001!important;">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img src="/img/icon_miperfil.png" id="profileImage" class="img-circle elevation-1" alt="User Image" style="height: 30px; width: 30px;">
+                                                <span class="ml-1" x-ref="username">Perfil</span>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                                <div class="d-flex justify-content-between mb-2 ml-3">
+                                                    <img class="" src="/img/icon_soporte.png" style="width: 18px; height: 25px;">
+                                                    <a class="dropdown-item" href="#">Soporte en Línea</a>
+                                                </div>
 
-                                            <div class="d-flex justify-content-between mb-2 ml-3">
-                                                <img src="/img/icon_registrarse.png" style="width: 18px; height: 25px;">                                        
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarse</a>
-                                            </div>
+                                                <div class="d-flex justify-content-between mb-2 ml-3">
+                                                    <img src="/img/icon_registrarse.png" style="width: 18px; height: 25px;">                                        
+                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarse</a>
+                                                </div>
 
-                                            <div class="d-flex justify-content-between mb-2 ml-3">
-                                                <img src="/img/icon_entrar.png" style="width: 18px; height: 25px;">
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar</a>
+                                                <div class="d-flex justify-content-between mb-2 ml-3">
+                                                    <img src="/img/icon_entrar.png" style="width: 18px; height: 25px;">
+                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>  
+                                        </li>
+                                    </ul>
+                                </li>  
                             <?php endif; ?>
                             </ul>
                         </div>
@@ -233,7 +360,12 @@
                                             <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php $x += 1; ?>
                                                 <li data-subcategory="<?php echo e($subcategory->name); ?>">
-                                                    <a class="dropdown-item subcategory<?php echo e($x); ?>" style="cursor:pointer;" data-subcategory="<?php echo e($subcategory->name); ?>" href="<?php echo e(route('cat', ['categ' => $subcategory->name ])); ?>">
+                                                    <a class="dropdown-item subcategory<?php echo e($x); ?>" style="cursor:pointer;" data-subcategory="<?php echo e($subcategory->name); ?>" href="<?php echo e(route('cat', [
+                                                        'categ' => $subcategory->name,
+                                                        'manufacturer_id' => $state['manufacturer_id'],
+                                                        'modelo_id' => $state['modelo_id'],
+                                                        'motor_id' => $state['motor_id'],
+                                                         ])); ?>">
                                                         <?php echo e($subcategory->name); ?>
 
                                                     </a>
@@ -296,7 +428,7 @@
             
             let message = event.detail.message
 
-            location.reload()
+            //location.reload()
         
         }) 
     </script>
@@ -311,6 +443,12 @@
         saveButton.addEventListener('click', () =>
         {
             localStorage.setItem('serverValue', serverInput.value);
+
+            // localStorage.setItem('serverManufacturer', '');
+
+            // localStorage.setItem('serverModelo', '');
+
+            // localStorage.setItem('serverModelo', '');
         });
 
         window.addEventListener('DOMContentLoaded', () =>

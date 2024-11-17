@@ -1,7 +1,7 @@
 <div>
         
     <!-- <form autocomplete="off" wire:submit.prevent="searchMotor"> -->
-    <form action="<?php echo e(route('searchMotor')); ?>" method="GET">
+    <form action="<?php echo e(route('searchMotor')); ?>" method="POST" wire:ignore.self>
         <?php echo csrf_field(); ?>
         <div class="card w-75 p-1 mx-auto">
             <div class="form-group">
@@ -14,8 +14,8 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>">
-                    <option value="0">Seleccione una opción</option>
-                    <?php $__currentLoopData = $comercio->manufacturersOriginal(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="0" selected>Seleccione una opción</option>
+                    <?php $__currentLoopData = $manufacturers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($manufacturer->id); ?>"><?php echo e($manufacturer->name); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>

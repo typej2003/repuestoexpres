@@ -33,20 +33,31 @@ class ComponentSearch extends AdminComponent
         ];
     }
    
-
     public $modelo;
     public $motor;
 	public $manufacturers = [], $modelos = [], $motores = [];
 
     public $manufacturer_id, $modelo_id, $motor_id;
 
-    public function mount($comercioId = 0, $manufacturer_id= 1, $modelo_id = 0, $motor_id = 0)
+    public function mount($comercioId = 0, $manufacturer_id= 0, $modelo_id = 0, $motor_id = 0)
     {
+
+        $this->manufacturer = $manufacturer_id;
+        $this->modelo = $modelo_id;
+        $this->motor = $motor_id;
+        
         $this->comercio_id = $comercioId;
+
+        $this->manufacturer_id = $manufacturer_id;
+        $this->modelo_id = $modelo_id;
+        $this->motor_id = $motor_id;
+
+        $this->manufacturers = Manufacturer::where('comercio_id', $this->comercio_id)->get();
+
 
 		// $this->manufacturers = Manufacturer::where('comercio_id', $this->comercio_id)->get();
         if($manufacturer_id == 0)
-		{
+		{            
 		    $this->modelos = collect();
 
             $this->motores = collect();
@@ -103,12 +114,5 @@ class ComponentSearch extends AdminComponent
         $this->emit('infoRecibida', $informacion, $this->manufacturer, $products);
     }
 
-    public function render()
-    {
-        $comercio = Comercio::find($this->comercio_id);
-
-        return view('livewire.components.component-search', [
-            'comercio' => $comercio,
-        ]);
-    }
+    
 }

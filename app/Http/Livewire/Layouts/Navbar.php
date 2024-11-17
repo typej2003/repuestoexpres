@@ -16,7 +16,7 @@ class Navbar extends Component
     public $state = [];
 
     public $comercio;
-    public $comercioId = 1;
+    public $comercio_id = 1;
 
     public $tasacambio = 1;
 
@@ -29,17 +29,40 @@ class Navbar extends Component
 
     public $currencyValue = 'Bs';
 
+    public $manufacturer_id, $modelo_id, $motor_id;
+
     protected $listeners = ['sendCategories' => 'sendCategories', 'receiveManufacturerS' => 'receiveManufacturerS', 'receiveModeloS' => 'receiveModeloS', 'receiveMotorS' => 'receiveMotorS'];
 
-    public function mount($comercioId = 1){
+    protected $listen = [
+        'App\Events\NewUserCreated' => [
+            'captarEvento',
+        ],
+    ];
 
-        $this->comercioId = $comercioId;
+    public function captarEvento()
+    {
+        dd('captarEvento');
+    }
 
-        $this->categories = Category::where('comercio_id', $comercioId)
+    public function mount($comercioId = 1, $manufacturer_id = 0, $modelo_id = 0, $motor_id = 0){
+
+        $this->comercio_id = $comercioId;
+
+        // dd($manufacturer_id);
+
+        $this->state['manufacturer_id'] = $manufacturer_id;
+
+        $this->state['modelo_id'] = $modelo_id;
+
+        $this->state['motor_id'] = $motor_id;
+
+
+
+        $this->categories = Category::where('comercio_id', $this->comercio_id)
                                     ->where('itemMenu', 1)
                                     ->get();
         
-        $this->comercio = Comercio::find($comercioId);
+        $this->comercio = Comercio::find($this->comercio_id);
         
         $setting = Setting::where('user_id', $this->comercio->user_id)->first();
 
@@ -90,22 +113,29 @@ class Navbar extends Component
 
     public function receiveManufacturerS ($manufacturerS_id=0)
     {
-        $this->state['manufacturerS_id'] = $manufacturerS_id;
+        $this->state['manufacturer_id'] = $manufacturerS_id;
+
+        $this->manufacturer_id = $manufacturerS_id;
 
     //    $this->dispatchBrowserEvent('sendCategories', ['categories' => $this->categories, 'message' => 'variables enviadas satisfactoriamente!']);
     }
 
     public function receiveModeloS ($modeloS_id=0)
     {
-        $this->state['modeloS_id'] = $modeloS_id;
+        $this->state['modelo_id'] = $modeloS_id;
+
+        $this->modelo_id = $modeloS_id;
 
     //    $this->dispatchBrowserEvent('sendCategories', ['categories' => $this->categories, 'message' => 'variables enviadas satisfactoriamente!']);
     }
 
     public function receiveMotorS ($motorS_id=0)
     {
-        $this->state['motorS_id'] = $motorS_id;
+        $this->state['motor_id'] = $motorS_id;
+
+        $this->motor_id = $motorS_id;
 
     //    $this->dispatchBrowserEvent('sendCategories', ['categories' => $this->categories, 'message' => 'variables enviadas satisfactoriamente!']);
     }
+
 }

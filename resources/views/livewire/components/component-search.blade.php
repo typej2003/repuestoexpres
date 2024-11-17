@@ -1,14 +1,14 @@
 <div>
         
     <!-- <form autocomplete="off" wire:submit.prevent="searchMotor"> -->
-    <form action="{{ route('searchMotor') }}" method="GET">
+    <form action="{{ route('searchMotor') }}" method="POST" wire:ignore.self>
         @csrf
         <div class="card w-75 p-1 mx-auto">
             <div class="form-group">
                 <label for="manufacturer">Marca</label>
                 <select wire:model="manufacturer" name="manufacturer_id" id="manufacturer_id" class="form-control @error('manufacturer') is-invalid @enderror">
-                    <option value="0">Seleccione una opción</option>
-                    @foreach($comercio->manufacturersOriginal() as $manufacturer)
+                    <option value="0" selected>Seleccione una opción</option>
+                    @foreach($manufacturers as $manufacturer)
                         <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
                     @endforeach
                 </select>
