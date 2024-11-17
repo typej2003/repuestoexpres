@@ -20,6 +20,9 @@
     .offcanvas {
       background-color: #fff;
     }
+    .nav-link:hover{
+        background-color: #fff;
+    }
     .navbar-toggler {
       border: none;
     }    
@@ -52,7 +55,7 @@
             display: none!important;
         }
       .navbar-nav > li:hover {
-        background-color: #0dcaf0;
+        background-color: #fff;
       }
     }
 
@@ -67,7 +70,7 @@
             display: none!important;
         }
       .navbar-nav > li:hover {
-        background-color: #0dcaf0;
+        background-color: #fff;
       }
     }
   </style>

@@ -290,8 +290,8 @@
 }
 
 .dropdown-toggle:hover {
-  border: 1px solid var(--main-bg-color)!important;
-  border-radius: 15px!important;
+  /* border: 1px solid var(--main-bg-color)!important; */
+  /* border-radius: 15px!important; */
   
 }
 
