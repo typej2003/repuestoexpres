@@ -14,6 +14,7 @@ use App\Http\Livewire\Afiliado\Product\Repuestoexpres\NewProductRE;
 use App\Http\Livewire\Afiliado\Product\Repuestoexpres\NewComboRE;
 use App\Http\Livewire\Afiliado\ListBrand;
 use App\Http\Livewire\Afiliado\ListContainers;
+use App\Http\Livewire\Afiliado\Repuestoexpres\ListClients;
 
 Route::get('/listComercios/{userId}', ListComercios::class)->name('listComercios')->middleware('auth');
 
@@ -40,4 +41,6 @@ Route::get('/newComboRE/{comercioId}/{editModal}', NewComboRE::class)->name('new
 Route::get('/listBrand/{comercioId}', ListBrand::class)->name('listBrand')->middleware('auth');
 
 Route::get('/listContainers/{comercioId}', ListContainers::class)->name('listContainers')->middleware('auth');
+
+Route::get('/listClients/{comercioId}', listClients::class)->name('listClients')->middleware('auth');
 

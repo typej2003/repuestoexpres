@@ -130,8 +130,10 @@ class ListProducts extends AdminComponent
 		$editModal = 'false';
 		
 		if ($this->screenResolution < 1024) {
+			return redirect()->route('newProductRE', ['comercioId' => $this->comercio_id, 'editModal' => $editModal] );
 			$this->dispatchBrowserEvent('show-form');	
 		}elseif ($this->screenResolution < 1280) {
+			return redirect()->route('newProductRE', ['comercioId' => $this->comercio_id, 'editModal' => $editModal] );
 			$this->dispatchBrowserEvent('show-form');
 		}else {
 			return redirect()->route('newProductRE', ['comercioId' => $this->comercio_id, 'editModal' => $editModal] );

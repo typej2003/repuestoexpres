@@ -136,4 +136,11 @@ class User extends Authenticatable
             
         }
     }
+
+    public function showVehiculos($comercio_id)
+    {
+        $vehiculos = Vehiculo::where('comercio_id', $comercio_id)->get();
+
+        return $vehiculos;
+    }
 }

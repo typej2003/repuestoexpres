@@ -96,6 +96,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{ route('listClients', 1) }}" class="nav-link {{ request()->is('listClients') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Clientes
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{ route('listMetodosPagos') }}" class="nav-link {{ request()->is('listMetodosPagos') ? 'active' : '' }}">
               <i class="nav-icon fas fa-comments"></i>
               <p>
@@ -253,7 +262,7 @@
                 <a href="{{ route('listManufacturers', $comercio->id) }}" class="nav-link">
                   <i class="nav-icon fas fa-comments"></i>
                   <p>
-                    Fabricantes
+                    FABRICANTES
                   </p>
                 </a>
               </li>
@@ -280,6 +289,12 @@
                 <a href="/listTransacciones/{{$comercio->id}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>TRANSACCIONES</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/listClients/{{$comercio->id}}" class="nav-link {{ request()->is('listClients') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>Clientes</p>
                 </a>
               </li>
             </ul>
