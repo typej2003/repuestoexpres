@@ -17,7 +17,7 @@ class ComponentSearch extends AdminComponent
     public $comercio_id = 0;
 
     #[Validate]
-	public $manufacturer;
+	public $manufacturer = 0;
 	public function rules()
     {
         return [
@@ -41,7 +41,7 @@ class ComponentSearch extends AdminComponent
 
     public function mount($comercioId = 0, $manufacturer_id= 0, $modelo_id = 0, $motor_id = 0)
     {
-
+        $this->manufacturer = 0;
         $this->manufacturer = $manufacturer_id;
         $this->modelo = $modelo_id;
         $this->motor = $motor_id;
@@ -53,7 +53,6 @@ class ComponentSearch extends AdminComponent
         $this->motor_id = $motor_id;
 
         $this->manufacturers = Manufacturer::where('comercio_id', $this->comercio_id)->get();
-
 
 		// $this->manufacturers = Manufacturer::where('comercio_id', $this->comercio_id)->get();
         if($manufacturer_id == 0)
@@ -75,10 +74,10 @@ class ComponentSearch extends AdminComponent
                 if (!$this->motores){
                     $this->motores = collect();
                 }
-            }
-            
+            }            
 
         }
+        
     }
 
     public function updatedManufacturer($value)

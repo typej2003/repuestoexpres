@@ -17,6 +17,9 @@ use App\Http\Livewire\Recursos\ApiController;
 
 use App\Http\Livewire\Recursos\EmailExample;
 
+use App\Http\Livewire\Components\Star;
+
+Route::get('/star', Star::class)->name('star'); 
 
 /*
 |--------------------------------------------------------------------------

@@ -322,31 +322,7 @@
                         <!-- OFF CANVAS MENU LINKS  START-->
                         <div class="d-flex flex-row justify-content-between px-0 " >
                             <ul class="w-60 nav nav-pills nav-fill d-flex">
-                                <!-- @foreach($categories as $category)
-                                <li class="nav-item dropdown">            
-                                    <a class="categoryMenu dropdownLink my-1 nav-link">{{$category->name}}</a>
-                                    <div class="subcategoryMenu dropdown-content-link">
-                                        @foreach($category->subcategories as $subcategory)
-                                            <a class="subcategoryLink" href="#">{{ $subcategory->name }}</a>
-                                        @endforeach
-                                    </div>            
-                                </li>
-                                @endforeach -->
-
-                                <!-- @foreach($categories as $category)
-                                <li class="nav-item dropdown">
-                                    <button class="btn btnCategoria">{{$category->name}}<i class="bx bx-chevron-down arrowCategoria"></i></button>
-                                    <div class="dropdownCategoria itemCategoria">
-                                        @foreach($category->subcategories as $subcategory)
-                                            <a href="#create" style="">
-                                                <i class="bx bx-plus-circle"></i>
-                                                {{ $subcategory->name }}
-                                            </a>    
-                                        @endforeach                                    
-                                    </div>
-                                </li>
-                                @endforeach -->
-
+                                
                                 <?php $x = -1; ?>
 
                                 @foreach($categories as $category)

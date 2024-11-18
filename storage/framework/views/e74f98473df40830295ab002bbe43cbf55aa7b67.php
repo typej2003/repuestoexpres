@@ -31,6 +31,15 @@
           </a>
         </li>
 
+        <li class="nav-item">
+          <a href="<?php echo e(route('star')); ?>" class="nav-link <?php echo e(request()->is('star') ? 'active' : ''); ?>">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Star
+            </p>
+          </a>
+        </li>
+
         <?php if(auth()->guard()->check()): ?>
         <?php if(auth()->user()->role == 'admin'): ?>
           <li class="nav-item">

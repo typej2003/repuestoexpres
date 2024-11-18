@@ -31,6 +31,15 @@
           </a>
         </li>
 
+        <li class="nav-item">
+          <a href="{{ route('star') }}" class="nav-link {{ request()->is('star') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Star
+            </p>
+          </a>
+        </li>
+
         @auth
         @if(auth()->user()->role == 'admin')
           <li class="nav-item">

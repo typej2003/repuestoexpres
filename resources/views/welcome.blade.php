@@ -21,6 +21,14 @@
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/infiniteSlider.css">
 
+    <script src="/js/jquery-3.6.4.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <link rel="stylesheet" href="/css/slick-theme.min.css">
+    <link rel="stylesheet" href="/css/slick.min.css">
+    <link rel="stylesheet" href="/css/carouselOffer.css">
+    <link rel="stylesheet" href="/css/showProducts.css">
+    <link rel="stylesheet" href="/css/star.css">
+
     
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -88,9 +96,9 @@
         <div class="my-5"></div>
     </section>
     
-    @include('livewire.components.navigation-map')
+    @livewire('components.navigation-map')
 
-    @include('layouts.partials.footer')
+    @livewire('layouts.footer')
     
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->

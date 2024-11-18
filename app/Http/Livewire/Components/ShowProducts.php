@@ -22,7 +22,12 @@ class ShowProducts extends AdminComponent
 
     public $parametro = null;
 
-    protected $listeners = ['infoRecibida' => 'actualizarInfo'];
+    public $renderizar = false;
+
+    protected $listeners = [
+        'infoRecibida' => 'actualizarInfo', 
+        'refreshValoracion' => 'refreshValoracion', 
+        'refreshShowProduct' => 'refreshShowProduct'];
 
     public function actualizarInfo($data, $manufacturer, $products)
     {
@@ -72,6 +77,12 @@ class ShowProducts extends AdminComponent
         }
     }
 
+    public function refreshValoracion($product_id, $ca_valoracion, $class)
+    {
+        $this->state['ca_valoracion'] = $ca_valoracion;
+        $this->state['class'] = $class;
+    }
+
     public function registrarValoracion()
     {
         $validatedData = Validator::make($this->state, [
@@ -98,11 +109,17 @@ class ShowProducts extends AdminComponent
 
             $this->dispatchBrowserEvent('hide-valoracionModal', ['message' => 'Gracias por la valoración!']);
             // $this->dispatchBrowserEvent('updateStar', ['comercio_id' => $comercio_id, 'puntuacion' => $puntuacion, 'class' => $class,]);
+
+            // $this->mount($this->comercio_id);
+            $this->refreshShowProduct();
+            return redirect()->route('welcome');
+
         }
     }
 
     public function valorar($product_id, $puntuacion, $classV)
 	{
+        $this->skipRender();
         if (auth()->user()) {
 
             $this->state['product_id'] = $product_id;
@@ -111,6 +128,8 @@ class ShowProducts extends AdminComponent
             $this->state['comment'] = '';
 
             $this->ca_valoracion = $puntuacion;
+
+            $this->emit('refreshStar', $product_id, $puntuacion, $classV);
 
             $this->dispatchBrowserEvent('show-valoracionModal', ['classV' => $classV, 'ca_valoracion' => $puntuacion, 'product_id' => $product_id]);
         }
@@ -124,8 +143,12 @@ class ShowProducts extends AdminComponent
 	{
         $this->state['ca_valoracion'] = $puntuacion;
         $this->ca_valoracion = $puntuacion;
-        $this->skipRender();
 	}
+
+    public function refreshShowProduct()
+    {
+        $this->mount($this->comercio_id);        
+    }
 
     public function render()
     {

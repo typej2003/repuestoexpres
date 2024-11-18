@@ -20,33 +20,38 @@ class WelcomeController extends Controller
 
     public function __invoke(Request $request)
     {
-        $comercio = null;
-        $existe = false;
-        //->
-        $peticion = explode('/', \Request::getRequestUri());
+        // $comercio = null;
+        // $existe = false;
+        // //->
+        // $peticion = explode('/', \Request::getRequestUri());
 
-        if($peticion[1] !== ''){
-            $comercio = Comercio::where('name', $peticion[2])->first();
-        }
+        // if($peticion[1] !== ''){
+        //     $comercio = Comercio::where('name', $peticion[2])->first();
+        // }
         
-        if($comercio){
-            $existe = true;
-        }else{
-            $categories = Category::where('comercio_id', 1)->get();
-        }
+        // if($comercio){
+        //     $existe = true;
+        // }else{
+        //     $categories = Category::where('comercio_id', 1)->get();
+        // }
 
-        dd($request);
+        // dd($request);
 
-        return view('welcome', [
-            'existe' => $existe,
-            'comercio' => $comercio,
-            'categories' => $categories,
-        ]);
+        // return view('welcome', [
+        //     'existe' => $existe,
+        //     'comercio' => $comercio,
+        //     'categories' => $categories,
+        // ]);
         
     }
 
     public function index(Request $request){
 
+        $peticion = explode('/', \Request::getRequestUri());
+        if($peticion[0] == '')
+        {
+            $manufacturer_id = 0;
+        }
         $words = '';
 
         if ($request->isMethod('post')) 
@@ -112,6 +117,7 @@ class WelcomeController extends Controller
 
         }
 
+        
         return view('welcome', [
             'words' => $words,
             'manufacturer_id' => $manufacturer_id,

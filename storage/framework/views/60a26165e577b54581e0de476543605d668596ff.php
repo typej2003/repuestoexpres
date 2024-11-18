@@ -6,7 +6,7 @@
         <div class="card w-75 p-1 mx-auto">
             <div class="form-group">
                 <label for="manufacturer">Marca</label>
-                <select wire:model="manufacturer" name="manufacturer_id" id="manufacturer_id" class="form-control <?php $__errorArgs = ['manufacturer'];
+                <select wire:ignore wire:model="manufacturer" name="manufacturer_id" id="manufacturer" class="form-control <?php $__errorArgs = ['manufacturer'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -14,10 +14,17 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>">
-                    <option value="0" selected>Seleccione una opción</option>
+                    <?php if($manufacturers->count() == 0 ): ?>    
+                        <option value="0">Seleccione una opción</option>
+                    <?php else: ?>
+                    <option value="0">Seleccione una opción</option>
+                    <?php endif; ?>
                     <?php $__currentLoopData = $manufacturers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($manufacturer->id); ?>"><?php echo e($manufacturer->name); ?></option>
+                            <option value="<?php echo e($manufacturer->id); ?>" selected="false"><?php echo e($manufacturer->name); ?></option>                        
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <script>
+                         $("#manufacturer_id").val("0");
+                    </script>
                 </select>
                 <?php $__errorArgs = ['manufacturer'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -109,7 +116,7 @@ unset($__errorArgs, $__bag); ?>
     </form>
 
     <script>
-        let manufacturer = document.getElementById('manufacturer_id');
+        let manufacturer = document.getElementById('manufacturer');
         let modelo = document.getElementById('modelo_id');
         let motor = document.getElementById('motor_id');
 

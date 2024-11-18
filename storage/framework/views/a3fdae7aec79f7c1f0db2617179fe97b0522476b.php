@@ -324,32 +324,7 @@
                         <!-- OFF CANVAS MENU LINKS  START-->
                         <div class="d-flex flex-row justify-content-between px-0 " >
                             <ul class="w-60 nav nav-pills nav-fill d-flex">
-                                <!-- <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li class="nav-item dropdown">            
-                                    <a class="categoryMenu dropdownLink my-1 nav-link"><?php echo e($category->name); ?></a>
-                                    <div class="subcategoryMenu dropdown-content-link">
-                                        <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <a class="subcategoryLink" href="#"><?php echo e($subcategory->name); ?></a>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </div>            
-                                </li>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> -->
-
-                                <!-- <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li class="nav-item dropdown">
-                                    <button class="btn btnCategoria"><?php echo e($category->name); ?><i class="bx bx-chevron-down arrowCategoria"></i></button>
-                                    <div class="dropdownCategoria itemCategoria">
-                                        <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <a href="#create" style="">
-                                                <i class="bx bx-plus-circle"></i>
-                                                <?php echo e($subcategory->name); ?>
-
-                                            </a>    
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                                    
-                                    </div>
-                                </li>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> -->
-
+                                
                                 <?php $x = -1; ?>
 
                                 <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

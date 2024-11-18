@@ -1,9 +1,6 @@
 <div>
-    <script src="/js/jquery-3.6.4.min.js"></script>
-    <script src="/js/slick.min.js"></script>
-    <link rel="stylesheet" href="/css/slick-theme.min.css">
-    <link rel="stylesheet" href="/css/slick.min.css">
-    <link rel="stylesheet" href="/css/carouselOffer.css">
+    
+
     <style>
         /* .slider{
             width: 90%!important;

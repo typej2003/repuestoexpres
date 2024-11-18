@@ -25,6 +25,12 @@
     border: none !important;
 }
 
+:root {
+    --main-bg-color:  #4447eb;
+    --main-btn-color: #FC5E27;
+    --main-footer-color: #FFCC2A;
+}
+
 /* AGREGADO O ACTUALIZACION A CSS DE LA PLANTILLA */
 .main-sidebar-img{
     width: 80%!important;
@@ -32,4 +38,23 @@
 
 .main-sidebar{
     background-color:  #4447eb;
+}
+
+.footer{
+    margin-top: auto;
+    width: 100%;
+    height: 80px;
+    background-color: var(--main-footer-color);
+    color: white;
+    text-decoration: solid;
+    font-weight: bold;
+    /*display: none;*/
+}
+
+.footer-img{
+    width: 40%!important;
+}
+
+.footer-img2{
+    width: 80%!important;
 }

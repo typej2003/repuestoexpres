@@ -20,7 +20,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/infiniteSlider.css">
-
     
     
     @stack('styles')
@@ -63,7 +62,8 @@
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        @include('layouts.partials.footer')
+        
+        @livewire('layouts.footer')
     </div>
     </body>
 

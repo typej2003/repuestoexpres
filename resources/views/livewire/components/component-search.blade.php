@@ -6,11 +6,18 @@
         <div class="card w-75 p-1 mx-auto">
             <div class="form-group">
                 <label for="manufacturer">Marca</label>
-                <select wire:model="manufacturer" name="manufacturer_id" id="manufacturer_id" class="form-control @error('manufacturer') is-invalid @enderror">
-                    <option value="0" selected>Seleccione una opción</option>
+                <select wire:ignore wire:model="manufacturer" name="manufacturer_id" id="manufacturer" class="form-control @error('manufacturer') is-invalid @enderror">
+                    @if($manufacturers->count() == 0 )    
+                        <option value="0">Seleccione una opción</option>
+                    @else
+                    <option value="0">Seleccione una opción</option>
+                    @endif
                     @foreach($manufacturers as $manufacturer)
-                        <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
+                            <option value="{{ $manufacturer->id }}" selected="false">{{ $manufacturer->name }}</option>                        
                     @endforeach
+                    <script>
+                         $("#manufacturer_id").val("0");
+                    </script>
                 </select>
                 @error('manufacturer')
                 <div class="invalid-feedback">
@@ -64,7 +71,7 @@
     </form>
 
     <script>
-        let manufacturer = document.getElementById('manufacturer_id');
+        let manufacturer = document.getElementById('manufacturer');
         let modelo = document.getElementById('modelo_id');
         let motor = document.getElementById('motor_id');
 
