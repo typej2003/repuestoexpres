@@ -46,7 +46,11 @@ class ResultsProducts extends AdminComponent
     public function render()
     {
 
-        $products = Product::where('name', $this->parametro)->paginate(15);
+        $this->parametro = 'XXX';
+
+        //$products = Product::where('name', $this->parametro)->paginate(15);
+
+        $products = Product::paginate(15);
 
         return view('livewire.components.results-products', [
             'products' => $products,

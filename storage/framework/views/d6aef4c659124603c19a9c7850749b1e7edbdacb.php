@@ -8,11 +8,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('backend/plugins/fontawesome-free/css/all.min.css')); ?>">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="{{ asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css')); ?>">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('backend/dist/css/adminlte.min.css')); ?>">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -24,8 +24,8 @@
     <div class="card-body">
         <p class="login-box-msg">Registrar un nuevo usuario</p>
 
-        <form action="{{ route('register') }}" method="post">           
-            @csrf
+        <form action="<?php echo e(route('register')); ?>" method="post">           
+            <?php echo csrf_field(); ?>
             <div class="group-control mb-3">
                 <label for="roleS">Tipo de usuario</label>
                 <select class="form-control" name="roleS" id="roleS">
@@ -69,9 +69,16 @@
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
-                    @error('name')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <span class="text-danger"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
             
@@ -84,9 +91,16 @@
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
-                    @error('email')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <span class="text-danger"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
 
@@ -99,9 +113,16 @@
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
-                    @error('password')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <span class="text-danger"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
 
@@ -114,9 +135,16 @@
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
-                    @error('password_confirmation')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    <?php $__errorArgs = ['password_confirmation'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <span class="text-danger"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
 
@@ -153,11 +181,12 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
+<script src="<?php echo e(asset('backend/plugins/jquery/jquery.min.js')); ?>"></script>
 <!-- Bootstrap 4 -->
-<script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="<?php echo e(asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
+<script src="<?php echo e(asset('backend/dist/js/adminlte.min.js')); ?>"></script>
 </body>
 </html>
 
+<?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/auth/register.blade.php ENDPATH**/ ?>

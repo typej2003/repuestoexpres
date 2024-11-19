@@ -60,11 +60,11 @@ if (! isset($_instance)) {
                         'modelo_id' => $modelo_id,
                         'motor_id' => $motor_id,
                         ])->html();
-} elseif ($_instance->childHasBeenRendered('CruSGx2')) {
-    $componentId = $_instance->getRenderedChildComponentId('CruSGx2');
-    $componentTag = $_instance->getRenderedChildComponentTagName('CruSGx2');
+} elseif ($_instance->childHasBeenRendered('tXWr7ls')) {
+    $componentId = $_instance->getRenderedChildComponentId('tXWr7ls');
+    $componentTag = $_instance->getRenderedChildComponentTagName('tXWr7ls');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('CruSGx2');
+    $_instance->preserveRenderedChild('tXWr7ls');
 } else {
     $response = \Livewire\Livewire::mount('layouts.navbar', [
                         'comercioId' => 1,
@@ -73,7 +73,7 @@ if (! isset($_instance)) {
                         'motor_id' => $motor_id,
                         ]);
     $html = $response->html();
-    $_instance->logRenderedChild('CruSGx2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('tXWr7ls', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -82,15 +82,15 @@ echo $html;
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.marcas-productos')->html();
-} elseif ($_instance->childHasBeenRendered('MFYjhBv')) {
-    $componentId = $_instance->getRenderedChildComponentId('MFYjhBv');
-    $componentTag = $_instance->getRenderedChildComponentTagName('MFYjhBv');
+} elseif ($_instance->childHasBeenRendered('OPqNq4H')) {
+    $componentId = $_instance->getRenderedChildComponentId('OPqNq4H');
+    $componentTag = $_instance->getRenderedChildComponentTagName('OPqNq4H');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('MFYjhBv');
+    $_instance->preserveRenderedChild('OPqNq4H');
 } else {
     $response = \Livewire\Livewire::mount('components.marcas-productos');
     $html = $response->html();
-    $_instance->logRenderedChild('MFYjhBv', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('OPqNq4H', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -110,11 +110,11 @@ if (! isset($_instance)) {
                         'modelo_id' => $modelo_id,
                         'motor_id' => $motor_id,
                         ])->html();
-} elseif ($_instance->childHasBeenRendered('KZcEH8s')) {
-    $componentId = $_instance->getRenderedChildComponentId('KZcEH8s');
-    $componentTag = $_instance->getRenderedChildComponentTagName('KZcEH8s');
+} elseif ($_instance->childHasBeenRendered('6uHooCA')) {
+    $componentId = $_instance->getRenderedChildComponentId('6uHooCA');
+    $componentTag = $_instance->getRenderedChildComponentTagName('6uHooCA');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('KZcEH8s');
+    $_instance->preserveRenderedChild('6uHooCA');
 } else {
     $response = \Livewire\Livewire::mount('components.component-search', [
                         'comercioId' => 1,
@@ -123,7 +123,7 @@ if (! isset($_instance)) {
                         'motor_id' => $motor_id,
                         ]);
     $html = $response->html();
-    $_instance->logRenderedChild('KZcEH8s', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('6uHooCA', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -132,15 +132,15 @@ echo $html;
                     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.carousel-offer')->html();
-} elseif ($_instance->childHasBeenRendered('IkJDP7J')) {
-    $componentId = $_instance->getRenderedChildComponentId('IkJDP7J');
-    $componentTag = $_instance->getRenderedChildComponentTagName('IkJDP7J');
+} elseif ($_instance->childHasBeenRendered('CVg1MVW')) {
+    $componentId = $_instance->getRenderedChildComponentId('CVg1MVW');
+    $componentTag = $_instance->getRenderedChildComponentTagName('CVg1MVW');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('IkJDP7J');
+    $_instance->preserveRenderedChild('CVg1MVW');
 } else {
     $response = \Livewire\Livewire::mount('components.carousel-offer');
     $html = $response->html();
-    $_instance->logRenderedChild('IkJDP7J', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('CVg1MVW', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -151,15 +151,15 @@ echo $html;
             <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.show-products')->html();
-} elseif ($_instance->childHasBeenRendered('QHTBz7e')) {
-    $componentId = $_instance->getRenderedChildComponentId('QHTBz7e');
-    $componentTag = $_instance->getRenderedChildComponentTagName('QHTBz7e');
+} elseif ($_instance->childHasBeenRendered('O0yqwWp')) {
+    $componentId = $_instance->getRenderedChildComponentId('O0yqwWp');
+    $componentTag = $_instance->getRenderedChildComponentTagName('O0yqwWp');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('QHTBz7e');
+    $_instance->preserveRenderedChild('O0yqwWp');
 } else {
     $response = \Livewire\Livewire::mount('components.show-products');
     $html = $response->html();
-    $_instance->logRenderedChild('QHTBz7e', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('O0yqwWp', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -174,11 +174,11 @@ if (! isset($_instance)) {
                 'modelo_id' => $modelo_id,
                 'motor_id' => $motor_id,
                 ])->html();
-} elseif ($_instance->childHasBeenRendered('HjL4uHl')) {
-    $componentId = $_instance->getRenderedChildComponentId('HjL4uHl');
-    $componentTag = $_instance->getRenderedChildComponentTagName('HjL4uHl');
+} elseif ($_instance->childHasBeenRendered('APg5zqD')) {
+    $componentId = $_instance->getRenderedChildComponentId('APg5zqD');
+    $componentTag = $_instance->getRenderedChildComponentTagName('APg5zqD');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('HjL4uHl');
+    $_instance->preserveRenderedChild('APg5zqD');
 } else {
     $response = \Livewire\Livewire::mount('components.results-products', [
                 'comercioId' => 1, 
@@ -188,7 +188,7 @@ if (! isset($_instance)) {
                 'motor_id' => $motor_id,
                 ]);
     $html = $response->html();
-    $_instance->logRenderedChild('HjL4uHl', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('APg5zqD', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -199,15 +199,15 @@ echo $html;
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.navigation-map')->html();
-} elseif ($_instance->childHasBeenRendered('niVyPpQ')) {
-    $componentId = $_instance->getRenderedChildComponentId('niVyPpQ');
-    $componentTag = $_instance->getRenderedChildComponentTagName('niVyPpQ');
+} elseif ($_instance->childHasBeenRendered('fRoKumw')) {
+    $componentId = $_instance->getRenderedChildComponentId('fRoKumw');
+    $componentTag = $_instance->getRenderedChildComponentTagName('fRoKumw');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('niVyPpQ');
+    $_instance->preserveRenderedChild('fRoKumw');
 } else {
     $response = \Livewire\Livewire::mount('components.navigation-map');
     $html = $response->html();
-    $_instance->logRenderedChild('niVyPpQ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('fRoKumw', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -215,15 +215,15 @@ echo $html;
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('layouts.footer')->html();
-} elseif ($_instance->childHasBeenRendered('SNlbdgc')) {
-    $componentId = $_instance->getRenderedChildComponentId('SNlbdgc');
-    $componentTag = $_instance->getRenderedChildComponentTagName('SNlbdgc');
+} elseif ($_instance->childHasBeenRendered('2rPdLMg')) {
+    $componentId = $_instance->getRenderedChildComponentId('2rPdLMg');
+    $componentTag = $_instance->getRenderedChildComponentTagName('2rPdLMg');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('SNlbdgc');
+    $_instance->preserveRenderedChild('2rPdLMg');
 } else {
     $response = \Livewire\Livewire::mount('layouts.footer');
     $html = $response->html();
-    $_instance->logRenderedChild('SNlbdgc', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('2rPdLMg', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -245,8 +245,8 @@ echo $html;
       <div class="modal-body">
         <section class="banner">
             <div class="row">
-                <div class="col-lg-12">
-                    <img class="img_logo" src="./img/logo_repuestos.png" alt="">
+                <div class="col-lg-12 d-flex">
+                    <img class="img_logo mx-auto" src="./img/logo_repuestos.png" alt="">
                 </div>
             </div>
         </section>
@@ -311,7 +311,7 @@ unset($__errorArgs, $__bag); ?>
                         <div class="form-group">
                             <div class="row mx-auto my-3">
                                 <div class="col-xs-12 col-sm-12 col-md-12 d-flex">
-                                    <button type="submit" class="btn btn-app w-100 mx-auto">IIniciar Sesión</button>
+                                    <button type="submit" class="btn btn-app w-100 mx-auto">Iniciar Sesión</button>
                                 </div>
                             </div>                
                         </div>
@@ -332,7 +332,7 @@ unset($__errorArgs, $__bag); ?>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
   <div class="modal-dialog">
   <div class="modal-content modalFondo">
       <div class="modal-header" style="background-color: #f8f8f8;">
@@ -406,13 +406,29 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
-                        <div class="row mx-auto my-3">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <button type="submit" class="btn boton1 w-100">Unete Ya</button>
+                        <label for="documento">Teléfono </label>        
+                        <div class="row mx-auto">
+                            <div class="col-xs-6 col-md-5 col-sm-4 col-4">
+                                <select class="form-control" name="cellphonecode" id="cellphonecode">
+                                    <option value="0">Seleccione</option>
+                                    <option value="0412">0412</option>
+                                    <option value="0414">0414</option>
+                                    <option value="0424">0424</option>
+                                    <option value="0416">0416</option>
+                                    <option value="0426">0426</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-md-7 col-sm-8 col-8">
+                                <input type="text" class="form-control" name="cellphone" id="cellphone">
                             </div>
                         </div>                
+                    </div>
+                    
+                    <div class="form-group d-flex">
+                                <button type="submit" class="btn btn-app w-100 mx-auto">Unete Ya</button>
+                        
                     </div>
                     <p class="text-center c-a texto"><a href="#">¿Olvidé mi contraseña?</a></p>
                     

@@ -96,6 +96,8 @@ class ListUsers extends AdminComponent
 			'email' => 'required|email|unique:users,email,'.$this->user->id,
 			'password' => 'sometimes|confirmed',
 			'role' => 'required',
+			'identificationNac' => 'required',
+			'identificationNumber' => 'required',
 		])->validate();
 
 		if(!empty($validatedData['password'])) {

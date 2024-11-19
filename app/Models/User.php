@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\ComercioVehiculo;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,6 +25,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'identificationNac',
+        'identificationNumber',
         'name',
         'email',
         'password',
@@ -137,10 +141,16 @@ class User extends Authenticatable
         }
     }
 
-    public function showVehiculos($comercio_id)
+    public function showVehiculos($user_id)
     {
-        $vehiculos = Vehiculo::where('comercio_id', $comercio_id)->get();
+        $vehiculos = Vehiculo::whereHas('comercioVehiculo', function($q)  use ($user_id) {
+            $q->where('user_id', $user_id);
+        })
+        ->with('manufacturer')
+        ->get();
 
         return $vehiculos;
     }
+
+    
 }

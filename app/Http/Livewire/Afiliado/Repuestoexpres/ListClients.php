@@ -6,6 +6,11 @@ use App\Http\Livewire\Admin\AdminComponent;
 
 use App\Models\User;
 use App\Models\Comercio;
+use App\Models\Manufacturer;
+use App\Models\Modelo;
+use App\Models\Motor;
+use App\Models\Vehiculo;
+use App\Models\ComercioVehiculo;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -36,18 +41,68 @@ class ListClients extends AdminComponent
 
 	public $comercio_id;
 
-	public function mount($comercioId = 1)
+	public $user_id;
+
+	#[Validate]
+	public $manufacturer;
+	public function rules()
+    {
+        return [
+            'manufacturer' => 'required|not_in:0',
+			'modelo' => 'required|not_in:0',
+			'motor' => 'required|not_in:0',
+        ];
+    }
+
+    public function messages() 
+    {
+        return [
+            'manufacturer.required' => 'Debe seleccionar una opcion.',
+			'modelo.required' => 'Debe seleccionar una opcion.',
+			'motor.required' => 'Debe seleccionar una opcion.',
+			'placa.required' => 'Debe ingresar un Placa.',
+        ];
+    }
+   
+    public $modelo;
+    public $motor;
+	public $manufacturers = [], $modelos = [], $motores = [];
+
+	public $manufacturer_id = 0;
+	public $modelo_id = 0; 
+	public $motor_id = 0;
+
+	public function mount($comercioId = 1, $manufacturer_id = 0, $modelo_id = 0, $motor_id = 0)
 	{
 		$this->comercio_id = $comercioId;
+
+		$this->manufacturer = 0;
+		$this->modelo = 0;
+		$this->motor = 0;
+
+		$this->manufacturers = collect();
+
+		$this->modelos = collect();
+
+		$this->motores = collect();
+
 	}
 
 	public function addNew()
 	{
 		$comercio_id = $this->comercio_id;
 		$this->reset();
+		$this->manufacturers = collect();
+
+		$this->modelos = collect();
+
+		$this->motores = collect();
+
 		$this->comercio_id = $comercio_id;
 
 		$this->showEditModal = false;
+
+		$this->state['role'] = 'cliente';
 
 		$this->dispatchBrowserEvent('show-form');
 	}
@@ -59,6 +114,8 @@ class ListClients extends AdminComponent
 			'email' => 'required|email|unique:users',
 			'password' => 'required|confirmed',
 			'role' => 'required',
+			'identificationNac' => 'required',
+			'identificationNumber' => 'required',
 		])->validate();
 
 		$validatedData['password'] = bcrypt($validatedData['password']);
@@ -67,7 +124,9 @@ class ListClients extends AdminComponent
 			$validatedData['avatar'] = $this->photo->store('/', 'avatars');
 		}
 
-		User::create($validatedData);
+		$user = User::create($validatedData);
+
+		$datosbasicos = DatosBasicos::create(['user_id' => $user->id]);
 
 		// session()->flash('message', 'User added successfully!');
 
@@ -94,6 +153,8 @@ class ListClients extends AdminComponent
 			'email' => 'required|email|unique:users,email,'.$this->user->id,
 			'password' => 'sometimes|confirmed',
 			'role' => 'required',
+			'identificationNac' => 'required',
+			'identificationNumber' => 'required',
 		])->validate();
 
 		if(!empty($validatedData['password'])) {
@@ -126,14 +187,76 @@ class ListClients extends AdminComponent
 		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Usuario eliminado satisfactoriamente!']);
 	}
 
-	public function addNewVehiculo()
+	public function addNewVehiculo($user_id)
 	{
+		$comercio_id = $this->comercio_id;
+		$this->reset();
+		$this->comercio_id = $comercio_id;
+		$this->user_id = $user_id;
+		
+		$this->modelos = collect();
 
+		$this->motores = collect();
+
+		$this->showEditModal = false;
+
+		$this->dispatchBrowserEvent('show-formVehiculo');
+
+	}
+
+	public function createVehiculo()
+	{
+		$validatedData = Validator::make($this->state, [
+			'placa' => 'required',
+		], $this->messages())->validate();
+
+		$this->validate();
+
+		$validatedData['manufacturer_id'] = $this->manufacturer;
+		$validatedData['modelo_id'] = $this->modelo;
+		$validatedData['motor_id'] = $this->motor;
+
+		$validatedData['user_id'] = $this->user_id;
+
+		$vehiculo = Vehiculo::create($validatedData);
+
+		ComercioVehiculo::create([
+			'user_id' => $this->user_id,
+			'vehiculo_id' => $vehiculo->id,
+			'comercio_id' => $this->comercio_id,
+		]);
+
+		// session()->flash('message', 'User added successfully!');
+
+		$this->dispatchBrowserEvent('hide-formVehiculo', ['message' => 'Vehículo agregado satisfactoriamente!']);
 	}
 
 	public function confirmVehiculo($vehiculo_id)
 	{
 
+	}
+
+	public function updatedManufacturer($value)
+	{
+        $this->manufacturer_id = $value;
+		$this->modelos = Modelo::where('manufacturer_id', $value)->get();
+		// $this->subcategory = $this->subcategories->first()->id ?? null;
+        $this->emit('receiveManufacturerS', $value);
+
+        $this->updatedModelo(0);
+	}
+
+    public function updatedModelo($value)
+	{
+        $this->modelo_id = $value;
+		$this->motores = Motor::where('manufacturer_id', $this->manufacturer_id)->where('modelo_id', $value)->get();
+		// $this->subcategory = $this->subcategories->first()->id ?? null;
+        $this->emit('receiveModeloS', $value);
+	}
+
+    public function updatedMotor($value)
+	{
+        $this->emit('receiveMotorS', $value);
 	}
 
     public function sortBy($columnName)
@@ -166,6 +289,8 @@ class ListClients extends AdminComponent
             ->paginate(15);
 		
 		$comercio = Comercio::find($this->comercio_id)->first();
+
+		$this->manufacturers = Manufacturer::where('comercio_id', $this->comercio_id)->get();
 
         return view('livewire.afiliado.repuestoexpres.list-clients', [
         	'users' => $users,

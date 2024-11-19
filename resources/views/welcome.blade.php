@@ -117,8 +117,8 @@
       <div class="modal-body">
         <section class="banner">
             <div class="row">
-                <div class="col-lg-12">
-                    <img class="img_logo" src="./img/logo_repuestos.png" alt="">
+                <div class="col-lg-12 d-flex">
+                    <img class="img_logo mx-auto" src="./img/logo_repuestos.png" alt="">
                 </div>
             </div>
         </section>
@@ -176,7 +176,7 @@
                         <div class="form-group">
                             <div class="row mx-auto my-3">
                                 <div class="col-xs-12 col-sm-12 col-md-12 d-flex">
-                                    <button type="submit" class="btn btn-app w-100 mx-auto">IIniciar Sesión</button>
+                                    <button type="submit" class="btn btn-app w-100 mx-auto">Iniciar Sesión</button>
                                 </div>
                             </div>                
                         </div>
@@ -197,7 +197,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
   <div class="modal-dialog">
   <div class="modal-content modalFondo">
       <div class="modal-header" style="background-color: #f8f8f8;">
@@ -271,13 +271,29 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
-                        <div class="row mx-auto my-3">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <button type="submit" class="btn boton1 w-100">Unete Ya</button>
+                        <label for="documento">Teléfono </label>        
+                        <div class="row mx-auto">
+                            <div class="col-xs-6 col-md-5 col-sm-4 col-4">
+                                <select class="form-control" name="cellphonecode" id="cellphonecode">
+                                    <option value="0">Seleccione</option>
+                                    <option value="0412">0412</option>
+                                    <option value="0414">0414</option>
+                                    <option value="0424">0424</option>
+                                    <option value="0416">0416</option>
+                                    <option value="0426">0426</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-md-7 col-sm-8 col-8">
+                                <input type="text" class="form-control" name="cellphone" id="cellphone">
                             </div>
                         </div>                
+                    </div>
+                    
+                    <div class="form-group d-flex">
+                                <button type="submit" class="btn btn-app w-100 mx-auto">Unete Ya</button>
+                        
                     </div>
                     <p class="text-center c-a texto"><a href="#">¿Olvidé mi contraseña?</a></p>
                     

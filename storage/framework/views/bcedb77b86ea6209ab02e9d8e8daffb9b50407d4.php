@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-between mb-2">
-                        <button wire:click.prevent="addNew" class="btn btn-primary"><i class="fa fa-plus-circle mr-1"></i> Nuevo Usuario</button>
+                        <button wire:click.prevent="addNew" class="btn btn-primary"><i class="fa fa-plus-circle mr-1"></i> Nuevo Cliente</button>
                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.search-input','data' => ['wire:model' => 'searchTerm']]); ?>
 <?php $component->withName('search-input'); ?>
@@ -73,11 +73,24 @@
                                         <td><?php echo e($user->datosbasicos->telefono); ?></td>
                                         <td>
                                         <a wire:click.prevent="addNewVehiculo(<?php echo e($user->id); ?>)" style="cursor:pointer" ><i class="fa fa-plus-circle mr-1"></i> Nuevo Vehículo</a>
+                                            
                                             <ul>
-                                            <?php $__currentLoopData = $user->showVehiculos($comercio->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehiculo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <li class="d-flex justify-content-between">
-                                                    <div class="mx-2"><?php echo e($vehiculo->marca); ?></div>
-                                                    <a href="" wire:click.prevent="confirmVehiculo(<?php echo e($vehiculo->id); ?>)">
+                                            <?php $__currentLoopData = $user->showVehiculos($user->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehiculos): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <li class="d-flex justify-content-between border border-1 p-2">
+                                                    <div class="mx-2">
+                                                        <?php echo e('Placa: ' . $vehiculos->placa); ?>
+
+                                                        <br>
+                                                        <?php echo e('Marca: ' . $vehiculos->manufacturer->name); ?>
+
+                                                        <br>
+                                                        <?php echo e('Modelo: ' . $vehiculos->modelo->name); ?>
+
+                                                        <br>
+                                                        <?php echo e('Motor: ' . $vehiculos->motor->name); ?>
+
+                                                    </div>
+                                                    <a href="" wire:click.prevent="confirmVehiculo(<?php echo e($vehiculos->id); ?>)">
                                                         <i class="fa fa-trash text-danger"></i>
                                                     </a>
                                                 </li>
@@ -127,33 +140,28 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Rol</label>
-                            <select name="" wire:model.defer="state.role" class="form-control <?php $__errorArgs = ['role'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="">
-                                <option value="0">SELECCIONE..</option>
-                                <option value="admin">ADMINISTRADOR</option>
-                                <option value="afiliado">AFILIADO</option>
-                                <option value="user">USER</option>
-                            </select>
-                            <?php $__errorArgs = ['role'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                            <div class="invalid-feedback">
-                                <?php echo e($message); ?>
+                            <label for="role">Rol</label>
+                            <input type="text" wire:model.defer="state.role" class="form-control" id="role" placeholder="Rol" readonly style="background-color:white">
+                        </div>
 
+                        <div class="form-group">
+                            <div class="row mx-auto">
+                                <div class="col-xs-6 col-md-4 col-sm-4 col-4">
+                                    <label for="tipodocumento">Tipo </label>
+                                    <select wire:model.defer="stateDatosBasicos.identificationNac" class="form-control inputForm inputType" name="" id="identificationNac" placeholder="Tipo">
+                                        <option value="J">J-</option>
+                                        <option value="E">E-</option>
+                                        <option value="G">G-</option>
+                                        <option value="P">P-</option>
+                                        <option value="V" selected>V-</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-6 col-md-8 col=sm-8 col-8">
+                                    <label for="documento">Documento</label>
+                                    <input wire:model.defer="stateDatosBasicos.identificationNumber" type="text" id="identificationNumber" class="form-control inputForm" placeholder="Documento">
+                                </div>
                             </div>
-                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                            
                         </div>
 
                         <div class="form-group">
@@ -281,6 +289,170 @@ unset($__errorArgs, $__bag); ?>
     </div>
 
     <!-- Modal -->
+    <div class="modal fade" id="formVehiculo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <form autocomplete="off" wire:submit.prevent="<?php echo e($showEditModal ? 'updateVehiculo' : 'createVehiculo'); ?>">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <?php if($showEditModal): ?>
+                            <span>Editar Vehículo</span>
+                            <?php else: ?>
+                            <span>Nuevo Vehículo</span>
+                            <?php endif; ?>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="placa">Placa</label>
+                            <input type="text" wire:model.defer="state.placa" class="form-control <?php $__errorArgs = ['placa'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="placa" aria-describedby="placaHelp" placeholder="Placa">
+                            <?php $__errorArgs = ['placa'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback">
+                                <?php echo e($message); ?>
+
+                            </div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="manufacturer">Marca</label>
+                            <select wire:ignore wire:model="manufacturer" name="manufacturer_id" id="manufacturer_id" class="form-control <?php $__errorArgs = ['manufacturer'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <?php if($manufacturers->count() == 0 ): ?>    
+                                    <option value="0">Seleccione una opción</option>
+                                <?php else: ?>
+                                <option value="0">Seleccione una opción</option>
+                                <?php endif; ?>
+                                <?php $__currentLoopData = $manufacturers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($manufacturer->id); ?>" selected="false"><?php echo e($manufacturer->name); ?></option>                        
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <script>
+                                    //$("#manufacturer_id").val("0");
+                                </script>
+                            </select>
+                            <?php $__errorArgs = ['manufacturer'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback">
+                                <?php echo e($message); ?>
+
+                            </div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modelo">Modelo</label>
+                            <select wire:model="modelo" name="modelo_id" id="modelo_id" class="modelo form-control <?php $__errorArgs = ['modelo'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" >
+                                <?php if($modelos->count() == 0 ): ?>    
+                                    <option value="0">Seleccione una opción</option>
+                                <?php else: ?>
+                                <option value="0">Seleccione una opción</option>
+                                <?php endif; ?>
+                                <?php $__currentLoopData = $modelos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $modelo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($modelo->id); ?>"><?php echo e($modelo->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                            <?php $__errorArgs = ['modelo'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback">
+                                <?php echo e($message); ?>
+
+                            </div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="motor">Motor</label>
+                            <select wire:model="motor" name="motor_id" id="motor_id" class="motor form-control <?php $__errorArgs = ['motor'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                <?php if($motores->count() == 0 ): ?>    
+                                    <option value="0">Seleccione una opción</option>
+                                <?php else: ?>
+                                <option value="0">Seleccione una opción</option>
+                                <?php endif; ?>
+                                <?php $__currentLoopData = $motores; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $motor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($motor->id); ?>"><?php echo e($motor->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                            <?php $__errorArgs = ['motor'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback">
+                                <?php echo e($message); ?>
+
+                            </div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
+                            <?php if($showEditModal): ?>
+                            <span>Guardar Cambios</span>
+                            <?php else: ?>
+                            <span>Guardar</span>
+                            <?php endif; ?>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -299,5 +471,20 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
+    <script>
+        window.onpageshow = function() {
+            window.addEventListener('show-formVehiculo', event => {
+                
+                $('#formVehiculo').modal('show');
+            })
+
+            window.addEventListener('hide-formVehiculo', event => {
+                
+                $('#formVehiculo').modal('hide');
+            })
+
+        }
+    </script>
+    
 </div>
 <?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/afiliado/repuestoexpres/list-clients.blade.php ENDPATH**/ ?>
