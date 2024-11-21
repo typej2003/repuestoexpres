@@ -170,14 +170,12 @@ class WelcomeController extends Controller
 
         $cadena = "http://192.168.1.4:8000";
 
+        $comercio = Comercio::where('dominio', 'LIKE', $_SERVER['SERVER_NAME']);
+
         // $cadena = "https://repuestoexpres.com";
 
-        if (strlen(strstr($fullUrl, $cadena))>0) {
-            $url = $cadena;
-        }
-
         $cookie_name = "infosite";
-        $cookie_value = $url;
+        $cookie_value = $_SERVER['SERVER_NAME'];
         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); //name,value,time,url
         
         // setcookie('infosite','',time() - 1);
