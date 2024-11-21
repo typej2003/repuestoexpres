@@ -143,7 +143,10 @@ class WelcomeController extends Controller
 
         // Fin cookie
 
-        if (empty($_COOKIE['infosite'])){
+        if( isset( $_COOKIE['infosite']) )
+        {
+            $this->setCookie();
+        }else{
             $this->setCookie();
         }
 
@@ -162,14 +165,28 @@ class WelcomeController extends Controller
 
     public function setCookie()
     {
-
         // $dominio = str_replace(\Request::url(), '', \Request::fullUrl());
-        $dominio = \Request::fullUrl();
+        $fullUrl = \Request::fullUrl();
+
+        $cadena = "http://192.168.1.4:8000";
+
+        // $cadena = "https://repuestoexpres.com";
+
+        if (strlen(strstr($fullUrl, $cadena))>0) {
+            $url = $cadena;
+        }
 
         $cookie_name = "infosite";
-        $cookie_value = $dominio;
+        $cookie_value = $url;
         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); //name,value,time,url
-       
+        
+        // setcookie('infosite','',time() - 1);
+        // if(empty($_COOKIE['infosite'])){
+        //     $this->dispatchBrowserEvent('update', ['message' => 'No existe el cookie!']);
+        //     dd('No existe el cookie!');
+        // }else{
+        //     dd($_COOKIE['infosite']);
+        // }
     }
 
     public function receiveManufacturerS ($manufacturerS_id=0)
