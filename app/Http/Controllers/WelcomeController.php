@@ -143,6 +143,10 @@ class WelcomeController extends Controller
 
         // Fin cookie
 
+        if (empty($_COOKIE['infosite'])){
+            $this->setCookie();
+        }
+
         return view('welcome', [
             'words' => $words,
             'manufacturer_id' => $manufacturer_id,
@@ -156,7 +160,8 @@ class WelcomeController extends Controller
         ]);
     }
 
-    public function setCookie(){
+    public function setCookie()
+    {
 
         // $dominio = str_replace(\Request::url(), '', \Request::fullUrl());
         $dominio = \Request::fullUrl();
@@ -165,7 +170,7 @@ class WelcomeController extends Controller
         $cookie_value = $dominio;
         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); //name,value,time,url
        
-       }
+    }
 
     public function receiveManufacturerS ($manufacturerS_id=0)
     {
