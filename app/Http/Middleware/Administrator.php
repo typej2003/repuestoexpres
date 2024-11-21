@@ -36,6 +36,8 @@ class Administrator
 
         $cadena = "http://192.168.1.4:8000";
 
+        // $cadena = "https://repuestoexpres.com";
+
         if (strlen(strstr($fullUrl, $cadena))>0) {
             $url = $cadena;
         }
