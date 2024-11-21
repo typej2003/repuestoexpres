@@ -2,9 +2,9 @@
     <?php
         if( isset( $_COOKIE['infosite']) )
         {
-            $this->setCookie();
+            $setCookie();
         }else{
-            $this->setCookie();
+            $setCookie();
         }
 
     ?>
