@@ -1,14 +1,4 @@
 <div>  
-    <?php
-        if( isset( $_COOKIE['infosite']) )
-        {
-            $setCookie();
-        }else{
-            $setCookie();
-        }
-
-    ?>
-{{ $_COOKIE['infosite'] }}
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <!doctype html>
 <html lang="es">
