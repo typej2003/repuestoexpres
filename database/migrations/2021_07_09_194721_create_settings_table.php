@@ -25,6 +25,10 @@ class CreateSettingsTable extends Migration
             $table->string('site_title')->nullable()->default(null);
             $table->string('footer_text')->nullable()->default(null);
             $table->boolean('sidebar_collapse')->default(false);
+            $table->boolean('in_cellphonecontact')->default(true);
+            $table->boolean('in_sliderprincipal')->default(true);
+            $table->boolean('in_marcasproductos')->default(true);
+            
             $table->string('currency')->nullable()->default('$');
             $table->string('api_bcv')->nullable()->default('NO');
             $table->timestamps();

@@ -12,28 +12,30 @@ class UpdateSetting extends Component
 
     public $userId = 0;
 
+    public $setting;
+
     public function mount($userId = 0)
     {
         if($userId == 0){
             $this->userId = auth()->user()->id;
         }
         
-        $setting = Setting::where('user_id', $this->userId)->first();
+        $this->setting = Setting::where('user_id', $this->userId)->first();
         
-        if ($setting) {
-            $this->state = $setting->toArray();
+        if ($this->setting) {
+            $this->state = $this->setting->toArray();
         }
     }
 
     public function updateSetting()
     {
-        $setting = Setting::first();
+        // $setting = Setting::first();
 
         $this->state['user_id'] = $this->userId;
-        if ($setting) {
-            $setting->update($this->state);
+        if ($this->setting) {
+            $this->setting->update($this->state);
         } else {
-            Setting::create($this->state);
+            $this->setting = Setting::create($this->state);
         }
 
         Cache::forget('setting');

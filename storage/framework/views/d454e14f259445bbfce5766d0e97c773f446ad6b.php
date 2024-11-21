@@ -82,19 +82,6 @@
                                     <input wire:model.defer="state.sidebar_collapse" type="checkbox" id="sidebar_collapse"> -->
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="custom-control custom-switch">
-                                        <input wire:model.defer="state.in_sliderprincipal" type="checkbox" class="custom-control-input" id="in_sliderprincipal">
-                                        <label class="custom-control-label" for="in_sliderprincipal">Mostrar Slider Principal</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="custom-control custom-switch">
-                                        <input wire:model.defer="state.in_marcasproductos" type="checkbox" class="custom-control-input" id="in_marcasproductos">
-                                        <label class="custom-control-label" for="in_marcasproductos">Mostrar Marcas Productos</label>
-                                    </div>
-                                </div>
 
                             </div>
                             <!-- /.card-body -->
@@ -110,10 +97,11 @@
     </section>
 </div>
 
-@push('js')
+<?php $__env->startPush('js'); ?>
 <script>
     $('#sidebarCollapse').on('change', function() {
         $('body').toggleClass('sidebar-collapse');
     })
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/admin/settings/update-setting.blade.php ENDPATH**/ ?>

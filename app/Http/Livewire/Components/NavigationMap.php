@@ -2,10 +2,22 @@
 
 namespace App\Http\Livewire\Components;
 
-use Livewire\Component;
+use App\Http\Livewire\Admin\AdminComponent;
 
-class NavigationMap extends Component
+use App\Models\Comercio;
+
+class NavigationMap extends AdminComponent
 {
+    public $comercio;
+
+    public function mount($comercio_id)
+    {
+        $this->comercio = Comercio::find($comercio_id);
+
+        
+        
+    }
+
     public function render()
     {
         return view('livewire.components.navigation-map');

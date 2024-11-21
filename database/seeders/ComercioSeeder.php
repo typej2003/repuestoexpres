@@ -19,6 +19,9 @@ class ComercioSeeder extends Seeder
             'user_id' => '1',
             'keyword' => 'comercio1',
             'name' => 'Comercio 1',
+            'cellphonecontact' => '04165800403',
+            'dominio' => 'http://192.168.1.4:8000',
+            // 'dominio' => 'http://www.repuestoexpres.com',
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
         ]);

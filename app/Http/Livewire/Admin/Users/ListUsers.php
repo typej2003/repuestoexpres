@@ -153,6 +153,7 @@ class ListUsers extends AdminComponent
 
     public function render()
     {
+
     	$users = User::query()
     		->where('name', 'like', '%'.$this->searchTerm.'%')
     		->orWhere('email', 'like', '%'.$this->searchTerm.'%')
@@ -163,4 +164,6 @@ class ListUsers extends AdminComponent
         	'users' => $users,
         ]);
     }
+
+	
 }

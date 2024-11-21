@@ -28,6 +28,8 @@ class CreateComerciosTable extends Migration
             $table->string('name');
             $table->string('avatar')->nullable();
             $table->string('keyword')->unique();
+            $table->string('dominio')->nullable();
+            $table->string('cellphonecontact')->nullable();
             $table->timestamps();
         });
     }

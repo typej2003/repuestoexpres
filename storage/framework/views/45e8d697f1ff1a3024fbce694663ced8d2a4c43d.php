@@ -7,7 +7,7 @@
         <div class="col-xl-8 d-flex flex-column align-self-start">
             <div class="row">
                 <div class="col-3">
-                    <p>Acerca de</p>
+                    <p>Acerca de <?php echo e($comercio->name); ?></p>
                 </div>
                 <div class="col-3">
                     <p>Categorias</p>

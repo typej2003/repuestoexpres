@@ -16,6 +16,9 @@ class Setting extends Model
         'site_title',
         'footer_text',
         'sidebar_collapse',
+        'in_cellphonecontact',
+        'in_sliderprincipal',
+        'in_marcasproductos',
         'api_bcv',
         'currency',
     ];

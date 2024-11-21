@@ -29,3 +29,4 @@ Route::get('settings', UpdateSetting::class)->name('settings');
 Route::get('listAreas', ListAreas::class)->name('listAreas');
 
 Route::get('messages', ListConversationAndMessages::class)->name('messages');
+

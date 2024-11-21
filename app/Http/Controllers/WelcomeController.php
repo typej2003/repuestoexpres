@@ -6,6 +6,10 @@ use App\Http\Livewire\Admin\AdminComponent;
 use Illuminate\Http\Request;
 use App\Models\Comercio;
 use App\Models\Category;
+use App\Models\Setting;
+use App\Models\User;
+
+
 use App\Events\NewEventCreated;
 
 class WelcomeController extends Controller
@@ -20,6 +24,7 @@ class WelcomeController extends Controller
 
     public function __invoke(Request $request)
     {
+
         // $comercio = null;
         // $existe = false;
         // //->
@@ -76,6 +81,11 @@ class WelcomeController extends Controller
             $modelo_id = $request->post('modelo_id');
             $motor_id = $request->post('motor_id');
 
+            $comercio_id = $request->post('comercio_id');
+            if(empty($comercio_id)){
+                $comercio_id = 1;
+            }
+
             // dd($request);
 
             if($request->post('manufacturer_id'))
@@ -101,10 +111,14 @@ class WelcomeController extends Controller
                     $words .= $request->get('categ');
                 }
             }
-
+            
             $manufacturer_id = $request->get('manufacturer_id');
             $modelo_id = $request->get('modelo_id');
             $motor_id = $request->get('motor_id');
+            $comercio_id = $request->get('comercio_id');
+            if(empty($comercio_id)){
+                $comercio_id = 1;
+            }
 
             // dd($request);
 
@@ -115,17 +129,43 @@ class WelcomeController extends Controller
 
             // event(new NewEventCreated());
 
+            $setting = Setting::find($comercio_id)->first();
+
         }
 
-        
+        if(empty($words)){
+            $words = null;
+        }
+
+        // Manipular cookie
+       
+        $this->setCookie();
+
+        // Fin cookie
+
         return view('welcome', [
             'words' => $words,
             'manufacturer_id' => $manufacturer_id,
             'modelo_id' => $modelo_id,
             'motor_id' => $motor_id,
+            'comercio_id' => $comercio_id,
+            'in_cellphonecontact' => $setting->in_cellphonecontact,
+            'in_sliderprincipal' => $setting->in_sliderprincipal,
+            'in_marcasproductos' => $setting->in_marcasproductos,
+            
         ]);
-        return redirect()->route('welcome');
     }
+
+    public function setCookie(){
+
+        // $dominio = str_replace(\Request::url(), '', \Request::fullUrl());
+        $dominio = \Request::fullUrl();
+
+        $cookie_name = "infosite";
+        $cookie_value = $dominio;
+        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); //name,value,time,url
+       
+       }
 
     public function receiveManufacturerS ($manufacturerS_id=0)
     {

@@ -24,6 +24,8 @@ class Comercio extends Model
         'area_id',
         'user_id',
         'avatar',
+        'cellphonecontact',
+        'dominio',
     ];
 
     protected $appends = [

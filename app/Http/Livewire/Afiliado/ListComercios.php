@@ -86,6 +86,7 @@ class ListComercios extends AdminComponent
 		$validatedData = Validator::make($this->state, [
 			'area_id'=> 'required|not_in:0',
 			'name' => 'required',
+			'cellphonecontact' => 'nullable',
 		])->validate();
 
 		if ($this->photo) {
@@ -125,6 +126,7 @@ class ListComercios extends AdminComponent
 		$validatedData = Validator::make($this->state, [
 			'name' => 'required',			
 			'area_id' => 'required',
+			'cellphonecontact' => 'nullable',
 		])->validate();
 
 		$validatedData['keyword'] = $this->state['keyword'];

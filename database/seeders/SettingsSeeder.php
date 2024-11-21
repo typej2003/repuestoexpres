@@ -21,6 +21,8 @@ class SettingsSeeder extends Seeder
             'site_title' => 'AutoRespuestos',
             'footer_text' => '',
             'sidebar_collapse' => false,
+            'in_cellphonecontact' => true,  
+            'in_sliderprincipal' => true,
             'currency' => '$',
             'api_bcv' => 'NO',
             'created_at' => '2022-05-16 12:20:36',
