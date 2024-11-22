@@ -206,10 +206,7 @@ class ListClients extends AdminComponent
 
 	public function createVehiculo()
 	{
-		$validatedData = Validator::make($this->state, [
-			'placa' => 'required',
-		], $this->messages())->validate();
-
+		
 		$this->validate();
 
 		$validatedData['manufacturer_id'] = $this->manufacturer;

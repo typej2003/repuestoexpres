@@ -1,6 +1,5 @@
 <div>  
     
-{{ $_COOKIE['infosite'] }}
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <!doctype html>
 <html lang="es">
@@ -122,7 +121,7 @@
 </html>
 
 <!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
   <div class="modal-dialog">
     <div class="modal-content modalFondo">
       <div class="modal-header" style="background-color: #f8f8f8;">

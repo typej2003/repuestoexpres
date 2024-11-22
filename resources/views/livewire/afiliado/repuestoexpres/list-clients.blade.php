@@ -66,8 +66,6 @@
                                             @foreach ($user->showVehiculos($user->id) as $vehiculos)
                                                 <li class="d-flex justify-content-between border border-1 p-2">
                                                     <div class="mx-2">
-                                                        {{ 'Placa: ' . $vehiculos->placa }}
-                                                        <br>
                                                         {{ 'Marca: ' . $vehiculos->manufacturer->name }}
                                                         <br>
                                                         {{ 'Modelo: ' . $vehiculos->modelo->name }}
@@ -243,15 +241,6 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="placa">Placa</label>
-                            <input type="text" wire:model.defer="state.placa" class="form-control @error('placa') is-invalid @enderror" id="placa" aria-describedby="placaHelp" placeholder="Placa">
-                            @error('placa')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
 
                         <div class="form-group">
                             <label for="manufacturer">Marca</label>

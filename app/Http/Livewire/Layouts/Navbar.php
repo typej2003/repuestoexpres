@@ -138,4 +138,14 @@ class Navbar extends Component
     //    $this->dispatchBrowserEvent('sendCategories', ['categories' => $this->categories, 'message' => 'variables enviadas satisfactoriamente!']);
     }
 
+    public function cartRuta()
+    {
+        if(auth()->check()){
+            return redirect()->route('cart');
+        }else{
+            return redirect()->route('cartOff');
+            return view('livewire.cart.cart');
+        }
+    }
+
 }

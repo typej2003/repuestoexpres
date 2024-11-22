@@ -236,83 +236,91 @@
         
                 <!-- CONTAINER MENU PRINCIPAL y ACCESO -->
                 <div class="row">
-                    <div class="col-xl-12">
-                        <section class="row menuNormal w-100" id="menuNormal" tabindex="-1">
+                    <div class="col-xl-12 col-md-12">
+                        <section class="row menuNormal w-75" id="menuNormal" tabindex="-1">
                         <!-- OFF CANVAS MENU LINKS  START-->
-                        <div class="d-flex flex-row justify-content-between px-0 " >
-                            <ul class="mx-3 w-100 navbar-nav fs-5 justify-content-start">
-                                <li class="nav-item p-3 py-md-1">
-                                    <form action="<?php echo e(route('search')); ?>" method="GET" class="d-flex" wire:ignore>
-                                        <input wire:model.defer="state.manufacturer_id" type="hidden" id ="manufacturerS_id" name = "manufacturerS_id">
-                                        <input wire:model.defer="state.modelo_id" type="hidden" id ="modeloS_id" name = "modeloS_id">
-                                        <input wire:model.defer="state.motor_id" type="hidden" id ="motorS_id" name = "motorS_id">
-                                        <input id="words" name="words" style="width: 350px;" class="form-control me-4 input-search" type="search" placeholder="Buscar" aria-label="Search">
-                                        <button id="btn-search" class="btn btn-outline-success input-form" type="submit">Buscar</button>
-                                    </form>
-                                </li>
-                            </ul>
-                            <ul class="navbar-nav fs-5 justify-content-evenly">
-                            <li class="nav-item p-3 py-md-1">
-                                <a href="" class="nav-link">INICIO</a>
-                            </li>
-                            <li class="nav-item p-3 py-md-1">
-                                <a href="" class="nav-link">PROJECTS</a>
-                            </li>
-                            <li class="nav-item p-3 py-md-1">
-                                <a href="" class="nav-link">ABOUT</a>
-                            </li>
-                            <?php if(auth()->guard()->check()): ?>
-                                <li class="nav-item p-3 py-md-1">
-                                    <ul class="navbar-nav ml-auto">
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link active dropdown-toggle titulo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <span class="ml-1" x-ref="username"><?php echo e(auth()->user()->name); ?></span>
-                                            </a>
-                                            <div class="dropdown-menu p-4" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="profileLink">Perfil</a>
-                                                <a class="dropdown-item" href="<?php echo e(route('admin.dashboard')); ?>" x-ref="profileLink">Escritorio</a>
-                                                <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="changePasswordLink">Cambiar Contraseña</a>
-                                                <a class="dropdown-item" href="<?php echo e(route('admin.settings')); ?>">Configuración</a>
-                                                <div class="dropdown-divider"></div>
-                                                <form method="POST" action="<?php echo e(route('logout')); ?>">
-                                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
-                                                </form>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                            <?php endif; ?>
-                                
-                            <?php if(auth()->guard()->guest()): ?>
-                                <li class="nav-item p-3 py-md-1">
-                                    <ul class="navbar-nav ml-auto">
-                                        <li class="nav-item dropdown" style="position: relative!important; z-index: 9001!important;">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img src="/img/icon_miperfil.png" id="profileImage" class="img-circle elevation-1" alt="User Image" style="height: 30px; width: 30px;">
-                                                <span class="ml-1" x-ref="username">Perfil</span>
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                                <div class="d-flex justify-content-between mb-2 ml-3">
-                                                    <img class="" src="/img/icon_soporte.png" style="width: 18px; height: 25px;">
-                                                    <a class="dropdown-item" href="#">Soporte en Línea</a>
+                            <div class="d-flex flex-row justify-content-between px-0 " >
+                                <ul class="w-75 navbar-nav fs-5 justify-content-start">
+                                    <li class="nav-item p-3 py-md-1">
+                                        <form action="<?php echo e(route('search')); ?>" method="GET" class="d-flex" wire:ignore>
+                                            <input wire:model.defer="state.manufacturer_id" type="hidden" id ="manufacturerS_id" name = "manufacturerS_id">
+                                            <input wire:model.defer="state.modelo_id" type="hidden" id ="modeloS_id" name = "modeloS_id">
+                                            <input wire:model.defer="state.motor_id" type="hidden" id ="motorS_id" name = "motorS_id">
+                                            <input id="words" name="words" style="width: 350px;" class="form-control me-4 input-search" type="search" placeholder="Buscar" aria-label="Search">
+                                            <button id="btn-search" class="btn btn-outline-success input-form" type="submit">Buscar</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                                <ul class="navbar-nav fs-5 justify-content-between">
+                                    <li class="nav-item p-3 py-md-1">
+                                        <a href="" class="nav-link">PROJECTS</a>
+                                    </li>
+                                    <li class="nav-item p-3 py-md-1">
+                                        <a href="" class="nav-link">ABOUT</a>
+                                    </li>
+                                <?php if(auth()->guard()->check()): ?>
+                                    <li class="nav-item p-3 py-md-1">
+                                        <ul class="navbar-nav ml-auto">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link active dropdown-toggle titulo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <span class="ml-1" x-ref="username"><?php echo e(auth()->user()->name); ?></span>
+                                                </a>
+                                                <div class="dropdown-menu p-4" aria-labelledby="navbarDropdown">
+                                                    <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="profileLink">Perfil</a>
+                                                    <a class="dropdown-item" href="<?php echo e(route('admin.dashboard')); ?>" x-ref="profileLink">Escritorio</a>
+                                                    <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="changePasswordLink">Cambiar Contraseña</a>
+                                                    <a class="dropdown-item" href="<?php echo e(route('admin.settings')); ?>">Configuración</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <form method="POST" action="<?php echo e(route('logout')); ?>">
+                                                        <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
+                                                    </form>
                                                 </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <?php endif; ?>
+                                    
+                                <?php if(auth()->guard()->guest()): ?>
+                                    <li class="nav-item p-3 py-md-1">
+                                        <ul class="navbar-nav ml-auto">
+                                            <li class="nav-item dropdown" style="position: relative!important; z-index: 9001!important;">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img src="/img/icon_miperfil.png" id="profileImage" class="img-circle elevation-1" alt="User Image" style="height: 30px; width: 30px;">
+                                                    <span class="ml-1" x-ref="username">Perfil</span>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                                    <div class="d-flex justify-content-between mb-2 ml-3">
+                                                        <img class="" src="/img/icon_soporte.png" style="width: 18px; height: 25px;">
+                                                        <a class="dropdown-item" href="#">Soporte en Línea</a>
+                                                    </div>
 
-                                                <div class="d-flex justify-content-between mb-2 ml-3">
-                                                    <img src="/img/icon_registrarse.png" style="width: 18px; height: 25px;">                                        
-                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarse</a>
-                                                </div>
+                                                    <div class="d-flex justify-content-between mb-2 ml-3">
+                                                        <img src="/img/icon_registrarse.png" style="width: 18px; height: 25px;">                                        
+                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarse</a>
+                                                    </div>
 
-                                                <div class="d-flex justify-content-between mb-2 ml-3">
-                                                    <img src="/img/icon_entrar.png" style="width: 18px; height: 25px;">
-                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar</a>
+                                                    <div class="d-flex justify-content-between mb-2 ml-3">
+                                                        <img src="/img/icon_entrar.png" style="width: 18px; height: 25px;">
+                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar</a>
+                                                    </div>
                                                 </div>
+                                            </li>
+                                        </ul>
+                                    </li> 
+                                <?php endif; ?>
+                                    
+                                    <li class="nav-item p-3 py-md-1">
+                                        <div class="row">
+                                            <div class="col-md-12 mx-2">
+                                                <a wire:click.prevent="cartRuta()" class="nav-link fw-bold mx-2 d-flex justify-content-start">
+                                                    <img src="/img/icon_carrito.png" style="width: 32px; height: 32px; cursor:pointer;">
+                                                    <span>(<?php echo e(\Cart::getTotalQuantity()); ?>)</span>
+                                                </a>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </li>  
-                            <?php endif; ?>
-                            </ul>
-                        </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </section>
                     </div>
                 </div>        
