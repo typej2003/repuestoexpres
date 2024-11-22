@@ -90,7 +90,7 @@
 
             if (savedServer)
             {
-                manufacturer_id.value = savedServer;
+                
                 modelo_id.value = localStorage.getItem('serverModelo');
                 motor_id.value = localStorage.getItem('serverMotor');;
             }

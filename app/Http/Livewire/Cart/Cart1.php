@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Cart;
 
 use App\Http\Livewire\Admin\AdminComponent;
 
+use Cart;
+
 use App\Models\Setting;
 
 class Cart1 extends AdminComponent
@@ -20,6 +22,10 @@ class Cart1 extends AdminComponent
 
         $words = '';
 
+        $conf = Setting::where('id', 1)->first();
+        
+        $cartCollection = \Cart::getContent();
+
         return view('livewire.cart.cart1', [
             'in_cellphonecontact' => $setting->in_cellphonecontact, 
             'comercio_id' => 1,
@@ -27,6 +33,7 @@ class Cart1 extends AdminComponent
             'modelo_id' => 0,
             'motor_id' => 0, 
             'words' => $words,
+            'cartCollection' => $cartCollection,
         ]);
     }
 }

@@ -1,10 +1,15 @@
 <div class="container-fluid">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/infiniteSlider.css">
+
     <script src="/js/jquery-3.6.4.min.js"></script>
     <script src="/js/slick.min.js"></script>
     <link rel="stylesheet" href="/css/slick-theme.min.css">
     <link rel="stylesheet" href="/css/slick.min.css">
     <link rel="stylesheet" href="/css/showProducts.css">
     <link rel="stylesheet" href="/css/star.css">
+
     <div class="row">
         <div class="col-md-12">
         <a href="/"><h6><i class="fa fa-solid fa-arrow-left"></i> Continuar con la compra</h6></a>
@@ -13,7 +18,73 @@
 
     <div class="row my-2">
         <div class="col-md-8">
+            <table class="table table-reponsive">
+                <thead class="thead-primary">
+                    <tr style="font-size: 12px">                      
+                        <th scope="col"></th>
+                        <th scope="col">Comercio</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <?php $__currentLoopData = $cartCollection; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="row">
+                    <tbody>
+                    <tr style="font-size: 12px">
+                        <td>
+                            <img src="<?php echo e($item->attributes->image); ?>" class="img-thumbnail" width="80" height="80">                                        
+                        </td>
+                        <td><strong><?php echo e($item->attributes->name_sucursal); ?></strong></td>
+                        <td><strong><?php echo e($item->name); ?></strong></td>
+                        <td><?php echo e($item->price); ?> USD</td>
+                        <td>
+                            <div class="col-md-12 d-flex justify-content-between">
+                                <div class="input-group input-number-group">
+                                    <div class="input-group-button">
+                                        <span class="input-number-decrement">-</span>
+                                    </div>
+                                    <input class="input-number" type="number" value="<?php echo e($item->quantity); ?>" min="0" max="1000">
+                                    <div class="input-group-button">
+                                        <span class="input-number-increment">+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><?php echo e(\Cart::get($item->id)->getPriceSum()); ?> USD </td>
+                        <td>
+                            <form action="<?php echo e(route('cart.remove')); ?>"   method="POST">
+                                <?php echo e(csrf_field()); ?>
 
+                                <input type="hidden" value="<?php echo e($item->id); ?>" id="id" name="id">
+                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </table>
+            <?php if(\Cart::getTotalQuantity()>0): ?>
+                <h6><?php echo e(\Cart::getTotalQuantity()); ?> Producto(s) en el carrito</h6><br>
+            <?php else: ?>
+                <h6>No Existen Productos en el Carrito de Compra</h6><br>
+            <?php endif; ?>
+            <div class="row">
+                <div class="col-md-6">
+                <?php if(count($cartCollection)>0): ?>
+                    <form action="<?php echo e(route('cart.clear')); ?>" method="POST">
+                    <?php echo e(csrf_field()); ?>
+
+                    <button class="boton2">
+                        Vaciar Carrito
+                    </button> 
+                    </form>
+                <?php endif; ?>         
+                </div>
+            </div>                
         </div>
         <div class="col-md-4">
             <div>Su pedido</div>
@@ -21,17 +92,37 @@
                     <thead>
                         <tr>
                             <th scope="col">Precio total artículos</th>
-                            <th scope="col">$ 19</th>
+                            <th scope="col">$ <?php echo e(\Cart::getTotal()); ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th scope="row">Total</th>
-                            <td>$ 19</td>
+                            <td>$ <?php echo e(\Cart::getTotal()); ?></td>
                         </tr>
                         <tr>
                             <th scope="row" colspan = "2">
-                                <button class="form-control btn btn-danger">Finalizar la compra</button>
+                                <?php if(count($cartCollection)>0): ?>
+                                    <?php if(auth()->guard()->check()): ?>
+                                    <button class="form-control btn btn-danger">Finalizar la compra</button>
+                                    <?php else: ?>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <strong>Ya Eres Usuario</strong> 
+                                            <br>Nos gustaria que Colocaras tus credenciales
+                                            <p class="mb-3">
+                                                <a class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar al Sistema</a>
+                                            </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <strong>Aun no tienes cuenta?</strong> 
+                                                <a class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarte</a>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </th>
                         </tr>
                     </tbody>
@@ -41,14 +132,9 @@
 
     <div class="row my-2">
         <div class="col-md-12">
-            <h4>También podría interesarle</h4>
-        </div>
-    </div>
-    <div class="row my-2">
-        <div class="col-md-12">
             <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('components.show-products', [
+    $html = \Livewire\Livewire::mount('components.show-recommended', [
                     'comercioId' => 1, 
                     'parametro' => $words,
                     'manufacturer_id' => $manufacturer_id,
@@ -61,7 +147,7 @@ if (! isset($_instance)) {
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
     $_instance->preserveRenderedChild('l2922314522-0');
 } else {
-    $response = \Livewire\Livewire::mount('components.show-products', [
+    $response = \Livewire\Livewire::mount('components.show-recommended', [
                     'comercioId' => 1, 
                     'parametro' => $words,
                     'manufacturer_id' => $manufacturer_id,
@@ -75,6 +161,21 @@ echo $html;
 ?>
         </div>
     </div>
+    
+    <script>
+        $('.input-number-increment').click(function() {
+        var $input = $(this).parents('.input-number-group').find('.input-number');
+        var val = parseInt($input.val(), 10);
+        $input.val(val + 1);
+        });
+
+        $('.input-number-decrement').click(function() {
+        var $input = $(this).parents('.input-number-group').find('.input-number');
+        var val = parseInt($input.val(), 10);
+        $input.val(val - 1);
+        })
+
+    </script>
     
 </div>
 <?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/cart/cart.blade.php ENDPATH**/ ?>

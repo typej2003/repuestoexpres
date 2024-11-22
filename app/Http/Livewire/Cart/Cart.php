@@ -13,6 +13,10 @@ class Cart extends AdminComponent
 
         $words = '';
 
+        $conf = Setting::where('id', 1)->first();
+        
+        $cartCollection = \Cart::getContent();
+
         return view('livewire.cart.cart', [
             'in_cellphonecontact' => $setting->in_cellphonecontact, 
             'comercio_id' => 1,
@@ -20,6 +24,7 @@ class Cart extends AdminComponent
             'modelo_id' => 0,
             'motor_id' => 0, 
             'words' => $words,
+            'cartCollection' => $cartCollection,
         ]);
     }
 

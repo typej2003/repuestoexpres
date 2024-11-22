@@ -65,66 +65,64 @@
     <div class="container-fluid showProductsP">
         <div class="row negrita">
             <div class="col-12">
-                <img class="mx-3" width="45px" src="/img/icon-motor.png" alt=""><span class="h3 text-dark">Motor</span>
+                
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <span class="h4 text-white"></span>  
+                <span class="h4 negrita">También podría interesarle</span>  
             </div>
         </div>    
         <div class="row">
             <div class="col-md-12">
-                <section class="regular slider slider-products" <?php if($renderizar): ?> wire:ignore <?php endif; ?> wire:ignore.self>
+                <section class="regular slider slider-recommended" <?php if($renderizar): ?> wire:ignore <?php endif; ?>>
                     <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <div>
-                            <form action="/add" method="post">
-                                <?php echo csrf_field(); ?>
-                                <input name="product_id" type="hidden" value="<?php echo e($product->id); ?>">
-                                <input name="name" type="hidden" value="<?php echo e($product->name); ?>">
-                                <input name="price1" type="hidden" value="<?php echo e($product->price1); ?>">
-                                <input name="quantity" type="hidden" value="1">
-                                <div class="card showProductCard mx-auto text-center mx-2">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="">
-                                                <img class="mx-auto" src="<?php echo e($product->avatar_url); ?>" alt="">
-                                            </div>
+                            <div class="card showProductCard mx-auto text-center mx-2">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="">
+                                            <img class="mx-auto" src="<?php echo e($product->avatar_url); ?>" alt="">
                                         </div>
-                                        <div class="row text-left">
-                                            <div class="negrita"><?php echo e($product->name); ?></div>
-                                                <?php if($product->on_offer): ?>
-                                                    <div class="text-decoration-line-through">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
-                                                    <div class="">Promoción: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice_offer()); ?></div>
-                                                <?php else: ?>
-                                                    <div class="">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
-                                                <?php endif; ?>
-                                                <div style="display: flex; flex-direction: row;">
-                                                    <button type="submit" class="btn btn-sale text-center">Comprar ahora</button>
-                                                    <br>                                                     
-                                                    <div class="cardStar" product="<?php echo e($product->id); ?>" >
-                                                        <?php for($i = 1; $i <=5; $i++): ?>
-                                                            <?php if($product->valoracionProduct->ca_valoracion >= $i): ?>
-                                                                <span wire:click.prevent="valorar(<?php echo e($product->id); ?>, <?php echo e($product->valoracionProduct->ca_valoracion); ?>, '<?php echo e($product->valoracionProduct->class); ?>')" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star <?php echo e($product->valoracionProduct->class); ?>">★</span>
-                                                            <?php else: ?>
-                                                                <span wire:click.prevent="valorar(<?php echo e($product->id); ?>, <?php echo e($product->valoracionProduct->ca_valoracion); ?>, '<?php echo e($product->valoracionProduct->class); ?>')" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star">★</span>
-                                                            <?php endif; ?>
-                                                        <?php endfor; ?>
-                                                        <h5 class="output" output="show<?php echo e($product->id); ?>">
-                                                            Puntuación: <?php echo e($product->valoracionProduct->ca_valoracion); ?>/5
-                                                        </h5>
-                                                    </div>
+                                    </div>
+                                    <div class="row text-left">
+                                        <div class="negrita"><?php echo e($product->name); ?></div>
+                                            <?php if($product->on_offer): ?>
+                                                <div class="text-decoration-line-through">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                                <div class="">Promoción: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice_offer()); ?></div>
+                                            <?php else: ?>
+                                                <div class="">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                            <?php endif; ?>
+                                            <div style="display: flex; flex-direction: row;">
+                                                <a class="btn btn-sale text-center">Comprar ahora</a>
+                                                <br>                                                     
+                                                <div class="cardStar" product="<?php echo e($product->id); ?>" >
+                                                    <?php for($i = 1; $i <=5; $i++): ?>
+                                                        <?php if($product->valoracionProduct->ca_valoracion >= $i): ?>
+                                                            <span wire:click.prevent="valorar(<?php echo e($product->id); ?>, <?php echo e($product->valoracionProduct->ca_valoracion); ?>, '<?php echo e($product->valoracionProduct->class); ?>')" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star <?php echo e($product->valoracionProduct->class); ?>">★</span>
+                                                        <?php else: ?>
+                                                            <span wire:click.prevent="valorar(<?php echo e($product->id); ?>, <?php echo e($product->valoracionProduct->ca_valoracion); ?>, '<?php echo e($product->valoracionProduct->class); ?>')" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star">★</span>
+                                                        <?php endif; ?>
+                                                    <?php endfor; ?>
+                                                    <h5 class="output" output="show<?php echo e($product->id); ?>">
+                                                        Puntuación: <?php echo e($product->valoracionProduct->ca_valoracion); ?>/5
+                                                    </h5>
                                                 </div>
-                                        </div>
-                                        <?php if($product->in_envio_gratis): ?>
-                                        <div class="text-left" style="color: blue;">Envío Gratis</div>
-                                        <?php endif; ?>
+
+                                                
+
+                                            </div>
                                     </div>
-                                    <div class="card-footer">
-                                        <span class="">Tienda: Auto Repuestos Fred</span>
-                                    </div>
+                                    <?php if($product->in_envio_gratis): ?>
+                                    <div class="text-left" style="color: blue;">Envío Gratis</div>
+                                    <?php endif; ?>
                                 </div>
-                            </form>
+                                <div class="card-footer">
+                                
+                                    <button wire:click.prevent="refreshShowProduct">Refresh</button>
+                                    <span class="">Tienda: Auto Repuestos Fred</span>
+                                </div>
+                            </div>
                         </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <div class="card showProductCard mx-auto text-center">
@@ -167,15 +165,15 @@
                                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.star', ['product_id' => $state['product_id'], 'ca_valoracion' => $state['ca_valoracion'], 'class' => $state['class']])->html();
-} elseif ($_instance->childHasBeenRendered('l3985106037-0')) {
-    $componentId = $_instance->getRenderedChildComponentId('l3985106037-0');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l3985106037-0');
+} elseif ($_instance->childHasBeenRendered('l4211397632-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l4211397632-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l4211397632-0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l3985106037-0');
+    $_instance->preserveRenderedChild('l4211397632-0');
 } else {
     $response = \Livewire\Livewire::mount('components.star', ['product_id' => $state['product_id'], 'ca_valoracion' => $state['ca_valoracion'], 'class' => $state['class']]);
     $html = $response->html();
-    $_instance->logRenderedChild('l3985106037-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l4211397632-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -224,7 +222,7 @@ unset($__errorArgs, $__bag); ?>
 
     <script>
         function loadSlider(){
-            $(".slider-products").slick({
+            $(".slider-recommended").slick({
             dots: true,
             infinite: true,
             slidesToShow: findSlides(),
@@ -280,4 +278,4 @@ unset($__errorArgs, $__bag); ?>
         }
     </script>
 
-</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/show-products.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/show-recommended.blade.php ENDPATH**/ ?>

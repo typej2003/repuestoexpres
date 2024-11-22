@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire\Components;
 
-use Illuminate\Http\Request;
-
 use App\Http\Livewire\Admin\AdminComponent;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,9 +10,7 @@ use App\Models\Comercio;
 use App\Models\Setting;
 use App\Models\ValoracionProduct;
 
-use Cart;
-
-class ShowProducts extends AdminComponent
+class ShowRecommended extends AdminComponent
 {
     public $comercio_id;
 
@@ -161,26 +157,12 @@ class ShowProducts extends AdminComponent
                             ->paginate();
         
         if($this->parametro == null){
-            return view('livewire.components.show-products',[
+            return view('livewire.components.show-recommended',[
                 'products' => $products 
             ]);
         }else{
             return '';
         }
         
-    }
-
-    public function comprar(Request $request)
-    {
-        dd($request);
-
-        \Cart::add(array(
-            'id' => $request->id,
-            'price' => $request->price1,
-            'quantity' => 1,
-            'attributes' => array(
-                'image' => $request->img,
-            )
-        ));
     }
 }

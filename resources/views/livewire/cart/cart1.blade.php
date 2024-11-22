@@ -71,59 +71,138 @@
     <div class="my-2"></div>    
     <section class="" style="min-height:100vh;">
         <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-            <a href="/"><h6><i class="fa fa-solid fa-arrow-left"></i> Continuar con la compra</h6></a>
+            <div class="row">
+                <div class="col-md-12">
+                <a href="/"><h6><i class="fa fa-solid fa-arrow-left"></i> Continuar con la compra</h6></a>
+                </div>
             </div>
-        </div>
 
-        <div class="row my-2">
-            <div class="col-md-8">
-
-            </div>
-            <div class="col-md-4">
-                <div>Su pedido</div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Precio total artículos</th>
-                                <th scope="col">$ 19</th>
+            <div class="row my-2">
+                <div class="col-md-8">
+                    <table class="table table-reponsive">
+                        <thead class="thead-primary">
+                            <tr style="font-size: 12px">                      
+                                <th scope="col"></th>
+                                <th scope="col">Comercio</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Subtotal</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">Total</th>
-                                <td>$ 19</td>
+                        @foreach($cartCollection as $item)
+                        <div class="row">
+                            <tbody>
+                            <tr style="font-size: 12px">
+                                <td>
+                                    <img src="{{ $item->attributes->image }}" class="img-thumbnail" width="80" height="80">                                        
+                                </td>
+                                <td><strong>{{ $item->attributes->name_sucursal }}</strong></td>
+                                <td><strong>{{ $item->name }}</strong></td>
+                                <td>{{ $item->price }} USD</td>
+                                <td>
+                                    <div class="col-md-12 d-flex justify-content-between">
+                                        <div class="input-group input-number-group">
+                                            <div class="input-group-button">
+                                                <span class="input-number-decrement">-</span>
+                                            </div>
+                                            <input class="input-number" type="number" value="{{ $item->quantity }}" min="0" max="1000">
+                                            <div class="input-group-button">
+                                                <span class="input-number-increment">+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ \Cart::get($item->id)->getPriceSum() }} USD </td>
+                                <td>
+                                    <form action="{{ route('cart.remove') }}"   method="POST">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" value="{{ $item->id }}" id="id" name="id">
+                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td>
                             </tr>
-                            <tr>
-                                <th scope="row" colspan = "2">
-                                    <button class="form-control btn btn-danger">Finalizar la compra</button>
-                                </th>
-                            </tr>
-                        </tbody>
+                            </tbody>
+                        </div>
+                        @endforeach
                     </table>
+                    @if(\Cart::getTotalQuantity()>0)
+                        <h6>{{ \Cart::getTotalQuantity()}} Producto(s) en el carrito</h6><br>
+                    @else
+                        <h6>No Existen Productos en el Carrito de Compra</h6><br>
+                    @endif
+                    <div class="row">
+                        <div class="col-md-6">
+                        @if(count($cartCollection)>0)
+                            <form action="{{ route('cart.clear') }}" method="POST">
+                            {{ csrf_field() }}
+                            <button class="boton2">
+                                Vaciar Carrito
+                            </button> 
+                            </form>
+                        @endif         
+                        </div>
+                    </div>                
+                </div>
+                <div class="col-md-4">
+                    <div>Su pedido</div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Precio total artículos</th>
+                                    <th scope="col">$ {{ \Cart::getTotal() }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Total</th>
+                                    <td>$ {{ \Cart::getTotal() }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan = "2">
+                                        @if(count($cartCollection)>0)
+                                            @auth
+                                            <button class="form-control btn btn-danger">Finalizar la compra</button>
+                                            @else
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                    <strong>Ya Eres Usuario</strong> 
+                                                    <br>Nos gustaria que Colocaras tus credenciales
+                                                    <p class="mb-3">
+                                                        <a class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar al Sistema</a>
+                                                    </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                    <strong>Aun no tienes cuenta?</strong> 
+                                                        <a class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarte</a>
+                                                    </div>
+                                                </div>
+                                            @endauth
+                                        @endif
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
             </div>
-        </div>
 
-        <div class="row my-2">
-            <div class="col-md-12">
-                <h4>También podría interesarle</h4>
-            </div>
+            <div class="row my-2">
+                <div class="col-md-12">
+                    @livewire('components.show-recommended', [
+                            'comercioId' => 1, 
+                            'parametro' => $words,
+                            'manufacturer_id' => $manufacturer_id,
+                            'modelo_id' => $modelo_id,
+                            'motor_id' => $motor_id,
+                            ] )
+                </div>
+            </div>        
         </div>
-        <div class="row my-2">
-            <div class="col-md-12">
-                @livewire('components.show-products', [
-                        'comercioId' => 1, 
-                        'parametro' => $words,
-                        'manufacturer_id' => $manufacturer_id,
-                        'modelo_id' => $modelo_id,
-                        'motor_id' => $motor_id,
-                        ] )
-            </div>
-        </div>
-        
-    </div>
     </section>
+
     @livewire('components.navigation-map', ['comercio_id' => $comercio_id])
 
     @livewire('layouts.footer')
@@ -339,7 +418,21 @@
   </div>
 </div>
 
-</div>
+    <script>
+        $('.input-number-increment').click(function() {
+        var $input = $(this).parents('.input-number-group').find('.input-number');
+        var val = parseInt($input.val(), 10);
+        $input.val(val + 1);
+        });
+
+        $('.input-number-decrement').click(function() {
+        var $input = $(this).parents('.input-number-group').find('.input-number');
+        var val = parseInt($input.val(), 10);
+        $input.val(val - 1);
+        })
+
+    </script>
+
 
 
 <script src="/js/app.js"></script>
@@ -359,4 +452,4 @@
 
 <script src="/js/jquery-3.6.4.min.js"></script>
 
-        
+</div>

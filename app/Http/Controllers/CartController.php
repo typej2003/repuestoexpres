@@ -60,22 +60,37 @@ class CartController extends Controller
 
     public function add(Request $request )
     {
-
+        
+        // \Cart::add(array(
+        //     'id' => $request->id,
+        //     'name' => $request->name,
+        //     'price' => $request->price,
+        //     'quantity' => $request->quantity,
+        //     'attributes' => array(
+        //         'image' => $request->img,
+        //         'afiliado_id' => $request->afiliado_id,
+        //         'sucursal_id' => $request->sucursal_id,
+        //         'name_sucursal' => $request->name_sucursal,
+        //         'categoria' => $request->categoria,
+        //     )
+        // ));
+        $product = Product::find($request->product_id);
+        
         \Cart::add(array(
-            'id' => $request->id,
-            'name' => $request->name,
-            'price' => $request->price,
-            'quantity' => $request->quantity,
+            'id' => $request->product_id,
+            'name' => $product->name,
+            'price' => $product->price1,
+            // 'quantity' => $request->quantity,
+            'quantity' => 1,
             'attributes' => array(
-                'image' => $request->img,
-                'afiliado_id' => $request->afiliado_id,
-                'sucursal_id' => $request->sucursal_id,
-                'name_sucursal' => $request->name_sucursal,
-                'categoria' => $request->categoria,
+                'image' => $product->avatar_url,
+                'comercio_id' => $product->comercio_id,
+                'categoria_id' => $request->categoria_id,
+                'subcategoria_id' => $request->subcategoria_id,
             )
         ));
-
-        return redirect()->route('cart.index')->with('success_msg', 'Item Agregado a su Carrito!');
+        return redirect()->back();
+        //return redirect()->route('cart.index')->with('success_msg', 'Item Agregado a su Carrito!');
     }
 
     public function add1(Request$request, $id)
