@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     
     <link rel="stylesheet" href="/css/navbar.css">
+    
 
   </head>
   <style>
@@ -310,10 +311,17 @@
                                     <li class="nav-item p-3 py-md-1">
                                         <div class="row">
                                             <div class="col-md-12 mx-2">
-                                                <a wire:click.prevent="cartRuta()" class="nav-link fw-bold mx-2 d-flex justify-content-start">
-                                                    <img src="/img/icon_carrito.png" style="width: 32px; height: 32px; cursor:pointer;">
-                                                    <span>({{\Cart::getTotalQuantity()}})</span>
-                                                </a>
+                                                <div class="dropdown-cart-drop">
+                                                    <a class="btn-cart-drop d-flex justify-content-between">
+                                                        <img src="/img/icon_carrito.png" style="width: 32px; height: 32px; cursor:pointer;">
+                                                        <span class="text-dark">({{\Cart::getTotalQuantity()}})</span>
+                                                    </a>
+                                                    <div class="dropdown-content-cart-drop">
+                                                        <div>
+                                                            @include('livewire.carrito.cart-drop')
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </li>

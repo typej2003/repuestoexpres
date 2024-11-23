@@ -55,7 +55,11 @@ class CartController extends Controller
 
     public function remove(Request $request){
         \Cart::remove($request->id);
-        return redirect()->route('cart.index')->with('success_msg', 'Item is removed!');
+
+        $cartCollection = \Cart::getContent();
+
+        return redirect()->route('goCart')->with('success_msg', 'Item is removed!');
+        // return redirect()->route('cart.index')->with('success_msg', 'Item is removed!');
     }
 
     public function add(Request $request )
@@ -119,13 +123,21 @@ class CartController extends Controller
                     'value' => $request->quantity
                 ),
         ));
-        return redirect()->route('cart.index')->with('success_msg', 'El Carrito ha sido Actualizado');
+
+
+        $cartCollection = \Cart::getContent();
+
+        return view('livewire.carrito.cart')->with('E-COMMERCE STORE | CART')->with(['cartCollection' => $cartCollection]);;
+        // return redirect()->route('cart.index')->with('success_msg', 'El Carrito ha sido Actualizado');
     }
 
     public function clear()
     {
         \Cart::clear();
-        return redirect()->route('cart.index')->with('success_msg', 'El Carrito se ha vaciado');
+
+        return redirect()->route('goCart')->with('success_msg', 'El Carrito se ha vaciado');
+
+        // return redirect()->route('cart.index')->with('success_msg', 'El Carrito se ha vaciado');
     }
 
     public function comprar()

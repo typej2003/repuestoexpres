@@ -5,6 +5,7 @@
 
 	use App\Http\Livewire\Cart\Cart;
 	use App\Http\Livewire\Cart\Cart1;
+	use App\Http\Livewire\Layouts\Navbar;
 
 	// Route::get('/cart', Cart::class)->name('cart');
 
@@ -12,6 +13,7 @@
 
 	Route::get('/cartOff', [Cart1::class, 'render'])->name('cartOff');;
 		
+	Route::get('/goCart', [Navbar::class, 'cartRuta'])->name('goCart');
 
 	Route::get('/previoproductcart/{sucursal_id}/{product_id}/{categoria}', [CartController::class, 'previaCompra']);
 	

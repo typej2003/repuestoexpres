@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Operacion\MakePayment;
 use App\Http\Livewire\Operacion\Pasarela;
 
+use App\Http\Livewire\Recursos\Selectul;
+
 
 use App\Http\Livewire\Components\Currency;
 
@@ -17,3 +19,4 @@ Route::get('/pasarela', Pasarela::class)->name('pasarela')->middleware('auth');
 
 Route::get('/enviardataPasarela', [Pasarela::class, 'enviarData'])->name('enviardataPasarela');
 
+Route::get('/selectul', Selectul::class)->name('selectul');
