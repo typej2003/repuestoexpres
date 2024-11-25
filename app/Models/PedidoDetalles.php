@@ -11,9 +11,12 @@ class PedidoDetalles extends Model
 
     protected $fillable = [
         'pedido_id',
+        'pedido',
         'comercio_id',
         'user_id',
+        'name',
         'product_id',
         'price1',
+        'quantity',
     ];
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\Setting;
 use App\Models\Pedido;
+use App\Models\PedidoDetalles;
 use App\Http\Controllers\CartController;
 
 class Cart extends AdminComponent
@@ -101,10 +102,10 @@ class Cart extends AdminComponent
         $cart = new CartController;
         
         
-        $pedido = auth()->user()->identificationNumber . '-' . str_replace("-", "", date("Y-m-d")) . str_replace(":", "", date("H:i:s"));
+        $pedidoref = auth()->user()->identificationNumber . '-' . str_replace("-", "", date("Y-m-d")) . str_replace(":", "", date("H:i:s"));
 
         $pedido = Pedido::create([
-            'pedido' => $pedido,
+            'pedido' => $pedidoref,
             'comercio_id' => $this->comercio_id,
             'user_id' => auth()->user()->id,
             'description' => '',
@@ -114,11 +115,27 @@ class Cart extends AdminComponent
             'confirmed' => 0,
         ]);
 
-        $contenido = $cart->contenido();
-
         //para guardar los detalles en la tabla PedidoDetalles
 
-        // $cart->onlyClear();
+        $pedido_id = $pedido->id;
+
+        $contenido = $cart->contenido();
+
+        foreach($contenido as $elemento)
+        {
+            $pedido = PedidoDetalles::create([
+                'pedido_id' => $pedido_id,
+                'pedido' => $pedido->pedido,
+                'comercio_id' => $this->comercio_id,
+                'user_id' => auth()->user()->id,
+                'product_id' => $elemento->id,
+                'name' => $elemento->name,
+                'price1' => $elemento->price,
+                'quantity' => $elemento->quantity,
+            ]);
+        }
+
+        $cart->onlyClear();
 
         return redirect()->route('metodospagos');
     }
