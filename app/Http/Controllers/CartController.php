@@ -17,6 +17,8 @@ class CartController extends Controller
 {
     public $conf = null;
 
+    public $state = [];
+
     public function __construct() { 
         $this->conf = Setting::where('id', 1)->first();
     }
@@ -131,6 +133,24 @@ class CartController extends Controller
         // return redirect()->route('cart.index')->with('success_msg', 'El Carrito ha sido Actualizado');
     }
 
+    public function updateQuantity($value){
+        dd($value);
+        
+        \Cart::update($this->state['id'],
+            array(
+                'quantity' => array(
+                    'relative' => false,
+                    'value' => $this->state['quantity']
+                ),
+        ));
+
+
+        $cartCollection = \Cart::getContent();
+
+        return view('livewire.carrito.cart')->with('E-COMMERCE STORE | CART')->with(['cartCollection' => $cartCollection]);;
+        // return redirect()->route('cart.index')->with('success_msg', 'El Carrito ha sido Actualizado');
+    }
+
     public function clear()
     {
         \Cart::clear();
@@ -138,6 +158,23 @@ class CartController extends Controller
         return redirect()->route('goCart')->with('success_msg', 'El Carrito se ha vaciado');
 
         // return redirect()->route('cart.index')->with('success_msg', 'El Carrito se ha vaciado');
+    }
+
+    public function onlyClear()
+    {
+        \Cart::clear();
+
+        // return redirect()->route('cart.index')->with('success_msg', 'El Carrito se ha vaciado');
+    }
+
+    public function total()
+    {
+        return \Cart::getTotal();
+    }
+
+    public function contenido()
+    {
+        return \Cart::getContent();
     }
 
     public function comprar()

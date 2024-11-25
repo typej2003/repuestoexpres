@@ -186,6 +186,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="<?php echo e(route('listPedidos', 1)); ?>" class="nav-link <?php echo e(request()->is('listPedidos') ? 'active' : ''); ?>">
+              <i class="fa fa-solid fa-file-invoice-dollar"></i>
+              <p>
+                Pedidos
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="<?php echo e(route('listTransacciones', 1)); ?>" class="nav-link <?php echo e(request()->is('listTransacciones') ? 'active' : ''); ?>">
               <i class="fa fa-solid fa-file-invoice-dollar"></i>
               <p>

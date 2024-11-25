@@ -152,5 +152,9 @@ class User extends Authenticatable
         return $vehiculos;
     }
 
-    
+    public function pedidos()
+    {
+        return $this->hasMany(User::class, 'user_id', 'id');
+    }
+
 }

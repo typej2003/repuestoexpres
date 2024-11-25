@@ -8,6 +8,7 @@ use App\Http\Livewire\Afiliado\ListCategories;
 use App\Http\Livewire\Afiliado\ListCategorieslist;
 use App\Http\Livewire\Afiliado\ListSubcategories;
 use App\Http\Livewire\Afiliado\ListProducts;
+use App\Http\Livewire\Afiliado\ListPedidos;
 use App\Http\Livewire\Afiliado\Product\ListCombos;
 use App\Http\Livewire\Afiliado\ListTasas;
 use App\Http\Livewire\Afiliado\Product\Repuestoexpres\NewProductRE;
@@ -15,6 +16,8 @@ use App\Http\Livewire\Afiliado\Product\Repuestoexpres\NewComboRE;
 use App\Http\Livewire\Afiliado\ListBrand;
 use App\Http\Livewire\Afiliado\ListContainers;
 use App\Http\Livewire\Afiliado\Repuestoexpres\ListClients;
+use App\Http\Livewire\Afiliado\MetodosPagos;
+
 
 Route::get('/listComercios/{userId}', ListComercios::class)->name('listComercios')->middleware('auth');
 
@@ -30,6 +33,8 @@ Route::get('/newSubcategory/{comercioId}/{categoryId}', listSubcategories::class
 
 Route::get('/listProducts/{comercioId}', ListProducts::class)->name('listProducts')->middleware('auth');
 
+Route::get('/listPedidos/{comercioId}', ListPedidos::class)->name('listPedidos')->middleware('auth');
+
 Route::get('/listCombos/{comercioId}', ListCombos::class)->name('listCombos')->middleware('auth');
 
 Route::get('/listTasas/{comercioId}', ListTasas::class)->name('listTasas')->middleware('auth');
@@ -43,4 +48,6 @@ Route::get('/listBrand/{comercioId}', ListBrand::class)->name('listBrand')->midd
 Route::get('/listContainers/{comercioId}', ListContainers::class)->name('listContainers')->middleware('auth');
 
 Route::get('/listClients/{comercioId}', listClients::class)->name('listClients')->middleware('auth');
+
+Route::get('/metodospagos', MetodosPagos::class)->name('metodospagos')->middleware('auth');
 

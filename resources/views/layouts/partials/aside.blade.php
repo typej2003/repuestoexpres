@@ -186,6 +186,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{ route('listPedidos', 1) }}" class="nav-link {{ request()->is('listPedidos') ? 'active' : '' }}">
+              <i class="fa fa-solid fa-file-invoice-dollar"></i>
+              <p>
+                Pedidos
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{ route('listTransacciones', 1) }}" class="nav-link {{ request()->is('listTransacciones') ? 'active' : '' }}">
               <i class="fa fa-solid fa-file-invoice-dollar"></i>
               <p>

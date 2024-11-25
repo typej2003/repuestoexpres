@@ -37,18 +37,18 @@
                         <td>
                             <img src="{{ $item->attributes->image }}" class="img-thumbnail" width="80" height="80">                                        
                         </td>
-                        <td><strong>{{ $item->attributes->name_sucursal }}</strong></td>
+                        <td><strong>{{ $item->attributes->comercio_id }}</strong></td>
                         <td><strong>{{ $item->name }}</strong></td>
                         <td>{{ $item->price }} USD</td>
                         <td>
                             <div class="col-md-12 d-flex justify-content-between">
                                 <div class="input-group input-number-group">
                                     <div class="input-group-button">
-                                        <span class="input-number-decrement">-</span>
+                                        <span class="input-number-decrement" wire:click.prevent="updateQuantity({{ $item->id }}, {{ $item->quantity }}, '-' )">-</span>
                                     </div>
                                     <input class="input-number" type="number" value="{{ $item->quantity }}" min="0" max="1000">
                                     <div class="input-group-button">
-                                        <span class="input-number-increment">+</span>
+                                        <span class="input-number-increment" wire:click.prevent="updateQuantity({{ $item->id }}, {{ $item->quantity }}, '+' )">+</span>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                             <th scope="row" colspan = "2">
                                 @if(count($cartCollection)>0)
                                     @auth
-                                    <button class="form-control btn btn-danger">Finalizar la compra</button>
+                                    <button wire:click.prevent="finalizarCompra" class="form-control btn btn-danger">Finalizar la compra</button>
                                     @else
                                         <div class="row">
                                             <div class="col-md-12">
@@ -150,7 +150,8 @@
         $('.input-number-decrement').click(function() {
         var $input = $(this).parents('.input-number-group').find('.input-number');
         var val = parseInt($input.val(), 10);
-        $input.val(val - 1);
+        if(val > 0)
+            $input.val(val - 1);
         })
 
     </script>

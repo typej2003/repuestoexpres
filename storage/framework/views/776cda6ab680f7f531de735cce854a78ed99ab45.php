@@ -37,18 +37,18 @@
                         <td>
                             <img src="<?php echo e($item->attributes->image); ?>" class="img-thumbnail" width="80" height="80">                                        
                         </td>
-                        <td><strong><?php echo e($item->attributes->name_sucursal); ?></strong></td>
+                        <td><strong><?php echo e($item->attributes->comercio_id); ?></strong></td>
                         <td><strong><?php echo e($item->name); ?></strong></td>
                         <td><?php echo e($item->price); ?> USD</td>
                         <td>
                             <div class="col-md-12 d-flex justify-content-between">
                                 <div class="input-group input-number-group">
                                     <div class="input-group-button">
-                                        <span class="input-number-decrement">-</span>
+                                        <span class="input-number-decrement" wire:click.prevent="updateQuantity(<?php echo e($item->id); ?>, <?php echo e($item->quantity); ?>, '-' )">-</span>
                                     </div>
                                     <input class="input-number" type="number" value="<?php echo e($item->quantity); ?>" min="0" max="1000">
                                     <div class="input-group-button">
-                                        <span class="input-number-increment">+</span>
+                                        <span class="input-number-increment" wire:click.prevent="updateQuantity(<?php echo e($item->id); ?>, <?php echo e($item->quantity); ?>, '+' )">+</span>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                             <th scope="row" colspan = "2">
                                 <?php if(count($cartCollection)>0): ?>
                                     <?php if(auth()->guard()->check()): ?>
-                                    <button class="form-control btn btn-danger">Finalizar la compra</button>
+                                    <button wire:click.prevent="finalizarCompra" class="form-control btn btn-danger">Finalizar la compra</button>
                                     <?php else: ?>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -141,11 +141,11 @@ if (! isset($_instance)) {
                     'modelo_id' => $modelo_id,
                     'motor_id' => $motor_id,
                     ])->html();
-} elseif ($_instance->childHasBeenRendered('irWSj9j')) {
-    $componentId = $_instance->getRenderedChildComponentId('irWSj9j');
-    $componentTag = $_instance->getRenderedChildComponentTagName('irWSj9j');
+} elseif ($_instance->childHasBeenRendered('l2922314522-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l2922314522-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l2922314522-0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('irWSj9j');
+    $_instance->preserveRenderedChild('l2922314522-0');
 } else {
     $response = \Livewire\Livewire::mount('components.show-recommended', [
                     'comercioId' => 1, 
@@ -155,7 +155,7 @@ if (! isset($_instance)) {
                     'motor_id' => $motor_id,
                     ]);
     $html = $response->html();
-    $_instance->logRenderedChild('irWSj9j', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l2922314522-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -172,7 +172,8 @@ echo $html;
         $('.input-number-decrement').click(function() {
         var $input = $(this).parents('.input-number-group').find('.input-number');
         var val = parseInt($input.val(), 10);
-        $input.val(val - 1);
+        if(val > 0)
+            $input.val(val - 1);
         })
 
     </script>
