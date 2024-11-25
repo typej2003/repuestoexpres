@@ -33,6 +33,13 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Confirmado</th>
                                         <th scope="col">
+                                            Pedido
+                                            <span wire:click="sortBy('pedido')" class="float-right text-sm" style="cursor: pointer;">
+                                                <i class="fa fa-arrow-up {{ $sortColumnName === 'pedido' && $sortDirection === 'asc' ? '' : 'text-muted' }}"></i>
+                                                <i class="fa fa-arrow-down {{ $sortColumnName === 'pedido' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col">
                                             Referencia
                                             <span wire:click="sortBy('reference')" class="float-right text-sm" style="cursor: pointer;">
                                                 <i class="fa fa-arrow-up {{ $sortColumnName === 'reference' && $sortDirection === 'asc' ? '' : 'text-muted' }}"></i>
@@ -56,6 +63,7 @@
                                                 <option value="0" {{ ($pedido->confirmed === 0) ? 'selected' : '' }}>NO CONFIRMADO</option>
                                             </select>
                                         </td>
+                                        <td>{{ $pedido->pedido }}</td>
                                         <td>{{ $pedido->reference }}</td>
                                         <td>{{ $pedido->client->identificationNumber }}</td>
                                         <td>{{ $pedido->client->name }}</td>

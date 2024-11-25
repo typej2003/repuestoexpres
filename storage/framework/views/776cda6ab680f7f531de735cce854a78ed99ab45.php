@@ -111,14 +111,14 @@
                                             <strong>Ya Eres Usuario</strong> 
                                             <br>Nos gustaria que Colocaras tus credenciales
                                             <p class="mb-3">
-                                                <a class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar al Sistema</a>
+                                                <a href="/login" class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar al Sistema</a>
                                             </p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                             <strong>Aun no tienes cuenta?</strong> 
-                                                <a class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarte</a>
+                                                <a href="/register" class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarte</a>
                                             </div>
                                         </div>
                                     <?php endif; ?>

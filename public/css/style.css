@@ -370,7 +370,7 @@ textarea {
 .btn-app{
     padding: 0%;
 	background-color: #28221B;
-	color: #FFCC2A;
+	color: #FFCC2A!important;
     min-width: 130px!important;
 	width: 140px!important;
 	height: 45px;
@@ -379,7 +379,7 @@ textarea {
     border-radius: 15px;
 }
 .btn-app:hover {
-	background-color: #332c24;
+	background-color: #332c24!important;
     font-size: .9rem!important;
 	color: #ffe07b;
 }

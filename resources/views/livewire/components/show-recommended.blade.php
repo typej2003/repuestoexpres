@@ -78,51 +78,53 @@
                 <section class="regular slider slider-recommended" @if($renderizar) wire:ignore @endif>
                     @forelse ($products as $index => $product)
                         <div>
-                            <div class="card showProductCard mx-auto text-center mx-2">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="">
-                                            <img class="mx-auto" src="{{$product->avatar_url}}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="row text-left">
-                                        <div class="negrita">{{$product->name}}</div>
-                                            @if($product->on_offer)
-                                                <div class="text-decoration-line-through">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
-                                                <div class="">Promoción: {{$currencyValue}}. {{ $product->getPrice_offer() }}</div>
-                                            @else
-                                                <div class="">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
-                                            @endif
-                                            <div style="display: flex; flex-direction: row;">
-                                                <a class="btn btn-sale text-center">Comprar ahora</a>
-                                                <br>                                                     
-                                                <div class="cardStar" product="{{$product->id}}" >
-                                                    @for ($i = 1; $i <=5; $i++)
-                                                        @if($product->valoracionProduct->ca_valoracion >= $i)
-                                                            <span wire:click.prevent="valorar({{ $product->id }}, {{ $product->valoracionProduct->ca_valoracion }}, '{{ $product->valoracionProduct->class }}')" product="{{ $product->id }}" star = "{{ $i }}" class="star {{ $product->valoracionProduct->class }}">★</span>
-                                                        @else
-                                                            <span wire:click.prevent="valorar({{ $product->id }}, {{ $product->valoracionProduct->ca_valoracion }}, '{{ $product->valoracionProduct->class }}')" product="{{ $product->id }}" star = "{{ $i }}" class="star">★</span>
-                                                        @endif
-                                                    @endfor
-                                                    <h5 class="output" output="show{{ $product->id }}">
-                                                        Puntuación: {{ $product->valoracionProduct->ca_valoracion }}/5
-                                                    </h5>
-                                                </div>
-
-                                                
-
+                            <form action="/add" method="post">
+                                @csrf
+                                <input name="product_id" type="hidden" value="{{ $product->id }}">
+                                <input name="name" type="hidden" value="{{ $product->name }}">
+                                <input name="price1" type="hidden" value="{{ $product->price1 }}">
+                                <input name="quantity" type="hidden" value="1">
+                                <div class="card showProductCard mx-auto text-center mx-2">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="">
+                                                <img class="mx-auto" src="{{$product->avatar_url}}" alt="">
                                             </div>
+                                        </div>
+                                        <div class="row text-left">
+                                            <div class="negrita">{{$product->name}}</div>
+                                                @if($product->on_offer)
+                                                    <div class="text-decoration-line-through">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
+                                                    <div class="">Promoción: {{$currencyValue}}. {{ $product->getPrice_offer() }}</div>
+                                                @else
+                                                    <div class="">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
+                                                @endif
+                                                <div style="display: flex; flex-direction: row;">
+                                                    <button type="submit" class="btn btn-sale text-center">Comprar ahora</button>
+                                                    <br>                                                     
+                                                    <div class="cardStar" product="{{$product->id}}" >
+                                                        @for ($i = 1; $i <=5; $i++)
+                                                            @if($product->valoracionProduct->ca_valoracion >= $i)
+                                                                <span wire:click.prevent="valorar({{ $product->id }}, {{ $product->valoracionProduct->ca_valoracion }}, '{{ $product->valoracionProduct->class }}')" product="{{ $product->id }}" star = "{{ $i }}" class="star {{ $product->valoracionProduct->class }}">★</span>
+                                                            @else
+                                                                <span wire:click.prevent="valorar({{ $product->id }}, {{ $product->valoracionProduct->ca_valoracion }}, '{{ $product->valoracionProduct->class }}')" product="{{ $product->id }}" star = "{{ $i }}" class="star">★</span>
+                                                            @endif
+                                                        @endfor
+                                                        <h5 class="output" output="show{{ $product->id }}">
+                                                            Puntuación: {{ $product->valoracionProduct->ca_valoracion }}/5
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        @if($product->in_envio_gratis)
+                                        <div class="text-left" style="color: blue;">Envío Gratis</div>
+                                        @endif
                                     </div>
-                                    @if($product->in_envio_gratis)
-                                    <div class="text-left" style="color: blue;">Envío Gratis</div>
-                                    @endif
+                                    <div class="card-footer">
+                                        <span class="">Tienda: Auto Repuestos Fred</span>
+                                    </div>
                                 </div>
-                                <div class="card-footer">
-                                
-                                    <button wire:click.prevent="refreshShowProduct">Refresh</button>
-                                    <span class="">Tienda: Auto Repuestos Fred</span>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     @empty
                         <div class="card showProductCard mx-auto text-center">

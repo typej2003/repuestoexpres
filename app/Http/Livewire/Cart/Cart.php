@@ -100,11 +100,11 @@ class Cart extends AdminComponent
     {
         $cart = new CartController;
         
-        $cart->onlyClear();
-        $reference = auth()->user()->identificationNumber . '-' . str_replace("-", "", date("Y-m-d")) . str_replace(":", "", date("H:i:s"));
         
+        $pedido = auth()->user()->identificationNumber . '-' . str_replace("-", "", date("Y-m-d")) . str_replace(":", "", date("H:i:s"));
+
         $pedido = Pedido::create([
-            'reference' => $reference,
+            'pedido' => $pedido,
             'comercio_id' => $this->comercio_id,
             'user_id' => auth()->user()->id,
             'description' => '',
@@ -118,6 +118,7 @@ class Cart extends AdminComponent
 
         //para guardar los detalles en la tabla PedidoDetalles
 
+        // $cart->onlyClear();
 
         return redirect()->route('metodospagos');
     }

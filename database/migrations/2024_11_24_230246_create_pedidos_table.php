@@ -15,7 +15,8 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->string('reference');
+            $table->string('pedido');
+            $table->string('reference')->nullable();
             $table->string('description')->nullable();
             $table->bigInteger('comercio_id');
             $table->bigInteger('user_id');

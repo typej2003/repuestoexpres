@@ -77,7 +77,7 @@ class ListPedidos extends AdminComponent
 	public function createPedido()
 	{
 		$validatedData = Validator::make($this->state, [
-			'reference' => 'required',
+			'pedido' => 'required',
             'description' => 'nullable',
             'cedula' => 'required',
             'coste'  => 'required',
@@ -124,8 +124,11 @@ class ListPedidos extends AdminComponent
 	public function updatePedido()
 	{
 		$validatedData = Validator::make($this->state, [
-			'reference' => 'required',
+			'pedido' => 'required',
             'description' => 'nullable',
+            'cedula' => 'required',
+            'coste'  => 'required',
+            'in_delivery' => 'nullable',
 		])->validate();
 
         $validatedData['comercio_id'] = $this->comercio_id;

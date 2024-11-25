@@ -13,6 +13,7 @@ class Pedido extends Model
     const NOTCONFIRMED = '0';
 
     protected $fillable = [
+        'pedido',
         'reference',
         'comercio_id',
         'user_id',
