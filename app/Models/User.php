@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 
+use Mail;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -155,6 +157,16 @@ class User extends Authenticatable
     public function pedidos()
     {
         return $this->hasMany(User::class, 'user_id', 'id');
+    }
+
+    public function email($vista, $titulo)
+    {
+        $token = Str::random(64);
+        //Envío de email al usuario
+        Mail::send('email.'.$vista, ['token' => $token, 'correo' => $this->email ], function($message) use($request){
+            $message->to($this->email);
+            $message->subject($titulo);
+        });
     }
 
 }

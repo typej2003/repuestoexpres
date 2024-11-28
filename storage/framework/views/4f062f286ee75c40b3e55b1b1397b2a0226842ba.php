@@ -5,12 +5,12 @@
             <span>Moneda: </span>
             <div class="currency mx-1">
                 <select class="form-control" wire:change="changeCurrency($event.target.value)" style="cursor:pointer;">
-                    <option value="Bs" {{ ($currencyValue === 'Bs') ? 'selected' : '' }}>Bs</option>
-                    <option value="$" {{ ($currencyValue === '$') ? 'selected' : '' }}>$</option>
+                    <option value="Bs" <?php echo e(($currencyValue === 'Bs') ? 'selected' : ''); ?>>Bs</option>
+                    <option value="$" <?php echo e(($currencyValue === '$') ? 'selected' : ''); ?>>$</option>
                 </select>
             </div>            
         </li>
-        <!-- <li class="nav-item dropdown ms-auto tasacambio"><span class="nav-link">$: {{$tasacambio}} Bs.</span></li>         -->
+        <!-- <li class="nav-item dropdown ms-auto tasacambio"><span class="nav-link">$: <?php echo e($tasacambio); ?> Bs.</span></li>         -->
     </ul>
 
 
@@ -20,4 +20,4 @@
             //location.reload()
         }) 
     </script>
-</div>
+</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/currency.blade.php ENDPATH**/ ?>

@@ -26,7 +26,7 @@
     <div class="card  mx-auto" style="width: 32rem;">
         <div class="card-body">
             <div class="row">
-                <div class="col-lg-12 titulo c-a text-center h2 pt-3">Ingresa a tu RepuestoExpres</div>
+                <div class="col-lg-12 titulo c-a text-center h2 pt-3"><a href="/">RepuestoExpres</a></div>
                 <p class="text-center textoreg">¿Todavía no te has registrado? <span><a href="#" class="c-n">Crea tu cuenta Aquí</a></span></p>
             </div>
     
