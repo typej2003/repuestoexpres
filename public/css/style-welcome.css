@@ -50,6 +50,10 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
 .div-search {position: absolute; display: none; top: 30px; right: 30px; z-index: 10; }
 .nav-overlay {margin-left: 10%; margin-top: 10%;}
 
+.marcas-productos img {
+  height: 100px;
+}
+
 @media only screen and (max-width: 1070px) {
     .overlay a {font-size: 20px} 
     .overlay .closebtn { font-size: 2rem; top: 1px; right: 5px; color: #000; z-index: 1;}
@@ -105,6 +109,10 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
   }
 
   .div-search {position: absolute; display: block; top: 30px; right: 25%; z-index: 10; }  
+
+  .marcas-productos {
+      display: none!important;
+  }
     
 }
 
