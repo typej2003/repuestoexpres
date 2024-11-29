@@ -35,50 +35,57 @@
                             @if($parametro)
                                 @forelse ($products as $index => $product)
                                     <div class="row  border border-1 ">
-                                        <div class="col-md-2 d-flex">
-                                            <img class="mx-auto" style="width:150px;" src="/noimage.png" alt="">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-12 centrarFlex">
-                                                    <div class="centrar">
-                                                        <span class="h6">{{ $product->name }}</span>
-                                                    </div>
-                                                    <br>
-                                                    <div class="centrar">
-                                                        {{ $product->description }}
-                                                    </div>
-                                                </div>
+                                        <form action="/add" method="post">
+                                            @csrf
+                                            <input name="product_id" type="hidden" value="{{ $product->id }}">
+                                            <input name="name" type="hidden" value="{{ $product->name }}">
+                                            <input name="price1" type="hidden" value="{{ $product->price1 }}">
+                                            <input name="quantity" type="hidden" value="1">
+                                            <div class="col-md-2 d-flex">
+                                                <img class="mx-auto" style="width:150px;" src="/noimage.png" alt="">
                                             </div>
-                                            <div class="row my-3">
-                                                <div class="col-md-12">
-                                                    <button class ="btn btn-app w-100 h-100">Detalles</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 ">
-                                            <div class="row">
-                                                <div class="col-md-12 d-flex">
-                                                    <span class="mx-auto h4">${{ $product->price1 }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 d-flex justify-content-between">
-                                                    <div class="input-group input-number-group">
-                                                        <div class="input-group-button">
-                                                            <span class="input-number-decrement">-</span>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-12 centrarFlex">
+                                                        <div class="centrar">
+                                                            <span class="h6">{{ $product->name }}</span>
                                                         </div>
-                                                        <input class="input-number" type="number" value="1" min="0" max="1000">
-                                                        <div class="input-group-button">
-                                                            <span class="input-number-increment">+</span>
+                                                        <br>
+                                                        <div class="centrar">
+                                                            {{ $product->description }}
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-danger w-25 h-100"><i class="text-white fa fa-shopping-cart" aria-hidden="true"></i></button>
+                                                </div>
+                                                <div class="row my-3">
+                                                    <div class="col-md-12">
+                                                        <button class ="btn btn-app w-100 h-100">Detalles</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <div class="row">
+                                                    <div class="col-md-12 d-flex">
+                                                        <span class="mx-auto h4">${{ $product->price1 }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 d-flex justify-content-between">
+                                                        <div class="input-group input-number-group">
+                                                            <div class="input-group-button">
+                                                                <span class="input-number-decrement">-</span>
+                                                            </div>
+                                                            <input class="input-number" type="number" value="1" min="0" max="1000">
+                                                            <div class="input-group-button">
+                                                                <span class="input-number-increment">+</span>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-danger w-25 h-100"><i class="text-white fa fa-shopping-cart" aria-hidden="true"></i></button>
+                                                    </div>
+                                                    
                                                 </div>
                                                 
                                             </div>
-                                            
-                                        </div>
+                                        </form>
                                     </div>
                                     
                                 @empty
