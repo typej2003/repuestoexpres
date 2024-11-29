@@ -1,6 +1,4 @@
 <div>
-    
-
     <style>
         /* .slider{
             width: 90%!important;

@@ -14,7 +14,7 @@
 
         .sliderC {
             /*width: 50%;*/
-            width: 200%;
+            width: 100%;
             margin: auto!important;
             height: 150px; 
         }

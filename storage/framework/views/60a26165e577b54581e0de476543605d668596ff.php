@@ -1,7 +1,9 @@
 <div>
-        
+    <div class="row">
+        <div class="col-lg-12 col-xs-12 col-md-12 col-sm-12">
+
     <!-- <form autocomplete="off" wire:submit.prevent="searchMotor"> -->
-    <form action="<?php echo e(route('searchMotor')); ?>" method="POST" wire:ignore.self>
+    <form action="<?php echo e(route('searchMotor')); ?>" method="get" wire:ignore.self>
         <?php echo csrf_field(); ?>
         <div class="card w-75 p-1 mx-auto">
             <div class="form-group">
@@ -114,7 +116,9 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>            
     </form>
-
+        </div>
+    </div>
+    
     <script>
         let manufacturer = document.getElementById('manufacturer');
         let modelo = document.getElementById('modelo_id');
@@ -141,5 +145,6 @@ unset($__errorArgs, $__bag); ?>
             }
         });
 
-    </script>
+    </script>    
+        
 </div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/component-search.blade.php ENDPATH**/ ?>

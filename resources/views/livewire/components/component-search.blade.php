@@ -1,7 +1,9 @@
 <div>
-        
+    <div class="row">
+        <div class="col-lg-12 col-xs-12 col-md-12 col-sm-12">
+
     <!-- <form autocomplete="off" wire:submit.prevent="searchMotor"> -->
-    <form action="{{ route('searchMotor') }}" method="POST" wire:ignore.self>
+    <form action="{{ route('searchMotor') }}" method="get" wire:ignore.self>
         @csrf
         <div class="card w-75 p-1 mx-auto">
             <div class="form-group">
@@ -69,7 +71,9 @@
             </div>
         </div>            
     </form>
-
+        </div>
+    </div>
+    
     <script>
         let manufacturer = document.getElementById('manufacturer');
         let modelo = document.getElementById('modelo_id');
@@ -96,5 +100,6 @@
             }
         });
 
-    </script>
+    </script>    
+        
 </div>

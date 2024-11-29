@@ -1,86 +1,15 @@
-<div class="container-fluid">
-    <style>
-        .input-number-group {
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-justify-content: center;
-                -ms-flex-pack: center;
-                    justify-content: center;
-            }
 
-            .input-number-group input[type=number]::-webkit-inner-spin-button,
-            .input-number-group input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-                    appearance: none;
-            }
-
-            .input-number-group .input-group-button {
-            line-height: calc(80px/2 - 5px);
-            }
-
-            .input-number-group .input-number {
-            width: 80px;
-            padding: 0 12px;
-            vertical-align: top;
-            text-align: center;
-            outline: none;
-            display: block;
-            margin: 0;
-            }
-
-            .input-number-group .input-number,
-            .input-number-group .input-number-decrement,
-            .input-number-group .input-number-increment {
-            border: 1px solid #cacaca;
-            height: 40px;
-            -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                    user-select: none;
-            border-radius: 0;
-            }
-
-            .input-number-group .input-number-decrement,
-            .input-number-group .input-number-increment {
-            display: inline-block;
-            width: 40px;
-            background: #e6e6e6;
-            color: #0a0a0a;
-            text-align: center;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 2rem;
-            font-weight: 400;
-            }
-
-            .input-number-group .input-number-decrement {
-            margin-right: 0.3rem;
-            }
-
-            .input-number-group .input-number-increment {
-            margin-left: 0.3rem;
-            }
-
-            @media (max-width: 768px) {
-               
-            }
-
-            @media (max-width: 990px) {
-               
-            }
-    </style>
-    <div class="row">
-        <div class="col-md-3" wire:ignore>
-            <!-- Sección de busqueda -->
-            <?php
+            <div class="row">
+                <div class="col-md-3 col-12" wire:ignore>
+                    <!-- Sección de busqueda -->
+                    <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.component-search', [
-                'comercioId' => 1, 
-                'manufacturer_id' => $manufacturer_id,
-                'modelo_id' => $modelo_id,
-                'motor_id' => $motor_id,
-                ])->html();
+                        'comercioId' => 1, 
+                        'manufacturer_id' => $manufacturer_id,
+                        'modelo_id' => $modelo_id,
+                        'motor_id' => $motor_id,
+                        ])->html();
 } elseif ($_instance->childHasBeenRendered('l2730780222-0')) {
     $componentId = $_instance->getRenderedChildComponentId('l2730780222-0');
     $componentTag = $_instance->getRenderedChildComponentTagName('l2730780222-0');
@@ -88,22 +17,22 @@ if (! isset($_instance)) {
     $_instance->preserveRenderedChild('l2730780222-0');
 } else {
     $response = \Livewire\Livewire::mount('components.component-search', [
-                'comercioId' => 1, 
-                'manufacturer_id' => $manufacturer_id,
-                'modelo_id' => $modelo_id,
-                'motor_id' => $motor_id,
-                ]);
+                        'comercioId' => 1, 
+                        'manufacturer_id' => $manufacturer_id,
+                        'modelo_id' => $modelo_id,
+                        'motor_id' => $motor_id,
+                        ]);
     $html = $response->html();
     $_instance->logRenderedChild('l2730780222-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-        </div>
-        <div class="col-md-9">
-            <div class="row">
-                <!-- Sección de categoría -->
-                <div class="col-md-12">
-                    <?php
+                </div>
+                <div class="col-md-9 col-12">
+                    <div class="row">
+                        <!-- Sección de categoría -->
+                        <div class="col-md-12 col-12">
+                            <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.section-catalogo', ['comercioId' => 1, 'parametro' => $parametro])->html();
 } elseif ($_instance->childHasBeenRendered('l2730780222-1')) {
@@ -118,13 +47,13 @@ if (! isset($_instance)) {
 }
 echo $html;
 ?>
-                </div>        
-            </div>
+                        </div>        
+                    </div>
 
-            <div class="row">
-                <!-- Sección de categoría -->
-                <div class="col-md-12">
-                    <?php
+                    <div class="row">
+                        <!-- Sección de categoría -->
+                        <div class="col-md-12 col-12">
+                            <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.section-manufacturers', ['comercioId' => 1, 'parametro' => $parametro])->html();
 } elseif ($_instance->childHasBeenRendered('l2730780222-2')) {
@@ -139,82 +68,83 @@ if (! isset($_instance)) {
 }
 echo $html;
 ?>
-                </div>        
-            </div>
+                        </div>        
+                    </div>
 
-            <!-- Sección de Resultados -->
-            <div class="row">
-                <div class="col-12">
-                    <span class="h4 mx-4">Resultado de: <?php echo e($parametro); ?> </span>  
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <?php if($parametro): ?>
-                        <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                            <div class="row  border border-1 ">
-                                <div class="col-md-2 d-flex">
-                                    <img class="mx-auto" style="width:150px;" src="/noimage.png" alt="">
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12 centrarFlex">
-                                            <div class="centrar">
-                                                <span class="h6"><?php echo e($product->name); ?></span>
-                                            </div>
-                                            <br>
-                                            <div class="centrar">
-                                                <?php echo e($product->description); ?>
+                    <!-- Sección de Resultados -->
+                    <div class="row bg">
+                        <div class="col-md-12 col-12">
+                            <span class="h4 mx-4">Resultado de: <?php echo e($parametro); ?> </span>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-12">
+                            <?php if($parametro): ?>
+                                <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                    <div class="row  border border-1 ">
+                                        <div class="col-md-2 d-flex">
+                                            <img class="mx-auto" style="width:150px;" src="/noimage.png" alt="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12 centrarFlex">
+                                                    <div class="centrar">
+                                                        <span class="h6"><?php echo e($product->name); ?></span>
+                                                    </div>
+                                                    <br>
+                                                    <div class="centrar">
+                                                        <?php echo e($product->description); ?>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row my-3">
-                                        <div class="col-md-12">
-                                            <button class ="btn btn-app w-100 h-100">Detalles</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 ">
-                                    <div class="row">
-                                        <div class="col-md-12 d-flex">
-                                            <span class="mx-auto h4">$<?php echo e($product->price1); ?></span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 d-flex justify-content-between">
-                                            <div class="input-group input-number-group">
-                                                <div class="input-group-button">
-                                                    <span class="input-number-decrement">-</span>
-                                                </div>
-                                                <input class="input-number" type="number" value="1" min="0" max="1000">
-                                                <div class="input-group-button">
-                                                    <span class="input-number-increment">+</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-danger w-25 h-100"><i class="text-white fa fa-shopping-cart" aria-hidden="true"></i></button>
+                                            <div class="row my-3">
+                                                <div class="col-md-12">
+                                                    <button class ="btn btn-app w-100 h-100">Detalles</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        
+                                        <div class="col-md-4 ">
+                                            <div class="row">
+                                                <div class="col-md-12 d-flex">
+                                                    <span class="mx-auto h4">$<?php echo e($product->price1); ?></span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 d-flex justify-content-between">
+                                                    <div class="input-group input-number-group">
+                                                        <div class="input-group-button">
+                                                            <span class="input-number-decrement">-</span>
+                                                        </div>
+                                                        <input class="input-number" type="number" value="1" min="0" max="1000">
+                                                        <div class="input-group-button">
+                                                            <span class="input-number-increment">+</span>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-danger w-25 h-100"><i class="text-white fa fa-shopping-cart" aria-hidden="true"></i></button>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
                                     </div>
                                     
-                                </div>
-                            </div>
-                            
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                            <div class="card showProductCard mx-auto text-center">
-                                <card-body>
-                                    <span>No tiene Productos Disponibles</span>
-                                </card-body>
-                                <card-footer>                    
-                                </card-footer>                    
-                            </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                    <div class="card showProductCard mx-auto text-center">
+                                        <card-body>
+                                            <span>No tiene Productos Disponibles</span>
+                                        </card-body>
+                                        <card-footer>                    
+                                        </card-footer>                    
+                                    </div>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
-            
-        </div>
-    </div>
+    
     <script>
         $('.input-number-increment').click(function() {
         var $input = $(this).parents('.input-number-group').find('.input-number');
@@ -228,6 +158,4 @@ echo $html;
         $input.val(val - 1);
         })
 
-    </script>
-</div>
-<?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/results-products.blade.php ENDPATH**/ ?>
+    </script><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/results-products.blade.php ENDPATH**/ ?>

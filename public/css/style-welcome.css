@@ -8,15 +8,23 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
     display: flex;
     justify-content: space-between;
 }
+.navigationMap{  background-color: #201E1F;  height: auto; color: #fff; }
+
+.logoNM { display: flex; margin: auto; text-align: center; align-items: center; margin-top: 20px; }
+
+
 .footer{
   margin-top: auto;
-  width: 100%;
-  height: auto;
+  width: 100% !important;
+  height: auto !important;
+  text-decoration: solid !important;
+  font-weight: bold !important;
+  /*display: none;*/  
+}
+
+.footer-color{
   background-color: var(--main-footer-color);
   color: white;
-  text-decoration: solid;
-  font-weight: bold;
-  /*display: none;*/
 }
 
 .footer-img{
@@ -26,7 +34,7 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
 .footer-img2{
   width: 80%!important;
 }
-.menu{ height:45px; width:100%; background-color: rgba(255,255,255, 1); border: 1px solid #000; color:rgb(0, 0, 0); text-align:center; display: flex; align-items: center; box-shadow: 5px 5px 15px gray; z-index: 9999;}
+.menu{ height:45px; width:100vw; background-color: rgba(255,255,255, 1); border: 1px solid #000; color:rgb(0, 0, 0); text-align:center; display: flex; align-items: center; box-shadow: 5px 5px 15px gray; z-index: 9999;}
 .wrapper{ height:auto; width:100%; padding-top:20px}
 .fixed{position:fixed; top:0}
 .menu-left{font-size:1.2rem; cursor:pointer; /*background-color: yellow; */width: 10%;}
@@ -36,8 +44,8 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
 }
 
 /*sidebar*/
-.overlay {height: 100%; width: 0; position: fixed; z-index: 1; top: 0; left: 0; background-color: rgb(255,255,255); background-color: rgba(255,255,255, 1); overflow-x: hidden; transition: 0.5s; box-shadow: 5px 5px 15px gray;}
-.overlay-content {position: relative; top: 0; width: 100%; text-align: justify; margin-top: 1px;}
+.overlay {height: 100%; max-width: 100vw; width: 0; position: fixed; z-index: 1; top: 45; left: 0; background-color: rgb(255,255,255); background-color: rgba(255,255,255, 1); overflow-x: hidden; transition: 0.5s; box-shadow: 5px 5px 15px gray;}
+.overlay-content {position: relative; top: 0; width: 100vw; text-align: justify; margin-top: 1px;}
 .overlay a { padding: 8px; text-decoration: none; font-size: 1rem; color: #818181; display: block; transition: 0.3s;}
 .overlay a:hover, .overlay a:focus { color: #000000; font-size: 1.2rem;}
 .overlay .closebtn { position: absolute; top: 1px; right: 5px; font-size: 2rem; color: #000; z-index: 1;}
@@ -63,19 +71,20 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
     body, html{ margin:0; padding:0; /*background-color: burlywood;*/}
     .header{display: none;}
 
-    .logo-responsive {
-      /* Arriba | Derecha | Abajo | Izquierda */
-      margin: 2px 2px 0 5px;
-      width: 150px !important;
-      height: 30px !important;
-    }
-  
     .search-responsive img {
       width: 25px;
     }
   
-    .menu-responsive img {
-      width: 45px;
+    .menu-responsive .icon {
+      width: 30px !important;
+      margin-top: 5px !important;
+    }
+
+    .logo-responsive {
+      /* Arriba | Derecha | Abajo | Izquierda */
+      margin: 2px 2px 0 5px !important;
+      width: 20% !important;
+      
     }
   
     .menu-horizontal div {
@@ -95,20 +104,37 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
     height: 45px;
   }
 
-  .menu-responsive button {
-    display: flex;
-    align-items: center;
-    height: 40px;
-    /* Arriba | Derecha | Abajo | Izquierda */
-    margin: 2px 2px 0 0;
-    background-color: red;
-    border: 0px;
-    border-radius: 15px;
-    color: white;
-    padding: 10px;
-  }
+  .menu-responsive button { display: flex; align-items: center; height: 40px;/* Arriba | Derecha | Abajo | Izquierda */ margin: 2px 2px 0 0; background-color: red; border: 0px; border-radius: 15px; color: white; padding: 10px;}
 
-  .div-search {position: absolute; display: block; top: 30px; right: 25%; z-index: 10; }  
+  .div-search {position: relative; display: block; top: 40px; left: 5px; z-index: 10; }  
+
+  .div-search input {
+    width: 350px;
+    height: 32px;
+    background: #fcfcfc;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+  }
+  
+  .div-search input { text-indent: 32px; width: 90% !important}
+  
+  .div-search .fa-search { 
+    position: absolute !important;
+    top: 3px !important;
+    right: 15px !important;
+    cursor: pointer !important;
+    border: 0px solid grey !important;
+    color: grey !important;
+    background-color: #fcfcfc;
+  }
+  
+  .div-search button {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .div-search .fa-search {left: 5% !important; right: auto !important;}
 
   .marcas-productos {
       display: none!important;
@@ -157,40 +183,9 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
 .search .fa-search {left: auto; right: 10px;}
 
 /* input div-search */
-.div-search {
-  position: relative;
-  color: #aaa;
-  font-size: 16px;
-  margin-top: 10px;
-}
 
 .div-search {display: inline-block;}
 
-.div-search input {
-  width: 350px;
-  height: 32px;
-  background: #fcfcfc;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
-}
-
-.div-search input { text-indent: 32px;}
-
-.div-search .fa-search { 
-  position: absolute;
-  top: 3px;
-  right: 5px !important;
-  cursor: pointer;
-  border: 0px solid grey;
-}
-
-.div-search button {
-  width: 30px;
-  height: 30px;
-}
-
-.div-search .fa-search {left: auto; right: 10px;}
 
 /* Menu horizontal */
 .menu-horizontal {
@@ -262,8 +257,6 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
     cursor: pointer;
   }
 
-  
-
   /* responsive */
   
   /*   Whatsapp         */
@@ -275,7 +268,7 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
 }
 
 svg {
-  width: 80px;
+  width: 60px;
   filter: drop-shadow(0 1px 4px rgba(0,0,0,.4));
   color: white;
 }
@@ -349,3 +342,76 @@ box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 color: #FFCC2A!important;
 background-color: #3d362d!important;
 }
+
+/*     Inicio de botones de incremento y decremento        */
+
+.input-number-group {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  }
+
+  .input-number-group input[type=number]::-webkit-inner-spin-button,
+  .input-number-group input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+  }
+
+  .input-number-group .input-group-button {
+  line-height: calc(80px/2 - 5px);
+  }
+
+  .input-number-group .input-number {
+  width: 80px;
+  padding: 0 12px;
+  vertical-align: top;
+  text-align: center;
+  outline: none;
+  display: block;
+  margin: 0;
+  }
+
+  .input-number-group .input-number,
+  .input-number-group .input-number-decrement,
+  .input-number-group .input-number-increment {
+  border: 1px solid #cacaca;
+  height: 40px;
+  -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: 0;
+  }
+
+  .input-number-group .input-number-decrement,
+  .input-number-group .input-number-increment {
+  display: inline-block;
+  width: 40px;
+  background: #e6e6e6;
+  color: #0a0a0a;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 400;
+  }
+
+  .input-number-group .input-number-decrement {
+  margin-right: 0.3rem;
+  }
+
+  .input-number-group .input-number-increment {
+  margin-left: 0.3rem;
+  }
+
+  @media (max-width: 768px) {
+     
+  }
+
+  @media (max-width: 990px) {
+     
+  }
+  /*   Fin de botones de incremento y decremento */
