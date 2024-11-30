@@ -35,10 +35,9 @@ class Currency extends Component
     {
         $this->currencyValue = $currency;
 
-        // $setting = Setting::where('user_id', $this->comercio->user_id)->first();
-        $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
-
         if(auth()->user()){
+            // $setting = Setting::where('user_id', $this->comercio->user_id)->first();
+            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
             if($settingUser){
                 $settingUser->update(['currency' => $currency]);    
             }else
