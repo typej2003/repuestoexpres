@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="/css/star.css">
     @stack('styles')
     <livewire:styles />
-</head>    
+</head> 
 <body>
     <div class="row">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12">
@@ -41,48 +41,7 @@
                     'motor_id' => $motor_id,
                     ])
             <div class="wrapper">
-                @if($in_sliderprincipal > 0)
-                    @include('livewire.components.slider-principal')
-                @endif
-
-                @if($in_marcasproductos > 0)
-                    @livewire('components.marcas-productos')
-                @endif
-                <div class="my-2"></div>    
-                <section class="">
-                    <div class="my-2"></div>
-                    
-                    @if($words == '')    
-                        <div class="row">
-                            <div class="col-xl-6 col-md-6 col-sm-6">
-                                @livewire('components.component-search', [
-                                    'comercioId' => 1,
-                                    'manufacturer_id' => $manufacturer_id,
-                                    'modelo_id' => $modelo_id,
-                                    'motor_id' => $motor_id,
-                                    ])
-                            </div>
-                            <div class="col-xl-6 col-md-6 col-sm-6">
-                                @livewire('components.carousel-offer')
-                            </div>
-                        </div>
-                    
-                        <div class="my-2"></div>
-                        @livewire('components.show-products')
-                    @endif
-                    
-                    @if($words != '' )                    
-                        @livewire('components.results-products', [
-                            'comercioId' => 1, 
-                            'parametro' => $words,
-                            'manufacturer_id' => $manufacturer_id,
-                            'modelo_id' => $modelo_id,
-                            'motor_id' => $motor_id,
-                            ] )
-                    @endif
-                </section>
-
-                
+                @livewire('cart.cart1')
             </div>
         </div>
     </div>
@@ -115,5 +74,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.4.min.js"></script>
+
+
 
 

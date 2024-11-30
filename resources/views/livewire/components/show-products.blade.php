@@ -129,7 +129,7 @@
                     @empty
                         <div class="card showProductCard mx-auto text-center">
                             <div class="card-body">
-                                <span>No tiene Ofertas Disponibles</span>
+                                <span>No tiene productos disponibles</span>
                             </div>
                             <div class= "card-footer">
                             </div>                    

@@ -40,7 +40,6 @@
                                             <input name="product_id" type="hidden" value="{{ $product->id }}">
                                             <input name="name" type="hidden" value="{{ $product->name }}">
                                             <input name="price1" type="hidden" value="{{ $product->price1 }}">
-                                            <input name="quantity" type="hidden" value="1">
                                             <div class="col-md-2 d-flex">
                                                 <img class="mx-auto" style="width:150px;" src="/noimage.png" alt="">
                                             </div>
@@ -74,7 +73,7 @@
                                                             <div class="input-group-button">
                                                                 <span class="input-number-decrement">-</span>
                                                             </div>
-                                                            <input class="input-number" type="number" value="1" min="0" max="1000">
+                                                            <input name="quantity" class="input-number" type="number" value="1" min="0" max="1000">
                                                             <div class="input-group-button">
                                                                 <span class="input-number-increment">+</span>
                                                             </div>

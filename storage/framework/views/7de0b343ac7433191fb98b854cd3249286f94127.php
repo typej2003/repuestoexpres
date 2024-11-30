@@ -26,7 +26,7 @@
             </div>
             <div class="header">
                 <div class="logo">
-                    <img src="/img/logo_repuestos.png" alt="">
+                    <a href="/"><img src="/img/logo_repuestos.png" alt=""></a>
                 </div>
                 <!-- The form -->
                 <div class="search">
@@ -53,7 +53,7 @@
                                         <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="changePasswordLink">Cambiar Contraseña</a>
                                         <a class="dropdown-item" href="<?php echo e(route('admin.settings')); ?>">Configuración</a>
                                         <div class="dropdown-divider"></div>
-                                        <form method="GET" action="<?php echo e(route('logout')); ?>">
+                                        <form method="post" action="<?php echo e(route('logout')); ?>">
                                             <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
                                         </form>
                                     </div>
@@ -103,9 +103,7 @@
                                         <img src="/img/icon_carrito.png" style="cursor:pointer;">
                                         <span class="text-dark">(<?php echo e(\Cart::getTotalQuantity()); ?>)</span>
                                     </a>
-                                    <div class="dropdown-content-cart-drop">
-                                            <?php echo $__env->make('livewire.carrito.cart-drop', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                    </div>
+                                    <?php echo $__env->make('livewire.carrito.cart-drop', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </div>
                             </div>
                         </div>
