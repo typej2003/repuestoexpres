@@ -19,10 +19,10 @@ class SettingUser extends Model
         $comercio = Comercio::find($comercioId);
         $Setting = Setting::where('user_id', $comercio->user_id)->first();
         
-        if(Auth::check()){
+        if(auth()->user()){
             $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
         }else{
-            $settingUser = $setting;
+            $settingUser = $Setting;
         }
         
         if($settingUser){
