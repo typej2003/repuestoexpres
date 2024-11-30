@@ -141,11 +141,11 @@ if (! isset($_instance)) {
                     'modelo_id' => $modelo_id,
                     'motor_id' => $motor_id,
                     ])->html();
-} elseif ($_instance->childHasBeenRendered('l2554320650-0')) {
-    $componentId = $_instance->getRenderedChildComponentId('l2554320650-0');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l2554320650-0');
+} elseif ($_instance->childHasBeenRendered('l2922314522-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l2922314522-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l2922314522-0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l2554320650-0');
+    $_instance->preserveRenderedChild('l2922314522-0');
 } else {
     $response = \Livewire\Livewire::mount('components.show-recommended', [
                     'comercioId' => 1, 
@@ -155,7 +155,7 @@ if (! isset($_instance)) {
                     'motor_id' => $motor_id,
                     ]);
     $html = $response->html();
-    $_instance->logRenderedChild('l2554320650-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l2922314522-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -178,4 +178,5 @@ echo $html;
 
     </script>
     
-</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/cart/cart1.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/cart/cart.blade.php ENDPATH**/ ?>

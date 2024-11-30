@@ -4,6 +4,7 @@
   --main-footer-color: #FFCC2A;
 }
 body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
+a {text-decoration: none; }
 .header{ border-top:1px solid white;background:white; color:#333; height:auto; width:100%; font-family: 'Lobster', cursive; text-align:center;
     display: flex;
     justify-content: space-between;
@@ -321,26 +322,26 @@ background-color: #3d362d!important;
 }
 
 .btn-sale{
-background-color: #28221B;
-color: #FFCC2A;
-  min-width: 130px!important;
-width: 140px!important;
-height: 45px;
-font-size: .8rem!important;
-margin-top: 5px;
-margin-left: 0px!important;
+	background-color: #28221B !important;
+	color: #FFCC2A !important;
+    min-width: 130px!important;
+	width: 140px!important;
+	height: 45px !important;
+	font-size: .8rem!important;
+	margin-top: 5px !important;
+	margin-left: 0px!important;
 }
 .btn-sale:hover {
-background-color: #332c24;
-color: #FFCC2A;
+	background-color: #332c24 !important;
+	color: #FFCC2A !important;
 }
 .btn-sale:active { 
-transform: scale(0.98); 
-/* Scaling button to 0.98 to its original size */ 
-box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
-/* Lowering the shadow */ 
-color: #FFCC2A!important;
-background-color: #3d362d!important;
+	transform: scale(0.98); 
+	/* Scaling button to 0.98 to its original size */ 
+	box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+	/* Lowering the shadow */ 
+	color: #FFCC2A!important;
+	background-color: #3d362d!important;
 }
 
 /*     Inicio de botones de incremento y decremento        */

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\WelcomeController;
 use App\Http\Livewire\WelcomeWire;
+use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\MainSearch;
 
@@ -87,3 +88,5 @@ Route::get('/emailexample', EmailExample::class)->name('emailexample');
 //             break;
 //     }
 // });
+
+Route::post('/autenticar', [AuthController::class, 'autenticar'])->name('autenticar');

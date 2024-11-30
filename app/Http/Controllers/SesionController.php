@@ -13,13 +13,9 @@ use DB;
 use Carbon\Carbon;
 use Mail;
 
-class AuthController extends Controller
+class SesionController extends Controller
 {
-    public $messages = [
-        'required'  => 'Campo requerido.',
-    ];
-
-   //Muestra la vista de acceso o login
+    //Muestra la vista de acceso o login
     public function acceder()
     {
         return view('auth.login');
@@ -28,24 +24,22 @@ class AuthController extends Controller
     //Autentica al usuario
     public function autenticar(Request $request)
     {
+        dd($request);
+
         //Validación de datos (incluyendo la de activo)
-        if($request->post('identificationNumber')){
-            $credentials = $request->validate([
-                'identificationNumber' => ['required'],
-                'password' => ['required']
-            ]);    
-        }else{
-            $credentials = $request->validate([
-                'email' => ['required', 'email'],
-                'password' => ['required']
-            ], $this->messages);    
-        }
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ]);
+        $credentials['activo'] = 1;
 
         //Si es correcto, inicio sesión y login
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route('welcome');
+            return back()->withErrors([
+                'email' => 'El email no está registrado.',
+            ]);
 
             // return redirect()->intended('admin/dashboard')->with('success','Bienvenido al panel de Administración');
         }
@@ -182,7 +176,4 @@ class AuthController extends Controller
         //Retorno
         return redirect('/login')->with('success','La contraseña se ha cambiado correctamente.');
     }
-
-    
-
 }

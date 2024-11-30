@@ -147,4 +147,27 @@
     }
     /*   Fin de botones de incremento y decremento */
 
+    .btn-sale{
+        background-color: #28221B !important;
+        color: #FFCC2A !important;
+        min-width: 130px!important;
+        width: 140px!important;
+        height: 45px !important;
+        font-size: .8rem!important;
+        margin-top: 5px !important;
+        margin-left: 0px!important;
+    }
+    .btn-sale:hover {
+        background-color: #332c24 !important;
+        color: #FFCC2A !important;
+    }
+    .btn-sale:active { 
+        transform: scale(0.98); 
+        /* Scaling button to 0.98 to its original size */ 
+        box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+        /* Lowering the shadow */ 
+        color: #FFCC2A!important;
+        background-color: #3d362d!important;
+    }
+
     

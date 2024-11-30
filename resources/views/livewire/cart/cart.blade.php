@@ -76,7 +76,7 @@
                 @if(count($cartCollection)>0)
                     <form action="{{ route('cart.clear') }}" method="POST">
                     {{ csrf_field() }}
-                    <button class="boton2">
+                    <button class="btn-danger">
                         Vaciar Carrito
                     </button> 
                     </form>
