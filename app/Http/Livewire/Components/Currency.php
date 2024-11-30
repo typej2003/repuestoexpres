@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Components;
 use Livewire\Component;
 
 use App\Models\Setting;
+use App\Models\SettingUser;
 use App\Models\Tasa;
 use App\Models\Comercio;
 
@@ -25,15 +26,28 @@ class Currency extends Component
     public function mount($comercioId = 1)
     {
         $this->comercio = Comercio::find($comercioId);
+
+        $settingUser = new SettingUser;    
+        $this->currencyValue = $settingUser->client($this->comercio->id);
     }
 
     public function changeCurrency($currency)
     {
         $this->currencyValue = $currency;
 
-        $setting = Setting::where('user_id', $this->comercio->user_id)->first();
+        // $setting = Setting::where('user_id', $this->comercio->user_id)->first();
+        $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
 
-        $setting->update(['currency' => $currency]);
+        if($settingUser){
+            $settingUser->update(['currency' => $currency]);    
+        }else
+        {
+            SettingUser::create([
+                'user_id' => auth()->user()->id,
+                'currency' => $currency,
+            ]);
+            
+        }
 
         $this->dispatchBrowserEvent('refreshPage', ['message' => 'Refresh pagina!']);        
     }

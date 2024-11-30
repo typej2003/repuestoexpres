@@ -65,6 +65,11 @@ class Navbar extends Component
         $this->comercio = Comercio::find($this->comercio_id);
         
         $setting = Setting::where('user_id', $this->comercio->user_id)->first();
+        // $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
+        $settingUser = new  SettingUser;
+        $settingUser->client($comercio->id);
+
+        dd($settingUser);
 
         if($setting){
             if($setting->api_bcv=="SI"){
@@ -85,7 +90,7 @@ class Navbar extends Component
                 }
             }
             
-            $this->currencyValue = $setting->currency;
+            $this->currencyValue = $settingUser->currency;
         }
         
     }

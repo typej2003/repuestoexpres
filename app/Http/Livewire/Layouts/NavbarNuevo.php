@@ -8,6 +8,7 @@ use App\Models\Comercio;
 use App\Models\Category;
 use App\Models\Tasa;
 use App\Models\Setting;
+use App\Models\SettingUser;
 
 class NavbarNuevo extends Component
 {
@@ -56,6 +57,7 @@ class NavbarNuevo extends Component
         $this->comercio = Comercio::find($this->comercio_id);
         
         $setting = Setting::where('user_id', $this->comercio->user_id)->first();
+        // $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
 
         if($setting){
             if($setting->api_bcv=="SI"){
@@ -76,7 +78,6 @@ class NavbarNuevo extends Component
                 }
             }
             
-            $this->currencyValue = $setting->currency;
         }
         
     }
