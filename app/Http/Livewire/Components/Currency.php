@@ -38,16 +38,19 @@ class Currency extends Component
         // $setting = Setting::where('user_id', $this->comercio->user_id)->first();
         $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
 
-        if($settingUser){
-            $settingUser->update(['currency' => $currency]);    
-        }else
-        {
-            SettingUser::create([
-                'user_id' => auth()->user()->id,
-                'currency' => $currency,
-            ]);
-            
+        if(auth()->user()){
+            if($settingUser){
+                $settingUser->update(['currency' => $currency]);    
+            }else
+            {
+                SettingUser::create([
+                    'user_id' => auth()->user()->id,
+                    'currency' => $currency,
+                ]);
+                
+            }
         }
+        
 
         $this->dispatchBrowserEvent('refreshPage', ['message' => 'Refresh pagina!']);        
     }
