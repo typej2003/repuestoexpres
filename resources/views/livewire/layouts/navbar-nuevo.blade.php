@@ -1,12 +1,31 @@
 <div>
+    <style>
+        .profile-menu { 
+            .dropdown-menu{
+                right: 0;
+                left: unset;
+            }
+            .fa-fw{
+                margin-right: 10px;
+            }  
+            }
+            .toggle-change{
+                &::after {
+                border-top: 0;
+                border-bottom: .3em solid;
+                }
+            } 
+    </style>
     <div class="row">
         <div class="col-lg-12 col-xs-12 col-md-12 col-sm-12">
             <div id="myNav" class="overlay">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <div class="overlay-content">
                     <div class="overlay-header">
-                        <img src="./img/logo_repuestos.png" alt="">
-                        <div>Bs VEF</div>
+                        <img class="logo-responsive" src="/img/logo_repuestos.png" alt="">
+                        <div class="currency-responsive">
+                            @livewire('components.currency')
+                        </div>
                     </div>
 
                     <div class="nav-overlay">
@@ -114,8 +133,42 @@
 
             <div class="menu">
                 <div class="menu-left" onclick="openNav()">&#9776; <span class="wordMenu">MENÚ</span></div> 
-                <div class="menu-center w-full">
-                    Barra de menu
+                <div class="menu-center w-full d-flex justify-content-around">
+                    @foreach($categories as $category)
+                        @if($category->subcategories->count() == 0)
+                            <a class="dropdown-item" style="cursor:pointer;" href="{{ route('cat', [
+                                'categ' => $category->name,
+                                'manufacturer_id' => $state['manufacturer_id'],
+                                'modelo_id' => $state['modelo_id'],
+                                'motor_id' => $state['motor_id'],
+                                ]) }}">
+                                {{$category->name}}
+                            </a>
+                        @else
+                            <div class="dropdown">
+                                <a class="dropdown-item dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{$category->name}}
+                                </a>
+                                
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        @foreach($category->subcategories as $subcategory)
+                                            <a class="dropdown-item" href="{{ route('cat', [
+                                                                        'categ' => $subcategory->name,
+                                                                        'manufacturer_id' => $state['manufacturer_id'],
+                                                                        'modelo_id' => $state['modelo_id'],
+                                                                        'motor_id' => $state['motor_id'],
+                                                                        ]) }}">
+                                                {{ $subcategory->name}}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                            </div>
+                        @endif
+                    @endforeach
+                    
+
+                    
+                            
                 </div>
                 <div class="button-search w-full" style="display: none; cursor: pointer;"><img src="./img/icon_buscar.png" alt=""></div>
                 <div class="menu-right w-full">
@@ -132,15 +185,15 @@
                     </div>
                             
                     
-                            <div class="form-group div-search">
-                                <form action="{{ route('search') }}" method="GET" wire:ignore>
-                                    <input wire:model.defer="state.manufacturer_id" type="hidden" class ="manufacturerS_id" name = "manufacturerS_id">
-                                    <input wire:model.defer="state.modelo_id" type="hidden" class ="modeloS_id" name = "modeloS_id">
-                                    <input wire:model.defer="state.motor_id" type="hidden" class ="motorS_id" name = "motorS_id">
-                                    <input name="words" type="text" placeholder="Buscar" style="height: 40px;">
-                                    <button type="submit" class="form-control fa fa-search"></button>
-                                </form>
-                            </div>      
+                    <div class="form-group div-search">
+                        <form action="{{ route('search') }}" method="GET" wire:ignore>
+                            <input wire:model.defer="state.manufacturer_id" type="hidden" class ="manufacturerS_id" name = "manufacturerS_id">
+                            <input wire:model.defer="state.modelo_id" type="hidden" class ="modeloS_id" name = "modeloS_id">
+                            <input wire:model.defer="state.motor_id" type="hidden" class ="motorS_id" name = "motorS_id">
+                            <input name="words" type="text" placeholder="Buscar" style="height: 40px;">
+                            <button type="submit" class="form-control fa fa-search"></button>
+                        </form>
+                    </div>      
                     
                 </div>
             </div>
@@ -151,6 +204,7 @@
         posicionarMenu();
 
         $(window).scroll(function() {    
+            closeNav()
             posicionarMenu();
         });
 
@@ -169,8 +223,6 @@
                     $('.div-search').css('display', 'none');
                 } 
                 else {
-                    console.log('remove fixed')
-                    console.log($(window).scrollTop() + ' >= ' + altura_del_header)
                     $('.menu').removeClass('fixed');
                     $('.wrapper').css('margin-top', '0');
                     $('.button-search').css('display', 'none');
@@ -201,10 +253,20 @@
 
     <script>
         function openNav() {
+            var altura_del_header = $('.header').outerHeight(true);
+            var altura_del_menu = $('.menu').outerHeight(true);
+
             var ancho = window.innerWidth;
             var alto = window.innerHeight;
             if(ancho > 920){
                 document.getElementById("myNav").style.width = "25%";
+                
+                if ($(window).scrollTop() >= 100){
+                    document.getElementById("myNav").style.marginTop = 0;
+                }
+                else{
+                    document.getElementById("myNav").style.marginTop = 100;
+                }
             }else{
                 document.getElementById("myNav").style.width = "75%";
             }
@@ -212,8 +274,61 @@
         }
         
         function closeNav() {
-        document.getElementById("myNav").style.width = "0%";
+            document.getElementById("myNav").style.width = "0%";
         }
     </script>
     
 </div>
+
+
+<!-- <ul class="profile-menu list-unstyled me-auto mb-2 mb-lg-0 d-flex justify-content-around">
+    @foreach($categories as $category)
+        @if($category->subcategories->count() == 0)
+            <li class="d-inline nav-item">
+                <a class="dropdown-item" style="cursor:pointer;" href="{{ route('cat', [
+                    'categ' => $category->name,
+                    'manufacturer_id' => $state['manufacturer_id'],
+                    'modelo_id' => $state['modelo_id'],
+                    'motor_id' => $state['motor_id'],
+                    ]) }}">
+                    {{$category->name}}
+                </a>
+            </li>
+        @else
+            <li class="dropdown d-inline nav-item">
+                <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{$category->name}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @foreach($category->subcategories as $subcategory)
+                        <li>
+                            <a class="dropdown-item" style="cursor:pointer;" href="{{ route('cat', [
+                            'categ' => $subcategory->name,
+                            'manufacturer_id' => $state['manufacturer_id'],
+                            'modelo_id' => $state['modelo_id'],
+                            'motor_id' => $state['motor_id'],
+                                ]) }}">
+                                {{$subcategory->name}}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </li>
+        @endif
+    @endforeach
+</ul>
+<script>
+    document.querySelectorAll('.dropdown-toggle').forEach(item => {
+        item.addEventListener('click', event => {
+        
+            if(event.target.classList.contains('dropdown-toggle') ){
+            event.target.classList.toggle('toggle-change');
+            }
+            else if(event.target.parentElement.classList.contains('dropdown-toggle')){
+            event.target.parentElement.classList.toggle('toggle-change');
+            }
+        })
+        });
+
+
+</script> -->

@@ -1,12 +1,45 @@
 <div>
+    <style>
+        .profile-menu { 
+            .dropdown-menu{
+                right: 0;
+                left: unset;
+            }
+            .fa-fw{
+                margin-right: 10px;
+            }  
+            }
+            .toggle-change{
+                &::after {
+                border-top: 0;
+                border-bottom: .3em solid;
+                }
+            } 
+    </style>
     <div class="row">
         <div class="col-lg-12 col-xs-12 col-md-12 col-sm-12">
             <div id="myNav" class="overlay">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <div class="overlay-content">
                     <div class="overlay-header">
-                        <img src="./img/logo_repuestos.png" alt="">
-                        <div>Bs VEF</div>
+                        <img class="logo-responsive" src="/img/logo_repuestos.png" alt="">
+                        <div class="currency-responsive">
+                            <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.currency')->html();
+} elseif ($_instance->childHasBeenRendered('l3224789718-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l3224789718-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l3224789718-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l3224789718-0');
+} else {
+    $response = \Livewire\Livewire::mount('components.currency');
+    $html = $response->html();
+    $_instance->logRenderedChild('l3224789718-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+                        </div>
                     </div>
 
                     <div class="nav-overlay">
@@ -114,23 +147,60 @@
 
             <div class="menu">
                 <div class="menu-left" onclick="openNav()">&#9776; <span class="wordMenu">MENÚ</span></div> 
-                <div class="menu-center w-full">
-                    Barra de menu
+                <div class="menu-center w-full d-flex justify-content-around">
+                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if($category->subcategories->count() == 0): ?>
+                            <a class="dropdown-item" style="cursor:pointer;" href="<?php echo e(route('cat', [
+                                'categ' => $category->name,
+                                'manufacturer_id' => $state['manufacturer_id'],
+                                'modelo_id' => $state['modelo_id'],
+                                'motor_id' => $state['motor_id'],
+                                ])); ?>">
+                                <?php echo e($category->name); ?>
+
+                            </a>
+                        <?php else: ?>
+                            <div class="dropdown">
+                                <a class="dropdown-item dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <?php echo e($category->name); ?>
+
+                                </a>
+                                
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <a class="dropdown-item" href="<?php echo e(route('cat', [
+                                                                        'categ' => $subcategory->name,
+                                                                        'manufacturer_id' => $state['manufacturer_id'],
+                                                                        'modelo_id' => $state['modelo_id'],
+                                                                        'motor_id' => $state['motor_id'],
+                                                                        ])); ?>">
+                                                <?php echo e($subcategory->name); ?>
+
+                                            </a>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    
+
+                    
+                            
                 </div>
                 <div class="button-search w-full" style="display: none; cursor: pointer;"><img src="./img/icon_buscar.png" alt=""></div>
                 <div class="menu-right w-full">
                     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.currency')->html();
-} elseif ($_instance->childHasBeenRendered('l3224789718-0')) {
-    $componentId = $_instance->getRenderedChildComponentId('l3224789718-0');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l3224789718-0');
+} elseif ($_instance->childHasBeenRendered('l3224789718-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l3224789718-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l3224789718-1');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l3224789718-0');
+    $_instance->preserveRenderedChild('l3224789718-1');
 } else {
     $response = \Livewire\Livewire::mount('components.currency');
     $html = $response->html();
-    $_instance->logRenderedChild('l3224789718-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l3224789718-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -146,15 +216,15 @@ echo $html;
                     </div>
                             
                     
-                            <div class="form-group div-search">
-                                <form action="<?php echo e(route('search')); ?>" method="GET" wire:ignore>
-                                    <input wire:model.defer="state.manufacturer_id" type="hidden" class ="manufacturerS_id" name = "manufacturerS_id">
-                                    <input wire:model.defer="state.modelo_id" type="hidden" class ="modeloS_id" name = "modeloS_id">
-                                    <input wire:model.defer="state.motor_id" type="hidden" class ="motorS_id" name = "motorS_id">
-                                    <input name="words" type="text" placeholder="Buscar" style="height: 40px;">
-                                    <button type="submit" class="form-control fa fa-search"></button>
-                                </form>
-                            </div>      
+                    <div class="form-group div-search">
+                        <form action="<?php echo e(route('search')); ?>" method="GET" wire:ignore>
+                            <input wire:model.defer="state.manufacturer_id" type="hidden" class ="manufacturerS_id" name = "manufacturerS_id">
+                            <input wire:model.defer="state.modelo_id" type="hidden" class ="modeloS_id" name = "modeloS_id">
+                            <input wire:model.defer="state.motor_id" type="hidden" class ="motorS_id" name = "motorS_id">
+                            <input name="words" type="text" placeholder="Buscar" style="height: 40px;">
+                            <button type="submit" class="form-control fa fa-search"></button>
+                        </form>
+                    </div>      
                     
                 </div>
             </div>
@@ -165,6 +235,7 @@ echo $html;
         posicionarMenu();
 
         $(window).scroll(function() {    
+            closeNav()
             posicionarMenu();
         });
 
@@ -183,8 +254,6 @@ echo $html;
                     $('.div-search').css('display', 'none');
                 } 
                 else {
-                    console.log('remove fixed')
-                    console.log($(window).scrollTop() + ' >= ' + altura_del_header)
                     $('.menu').removeClass('fixed');
                     $('.wrapper').css('margin-top', '0');
                     $('.button-search').css('display', 'none');
@@ -215,10 +284,20 @@ echo $html;
 
     <script>
         function openNav() {
+            var altura_del_header = $('.header').outerHeight(true);
+            var altura_del_menu = $('.menu').outerHeight(true);
+
             var ancho = window.innerWidth;
             var alto = window.innerHeight;
             if(ancho > 920){
                 document.getElementById("myNav").style.width = "25%";
+                
+                if ($(window).scrollTop() >= 100){
+                    document.getElementById("myNav").style.marginTop = 0;
+                }
+                else{
+                    document.getElementById("myNav").style.marginTop = 100;
+                }
             }else{
                 document.getElementById("myNav").style.width = "75%";
             }
@@ -226,9 +305,64 @@ echo $html;
         }
         
         function closeNav() {
-        document.getElementById("myNav").style.width = "0%";
+            document.getElementById("myNav").style.width = "0%";
         }
     </script>
     
 </div>
-<?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/layouts/navbar-nuevo.blade.php ENDPATH**/ ?>
+
+
+<!-- <ul class="profile-menu list-unstyled me-auto mb-2 mb-lg-0 d-flex justify-content-around">
+    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if($category->subcategories->count() == 0): ?>
+            <li class="d-inline nav-item">
+                <a class="dropdown-item" style="cursor:pointer;" href="<?php echo e(route('cat', [
+                    'categ' => $category->name,
+                    'manufacturer_id' => $state['manufacturer_id'],
+                    'modelo_id' => $state['modelo_id'],
+                    'motor_id' => $state['motor_id'],
+                    ])); ?>">
+                    <?php echo e($category->name); ?>
+
+                </a>
+            </li>
+        <?php else: ?>
+            <li class="dropdown d-inline nav-item">
+                <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <?php echo e($category->name); ?>
+
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li>
+                            <a class="dropdown-item" style="cursor:pointer;" href="<?php echo e(route('cat', [
+                            'categ' => $subcategory->name,
+                            'manufacturer_id' => $state['manufacturer_id'],
+                            'modelo_id' => $state['modelo_id'],
+                            'motor_id' => $state['motor_id'],
+                                ])); ?>">
+                                <?php echo e($subcategory->name); ?>
+
+                            </a>
+                        </li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </ul>
+            </li>
+        <?php endif; ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+</ul>
+<script>
+    document.querySelectorAll('.dropdown-toggle').forEach(item => {
+        item.addEventListener('click', event => {
+        
+            if(event.target.classList.contains('dropdown-toggle') ){
+            event.target.classList.toggle('toggle-change');
+            }
+            else if(event.target.parentElement.classList.contains('dropdown-toggle')){
+            event.target.parentElement.classList.toggle('toggle-change');
+            }
+        })
+        });
+
+
+</script> --><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/layouts/navbar-nuevo.blade.php ENDPATH**/ ?>

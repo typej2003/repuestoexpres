@@ -57,15 +57,26 @@ a {text-decoration: none; }
 
 .button-search img {width: 40px; cursor: pointer;}
 .div-search {position: absolute; display: none; top: 30px; right: 30px; z-index: 10; }
-.nav-overlay {margin-left: 10%; margin-top: 10%;}
+.nav-overlay {margin-left: 15px; margin-top: 0;}
 
 .marcas-productos img {
   height: 100px;
 }
 
+.logo-responsive {
+  /* Arriba | Derecha | Abajo | Izquierda */
+  margin: 2px 2px 0 5px !important;
+  width: 20% !important;
+  
+}
+
 @media only screen and (max-width: 1070px) {
+    .overlay .overlay-header {display: flex; justify-content: start;  align-items: center; }
+    .overlay-header img { width: 45% !important;}
+    .overlay-header div { width: 20%; margin-right: 35px;}
+    .overlay-header .currency-responsive {width: 15% !important; margin-left: 0 !important;}
     .overlay a {font-size: 20px} 
-    .overlay .closebtn { font-size: 2rem; top: 1px; right: 5px; color: #000; z-index: 1;}
+    .overlay .closebtn { font-size: 2rem; top: 1px !important; margin-top: 1px !important; right: 1px !important; color: #000; z-index: 1; padding: 0 !important; margin: 0 !important; top: 0 !important;}
     .wordMenu {display: none;}
     .w-full{display: none!important; background-color: aqua;}
     .menu {/*background-color: black;*/}

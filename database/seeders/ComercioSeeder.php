@@ -17,8 +17,8 @@ class ComercioSeeder extends Seeder
         DB::table('comercios')->insert([
             'area_id' => '2',
             'user_id' => '1',
-            'keyword' => 'comercio1',
-            'name' => 'Comercio 1',
+            'keyword' => 'repuestoexpres',
+            'name' => 'RepuestoExpres',
             'cellphonecontact' => '04165800403',
             'dominio' => 'http://192.168.1.4:8000',
             // 'dominio' => 'http://www.repuestoexpres.com',
