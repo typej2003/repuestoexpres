@@ -8,6 +8,7 @@ use App\Http\Livewire\Afiliado\ListCategories;
 use App\Http\Livewire\Afiliado\ListCategorieslist;
 use App\Http\Livewire\Afiliado\ListSubcategories;
 use App\Http\Livewire\Afiliado\ListProducts;
+use App\Http\Livewire\Afiliado\Repuestoexpres\ListMenus;
 use App\Http\Livewire\Afiliado\ListPedidos;
 use App\Http\Livewire\Afiliado\Product\ListCombos;
 use App\Http\Livewire\Afiliado\ListTasas;
@@ -32,6 +33,8 @@ Route::get('/listCategorieslist/{comercioId}', listCategorieslist::class)->name(
 Route::get('/newSubcategory/{comercioId}/{categoryId}', listSubcategories::class)->name('listSubcategories')->middleware('auth');
 
 Route::get('/listProducts/{comercioId}', ListProducts::class)->name('listProducts')->middleware('auth');
+
+Route::get('/listMenus/{comercioId}', ListMenus::class)->name('listMenus')->middleware('auth');
 
 Route::get('/listPedidos/{comercioId}', ListPedidos::class)->name('listPedidos')->middleware('auth');
 

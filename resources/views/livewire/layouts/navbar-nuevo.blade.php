@@ -43,6 +43,9 @@
                     
                 </div>
             </div>
+            <div class="fixed-top">
+
+            
             <div class="header">
                 <div class="logo">
                     <a href="/"><img src="/img/logo_repuestos.png" alt=""></a>
@@ -197,6 +200,7 @@
                     
                 </div>
             </div>
+            </div>
         </div>
     </div>
     
@@ -205,7 +209,7 @@
 
         $(window).scroll(function() {    
             closeNav()
-            posicionarMenu();
+            // posicionarMenu();
         });
 
         function posicionarMenu()
@@ -217,18 +221,21 @@
                 if ($(window).scrollTop() >= altura_del_header){
                     console.log('add fixed')
                     console.log($(window).scrollTop() + ' >= ' + altura_del_header)
+                    $('.header').addClass('fixed');
                     $('.menu').addClass('fixed');
-                    $('.wrapper').css('margin-top', (altura_del_menu) + 'px');
+                    // $('.wrapper').css('margin-top', (altura_del_menu) + 'px');
                     $('.button-search').css('display', 'block');
                     $('.div-search').css('display', 'none');
                 } 
                 else {
+                    $('.header').removeClass('fixed');
                     $('.menu').removeClass('fixed');
                     $('.wrapper').css('margin-top', '0');
                     $('.button-search').css('display', 'none');
                     $('.div-search').css('display', 'none');
                 }
             }else{
+                $('.header').addClass('fixed');
                  $('.menu').addClass('fixed');
                  $('.wrapper').css('margin-top', (altura_del_menu) + 'px');
                  $('.div-search').css('display', 'none');
