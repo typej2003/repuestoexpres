@@ -274,8 +274,7 @@
                             <div><a href=""><img class="icon" src="/img/icon_miperfil.png" alt=""></a></div>
                             <div><a href=""><img class="icon" src="/img/icon_heart.png" alt=""></a></div>
                             <div><a href=""><img class="icon" src="/img/icon_carrito.png" alt=""></a></div>
-                        </div>
-                                
+                        </div>                                
                         
                         <div class="div-search d-none w-100">
                             <form action="{{ route('search') }}" method="GET" >
