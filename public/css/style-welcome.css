@@ -50,7 +50,7 @@ a {text-decoration: none; }
 .footer-img2{ width: 80%!important; }
 
 .menu{ height:45px; width:100vw; background-color: rgba(255,255,255, 1); border: 1px solid #000; color:rgb(0, 0, 0); text-align:center; display: flex; align-items: center; box-shadow: 5px 5px 15px gray; z-index: 9999;}
-.wrapper{ height:auto; width:100%; padding-top:20px}
+.wrapper{ height:auto; width:100%; padding-top:20px; margin-top: 100px;}
 .fixed{position:fixed; top:0}
 .menu-left{font-size:1.2rem; cursor:pointer; /*background-color: yellow; */width: 10%;}
 .menu-center{/*background-color: blue;*/ width: 90%;}
@@ -101,6 +101,7 @@ a {text-decoration: none; }
   .menu {display: flex !important; justify-content:space-between !important; /*background-color: black;*/}
   body, html{ margin:0; padding:0; /*background-color: burlywood;*/}
   .header{display: none;}
+  .wrapper{ padding-top:0px; margin-top: 45px; }
 
   .search-responsive img {
   width: 25px;
