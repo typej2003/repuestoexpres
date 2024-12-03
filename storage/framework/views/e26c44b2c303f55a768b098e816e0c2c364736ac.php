@@ -147,4 +147,4 @@ unset($__errorArgs, $__bag); ?>
 
     </script>    
         
-</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/component-search.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/component-search.blade.php ENDPATH**/ ?>

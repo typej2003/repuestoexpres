@@ -14,6 +14,7 @@
     <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
     <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <script src="/js/jquery-3.6.4.min.js"></script>  
     <script src="/js/slick.min.js"></script>
     <link rel="stylesheet" href="/css/slick-theme.min.css">
@@ -34,13 +35,14 @@
                     </a>
                 </div>            
             @endif
-            @livewire('layouts.navbar-nuevo', [
-                    'comercioId' => 1,
-                    'manufacturer_id' => $manufacturer_id,
-                    'modelo_id' => $modelo_id,
-                    'motor_id' => $motor_id,
-                    ])
             <div class="wrapper">
+                @livewire('layouts.navbar-nuevo', [
+                        'comercioId' => 1,
+                        'manufacturer_id' => $manufacturer_id,
+                        'modelo_id' => $modelo_id,
+                        'motor_id' => $motor_id,
+                        ])
+
                 @if($in_sliderprincipal > 0)
                     @include('livewire.components.slider-principal')
                 @endif

@@ -48,4 +48,4 @@
         <li class="list-group-item">Tu carrito esta vacío</li>
     <?php endif; ?>
     </ul>
-</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/carrito/cart-drop.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/carrito/cart-drop.blade.php ENDPATH**/ ?>

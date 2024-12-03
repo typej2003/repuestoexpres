@@ -36,7 +36,7 @@
             height: 35px;
             display: block;
             /* background-image: url('/img/circle-right-regular.svg'); */
-            z-index: 1000;
+            z-index: 2;
         }
 
         .slick-prev.slick-arrow {
@@ -46,7 +46,7 @@
             height: 35px;
             display: block;
             /* background-image: url('/img/circle-left-regular.svg'); */
-            z-index: 1000;
+            z-index: 2;
         }
 
         .slick-slide {

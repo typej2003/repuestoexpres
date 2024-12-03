@@ -36,4 +36,4 @@
         </div>
     </body>
 </html>
-<?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions/views/minimal.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions/views/minimal.blade.php ENDPATH**/ ?>

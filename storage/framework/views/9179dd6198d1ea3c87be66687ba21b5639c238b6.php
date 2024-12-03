@@ -10,11 +10,11 @@ if (! isset($_instance)) {
                         'modelo_id' => $modelo_id,
                         'motor_id' => $motor_id,
                         ])->html();
-} elseif ($_instance->childHasBeenRendered('l2730780222-0')) {
-    $componentId = $_instance->getRenderedChildComponentId('l2730780222-0');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l2730780222-0');
+} elseif ($_instance->childHasBeenRendered('l1300619689-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1300619689-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1300619689-0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l2730780222-0');
+    $_instance->preserveRenderedChild('l1300619689-0');
 } else {
     $response = \Livewire\Livewire::mount('components.component-search', [
                         'comercioId' => 1, 
@@ -23,7 +23,7 @@ if (! isset($_instance)) {
                         'motor_id' => $motor_id,
                         ]);
     $html = $response->html();
-    $_instance->logRenderedChild('l2730780222-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l1300619689-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -35,15 +35,15 @@ echo $html;
                             <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.section-catalogo', ['comercioId' => 1, 'parametro' => $parametro])->html();
-} elseif ($_instance->childHasBeenRendered('l2730780222-1')) {
-    $componentId = $_instance->getRenderedChildComponentId('l2730780222-1');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l2730780222-1');
+} elseif ($_instance->childHasBeenRendered('l1300619689-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1300619689-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1300619689-1');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l2730780222-1');
+    $_instance->preserveRenderedChild('l1300619689-1');
 } else {
     $response = \Livewire\Livewire::mount('components.section-catalogo', ['comercioId' => 1, 'parametro' => $parametro]);
     $html = $response->html();
-    $_instance->logRenderedChild('l2730780222-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l1300619689-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -56,15 +56,15 @@ echo $html;
                             <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.section-manufacturers', ['comercioId' => 1, 'parametro' => $parametro])->html();
-} elseif ($_instance->childHasBeenRendered('l2730780222-2')) {
-    $componentId = $_instance->getRenderedChildComponentId('l2730780222-2');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l2730780222-2');
+} elseif ($_instance->childHasBeenRendered('l1300619689-2')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1300619689-2');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1300619689-2');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l2730780222-2');
+    $_instance->preserveRenderedChild('l1300619689-2');
 } else {
     $response = \Livewire\Livewire::mount('components.section-manufacturers', ['comercioId' => 1, 'parametro' => $parametro]);
     $html = $response->html();
-    $_instance->logRenderedChild('l2730780222-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l1300619689-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -164,4 +164,4 @@ echo $html;
         $input.val(val - 1);
         })
 
-    </script><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/results-products.blade.php ENDPATH**/ ?>
+    </script><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/results-products.blade.php ENDPATH**/ ?>

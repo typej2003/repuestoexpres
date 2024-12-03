@@ -25,14 +25,28 @@
                     <div class="overlay-header">
                         <img class="logo-responsive" src="/img/logo_repuestos.png" alt="">
                         <div class="currency-responsive">
-                            @livewire('components.currency')
+                            <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.currency')->html();
+} elseif ($_instance->childHasBeenRendered('l3862662930-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l3862662930-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l3862662930-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l3862662930-0');
+} else {
+    $response = \Livewire\Livewire::mount('components.currency');
+    $html = $response->html();
+    $_instance->logRenderedChild('l3862662930-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                         </div>
                     </div>
 
                     <div class="nav-overlay">
 
                         <div class="accordion-container">
-                            @guest
+                            <?php if(auth()->guard()->guest()): ?>
                                 <div class="set">
                                     <a href="#" style="font-weight: bold; font-size: 1.5rem;">
                                     Cuenta
@@ -56,24 +70,25 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endguest
-                            @auth
+                            <?php endif; ?>
+                            <?php if(auth()->guard()->check()): ?>
                                 <div class="set">
                                     <a href="#" style="font-weight: bold; font-size: 1.5rem;">
-                                        {{ auth()->user()->name }}
+                                        <?php echo e(auth()->user()->name); ?>
+
                                     </a>
                                     <div class="content">
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
-                                            <a class="dropdown-item" href="{{ route('admin.profile.edit') }}" x-ref="profileLink">Perfil</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="profileLink">Perfil</a>
                                         </div>
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
-                                            <a class="dropdown-item" href="{{ route('admin.dashboard') }}" x-ref="profileLink">Escritorio</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.dashboard')); ?>" x-ref="profileLink">Escritorio</a>
                                         </div>
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
-                                            <a class="dropdown-item" href="{{ route('admin.profile.edit') }}" x-ref="changePasswordLink">Cambiar Contraseña</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="changePasswordLink">Cambiar Contraseña</a>
                                         </div>
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
-                                            <a class="dropdown-item" href="{{ route('admin.settings') }}">Configuración</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.settings')); ?>">Configuración</a>
                                         </div>
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
                                             <a class="dropdown-item" href="#">
@@ -83,13 +98,13 @@
                                         </div>
                                         <div class="dropdown-divider"></div>
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
-                                            <form method="post" action="{{ route('logout') }}">
-                                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
+                                            <form method="post" action="<?php echo e(route('logout')); ?>">
+                                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                            @endauth
+                            <?php endif; ?>
                         </div>
                             
                     </div>
@@ -99,44 +114,46 @@
                     <div class="nav-overlay">
                         <div class="accordion-container">
                             <h4>Categorías</h4>
-                            @foreach($categories as $category)
-                                    @if($category->subcategories->count() == 0)
+                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($category->subcategories->count() == 0): ?>
                                         <div class="set">
-                                            <a class="mx-4" style="cursor:pointer;" href="{{ route('cat', [
+                                            <a class="mx-4" style="cursor:pointer;" href="<?php echo e(route('cat', [
                                                 'categ' => $category->name,
                                                 'manufacturer_id' => $state['manufacturer_id'],
                                                 'modelo_id' => $state['modelo_id'],
                                                 'motor_id' => $state['motor_id'],
-                                                ]) }}" style="font-weight: bold; ">
-                                                {{$category->name}}
+                                                ])); ?>" style="font-weight: bold; ">
+                                                <?php echo e($category->name); ?>
+
                                             </a>
                                         </div>
-                                    @else
+                                    <?php else: ?>
                                         <div class="set" style="font-weight: bold; ">
                                             <a href="#">
                                                 <i class="fa fa-plus mr-3"></i>
-                                                {{$category->name}}                                                
+                                                <?php echo e($category->name); ?>                                                
                                             </a>
                                     
-                                            @foreach($category->subcategories as $subcategory)
+                                            <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="content">
                                                     <div class="d-flex justify-content-between mx-3">
-                                                        <a class="" href="{{ route('cat', [
+                                                        <a class="" href="<?php echo e(route('cat', [
                                                                                     'categ' => $subcategory->name,
                                                                                     'manufacturer_id' => $state['manufacturer_id'],
                                                                                     'modelo_id' => $state['modelo_id'],
                                                                                     'motor_id' => $state['motor_id'],
-                                                                                    ]) }}">
-                                                            {{ $subcategory->name}}
+                                                                                    ])); ?>">
+                                                            <?php echo e($subcategory->name); ?>
+
                                                         </a>
                                                     </div>
                                                 </div>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             
                                         </div>
-                                    @endif                                
+                                    <?php endif; ?>                                
                                 
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>        
                     </div>
 
@@ -176,7 +193,7 @@
                     </div>
                     <!-- The form -->
                     <div class="search">
-                        <form class="d-flex justify-content-center" action="{{ route('search') }}" method="GET" wire:ignore>
+                        <form class="d-flex justify-content-center" action="<?php echo e(route('search')); ?>" method="GET" wire:ignore>
                             <input wire:model.defer="state.manufacturer_id" type="hidden" class ="manufacturerS_id" name = "manufacturerS_id">
                             <input wire:model.defer="state.modelo_id" type="hidden" class ="modeloS_id" name = "modeloS_id">
                             <input wire:model.defer="state.motor_id" type="hidden" class ="motorS_id" name = "motorS_id">
@@ -186,29 +203,29 @@
                     </div>
                     <!-- Menu horizontal -->
                     <ul class="menu-horizontal">
-                        @auth
+                        <?php if(auth()->guard()->check()): ?>
                             <li class="nav-item p-3 py-md-1">
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item dropdown">
                                         <a class="nav-link active dropdown-toggle botonera" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span class="ml-1" x-ref="username">{{ auth()->user()->name }}</span>
+                                            <span class="ml-1" x-ref="username"><?php echo e(auth()->user()->name); ?></span>
                                         </a>
                                         <div class="dropdown-menu p-4" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ route('admin.profile.edit') }}" x-ref="profileLink">Perfil</a>
-                                            <a class="dropdown-item" href="{{ route('admin.dashboard') }}" x-ref="profileLink">Escritorio</a>
-                                            <a class="dropdown-item" href="{{ route('admin.profile.edit') }}" x-ref="changePasswordLink">Cambiar Contraseña</a>
-                                            <a class="dropdown-item" href="{{ route('admin.settings') }}">Configuración</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="profileLink">Perfil</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.dashboard')); ?>" x-ref="profileLink">Escritorio</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.profile.edit')); ?>" x-ref="changePasswordLink">Cambiar Contraseña</a>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.settings')); ?>">Configuración</a>
                                             <div class="dropdown-divider"></div>
-                                            <form method="post" action="{{ route('logout') }}">
-                                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
+                                            <form method="post" action="<?php echo e(route('logout')); ?>">
+                                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); this.closest('form').submit();">Salir</a>
                                             </form>
                                         </div>
                                     </li>
                                 </ul>
                             </li>
-                        @endauth
+                        <?php endif; ?>
                             
-                        @guest
+                        <?php if(auth()->guard()->guest()): ?>
                             <li class="">                                
                                 <a class="dropdown-toggle botonera" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                                
                                     <img style="height:45px" src="/img/icon_miperfil.png" id="profileImage" alt="User Image">Perfil
@@ -235,7 +252,7 @@
                                 </div>
                                 
                             </li> 
-                        @endguest
+                        <?php endif; ?>
                         <li>
                             <a class="botonera" href="">
                                 <img style="height:45px" src="./img/icon_heart.png" alt="">
@@ -247,9 +264,9 @@
                                     <div class="dropdown-cart-drop">
                                         <a class="btn-cart-drop d-flex justify-content-between botonera">
                                             <img src="/img/icon_carrito.png" style="height:45px cursor:pointer;">
-                                            <span class="text-dark">({{\Cart::getTotalQuantity()}})</span>
+                                            <span class="text-dark">(<?php echo e(\Cart::getTotalQuantity()); ?>)</span>
                                         </a>
-                                        @include('livewire.carrito.cart-drop')
+                                        <?php echo $__env->make('livewire.carrito.cart-drop', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                     </div>
                                 </div>
                             </div>
@@ -264,7 +281,21 @@
                     </div>
                     <div class="button-search w-full" style="display: none; cursor: pointer;"><img src="./img/icon_buscar.png" alt=""></div>
                     <div class="menu-right w-full">
-                        @livewire('components.currency')
+                        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.currency')->html();
+} elseif ($_instance->childHasBeenRendered('l3862662930-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l3862662930-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l3862662930-1');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l3862662930-1');
+} else {
+    $response = \Livewire\Livewire::mount('components.currency');
+    $html = $response->html();
+    $_instance->logRenderedChild('l3862662930-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                     </div>
                     <div class="menu-responsive">
                         <div class="menu-responsive">
@@ -278,7 +309,7 @@
                                 
                         
                         <div class="div-search d-none w-100">
-                            <form action="{{ route('search') }}" method="GET" >
+                            <form action="<?php echo e(route('search')); ?>" method="GET" >
                                 <input wire:model.defer="state.manufacturer_id" type="hidden" class ="manufacturerS_id" name = "manufacturerS_id">
                                 <input wire:model.defer="state.modelo_id" type="hidden" class ="modeloS_id" name = "modeloS_id">
                                 <input wire:model.defer="state.motor_id" type="hidden" class ="motorS_id" name = "motorS_id">
@@ -422,34 +453,37 @@
 </div>
 
 
-<!-- @foreach($categories as $category)
-    @if($category->subcategories->count() == 0)
-        <a class="dropdown-item" style="cursor:pointer;" href="{{ route('cat', [
+<!-- <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php if($category->subcategories->count() == 0): ?>
+        <a class="dropdown-item" style="cursor:pointer;" href="<?php echo e(route('cat', [
             'categ' => $category->name,
             'manufacturer_id' => $state['manufacturer_id'],
             'modelo_id' => $state['modelo_id'],
             'motor_id' => $state['motor_id'],
-            ]) }}">
-            {{$category->name}}
+            ])); ?>">
+            <?php echo e($category->name); ?>
+
         </a>
-    @else
+    <?php else: ?>
         <div class="dropdown">
             <a class="dropdown-item dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{$category->name}}
+                <?php echo e($category->name); ?>
+
             </a>
             
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    @foreach($category->subcategories as $subcategory)
-                        <a class="dropdown-item" href="{{ route('cat', [
+                    <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <a class="dropdown-item" href="<?php echo e(route('cat', [
                                                     'categ' => $subcategory->name,
                                                     'manufacturer_id' => $state['manufacturer_id'],
                                                     'modelo_id' => $state['modelo_id'],
                                                     'motor_id' => $state['motor_id'],
-                                                    ]) }}">
-                            {{ $subcategory->name}}
+                                                    ])); ?>">
+                            <?php echo e($subcategory->name); ?>
+
                         </a>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
         </div>
-    @endif
-@endforeach -->
+    <?php endif; ?>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> --><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/layouts/navbar-nuevo.blade.php ENDPATH**/ ?>

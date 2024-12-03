@@ -20,4 +20,4 @@
             //location.reload()
         }) 
     </script>
-</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/currency.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/currency.blade.php ENDPATH**/ ?>

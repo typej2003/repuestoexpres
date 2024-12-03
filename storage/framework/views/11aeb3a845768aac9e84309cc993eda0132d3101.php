@@ -19,4 +19,4 @@
     <script src="/js/star.js"></script>
 
 </div>
-<?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/star.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/star.blade.php ENDPATH**/ ?>

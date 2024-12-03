@@ -12,7 +12,7 @@
          box-sizing: border-box;
         } */
 
-        .sliderC {
+        .sliderM {
             /*width: 50%;*/
             width: 100%;
             margin: auto!important;
@@ -26,7 +26,6 @@
         .slick-slide img {
         width: 100%;
         height: auto;
-        padding: auto;
         }
 
         .slick-prev:before,
@@ -67,7 +66,7 @@
         opacity: 1;
         } */
 
-        .cardCatalogo {
+        .cardManufacturer {
             width: 150px;
             height: 150px;
         }
@@ -75,22 +74,22 @@
     </style>
     <div class="row">
         <div class="col-md-12">
-            Seleccione el catalogo 
+            Seleccione el catalogo del fabricante 
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <section class="regular sliderC slider-catalogo">
-                <?php $__empty_1 = true; $__currentLoopData = $catalogos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+            <section class="regular sliderM slider-manufacturer">
+                <?php $__empty_1 = true; $__currentLoopData = $manufacturers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div>
-                        <div class="card cardCatalogo mx-auto text-center mx-2">
+                        <div class="card cardManufacturer mx-auto text-center mx-2">
                             <div class="card-body">
-                                <img class="mx-auto border border-1" src="<?php echo e($product->avatar_url); ?>" alt="">                                
+                                <img class="mx-auto border border-1" src="<?php echo e($manufacturer->avatar_url); ?>" alt="">                                
                             </div>
                         </div>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                    <div class="card cardCatalogo mx-auto text-center">
+                    <div class="card cardManufacturer mx-auto text-center">
                         <card-body>
                             <span>No tiene Catalogo para este producto</span>
                         </card-body>
@@ -104,7 +103,7 @@
 
     <script>
         function loadSlider(){
-            $(".slider-catalogo").slick({
+            $(".slider-manufacturer").slick({
             dots: true,
             infinite: true,
             slidesToShow: findSlides(),
@@ -133,4 +132,4 @@
             //location.reload()
         })
     </script>
-</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/section-catalogo.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/section-manufacturers.blade.php ENDPATH**/ ?>

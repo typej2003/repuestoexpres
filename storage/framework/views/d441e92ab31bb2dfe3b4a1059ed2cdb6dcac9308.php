@@ -13,4 +13,4 @@
             </div>
         </div>
     </div>
-</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/slider-principal.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/slider-principal.blade.php ENDPATH**/ ?>

@@ -25,4 +25,4 @@
         </li>
     </ul>
 </nav>
-<?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/layouts/navbar-in.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/layouts/navbar-in.blade.php ENDPATH**/ ?>

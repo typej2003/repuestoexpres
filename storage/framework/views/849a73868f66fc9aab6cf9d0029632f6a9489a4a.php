@@ -370,4 +370,4 @@
   </div>
   <!-- /.sidebar -->
 </aside>
-<?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/layouts/partials/aside.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/layouts/partials/aside.blade.php ENDPATH**/ ?>

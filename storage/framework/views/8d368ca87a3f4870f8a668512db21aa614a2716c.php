@@ -2,15 +2,15 @@
 	<?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.navigation-map', ['comercio_id' => $comercio_id])->html();
-} elseif ($_instance->childHasBeenRendered('l2936604503-0')) {
-    $componentId = $_instance->getRenderedChildComponentId('l2936604503-0');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l2936604503-0');
+} elseif ($_instance->childHasBeenRendered('l1222314639-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1222314639-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1222314639-0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l2936604503-0');
+    $_instance->preserveRenderedChild('l1222314639-0');
 } else {
     $response = \Livewire\Livewire::mount('components.navigation-map', ['comercio_id' => $comercio_id]);
     $html = $response->html();
-    $_instance->logRenderedChild('l2936604503-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l1222314639-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -28,4 +28,4 @@ echo $html;
 				</div>
 		</div>
 	</div>
-</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/layouts/footer.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/layouts/footer.blade.php ENDPATH**/ ?>

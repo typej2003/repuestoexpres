@@ -39,7 +39,7 @@
             height: 35px;
             display: block;
             /* background-image: url('/img/circle-right-regular.svg'); */
-            z-index: 1000;
+            z-index: 2;
         }
 
         .slick-prev.slick-arrow {
@@ -49,7 +49,7 @@
             height: 35px;
             display: block;
             /* background-image: url('/img/circle-left-regular.svg'); */
-            z-index: 1000;
+            z-index: 2;
         }
 
         .slick-slide {
@@ -165,4 +165,4 @@
             //location.reload()
         })
     </script>
-</div><?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/livewire/components/carousel-offer.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/carousel-offer.blade.php ENDPATH**/ ?>

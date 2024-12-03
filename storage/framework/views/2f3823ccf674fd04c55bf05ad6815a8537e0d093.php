@@ -128,4 +128,4 @@ unset($__errorArgs, $__bag); ?>
 <script src="<?php echo e(asset('backend/dist/js/adminlte.min.js')); ?>"></script>
 </body>
 </html>
-<?php /**PATH C:\Users\Personal\Documents\Proyectos\github\repuestoexpres\resources\views/auth/login.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/auth/login.blade.php ENDPATH**/ ?>
