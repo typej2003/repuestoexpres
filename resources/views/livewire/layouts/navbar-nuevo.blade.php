@@ -120,7 +120,7 @@
                                     
                                             @foreach($category->subcategories as $subcategory)
                                                 <div class="content">
-                                                    <div class="d-flex justify-content-between mx-3">
+                                                    <div class="d-flex justify-content-between mx-5">
                                                         <a class="" href="{{ route('cat', [
                                                                                     'categ' => $subcategory->name,
                                                                                     'manufacturer_id' => $state['manufacturer_id'],

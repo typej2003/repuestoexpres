@@ -136,7 +136,7 @@ echo $html;
                                     
                                             <?php $__currentLoopData = $category->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="content">
-                                                    <div class="d-flex justify-content-between mx-3">
+                                                    <div class="d-flex justify-content-between mx-5">
                                                         <a class="" href="<?php echo e(route('cat', [
                                                                                     'categ' => $subcategory->name,
                                                                                     'manufacturer_id' => $state['manufacturer_id'],
