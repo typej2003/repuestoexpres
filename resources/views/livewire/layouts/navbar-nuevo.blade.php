@@ -260,7 +260,7 @@
                 <div class="menu">
                     <div class="menu-left" onclick="openNav()">&#9776; <span class="wordMenu">MENÚ</span></div> 
                     <div class="menu-center w-full d-flex justify-content-around">                        
-                                
+                        @livewire('components.menu-component')
                     </div>
                     <div class="button-search w-full" style="display: none; cursor: pointer;"><img src="./img/icon_buscar.png" alt=""></div>
                     <div class="menu-right w-full">

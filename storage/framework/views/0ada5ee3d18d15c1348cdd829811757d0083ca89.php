@@ -277,22 +277,36 @@ echo $html;
                 <div class="menu">
                     <div class="menu-left" onclick="openNav()">&#9776; <span class="wordMenu">MENÚ</span></div> 
                     <div class="menu-center w-full d-flex justify-content-around">                        
-                                
-                    </div>
-                    <div class="button-search w-full" style="display: none; cursor: pointer;"><img src="./img/icon_buscar.png" alt=""></div>
-                    <div class="menu-right w-full">
                         <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('components.currency')->html();
+    $html = \Livewire\Livewire::mount('components.menu-component')->html();
 } elseif ($_instance->childHasBeenRendered('l3862662930-1')) {
     $componentId = $_instance->getRenderedChildComponentId('l3862662930-1');
     $componentTag = $_instance->getRenderedChildComponentTagName('l3862662930-1');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
     $_instance->preserveRenderedChild('l3862662930-1');
 } else {
-    $response = \Livewire\Livewire::mount('components.currency');
+    $response = \Livewire\Livewire::mount('components.menu-component');
     $html = $response->html();
     $_instance->logRenderedChild('l3862662930-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+                    </div>
+                    <div class="button-search w-full" style="display: none; cursor: pointer;"><img src="./img/icon_buscar.png" alt=""></div>
+                    <div class="menu-right w-full">
+                        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.currency')->html();
+} elseif ($_instance->childHasBeenRendered('l3862662930-2')) {
+    $componentId = $_instance->getRenderedChildComponentId('l3862662930-2');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l3862662930-2');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l3862662930-2');
+} else {
+    $response = \Livewire\Livewire::mount('components.currency');
+    $html = $response->html();
+    $_instance->logRenderedChild('l3862662930-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

@@ -73,6 +73,8 @@
                                             </span>
                                         </th>
                                         <th>Ruta</th>
+                                        <th>Origen</th>
+                                        <th>Menu</th>
                                         <th>Posición</th>
                                         <th scope="col">Fecha de Registro</th>
                                         <th scope="col">Opciones</th>
@@ -84,6 +86,8 @@
                                         <th scope="row"><?php echo e($menus->firstItem() + $index); ?></th>
                                         <td><?php echo e($menu->texto); ?></td>
                                         <td><?php echo e($menu->ruta); ?></td>
+                                        <td><?php echo e($menu->origen); ?></td>
+                                        <td><?php echo e($menu->menu); ?></td>
                                         <td><?php echo e($menu->posicion); ?></td>
                                         <td><?php echo e($menu->comercio_id); ?></td>
                                         <td><?php echo e($menu->created_at->toFormattedDate() ?? 'N/A'); ?></td>

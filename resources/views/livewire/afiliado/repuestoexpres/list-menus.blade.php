@@ -62,6 +62,8 @@
                                             </span>
                                         </th>
                                         <th>Ruta</th>
+                                        <th>Origen</th>
+                                        <th>Menu</th>
                                         <th>Posición</th>
                                         <th scope="col">Fecha de Registro</th>
                                         <th scope="col">Opciones</th>
@@ -73,6 +75,8 @@
                                         <th scope="row">{{ $menus->firstItem() + $index }}</th>
                                         <td>{{ $menu->texto }}</td>
                                         <td>{{ $menu->ruta }}</td>
+                                        <td>{{ $menu->origen }}</td>
+                                        <td>{{ $menu->menu }}</td>
                                         <td>{{ $menu->posicion }}</td>
                                         <td>{{ $menu->comercio_id }}</td>
                                         <td>{{ $menu->created_at->toFormattedDate() ?? 'N/A' }}</td>

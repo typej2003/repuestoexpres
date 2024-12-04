@@ -17,6 +17,8 @@ class CreateMenusTable extends Migration
             $table->id();
             $table->string('texto');
             $table->string('ruta');
+            $table->string('origen');
+            $table->string('menu');
             $table->bigInteger('posicion');
             $table->bigInteger('comercio_id');
             $table->timestamps();

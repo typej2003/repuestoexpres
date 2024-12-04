@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             MotorSeeder::class,
             ContainerSeeder::class,
             ProductsSeeder::class,
+            MenuSeeder::class,
         ]);
     }
 }
