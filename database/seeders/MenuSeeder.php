@@ -15,10 +15,10 @@ class MenuSeeder extends Seeder
     public function run()
     {
         DB::table('menus')->insert([
-            'texto' => 'Menu 1',
-            'ruta' => 'listAutos',
-            'origen' => 'view', // view or categories
-            'menu' => 0,
+            'texto' => 'Automovil',
+            'ruta' => 'automovil',
+            'origen' => 'categories', // view or categories
+            'menu' => 1,
             'posicion' => 1,
             'comercio_id' => '1',
             'created_at' => '2022-05-16 12:20:36',
@@ -26,11 +26,11 @@ class MenuSeeder extends Seeder
         ]);
 
         DB::table('menus')->insert([
-            'texto' => 'Menu 2',
-            'ruta' => 'categories',
+            'texto' => 'Motocicleta',
+            'ruta' => 'motocicleta',
             'origen' => 'categories', // view or categories
             'menu' => 1,
-            'posicion' => 1,
+            'posicion' => 2,
             'comercio_id' => '1',
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
@@ -41,7 +41,7 @@ class MenuSeeder extends Seeder
             'ruta' => 'categories',
             'origen' => 'categories', // view or categories
             'menu' => 1,
-            'posicion' => 2,
+            'posicion' => 3,
             'comercio_id' => '1',
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
@@ -52,7 +52,7 @@ class MenuSeeder extends Seeder
             'ruta' => 'categories',
             'origen' => 'categories', // view or categories
             'menu' => 1,
-            'posicion' => 3,
+            'posicion' => 4,
             'comercio_id' => '1',
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
@@ -63,7 +63,7 @@ class MenuSeeder extends Seeder
             'ruta' => 'listNavidad',
             'origen' => 'view', // view or categories
             'menu' => 1,
-            'posicion' => 4,
+            'posicion' => 5,
             'comercio_id' => '1',
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'
