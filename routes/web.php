@@ -20,6 +20,8 @@ use App\Http\Livewire\Recursos\EmailExample;
 
 use App\Http\Livewire\Components\Star;
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 Route::get('/star', Star::class)->name('star'); 
 
 /*
@@ -90,3 +92,13 @@ Route::get('/emailexample', EmailExample::class)->name('emailexample');
 // });
 
 Route::post('/autenticar', [AuthController::class, 'autenticar'])->name('autenticar');
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
