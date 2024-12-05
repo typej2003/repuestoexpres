@@ -8,6 +8,7 @@ use App\Http\Livewire\Afiliado\ListCategories;
 use App\Http\Livewire\Afiliado\ListCategorieslist;
 use App\Http\Livewire\Afiliado\ListSubcategories;
 use App\Http\Livewire\Afiliado\ListProducts;
+use App\Http\Livewire\Afiliado\ViewDetails;
 use App\Http\Livewire\Afiliado\Repuestoexpres\ListMenus;
 use App\Http\Livewire\Afiliado\ListPedidos;
 use App\Http\Livewire\Afiliado\Product\ListCombos;
@@ -32,7 +33,18 @@ Route::get('/listCategorieslist/{comercioId}', listCategorieslist::class)->name(
 
 Route::get('/newSubcategory/{comercioId}/{categoryId}', listSubcategories::class)->name('listSubcategories')->middleware('auth');
 
-Route::get('/listProducts/{comercioId}', ListProducts::class)->name('listProducts')->middleware('auth');
+Route::get('/listProducts/{comercioId} ', ListProducts::class)->name('listProducts')->middleware('auth');
+
+Route::get('/routedetails/{comercioId}/{productId}', function($comercioId, $productId){
+    if(auth()->user()){
+        return redirect()->route('viewdetails', ['comercioId' => $comercioId, 'productId' => $productId]);
+    }
+    else{
+        return view('livewire.afiliado.view-details', ['comercioId' => $comercioId, 'productId' => $productId]);
+    }
+});
+
+Route::get('/viewdetails/{comercioId}/{productId}', ViewDetails::class)->name('viewdetails');
 
 Route::get('/listMenus/{comercioId}', ListMenus::class)->name('listMenus')->middleware('auth');
 

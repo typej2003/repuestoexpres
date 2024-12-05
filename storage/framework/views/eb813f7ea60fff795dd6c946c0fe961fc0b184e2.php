@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Profile</h1>
+                    <h1>Perfil</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">User Profile</li>
+                        <li class="breadcrumb-item"><a href="/admin/dashboard">Escritorio</a></li>
+                        <li class="breadcrumb-item active">Perfil del Usuario</li>
                     </ol>
                 </div>
             </div>
@@ -39,7 +39,7 @@
 
                             <h3 class="profile-username text-center"><?php echo e(auth()->user()->name); ?></h3>
 
-                            <p class="text-muted text-center">Admin</p>
+                            <p class="text-muted text-center"><?php echo e(auth()->user()->rol()); ?></p>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -50,17 +50,19 @@
                     <div class="card" x-data="{ currentTab: $persist('profile') }">
                         <div class="card-header p-2">
                             <ul class="nav nav-pills" wire:ignore>
-                                <li @click.prevent="currentTab = 'profile'" class="nav-item"><a class="nav-link" :class="currentTab === 'profile' ? 'active' : ''" href="#profile" data-toggle="tab"><i class="fa fa-user mr-1"></i> Edit Profile</a></li>
-                                <li @click.prevent="currentTab = 'changePassword'" class="nav-item"><a class="nav-link" :class="currentTab === 'changePassword' ? 'active' : ''" href="#changePassword" data-toggle="tab"><i class="fa fa-key mr-1"></i> Change
-                                        Password</a></li>
+                                <li @click.prevent="currentTab = 'profile'" class="nav-item"><a class="nav-link" :class="currentTab === 'profile' ? 'active' : ''" href="#profile" data-toggle="tab"><i class="fa fa-user mr-1"></i> Editar Perfil</a></li>
+                                <li @click.prevent="currentTab = 'changePassword'" class="nav-item"><a class="nav-link" :class="currentTab === 'changePassword' ? 'active' : ''" href="#changePassword" data-toggle="tab"><i class="fa fa-key mr-1"></i> Cambiar Contraseña</a></li>
+                                <li @click.prevent="currentTab = 'changeBasicData'" class="nav-item"><a class="nav-link" :class="currentTab === 'changeBasicData' ? 'active' : ''" href="#changeBasicData" data-toggle="tab"><i class="fa fa-key mr-1"></i> Datos Básicos</a></li>
+                                <li @click.prevent="currentTab = 'changeBillingDetails'" class="nav-item"><a class="nav-link" :class="currentTab === 'changeBillingDetails' ? 'active' : ''" href="#changeBillingDetails" data-toggle="tab"><i class="fa fa-key mr-1"></i> Facturación</a></li>
                             </ul>
                         </div><!-- /.card-header -->
                         <div class="card-body">
                             <div class="tab-content">
+
                                 <div class="tab-pane" :class="currentTab === 'profile' ? 'active' : ''" id="profile" wire:ignore.self>
                                     <form wire:submit.prevent="updateProfile" class="form-horizontal">
                                         <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                            <label for="inputName" class="col-sm-2 col-form-label">Usuario</label>
                                             <div class="col-sm-10">
                                                 <input wire:model.defer="state.name" type="text" class="form-control <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -69,7 +71,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="inputName" placeholder="Name">
+unset($__errorArgs, $__bag); ?>" id="inputName" placeholder="Usuario">
                                                 <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -113,7 +115,7 @@ unset($__errorArgs, $__bag); ?>
                                         </div>
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10">
-                                                <button type="submit" class="btn btn-success"><i class="fa fa-save mr-1"></i> Save Changes</button>
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-save mr-1"></i> Guardar Cambios</button>
                                             </div>
                                         </div>
                                     </form>
@@ -122,8 +124,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="tab-pane" :class="currentTab === 'changePassword' ? 'active' : ''" id="changePassword" wire:ignore.self>
                                     <form wire:submit.prevent="changePassword" class="form-horizontal">
                                         <div class="form-group row">
-                                            <label for="currentPassword" class="col-sm-3 col-form-label">Current
-                                                Password</label>
+                                            <label for="currentPassword" class="col-sm-3 col-form-label">Contraseña actual</label>
                                             <div class="col-sm-9">
                                                 <input wire:model.defer="state.current_password" type="password" class="form-control <?php $__errorArgs = ['current_password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -132,7 +133,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="currentPassword" placeholder="Current Password">
+unset($__errorArgs, $__bag); ?>" id="currentPassword" placeholder="Contraseña actual">
                                                 <?php $__errorArgs = ['current_password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -149,8 +150,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="newPassword" class="col-sm-3 col-form-label">New
-                                                Password</label>
+                                            <label for="newPassword" class="col-sm-3 col-form-label">Nueva Contraseña</label>
                                             <div class="col-sm-9">
                                                 <input wire:model.defer="state.password" type="password" class="form-control <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -159,7 +159,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="newPassword" placeholder="New Password">
+unset($__errorArgs, $__bag); ?>" id="newPassword" placeholder="Nueva Contraseña">
                                                 <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -176,8 +176,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="passwordConfirmation" class="col-sm-3 col-form-label">Confirm
-                                                New Password</label>
+                                            <label for="passwordConfirmation" class="col-sm-3 col-form-label">Confirme la Contraseña</label>
                                             <div class="col-sm-9">
                                                 <input wire:model.defer="state.password_confirmation" type="password" class="form-control <?php $__errorArgs = ['password_confirmation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -186,7 +185,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="passwordConfirmation" placeholder="Confirm New Password">
+unset($__errorArgs, $__bag); ?>" id="passwordConfirmation" placeholder="Confirme la Contraseña">
                                                 <?php $__errorArgs = ['password_confirmation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -204,10 +203,46 @@ unset($__errorArgs, $__bag); ?>
                                         </div>
                                         <div class="form-group row">
                                             <div class="offset-sm-3 col-sm-9">
-                                                <button type="submit" class="btn btn-success"><i class="fa fa-save mr-1"></i> Save Changes</button>
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-save mr-1"></i> Guardar Cambios</button>
                                             </div>
                                         </div>
                                     </form>
+                                </div>
+
+                                <div class="tab-pane" :class="currentTab === 'changeBasicData' ? 'active' : ''" id="changeBasicData" wire:ignore.self>
+                                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('admin.profile.basic-data', ['user_id' => auth()->user()->id ])->html();
+} elseif ($_instance->childHasBeenRendered('l454126080-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l454126080-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l454126080-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l454126080-0');
+} else {
+    $response = \Livewire\Livewire::mount('admin.profile.basic-data', ['user_id' => auth()->user()->id ]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l454126080-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+                                </div>
+
+                                <div class="tab-pane" :class="currentTab === 'changeBillingDetails' ? 'active' : ''" id="changeBillingDetails" wire:ignore.self>
+                                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('admin.profile.billing-details', ['user_id' => auth()->user()->id ])->html();
+} elseif ($_instance->childHasBeenRendered('l454126080-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l454126080-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l454126080-1');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l454126080-1');
+} else {
+    $response = \Livewire\Livewire::mount('admin.profile.billing-details', ['user_id' => auth()->user()->id ]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l454126080-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>

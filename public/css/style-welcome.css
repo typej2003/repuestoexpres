@@ -23,7 +23,7 @@ a {text-decoration: none; }
 .search .fa-search {left: auto; right: 10px;}
 
 /* Menu horizontal */
-.menu-horizontal { list-style-type: none; text-align: center; width: 30% !important; height: 70px !important; }
+.menu-horizontal { list-style-type: none; width: 30% !important; height: 70px !important; }
 
 .menu-horizontal-responsive {  list-style-type: none; text-align: center; margin-top: 0px !important; }
   
@@ -31,7 +31,7 @@ a {text-decoration: none; }
 
 .botonera { display: flex !important; align-items: center !important; height: 50px !important; padding: 5px !important; border-radius: 15px !important; }
 
-.botonera a { color: black;     text-decoration: none; display: flex; align-items: center; }
+.botonera a { color: black; text-decoration: none; display: flex; align-items: center; }
 
 .botonera img { width: 45px !important; }
 
@@ -280,6 +280,32 @@ background-color: #3d362d!important;
 	/* Lowering the shadow */ 
 	color: #FFCC2A!important;
 	background-color: #3d362d!important;
+}
+
+.btn-view{
+	background-color: #722c2c !important;
+	color: #FFCC2A !important;
+  min-width: 130px!important;
+	width: 140px!important;
+	height: 45px !important;
+	font-size: .8rem!important;
+	margin-top: 5px !important;
+	margin-left: 0px!important;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.btn-view:hover {
+	background-color: #722c2c !important;
+	color: #FFCC2A !important;
+}
+.btn-view:active { 
+	transform: scale(0.98); 
+	/* Scaling button to 0.98 to its original size */ 
+	box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+	/* Lowering the shadow */ 
+	color: #FFCC2A!important;
+	background-color: #722c2c!important;
 }
 
 /*     Inicio de botones de incremento y decremento        */

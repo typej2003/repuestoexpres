@@ -192,6 +192,11 @@ class Product extends Model
         }
     }
 
+    public function comercio()
+    {
+        return $this->hasOne(Comercio::class, 'id', 'comercio_id');
+    }
+
     public function showSubcategories()
     {
         $categorias = CategoriesProduct::where('product_id', $this->id)->where('comercio_id', $this->comercio_id)->get();

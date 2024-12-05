@@ -100,7 +100,10 @@
                                                     <div class="">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
                                                 @endif
                                                 <div style="display: flex; flex-direction: row;">
+                                                    <div class="">
                                                     <button type="submit" class="btn btn-sale text-center">Comprar ahora</button>
+                                                    <a href="/routedetails/{{ $product->comercio_id }}/{{ $product->id }}" class="btn btn-view ">Ver</a>
+                                                    </div>
                                                     <br>                                                     
                                                     <div class="cardStar" product="{{$product->id}}" >
                                                         @for ($i = 1; $i <=5; $i++)

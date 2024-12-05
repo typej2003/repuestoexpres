@@ -65,17 +65,17 @@
     <div class="container-fluid showProductsP">
         <div class="row negrita">
             <div class="col-12">
-                <img class="mx-3" width="45px" src="/img/icon-motor.png" alt=""><span class="h3 text-dark">Motor</span>
+                
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <span class="h4 text-white"></span>  
+                <span class="h4 negrita">También podría interesarle</span>  
             </div>
         </div>    
         <div class="row">
             <div class="col-md-12">
-                <section class="regular slider slider-products" <?php if($renderizar): ?> wire:ignore <?php endif; ?> wire:ignore.self>
+                <section class="regular slider slider-recommended" <?php if($renderizar): ?> wire:ignore <?php endif; ?>>
                     <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <div>
                             <form action="/add" method="post">
@@ -100,10 +100,7 @@
                                                     <div class="">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
                                                 <?php endif; ?>
                                                 <div style="display: flex; flex-direction: row;">
-                                                    <div class="">
                                                     <button type="submit" class="btn btn-sale text-center">Comprar ahora</button>
-                                                    <a href="/routedetails/<?php echo e($product->comercio_id); ?>/<?php echo e($product->id); ?>" class="btn btn-view ">Ver</a>
-                                                    </div>
                                                     <br>                                                     
                                                     <div class="cardStar" product="<?php echo e($product->id); ?>" >
                                                         <?php for($i = 1; $i <=5; $i++): ?>
@@ -132,7 +129,7 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <div class="card showProductCard mx-auto text-center">
                             <div class="card-body">
-                                <span>No tiene productos disponibles</span>
+                                <span>No tiene Ofertas Disponibles</span>
                             </div>
                             <div class= "card-footer">
                             </div>                    
@@ -170,15 +167,15 @@
                                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.star', ['product_id' => $state['product_id'], 'ca_valoracion' => $state['ca_valoracion'], 'class' => $state['class']])->html();
-} elseif ($_instance->childHasBeenRendered('l3526436199-0')) {
-    $componentId = $_instance->getRenderedChildComponentId('l3526436199-0');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l3526436199-0');
+} elseif ($_instance->childHasBeenRendered('l340087703-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l340087703-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l340087703-0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l3526436199-0');
+    $_instance->preserveRenderedChild('l340087703-0');
 } else {
     $response = \Livewire\Livewire::mount('components.star', ['product_id' => $state['product_id'], 'ca_valoracion' => $state['ca_valoracion'], 'class' => $state['class']]);
     $html = $response->html();
-    $_instance->logRenderedChild('l3526436199-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l340087703-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -227,7 +224,7 @@ unset($__errorArgs, $__bag); ?>
 
     <script>
         function loadSlider(){
-            $(".slider-products").slick({
+            $(".slider-recommended").slick({
             dots: true,
             infinite: true,
             slidesToShow: findSlides(),
@@ -283,4 +280,4 @@ unset($__errorArgs, $__bag); ?>
         }
     </script>
 
-</div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/show-products.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/show-recommended.blade.php ENDPATH**/ ?>
