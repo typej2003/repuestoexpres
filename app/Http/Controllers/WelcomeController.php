@@ -151,10 +151,10 @@ class WelcomeController extends Controller
         }
 
         $comercio_id = $request->get('comercio_id');
-            if(empty($comercio_id)){
-                $comercio_id = 1;
-            }
-            $setting = Setting::find($comercio_id)->first();
+        if(empty($comercio_id)){
+            $comercio_id = 1;
+        }
+        $setting = Setting::find($comercio_id)->first();
         return view('welcome', [
             'words' => $words,
             'manufacturer_id' => $manufacturer_id,

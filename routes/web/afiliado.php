@@ -22,6 +22,7 @@ use App\Http\Livewire\Afiliado\MetodosPagos;
 
 use App\Models\Comercio;
 use App\Models\Product;
+use App\Models\Setting;
 
 Route::get('/listComercios/{userId}', ListComercios::class)->name('listComercios')->middleware('auth');
 
@@ -44,7 +45,18 @@ Route::get('/routedetails/{comercioId}/{productId}', function($comercioId, $prod
     else{
         $product = Product::find($productId);
         $comercio = Comercio::find($comercioId);
-        return view('livewire.afiliado.view-details', ['comercio' => $comercio, 'product' => $product]);
+        $setting = Setting::find($comercioId)->first();
+
+        return view('livewire.afiliado.view-details', [
+            'comercio' => $comercio, 
+            'product' => $product,
+            'in_cellphonecontact' => $setting->in_cellphonecontact,
+            'in_sliderprincipal' => $setting->in_sliderprincipal,
+            'in_marcasproductos' => $setting->in_marcasproductos,
+            'manufacturer_id' => '',
+            'modelo_id' => '',
+            'motor_id' => '',
+        ]);
     }
 });
 
