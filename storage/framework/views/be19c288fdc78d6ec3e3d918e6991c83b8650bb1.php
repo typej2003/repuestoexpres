@@ -26,7 +26,7 @@
         </div><!-- /.row -->
         <div class="row mb-2">
             <div class="col-sm-6">
-                <img style="width:100%; height: 100%;" src="/noimage.png" alt="">
+                <img style="width:100%; height: 100%;" src="<?php echo e($product->avatar_url); ?>" alt="">
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <div class="row">

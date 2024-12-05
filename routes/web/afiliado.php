@@ -20,6 +20,8 @@ use App\Http\Livewire\Afiliado\ListContainers;
 use App\Http\Livewire\Afiliado\Repuestoexpres\ListClients;
 use App\Http\Livewire\Afiliado\MetodosPagos;
 
+use App\Models\Comercio;
+use App\Models\Product;
 
 Route::get('/listComercios/{userId}', ListComercios::class)->name('listComercios')->middleware('auth');
 
@@ -40,7 +42,9 @@ Route::get('/routedetails/{comercioId}/{productId}', function($comercioId, $prod
         return redirect()->route('viewdetails', ['comercioId' => $comercioId, 'productId' => $productId]);
     }
     else{
-        return view('livewire.afiliado.view-details', ['comercioId' => $comercioId, 'productId' => $productId]);
+        $product = Product::find($productId);
+        $comercio = Comercio::find($comercioId);
+        return view('livewire.afiliado.view-details', ['comercio' => $comercio, 'product' => $product]);
     }
 });
 
