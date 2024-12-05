@@ -58,8 +58,6 @@ class ShowProducts extends AdminComponent
         }
     }
 
-    
-
     public function searchClass($puntuacion)
     {
         switch ($puntuacion) {
