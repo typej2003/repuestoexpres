@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use App\Models\DatosBasicos;
 
 use App\Http\Controllers\WelcomeController;
 use App\Http\Livewire\WelcomeWire;
@@ -117,6 +119,29 @@ Route::get('/login-google', function () {
  
 Route::get('/google-callback', function () {
     $user = Socialite::driver('google')->user();
- 
+    
+    $userExists = User::where('external_id', $user->id)->where('external_auth', 'google')->exists();
+
+    if($userExists){
+        Auth::login($userExists);
+    }else{
+        $userNew = User::create([
+                'name' =>user->name,
+                'email' =>user->email,
+                'avatar' =>user->avatar,
+                'external_id' =>user->id,
+                'external_auth' =>'google',
+                'role' =>'cliente',
+            ]);
+        
+        DatosBasicos::create([
+            'user_id' => $userNew->id,
+            'cellphonecode' => '',
+            'cellphone' => '',
+        ]);
+        
+        Auth::login($userNew);
+    }
+    return redirect('/');
     // $user->token
 });

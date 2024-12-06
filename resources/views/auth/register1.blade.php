@@ -12,7 +12,7 @@
                             <label class="text-bold Text-Uppercase" for="">Inicia tu registro</label>
                         </div>
                         <div class="group-control my-3">
-                            <a class="form-control text-center" href=""><i class="fa fa-brands fa-google"></i> Regístrate con Google</a>
+                            <a class="form-control text-center" href="/login-google"><i class="fa fa-brands fa-google"></i> Regístrate con Google</a>
                         </div>
                         <hr class="my-3">
                         <div class="group-control">

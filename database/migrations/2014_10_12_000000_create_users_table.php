@@ -18,9 +18,13 @@ class CreateUsersTable extends Migration
             $table->string('identificationNac')->nullable();
             $table->string('identificationNumber')->nullable();
             $table->string('name');
+            $table->string('names')->nullable();
+            $table->string('surnames')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('external_id')->nullable();
+            $table->string('external_auth')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
