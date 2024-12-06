@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Laravel\Socialite\Facades\Socialite;
+
 use App\Http\Controllers\WelcomeController;
 use App\Http\Livewire\WelcomeWire;
 use App\Http\Controllers\AuthController;
@@ -102,3 +104,19 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
  
     return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::get('/login1', function(){
+    return view('auth.login1');
+});
+
+// autentica con google
+ 
+Route::get('/login-google', function () {
+    return Socialite::driver('google')->redirect();
+});
+ 
+Route::get('/google-callback', function () {
+    $user = Socialite::driver('google')->user();
+ 
+    // $user->token
+});

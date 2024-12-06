@@ -4,6 +4,14 @@ body, html{ margin:0; padding:0; /*background-color: yellowgreen;*/}
 
 a {text-decoration: none; }
 
+.text-bold {
+  font-weight: bold;
+}
+
+.Text-Uppercase {
+  text-transform: uppercase;
+}
+
 .header{ border-top:1px solid white;background:rgb(255, 255, 255); color:#333; height: 70px !important; width:100%; font-family: 'Lobster', cursive; text-align:center; display: flex; justify-content: space-between; }
 
 /* logo */

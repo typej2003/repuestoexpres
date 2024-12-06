@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Afiliado;
 
 use App\Http\Livewire\Admin\AdminComponent;
+
 use App\Models\User;
 use App\Models\Comercio;
 use App\Models\Area;
@@ -92,6 +93,10 @@ class ListComercios extends AdminComponent
 		if ($this->photo) {
 			$validatedData['avatar'] = $this->photo->store('/', 'avatarscomercios');
 		}
+
+		// resize image
+
+
 
         $validatedData['user_id'] = $this->userId;
 
