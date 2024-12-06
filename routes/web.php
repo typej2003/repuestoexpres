@@ -118,30 +118,30 @@ Route::get('/login-google', function () {
 });
  
 Route::get('/google-callback', function () {
-    $user = Socialite::driver('google')->user();
+    // $user = Socialite::driver('google')->user();
     
-    $userExists = User::where('external_id', $user->id)->where('external_auth', 'google')->exists();
+    // $userExists = User::where('external_id', $user->id)->where('external_auth', 'google')->exists();
 
-    if($userExists){
-        Auth::login($userExists);
-    }else{
-        $userNew = User::create([
-                'name' =>user->name,
-                'email' =>user->email,
-                'avatar' =>user->avatar,
-                'external_id' =>user->id,
-                'external_auth' =>'google',
-                'role' =>'cliente',
-            ]);
+    // if($userExists){
+    //     Auth::login($userExists);
+    // }else{
+    //     $userNew = User::create([
+    //             'name' =>user->name,
+    //             'email' =>user->email,
+    //             'avatar' =>user->avatar,
+    //             'external_id' =>user->id,
+    //             'external_auth' =>'google',
+    //             'role' =>'cliente',
+    //         ]);
         
-        DatosBasicos::create([
-            'user_id' => $userNew->id,
-            'cellphonecode' => '',
-            'cellphone' => '',
-        ]);
+    //     DatosBasicos::create([
+    //         'user_id' => $userNew->id,
+    //         'cellphonecode' => '',
+    //         'cellphone' => '',
+    //     ]);
         
-        Auth::login($userNew);
-    }
+    //     Auth::login($userNew);
+    // }
     return redirect('/');
     // $user->token
 });
