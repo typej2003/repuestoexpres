@@ -33,7 +33,9 @@ class NavbarNuevo extends Component
 
     public $manufacturer_id, $modelo_id, $motor_id;
 
-    protected $listeners = ['sendCategories' => 'sendCategories', 'receiveManufacturerS' => 'receiveManufacturerS', 'receiveModeloS' => 'receiveModeloS', 'receiveMotorS' => 'receiveMotorS'];
+    public $totalQuantityCart = 0;
+
+    protected $listeners = ['sendCategories' => 'sendCategories', 'receiveManufacturerS' => 'receiveManufacturerS', 'receiveModeloS' => 'receiveModeloS', 'receiveMotorS' => 'receiveMotorS', 'changeQuantity' => 'changeQuantity'];
 
 
     public function mount($comercioId = 1, $manufacturer_id = 0, $modelo_id = 0, $motor_id = 0){
@@ -47,8 +49,6 @@ class NavbarNuevo extends Component
         $this->state['modelo_id'] = $modelo_id;
 
         $this->state['motor_id'] = $motor_id;
-
-
 
         $this->categories = Category::where('comercio_id', $this->comercio_id)
                                     ->where('itemMenu', 1)
@@ -79,7 +79,14 @@ class NavbarNuevo extends Component
             }
             
         }
+
+        $this->totalQuantityCart = \Cart::getTotalQuantity();
         
+    }
+
+    public function changeQuantity()
+    {
+        $this->totalQuantityCart = \Cart::getTotalQuantity();
     }
 
     public function render()

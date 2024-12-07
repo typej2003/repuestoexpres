@@ -5,6 +5,7 @@
 
 	use App\Http\Livewire\Cart\Cart;
 	use App\Http\Livewire\Cart\Cart1;
+	use App\Http\Livewire\Cart\LiveCartController;
 	use App\Http\Livewire\Layouts\Navbar;
 
 	// Route::get('/cart', Cart::class)->name('cart');
@@ -21,7 +22,9 @@
 
 	//Route::get('/', [CartController::class, 'shop'])->name('shop')->middleware('auth');
 	Route::get('/shop', [CartController::class, 'shop'])->name('shop');
-	Route::post('/add', [CartController::class, 'add'])->name('cart.store');
+	
+	//Route::post('/add', [CartController::class, 'add'])->name('cart.store');
+	Route::post('/add', [LiveCartController::class, 'add'])->name('cart.store');
 
 	Route::post('/update', [CartController::class, 'update'])->name('cart.update');
 	Route::post('/remove', [CartController::class, 'remove'])->name('cart.remove');

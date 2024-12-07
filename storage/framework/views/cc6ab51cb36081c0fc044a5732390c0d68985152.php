@@ -105,7 +105,8 @@
                                             <?php endif; ?>
                                             <div style="display: flex; flex-direction: row;">
                                                 <div class="">
-                                                <button type="submit" class="btn btn-sale text-center">Comprar ahora</button>
+                                                <!-- <button type="submit" class="btn btn-sale text-center">Comprar ahora</button> -->
+                                                <a wire:click.prevent="sendCard(<?php echo e($product->id); ?>, 1)" class="btn btn-sale text-center">Comprar ahora</a>
                                                 <a href="/routedetails/<?php echo e($product->comercio_id); ?>/<?php echo e($product->id); ?>" class="btn btn-view ">Ver</a>
                                                 </div>
                                                 <br>                                                     

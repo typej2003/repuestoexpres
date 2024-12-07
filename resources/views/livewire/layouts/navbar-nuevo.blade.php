@@ -247,7 +247,8 @@
                                     <div class="dropdown-cart-drop">
                                         <a class="btn-cart-drop d-flex justify-content-between botonera">
                                             <img src="/img/icon_carrito.png" style="height:45px cursor:pointer;">
-                                            <span class="text-dark">({{\Cart::getTotalQuantity()}})</span>
+                                            <span class="text-dark">({{$totalQuantityCart}})</span>
+                                            <!-- <span class="text-dark">({{\Cart::getTotalQuantity()}})</span> -->
                                         </a>
                                         @include('livewire.carrito.cart-drop')
                                     </div>

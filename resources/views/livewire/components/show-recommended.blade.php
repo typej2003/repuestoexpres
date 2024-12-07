@@ -75,7 +75,7 @@
         </div>    
         <div class="row">
             <div class="col-md-12">
-                <section class="regular slider slider-recommended" @if($renderizar) wire:ignore @endif>
+                <section class="regular slider slider-recommended" @if($renderizar) wire:ignore @endif wire:ignore.self>
                     @forelse ($products as $index => $product)
                         <div>
                             <form action="/add" method="post">
@@ -100,7 +100,11 @@
                                                     <div class="">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
                                                 @endif
                                                 <div style="display: flex; flex-direction: row;">
-                                                    <button type="submit" class="btn btn-sale text-center">Comprar ahora</button>
+                                                    <div class="">
+                                                    <!-- <button type="submit" class="btn btn-sale text-center">Comprar ahora</button> -->
+                                                    <a wire:click.prevent="sendCard({{ $product->id }}, 1)" class="btn btn-sale text-center">Comprar ahora</a>
+                                                    <a href="/routedetails/{{ $product->comercio_id }}/{{ $product->id }}" class="btn btn-view ">Ver</a>
+                                                    </div>
                                                     <br>                                                     
                                                     <div class="cardStar" product="{{$product->id}}" >
                                                         @for ($i = 1; $i <=5; $i++)
@@ -129,7 +133,7 @@
                     @empty
                         <div class="card showProductCard mx-auto text-center">
                             <div class="card-body">
-                                <span>No tiene Ofertas Disponibles</span>
+                                <span>No tiene productos disponibles</span>
                             </div>
                             <div class= "card-footer">
                             </div>                    

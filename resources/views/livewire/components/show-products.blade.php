@@ -101,7 +101,8 @@
                                                 @endif
                                                 <div style="display: flex; flex-direction: row;">
                                                     <div class="">
-                                                    <button type="submit" class="btn btn-sale text-center">Comprar ahora</button>
+                                                    <!-- <button type="submit" class="btn btn-sale text-center">Comprar ahora</button> -->
+                                                    <a wire:click.prevent="sendCard({{ $product->id }}, 1)" class="btn btn-sale text-center">Comprar ahora</a>
                                                     <a href="/routedetails/{{ $product->comercio_id }}/{{ $product->id }}" class="btn btn-view ">Ver</a>
                                                     </div>
                                                     <br>                                                     

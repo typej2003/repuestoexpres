@@ -75,7 +75,7 @@
         </div>    
         <div class="row">
             <div class="col-md-12">
-                <section class="regular slider slider-recommended" <?php if($renderizar): ?> wire:ignore <?php endif; ?>>
+                <section class="regular slider slider-recommended" <?php if($renderizar): ?> wire:ignore <?php endif; ?> wire:ignore.self>
                     <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <div>
                             <form action="/add" method="post">
@@ -100,7 +100,11 @@
                                                     <div class="">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
                                                 <?php endif; ?>
                                                 <div style="display: flex; flex-direction: row;">
-                                                    <button type="submit" class="btn btn-sale text-center">Comprar ahora</button>
+                                                    <div class="">
+                                                    <!-- <button type="submit" class="btn btn-sale text-center">Comprar ahora</button> -->
+                                                    <a wire:click.prevent="sendCard(<?php echo e($product->id); ?>, 1)" class="btn btn-sale text-center">Comprar ahora</a>
+                                                    <a href="/routedetails/<?php echo e($product->comercio_id); ?>/<?php echo e($product->id); ?>" class="btn btn-view ">Ver</a>
+                                                    </div>
                                                     <br>                                                     
                                                     <div class="cardStar" product="<?php echo e($product->id); ?>" >
                                                         <?php for($i = 1; $i <=5; $i++): ?>
@@ -129,7 +133,7 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <div class="card showProductCard mx-auto text-center">
                             <div class="card-body">
-                                <span>No tiene Ofertas Disponibles</span>
+                                <span>No tiene productos disponibles</span>
                             </div>
                             <div class= "card-footer">
                             </div>                    
