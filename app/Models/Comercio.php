@@ -24,18 +24,28 @@ class Comercio extends Model
         'area_id',
         'user_id',
         'avatar',
+        'banner',
         'cellphonecontact',
         'dominio',
     ];
 
     protected $appends = [
         'avatar_url',
+        'banner_url',
     ];
 
     public function getAvatarUrlAttribute()
     {
         if ($this->avatar && Storage::disk('avatarscomercios')->exists($this->avatar)) {   
             return Storage::disk('avatarscomercios')->url($this->avatar);
+        }
+        return asset('noimage.png');
+    }
+
+    public function getBannerUrlAttribute()
+    {
+        if ($this->banner && Storage::disk('bannerscomercios')->exists($this->banner)) {
+            return Storage::disk('bannerscomercios')->url($this->banner);
         }
         return asset('noimage.png');
     }

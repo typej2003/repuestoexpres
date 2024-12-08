@@ -238,7 +238,7 @@
                         @endguest
                         <li>
                             <a class="botonera" href="">
-                                <img style="height:45px" src="./img/icon_heart.png" alt="">
+                                <img style="height:45px" src="/img/icon_heart.png" alt="">
                             </a>
                         </li>
                         <li>

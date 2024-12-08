@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4 overflowul">
   <!-- Brand Logo -->
   <a href="/" class="brand-link bg-white">
     <img class="main-sidebar-img" src="/img/logo_repuestos.png" alt="">
@@ -20,13 +20,14 @@
     </div>
 
     <!-- Sidebar Menu -->
-    <nav class="mt-2">
+     
+    <nav class="mt-2 overflowul">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-link <?php echo e(request()->is('admin/dashboard') ? 'active' : ''); ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              Tablero
+              Escritorio
             </p>
           </a>
         </li>

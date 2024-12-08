@@ -3,7 +3,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style-welcome.css">
-
+    <script src="/js/jquery-3.6.4.min.js"></script>
     <script src="/js/slick.min.js"></script>
     <link rel="stylesheet" href="/css/slick-theme.min.css">
     <link rel="stylesheet" href="/css/slick.min.css">
@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-md-12">
-        <a href="/"><h6><i class="fa fa-solid fa-arrow-left"></i> Continuar con la compra Hola</h6></a>
+        <a href="/"><h6><i class="fa fa-solid fa-arrow-left"></i> Continuar con la compra</h6></a>
         </div>
     </div>
 
@@ -348,5 +348,9 @@
 
     </script>
 
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.4.min.js"></script>
     
 </div>
+

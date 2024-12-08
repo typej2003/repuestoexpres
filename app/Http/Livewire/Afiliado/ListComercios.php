@@ -37,6 +37,8 @@ class ListComercios extends AdminComponent
 
 	public $photo;
 
+	public $banner;
+
 	protected $listeners = [
 		'generarKeyword'
    		];
@@ -77,8 +79,7 @@ class ListComercios extends AdminComponent
 	{
 		$this->state['keyword'] = strtolower(str_replace(' ', '', $this->state['name']));
 
-		$this->dispatchBrowserEvent('getKeyword', ['keyword' => $this->state['keyword']]);
-		
+		$this->dispatchBrowserEvent('getKeyword', ['keyword' => $this->state['keyword']]);		
 
 	}
 
@@ -91,12 +92,21 @@ class ListComercios extends AdminComponent
 		])->validate();
 
 		if ($this->photo) {
-			$validatedData['avatar'] = $this->photo->store('/', 'avatarscomercios');
+			// $validatedData['avatar'] = $this->photo->store('/', 'avatarscomercios');
+			$filename = $validatedData['name'].'_'.date("YmdHis");			
+			$validatedData['avatar'] = $this->photo->storeAs(null,
+                $filename . '.png', 'avatarscomercios'
+            );            
+		}
+
+		if ($this->banner) {
+			$filename = $validatedData['name'].'_banner_'.date("YmdHis");			
+			$validatedData['banner'] = $this->photo->storeAs(null,
+                $filename . '.png', 'bannerscomercios'
+            );            
 		}
 
 		// resize image
-
-
 
         $validatedData['user_id'] = $this->userId;
 
@@ -123,6 +133,8 @@ class ListComercios extends AdminComponent
 
 		$this->state = $comercio->toArray();
 
+		// dd($this->state['avatar']);
+
 		$this->dispatchBrowserEvent('show-form');
 	}
 
@@ -137,7 +149,25 @@ class ListComercios extends AdminComponent
 		$validatedData['keyword'] = $this->state['keyword'];
 
 		if ($this->photo) {
-			$validatedData['avatar'] = $this->photo->store('/', 'avatarscomercios');
+			// $validatedData['avatar'] = $this->photo->store('/', 'avatarscomercios');
+			$filename = $validatedData['name'].'_'.date("YmdHis");
+			if (Storage::disk('avatarscomercios')->exists($this->comercio->banner)) {
+				Storage::disk('avatarscomercios')->delete($this->comercio->banner);
+			}
+			$validatedData['avatar'] = $this->photo->storeAs(null,
+                $filename . '.png', 'avatarscomercios'
+            );            
+		}
+
+		if ($this->banner) {
+			$filename = $validatedData['name'].'_banner_'.date("YmdHis");	
+			
+			if (Storage::disk('bannerscomercios')->exists($this->comercio->banner)) {
+				Storage::disk('bannerscomercios')->delete($this->comercio->banner);
+			}
+			$validatedData['banner'] = $this->banner->storeAs(null,
+                $filename . '.png', 'bannerscomercios'
+            );            
 		}
 
 		$this->comercio->update($validatedData);

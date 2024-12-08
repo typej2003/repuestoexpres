@@ -66,6 +66,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'bannerscomercios' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/bannerscomercios'),
+            'url' => env('APP_URL').'/storage/bannerscomercios',
+            'visibility' => 'public',
+        ],
+
         'avatarsmanufacturers' => [
             'driver' => 'local',
             'root' => storage_path('app/public/avatarsmanufacturers'),
@@ -111,6 +118,7 @@ return [
         public_path('storage') => storage_path('app/public'),
         public_path('storage/avatars') => storage_path('app/public/avatars'),
         public_path('storage/avatarscomercios') => storage_path('app/public/avatarscomercios'),
+        public_path('storage/bannerscomercios') => storage_path('app/public/bannerscomercios'),
         public_path('storage/avatarscategories') => storage_path('app/public/avatarscategories'),
         public_path('storage/avatarssubcategories') => storage_path('app/public/avatarssubcategories'),
         public_path('storage/avatarsproducts') => storage_path('app/public/avatarsproducts'),

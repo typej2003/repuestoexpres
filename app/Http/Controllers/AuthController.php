@@ -45,7 +45,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route('welcome');
+            // return redirect()->route('welcome');
 
             // return redirect()->intended('admin/dashboard')->with('success','Bienvenido al panel de Administración');
         }
@@ -66,25 +66,42 @@ class AuthController extends Controller
     public function registrarse(Request $request)
     {
         //Validación y recopilación de datos
-        $request->validate([
-            'nombre' => 'required',
-            'email' => 'required|email|unique:usuarios',
-            'password' => 'required|confirmed|min:6',
+        Validator::make($input, [
+            'identificationNac' => ['required', 'string', 'max:1'],
+            'identificationNumber' => ['required', 'string', 'max:12'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class),
+            ],
+            'password' => $this->passwordRules(),
+        ])->validate();
+        
+        $user = User::create([
+            'identificationNac' => $input['identificationNac'],
+            'identificationNumber' => $input['identificationNumber'],
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'role' => $input['role'],
+            'password' => Hash::make($input['password']),
         ]);
-        $data = $request->all();
 
-        //Creación de nuevo usuario
-        $usuario = Usuario::create([
-            'nombre' => $data['nombre'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+        DatosBasicos::create([
+            'user_id' => $user->id,
+            'cellphonecode' => $input['cellphonecode'],
+            'cellphone' => $input['cellphone'],
         ]);
-
+        
         //Login de usuario
-        Auth::login($usuario);
+        Auth::login($user);
+
+        return back();
 
         //Redirección
-        return redirect("admin")->with('success','Te has registrado correctamente. Bienvenido');
+        // return redirect("admin")->with('success','Te has registrado correctamente. Bienvenido');
     }
 
     //Salir del panel de administración

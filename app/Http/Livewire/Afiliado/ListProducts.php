@@ -199,10 +199,13 @@ class ListProducts extends AdminComponent
 		$filename = $this->state['code'].'-'.$this->comercio_id;
 
 		if ($this->photo) {
+			if (Storage::disk('avatarsproducts')->exists($this->product->avatar)) {
+				Storage::disk('avatarsproducts')->delete($this->product->avatar);
+			}
 			//$validatedData['image_path1'] = $this->photo->store('/', 'avatarsproducts');
             $validatedData['image_path1'] = $this->photo->storeAs(null,
                 $filename . '-1.png', 'avatarsproducts'
-            );            
+            );
 		}
 
 		$this->product->update($validatedData);

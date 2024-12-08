@@ -78,24 +78,8 @@ Route::get('/enviarData', [SearchAfiliado::class, 'enviarData'])->name('enviarda
 
 Route::get('/emailexample', EmailExample::class)->name('emailexample');
 
-// Route::get('/{valor1}/{valor2}', function($valor1, $valor2){
-//     switch ($valor1) {
-//         case 'com':
-//             dd('Welcome Comercio');
-//             break;
-//         case 'pas':
-//             dd('Welcome Pasarela');
-//             break;
-//         case 'search':
-//             dd('Search Producto');
-//             break;
-//         default:
-//             # code...
-//             break;
-//     }
-// });
-
 Route::post('/autenticar', [AuthController::class, 'autenticar'])->name('autenticar');
+Route::post('/registarse', [AuthController::class, 'registrarse'])->name('registrarse');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -109,6 +93,10 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
 Route::get('/login1', function(){
     return view('auth.login1');
+});
+
+Route::get('/register1', function(){
+    return view('auth.register1');
 });
 
 // autentica con google

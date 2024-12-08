@@ -47,9 +47,9 @@ Route::get('/routedetails/{comercioId}/{productId}', function($comercioId, $prod
         $comercio = Comercio::find($comercioId);
         $setting = Setting::find($comercioId)->first();
 
-        return view('livewire.afiliado.view-details', [
+        return view('externalviews.view-details', [
             'comercio' => $comercio, 
-            'product' => $product,
+            'productId' => $product->id,
             'in_cellphonecontact' => $setting->in_cellphonecontact,
             'in_sliderprincipal' => $setting->in_sliderprincipal,
             'in_marcasproductos' => $setting->in_marcasproductos,
@@ -80,5 +80,5 @@ Route::get('/listContainers/{comercioId}', ListContainers::class)->name('listCon
 
 Route::get('/listClients/{comercioId}', listClients::class)->name('listClients')->middleware('auth');
 
-Route::get('/metodospagos', MetodosPagos::class)->name('metodospagos')->middleware('auth');
+Route::get('/metodospagos/{pedido}', MetodosPagos::class)->name('metodospagos')->middleware('auth');
 

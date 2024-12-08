@@ -63,7 +63,7 @@
                                                 <option value="0" {{ ($pedido->confirmed === 0) ? 'selected' : '' }}>NO CONFIRMADO</option>
                                             </select>
                                         </td>
-                                        <td>{{ $pedido->pedido }}</td>
+                                        <td><a href="/metodospagos/{{ $pedido->pedido }}">{{ $pedido->pedido }}</a></td>
                                         <td>{{ $pedido->reference }}</td>
                                         <td>{{ $pedido->client->identificationNumber }}</td>
                                         <td>{{ $pedido->client->name }}</td>

@@ -99,8 +99,8 @@ class Cart extends AdminComponent
 
     public function finalizarCompra()
     {
-        $cart = new CartController;
         
+        $cart = new CartController;        
         
         $pedidoref = auth()->user()->identificationNumber . '-' . str_replace("-", "", date("Y-m-d")) . str_replace(":", "", date("H:i:s"));
 
@@ -137,7 +137,7 @@ class Cart extends AdminComponent
 
         $cart->onlyClear();
 
-        return redirect()->route('metodospagos');
+        return redirect()->route('metodospagos', ['pedido' => $pedido->pedido]);
     }
 
 }

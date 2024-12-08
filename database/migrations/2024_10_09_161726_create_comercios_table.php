@@ -27,6 +27,7 @@ class CreateComerciosTable extends Migration
                 ->onUpdate('cascade');
             $table->string('name');
             $table->string('avatar')->nullable();
+            $table->string('banner')->nullable();
             $table->string('keyword')->unique();
             $table->string('dominio')->nullable();
             $table->string('cellphonecontact')->nullable();
