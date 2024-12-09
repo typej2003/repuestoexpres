@@ -153,10 +153,14 @@ class Product extends Model
     public function getPrice1()
     {
         
-        $settings = Setting::where('user_id', $this->user_id)->first();
+        $setting = Setting::where('user_id', $this->user_id)->first();
         if(auth()->user()){
-            $settingsUser = SettingUser::where('user_id', auth()->user()->id)->first();
-            $currency = $settingsUser->currency;
+            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
+            if($settingUser){
+                $currency = $settingsUser->currency;
+            }else{
+                $currency = $setting->currency;
+            }            
         }else{
             $currency = request()->cookie('currency');
         }

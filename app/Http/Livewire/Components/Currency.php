@@ -28,14 +28,20 @@ class Currency extends AdminComponent
     {
         $minutes = 10;
         $this->comercio = Comercio::find($comercioId);
+        $setting = Setting::where('user_id', $this->comercio->user_id)->first();    
 
         if(auth()->user())
         {
-            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();    
-            \Cookie::queue('currency', $settingUser->currency, $minutes);
-            $this->currencyValue = $settingUser->currency;
-        }else{
-            $setting = Setting::where('user_id', $this->comercio->user_id)->first();    
+            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first(); 
+            if($settingUser){
+                \Cookie::queue('currency', $settingUser->currency, $minutes);
+                $this->currencyValue = $settingUser->currency;
+            }else{
+                \Cookie::queue('currency', $setting->currency, $minutes);
+                $this->currencyValue = $setting->currency;
+            }
+            
+        }else{            
             \Cookie::queue('currency', $setting->currency, $minutes);
             $this->currencyValue = $setting->currency;
         }
