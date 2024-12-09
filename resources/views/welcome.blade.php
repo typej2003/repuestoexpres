@@ -52,7 +52,6 @@
                 @endif
                 <div class="my-2"></div>    
                 <section class="">
-                <h1>Valor currencyValue: {{ $currencyValue }}</h1>
                     <div class="my-2"></div>
                     
                     @if($words == '')    
