@@ -1,4 +1,7 @@
 var path = 'file:///C:/Users/Personal/Desktop/metodopago/'
+
+var monto = 0;
+
 var datosCliente = {
     'userId': 0,
     'codigoFactura': '',
@@ -84,10 +87,11 @@ var categoryOption = []
 
 var clienteId = 0;
 var currency = 1; // Bolivar
+var currencyValue = '$'
 var amount = 1;
-var reference = '12345678';
-var title = 'Estoesuntitulo';
-var description = 'Estoesunadescripcion';
+var reference = '12345678'; // Pedido a pagar
+var title = 'Esto es un titulo';
+var description = 'Esto es una descripcion';
 var email = 'eefdsfse';
 var cellphone = '';
 var rifLetter = 'J';

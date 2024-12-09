@@ -95,15 +95,29 @@ class Cart1 extends AdminComponent
     }
 
     public function finalizarCompra()
-    {
-        
+    {        
         $cart = new CartController;
-        
+        $contenido = $cart->contenido();
+        $title = 'Compra';
+        $description = '';
+
+        foreach($contenido as $elemento)
+        {
+            if($description !== '')
+            {
+                $description .= ' - ';
+            }
+            $description .= $elemento->name;
+            $description .= ' / '. $elemento->quantity;
+            $description .= ' / '. $elemento->price;
+        }
         
         $pedidoref = auth()->user()->identificationNumber . '-' . str_replace("-", "", date("Y-m-d")) . str_replace(":", "", date("H:i:s"));
 
         $pedido = Pedido::create([
             'pedido' => $pedidoref,
+            'title' => $title,
+            'description' => $description,
             'comercio_id' => $this->comercio_id,
             'user_id' => auth()->user()->id,
             'description' => '',
@@ -117,13 +131,11 @@ class Cart1 extends AdminComponent
 
         $pedido_id = $pedido->id;
 
-        $contenido = $cart->contenido();
-
         foreach($contenido as $elemento)
         {
             $pedido = PedidoDetalles::create([
                 'pedido_id' => $pedido_id,
-                'pedido' => $pedido->pedido,
+                'pedido' => $pedido->pedido,                
                 'comercio_id' => $this->comercio_id,
                 'user_id' => auth()->user()->id,
                 'product_id' => $elemento->id,
@@ -135,8 +147,7 @@ class Cart1 extends AdminComponent
 
         $cart->onlyClear();
 
-        return redirect()->route('pasarela', ['pedido' => $pedido->pedido]);
-
+        return redirect()->route('pasarela', ['pedido' => $pedido->pedido, 'comercioId' => $this->comercio_id]);
     }
     
 

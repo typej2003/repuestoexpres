@@ -12,30 +12,73 @@ use App\Models\DatosBasicos;
 use App\Models\Comercio;
 use App\Models\Banco;
 use App\Models\Transaccion;
+use App\Models\Pedido;
 
 class Pasarela extends Component
 {
-    public $id_suc; 
-
+    public $id_suc;
     public $tokenId;
-
     public $state = [];
-
     public $showEditModal = false;
-
-    public $photo;
-
     public $comercio_id;
+    public $pedido;
 
-    public function mount($comercio_id = 1)
+    public $clienteId = 0;
+    public $currency = 1; // Bolivar
+    public $currencyValue = '$';
+    public $amount = 1; //monto
+    public $reference = '12345678'; // Pedido a pagar
+    public $title = 'Esto es un titulo';
+    public $description = 'Esto es una descripcion';
+    public $email = 'typej2003@gmail.com';
+    public $cellphone = '';
+    public $rifLetter = 'J';
+    public $rifNumber = ''; // J G
+    public $identificationNac = 'V'; // V E P
+    public $identificationNumber = '';
+
+    public function mount($pedido, $comercio_id = 1)
 	{
 		$this->comercio_id = $comercio_id;
         $this->autenticarComercio($this->comercio_id);
+        
+        $this->pedido = Pedido::where('pedido', $pedido)->first();
+        if($this->pedido)
+        {
+            $this->reference = $this->pedido->pedido;
+            $this->title = $this->pedido->title;
+            $this->description = $this->pedido->description;
+            $this->clienteId = $this->pedido->user_id;
+            $this->amount = $this->pedido->coste;
+            $this->currency = $this->pedido->currency;
+            $this->currencyValue = $this->searchCurrency($this->pedido->currency);
+            $cliente = $this->pedido->client;            
+            $this->email = $cliente->email;
+            $this->cellphone = $cliente->datosbasicos->cellphonecode.$cliente->datosbasicos->cellphone;
+            $this->identificationNac = $cliente->identificationNac;
+            $this->identificationNumber = $cliente->identificationNumber;
+        }
+        
 	}
+
+    public function searchCurrency($currency)
+    {
+        switch ($currency) {
+            case '1':
+                return 'Bs';
+                break;
+            
+            case '2':
+                return '$';
+                break;
+        }
+    }
 
     public function autenticarComercio($comercio_id)
     {
+        
         $comercio = Comercio::find($comercio_id);
+        
         if($comercio)
         {
             $user_id = $comercio->user_id;
@@ -46,73 +89,10 @@ class Pasarela extends Component
             }
             
         }else{
+            dd('ok');
             return redirect('/errorFound/10');
         }
     }
-
-    public function addNew()
-	{
-        $this->autenticarComercio($this->comercio_id);
-
-        $tokenId = $this->tokenId;
-        $comercio_id = $this->comercio_id;
-		$this->reset();
-        $this->tokenId = $tokenId;
-        $this->comercio_id = $comercio_id;
-
-        $this->state['identificationNac'] = "V";
-		$this->showEditModal = false;
-
-		$this->dispatchBrowserEvent('show-formUser');
-        
-	}
-
-    public function createUser()
-	{
-        $messages = [
-            'role.required'  => 'El rol es requerido.',
-            'name.required'  => 'El nombre es requerido.',
-            'email.required'  => 'El email es requerido.',
-            // 'password.required'  => 'El Password es requerido.',
-            // 'password.confirmed'  => 'El Password no esta confirmado.',
-            'unique'    => 'Ya existe un email registrado',
-        ];
-
-		$validatedData = Validator::make($this->state, [
-			'name' => 'required',
-			'email' => 'required|email|unique:users',
-			'password' => 'nullable',
-			'role' => 'required',
-            'email' => 'nullable',
-            'identificationNac' => 'required',
-            'identificationNumber' => 'required',
-            'cellphonecode' => 'nullable',
-            'cellphone' => 'nullable',
-            'address' => 'nullable',
-        ],
-        $messages,)->validate();
-
-        if(isset($validatedData['password'])){
-            $validatedData['password'] = bcrypt($validatedData['password']);
-        }else{
-            $validatedData['password'] = bcrypt($validatedData['identificationNumber']);
-        }
-
-		if ($this->photo) {
-			$validatedData['avatar'] = $this->photo->store('/', 'avatars');
-		}
-
-		$user = User::create($validatedData);
-
-        DatosBasicos::create(['user_id' => $user->id, ]);
-
-		// session()->flash('message', 'User added successfully!');
-
-		$this->dispatchBrowserEvent('hide-formUser', [
-            'identificationNumber' => $user->identificationNumber,
-            'name' => $user->name,
-        ]);
-	}
 
     public function procesado(Request $request)
 	{
@@ -150,53 +130,6 @@ class Pasarela extends Component
         
         return response()->json($data);
 
-    }
-
-   
-    public function createClient(Request $request){
-
-        // dd($request);
-        $validatedData = Validator::make($request->all(), [
-            'identificationNac' => 'required|not_in:0',
-            'identificationNumber' => 'required',
-			'name' => 'required',
-			'email' => 'required|email|unique:users',
-			'password' => 'nullable',
-            'password_confirmation' => 'nullable',
-            'cellphonecode' => 'nullable',
-            'cellphone' => 'nullable',
-            'address' => 'nullable',
-        ])->validate();
-
-        if($validatedData['password'] !== null)
-        {
-            $validatedData['password'] = bcrypt($validatedData['password']);
-        }else{
-            $validatedData['password'] = bcrypt($validatedData['identificationNumber']);
-        }
-        
-		
-        $validatedData['role'] = 'cliente';
-
-		$user = User::create($validatedData);
-
-        $datosbasicos['user_id'] = $user->id;
-        $datosbasicos['cellphonecode'] = $validatedData['cellphonecode'];
-        $datosbasicos['cellphone'] = $validatedData['cellphone'];
-        $datosbasicos['address'] = $validatedData['address'];
-
-        DatosBasicos::create($datosbasicos);
-
-		// session()->flash('message', 'User added successfully!');
-
-		$this->dispatchBrowserEvent('hide-form-pasarela', [
-            'message' => 'Usuario agregado satisfactoriamente!',
-            'identificationNumber' => $user->identificationNumber,
-            'name' => $user->name,
-        ]);
-
-        //return Redirect::back()->with('msg', 'The Message');
-        
     }
 
     public function render()

@@ -63,7 +63,7 @@
                                                 <option value="0" {{ ($pedido->confirmed === 0) ? 'selected' : '' }}>NO CONFIRMADO</option>
                                             </select>
                                         </td>
-                                        <td><a href="/pasarela/{{ $pedido->pedido }}">{{ $pedido->pedido }}</a></td>
+                                        <td><a href="/pasarela/{{ $pedido->pedido }}/{{ $pedido->comercio_id }}">{{ $pedido->pedido }}</a></td>
                                         <td>{{ $pedido->reference }}</td>
                                         <td>{{ $pedido->client->identificationNumber }}</td>
                                         <td>{{ $pedido->client->name }}</td>
@@ -82,7 +82,7 @@
                                     </tr>
                                     @empty
                                     <tr class="text-center">
-                                        <td colspan="7">
+                                        <td colspan="9">
                                             <img src="https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/v2/assets/empty.svg" alt="No results found" style="width: 150px;">
                                             <p class="mt-2">No se encontro resultado</p>
                                         </td>

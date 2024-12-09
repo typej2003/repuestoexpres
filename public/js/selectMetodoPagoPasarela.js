@@ -1,8 +1,6 @@
 function selectMetodoPago(index1 = 0)
-{
-    
+{    
     let index = index1
-
     let bloque = document.createElement('div')
     bloque.id = index
     let pantalla = 'p-' + index
@@ -56,8 +54,7 @@ function selectMetodoPago(index1 = 0)
     spanP.innerText = "Monto a Pagar"
     let spanT = document.createElement('div')
     spanT.classList.add('montoPagar')
-    spanT.innerText = "BS. 30,00"
-    
+    spanT.innerText = currencyValue + ' ' + monto
     bloque.appendChild(row0)
     row0.appendChild(h40)
     row0.appendChild(group)

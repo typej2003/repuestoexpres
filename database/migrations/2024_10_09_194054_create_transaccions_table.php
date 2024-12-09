@@ -36,7 +36,7 @@ class CreateTransaccionsTable extends Migration
             $table->string('currency');
             $table->string('banco')->nullable();
             $table->string('codigo')->nullable();
-            $table->string('reference')->nullable();
+            $table->string('reference')->nullable(); //Pedido
             $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->string('email')->nullable();

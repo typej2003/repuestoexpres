@@ -17,6 +17,7 @@ class Pedido extends Model
         'reference',
         'comercio_id',
         'user_id',
+        'title',
         'description',
         'coste',
         'currency',

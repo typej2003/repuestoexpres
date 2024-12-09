@@ -41,4 +41,4 @@
 
 	Route::get('/formasdepago', [CartController::class, 'formasdepago'])->name('cart.formasdepago')->middleware('auth');	
 
-	Route::get('/pasarela/{pedido}', Pasarela::class)->name('pasarela')->middleware('auth');
+	Route::get('/pasarela/{pedido}/{comercioId}', Pasarela::class)->name('pasarela')->middleware('auth');

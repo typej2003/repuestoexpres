@@ -17,7 +17,8 @@ class CreatePedidosTable extends Migration
             $table->id();
             $table->string('pedido');
             $table->string('reference')->nullable();
-            $table->string('description')->nullable();
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
             $table->bigInteger('comercio_id');
             $table->bigInteger('user_id');
             $table->decimal('coste', 12, 2);
