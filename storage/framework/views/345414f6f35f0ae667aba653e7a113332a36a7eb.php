@@ -1,67 +1,28 @@
-<div wire:ignore>
+<div>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" type="image/svg+xml" href="/icon.png" />
+    <title><?php echo e(setting('site_title')); ?> | <?php echo e(setting('site_name')); ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style-welcome.css">
+    <link rel="stylesheet" href="/css/navigationMap.css">
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    <style>
-            /* .slider{
-                width: 90%!important;
-            } */
-            /* * {
-        box-sizing: border-box;
-        } */
+    <script src="/js/jquery-3.6.4.min.js"></script>  
+    <script src="/js/slick.min.js"></script>
+    <link rel="stylesheet" href="/css/slick-theme.min.css">
+    <link rel="stylesheet" href="/css/slick.min.css">
+    <link rel="stylesheet" href="/css/carouselOffer.css">
+    <link rel="stylesheet" href="/css/showProducts.css">
+    <link rel="stylesheet" href="/css/star.css">
+    <?php echo $__env->yieldPushContent('styles'); ?>
+    <?php echo \Livewire\Livewire::styles(); ?>
 
-        .slider {
-            /*width: 50%;*/
-            width: 100%;
-            margin: 10px auto!important; */        
-            /* height: 300px; */
-        }
-
-        .slick-slide {
-        margin: 0px 10px; 
-        }
-
-        .slick-slide img {
-        width: 80%;
-        height: 200px;
-        }
-
-        .slick-prev:before,
-        .slick-next:before {
-        color: black;
-        }
-
-        .slick-next.slick-arrow {
-            border: 1px solid black;
-            border-radius: 50px;
-            width: 35px;
-            height: 35px;
-            display: block;
-            /* background-image: url('/img/circle-right-regular.svg'); */
-            z-index: 2;
-        }
-
-        .slick-prev.slick-arrow {
-            border: 1px solid black;
-            border-radius: 50px;
-            width: 35px;
-            height: 35px;
-            display: block;
-            /* background-image: url('/img/circle-left-regular.svg'); */
-            z-index: 2;
-        }
-
-        .slick-slide {
-        transition: all ease-in-out .3s;
-        /* opacity: .2; */
-        }
-        
-        /* .slick-active {
-        opacity: .5;
-        }
-
-        .slick-current {
-        opacity: 1;
-        } */
-    </style>  
+    
     <div class="container-fluid showProductsP">
         <div class="row negrita">
             <div class="col-12">

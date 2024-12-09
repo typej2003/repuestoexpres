@@ -7,6 +7,25 @@
     --main-footer-color: #FFCC2A;
 }
 
+.card.showProductCard {
+    background-color: #ffffff !important;
+    width: 20rem!important;
+    height: 23rem!important;
+    border-radius: 15px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+    flex: auto;
+  }
+  
+  .showProductCard:hover {
+    box-shadow: 0 3px 3px var(--main-bg-color);
+  }
+  
+  .showProductCard img{
+    width: 120px!important;
+    height: 150px!important;
+    text-align: center!important;
+    align-items: center;
+  }
 
 
 @media screen and (max-width: 768px) {

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cookie;
 
 class Product extends Model
 {
@@ -20,6 +21,13 @@ class Product extends Model
      *
      * @var array
      */
+
+    public $currencyValue;
+
+    protected $listeners = [
+        'emitCurrency' => 'emitCurrency'
+    ];
+
     protected $fillable = [
         'user_id',
         'comercio_id',
@@ -144,7 +152,15 @@ class Product extends Model
 
     public function getPrice1()
     {
+        
         $settings = Setting::where('user_id', $this->user_id)->first();
+        if(auth()->user()){
+            $settingsUser = SettingUser::where('user_id', auth()->user()->id)->first();
+            $currency = $settingsUser->currency;
+        }else{
+            $currency = request()->cookie('currency');
+        }
+        
 
         $tasaValues = Tasa::where('user_id', $this->user_id)->first();
 
@@ -153,16 +169,13 @@ class Product extends Model
         }else{
             $tasa = $tasaValues->tasa;
         }
-
-        switch ($settings->currency) {
+        
+        switch ($currency) {
             case 'Bs':
                 return round($tasa * $this->price1, 2);
                 break;            
             case '$':
-                return round($this->price1, 2);
-                break;
-            case '€':
-                return 0;
+                return round($this->price1, 2);                
                 break;
         }
     }

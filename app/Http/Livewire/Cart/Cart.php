@@ -137,7 +137,7 @@ class Cart extends AdminComponent
 
         $cart->onlyClear();
 
-        return redirect()->route('metodospagos', ['pedido' => $pedido->pedido]);
+        return redirect()->route('pasarela', ['pedido' => $pedido->pedido]);
     }
 
 }

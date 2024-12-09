@@ -82,3 +82,5 @@ Route::get('/listClients/{comercioId}', listClients::class)->name('listClients')
 
 Route::get('/metodospagos/{pedido}', MetodosPagos::class)->name('metodospagos')->middleware('auth');
 
+
+

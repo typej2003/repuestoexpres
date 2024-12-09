@@ -31,7 +31,9 @@ class ShowProducts extends AdminComponent
     protected $listeners = [
         'infoRecibida' => 'actualizarInfo', 
         'refreshValoracion' => 'refreshValoracion', 
-        'refreshShowProduct' => 'refreshShowProduct'];
+        'refreshShowProduct' => 'refreshShowProduct',
+        'emitCurrency' => 'emitCurrency'
+    ];
 
     public function sendCard($product_id, $quantity )
     {
@@ -202,5 +204,11 @@ class ShowProducts extends AdminComponent
                 'image' => $request->img,
             )
         ));
+    }
+
+    public function emitCurrency($currencyValue, Request $request)
+    {
+        $this->currencyValue = $request->cookie('currency');
+
     }
 }

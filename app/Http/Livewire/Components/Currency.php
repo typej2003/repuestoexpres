@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire\Components;
 
-use Livewire\Component;
+use App\Http\Livewire\Admin\AdminComponent;
+use Illuminate\Http\Request;
 
 use App\Models\Setting;
 use App\Models\SettingUser;
 use App\Models\Tasa;
 use App\Models\Comercio;
 
-class Currency extends Component
+class Currency extends AdminComponent
 {
     public $tasacambio = 1;
 
@@ -25,16 +26,25 @@ class Currency extends Component
 
     public function mount($comercioId = 1)
     {
+        $minutes = 10;
         $this->comercio = Comercio::find($comercioId);
 
-        $settingUser = new SettingUser;    
-        $this->currencyValue = $settingUser->client($this->comercio->id);
+        if(auth()->user())
+        {
+            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();    
+            \Cookie::queue('currency', $settingUser->currency, $minutes);
+            $this->currencyValue = $settingUser->currency;
+        }else{
+            $setting = Setting::where('user_id', $this->comercio->user_id)->first();    
+            \Cookie::queue('currency', $setting->currency, $minutes);
+            $this->currencyValue = $setting->currency;
+        }
+        
     }
 
     public function changeCurrency($currency)
     {
-        $this->currencyValue = $currency;
-
+        $minutes = 10;
         if(auth()->user()){
             // $setting = Setting::where('user_id', $this->comercio->user_id)->first();
             $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
@@ -42,16 +52,24 @@ class Currency extends Component
                 $settingUser->update(['currency' => $currency]);    
             }else
             {
-                SettingUser::create([
+                $settingUser = SettingUser::create([
                     'user_id' => auth()->user()->id,
                     'currency' => $currency,
                 ]);
                 
             }
+            \Cookie::queue('currency', $settingUser->currency, $minutes);
+            
+        }else{
+            \Cookie::queue('currency', $currency, $minutes);
         }
-        
 
-        $this->dispatchBrowserEvent('refreshPage', ['message' => 'Refresh pagina!']);        
+        $this->emit('emitCurrency', $currency);
+        $this->currencyValue = $currency;
+
+        $this->dispatchBrowserEvent('refreshPage', ['message' => 'Refresh pagina!']);  
+        
+        
     }
 
     public function render()

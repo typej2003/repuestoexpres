@@ -14,7 +14,7 @@ class SettingUser extends Model
         'currency',
     ];
 
-    public function client($comercioId=1)
+    public function client($comercioId = 1)
     {
         $comercio = Comercio::find($comercioId);
         $Setting = Setting::where('user_id', $comercio->user_id)->first();
