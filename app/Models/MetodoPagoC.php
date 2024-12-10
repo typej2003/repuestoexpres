@@ -13,6 +13,7 @@ class MetodoPagoC extends Model
         'comercio_id',
         'metodo',
         'banco',
+        'codigo',
         'tipocuenta',
         'currency',
         'nrocuenta',
@@ -43,7 +44,7 @@ class MetodoPagoC extends Model
 
         switch ($this->metodo) {
             case 'pagomovil':
-                $description = $this->banco . ' / ' . $this->cellphonecode .'-'. $this->cellphone." / ".$this->identificationNac."-".$this->identificationNumber;
+                $description = $this->banco . ' / ' . $this->codigo . ' / ' . $this->cellphonecode .'-'. $this->cellphone." / ".$this->identificationNac."-".$this->identificationNumber;
                 break;
             
             case 'transferencia':

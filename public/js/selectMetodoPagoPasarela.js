@@ -1,7 +1,8 @@
+var comercio_id
 var reference
 var title
 var description
-var clienteId
+var cliente_id
 var amount
 var currency
 var currencyValue
@@ -11,13 +12,16 @@ var identificationNac
 var identificationNumber
 var rifLetter
 var rifNumber
+var pagosmoviles
+var transferencias
 
-function selectMetodoPago(index1 = 0,referenceP, titleP, descriptionP, clienteIdP,amountP,currencyP,currencyValueP,emailP, cellphonecodeP, cellphoneP, identificationNacP, identificationNumberP,rifLetterP, rifNumberP)
+function selectMetodoPago(index1 = 0, comercio_idP, referenceP, titleP, descriptionP, clienteIdP,amountP,currencyP,currencyValueP,emailP, cellphonecodeP, cellphoneP, identificationNacP, identificationNumberP,rifLetterP, rifNumberP, pagosmovilesP, transferenciasP)
 {    
+    comercio_id = comercio_idP
     reference = referenceP
     title = titleP
     description  = descriptionP
-    clienteId = clienteIdP
+    cliente_id = clienteIdP
     amount = amountP
     currency = currencyP
     currencyValue  = currencyValueP
@@ -28,6 +32,9 @@ function selectMetodoPago(index1 = 0,referenceP, titleP, descriptionP, clienteId
     identificationNumber = identificationNumberP
     rifLetter = rifLetterP;
     rifNumber = rifNumberP; // J G
+
+    pagosmoviles = pagosmovilesP
+    transferencias = transferenciasP
     
     let index = index1
     let bloque = document.createElement('div')
@@ -176,13 +183,11 @@ function selectModo(e) {
                 break;
             
             case 'pagomovil':
-                console.log('switch ' + identificationNac)
                 bloque[0].appendChild(crearPantallaPagoMovil(pantalla))
                 document.getElementById('identificationNacPM').value = identificationNac
                 document.getElementById('identificationNumberPM').value = identificationNumber
                 document.getElementById('cellphonecodePM').value = cellphonecode
                 document.getElementById('cellphonePM').value = cellphone
-                console.log('switch ' + cellphone)
                 break;
             
             case 'transferencia':
@@ -349,7 +354,8 @@ function crearPantallaPagoMovil(pantalla)
     option.innerHTML = 'Seleccione un Banco'
     bancoasociadoPM.appendChild(option)       
     //Llena el select bancoasociado
-    bancosAsociadosPM.forEach(element => {
+    
+    pagosmoviles.forEach(element => {
         let option = document.createElement('option')
         option.value=element.codigo
         option.innerHTML = element.banco
@@ -365,7 +371,6 @@ function crearPantallaPagoMovil(pantalla)
     bloqueP.appendChild(spanGroup)
 
     bancoasociadoPM.addEventListener('change', function(){
-        
         var spanDP = document.createElement('div')
         spanDP.classList.add('textInfo', 'divInfo', 'text-center', 'font-weight-bold')
         var spanGroupBotones = document.createElement('div')
@@ -380,16 +385,16 @@ function crearPantallaPagoMovil(pantalla)
             spanGroup.classList.add('d-none')
             return 0
         }else{
-            var banco = bancosAsociadosPM.some(function(buscar){
+            var banco = pagosmoviles.some(function(buscar){
                 if(buscar.codigo === codigo)
                 {
                     pagomovil = buscar
                 }                    
             });
-
+            
             spanGroup.classList.remove('d-none')            
-            spanDP.innerHTML = `<div class='negrita'>RIF/CEDULA</div><div>${pagomovil.cedula}</div>
-                            <div class='negrita'>BANCO</div><div>${pagomovil.banco}</div>
+            spanDP.innerHTML = `<div class='negrita'>RIF/CEDULA</div><div>${pagomovil.identificationNumber}</div>
+                            <div class='negrita'>BANCO</div><div>${pagomovil.banco} (${pagomovil.codigo})</div>
                             <div class='negrita'>TELÉFONO</div><div>${pagomovil.cellphone}</div>
             `
 
@@ -561,7 +566,7 @@ function showFormGrupoPagoMovil ()
                     <option value="0">Seleccione una Cuenta</option>
                     `
                     let option = ''
-                    bancosAsociadosPM.forEach(element => {
+                    pagosmoviles.forEach(element => {
                         option += `
                             <option value="${element.codigo}">${element.banco}</option>
                         `
@@ -1530,6 +1535,8 @@ function enviarZelle(){
         objeto['cliente_id'] = cliente_id
         objeto['currency'] = 1
         objeto['comercio_id'] = comercio_id
+        objeto['title'] = title
+        objeto['description'] = description
         objeto['codigo'] = ''
         
         document.querySelectorAll('.formZelle input').forEach((input, i) => {

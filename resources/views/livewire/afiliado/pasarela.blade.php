@@ -114,8 +114,15 @@
         var rifLetter = 'J';
         var rifNumber = ''; // J G
 
+        var pagosmoviles = @this.pagosmoviles;
+        var transferencias = @this.transferencias;
+
+        var comercio_id = @this.comercio_id;
+        
+        //console.log(comercio_id)
+
         let divPrincipal = document.getElementById('divPrincipal')
-        divPrincipal.appendChild(selectMetodoPago(0, reference, title, description, clienteId,amount,currency,currencyValue,email,cellphonecode, cellphone, identificationNac, identificationNumber,rifLetter, rifNumber))  
+        divPrincipal.appendChild(selectMetodoPago(0, comercio_id, reference, title, description, clienteId,amount,currency,currencyValue,email,cellphonecode, cellphone, identificationNac, identificationNumber,rifLetter, rifNumber, pagosmoviles, transferencias))  
     })
     
 </script>

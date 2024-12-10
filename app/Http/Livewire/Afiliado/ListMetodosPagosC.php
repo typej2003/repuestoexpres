@@ -231,12 +231,16 @@ class ListMetodosPagosC extends AdminComponent
 			case 'pagomovil':
 				
 				$validatedData = Validator::make($this->state, [
-					'banco' => 'required|not_in:0',
+					'banco_id' => 'required|not_in:0',
 					'cellphonecode' => 'required|not_in:0',
 					'cellphone' => 'required',
 					'identificationNac' => 'required',
 					'identificationNumber' => 'required',
 				], $messages)->validate();
+
+				$banco = Banco::find($validatedData['banco_id']);
+				$validatedData['codigo'] = $banco->codigo;
+				$validatedData['banco'] = $banco->name;
 				break;
 
 			case '6':

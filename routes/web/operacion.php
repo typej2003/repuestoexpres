@@ -16,6 +16,4 @@ Route::get('/menu', MenuComponent::class,)->name('menu');
 
 Route::get('/MakePayment/{comercioId}', MakePayment::class)->name('MakePayment')->middleware('auth');
 
-Route::get('/enviardataPasarela', [Pasarela::class, 'enviarData'])->name('enviardataPasarela');
-
 Route::get('/selectul', Selectul::class)->name('selectul');

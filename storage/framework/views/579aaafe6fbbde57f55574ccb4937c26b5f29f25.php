@@ -114,8 +114,15 @@
         var rifLetter = 'J';
         var rifNumber = ''; // J G
 
+        var pagosmoviles = window.livewire.find('<?php echo e($_instance->id); ?>').pagosmoviles;
+        var transferencias = window.livewire.find('<?php echo e($_instance->id); ?>').transferencias;
+
+        var comercio_id = window.livewire.find('<?php echo e($_instance->id); ?>').comercio_id;
+        
+        //console.log(comercio_id)
+
         let divPrincipal = document.getElementById('divPrincipal')
-        divPrincipal.appendChild(selectMetodoPago(0, reference, title, description, clienteId,amount,currency,currencyValue,email,cellphonecode, cellphone, identificationNac, identificationNumber,rifLetter, rifNumber))  
+        divPrincipal.appendChild(selectMetodoPago(0, comercio_id, reference, title, description, clienteId,amount,currency,currencyValue,email,cellphonecode, cellphone, identificationNac, identificationNumber,rifLetter, rifNumber, pagosmoviles, transferencias))  
     })
     
 </script>

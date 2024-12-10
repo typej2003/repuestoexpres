@@ -18,6 +18,7 @@ class CreateMetodoPagoCSTable extends Migration
             $table->bigInteger('comercio_id');
             $table->string('metodo')->nullable();
             $table->string('banco')->nullable();
+            $table->string('codigo')->nullable();
             $table->string('tipocuenta')->nullable();
             $table->string('currency')->nullable();
             $table->string('marcaInternaciona')->nullable();

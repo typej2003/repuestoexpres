@@ -231,14 +231,14 @@
                         <div style="display: {{$visible5}}"> <!-- Datos pagomovil -->
                             <div class= "datosPagomovil">
                                 <div class="form-group" wire:ignore>
-                                    <label for="banco">Banco</label>
-                                    <select wire:model.defer="state.banco" class="form-control inputForm inputType @error('banco') is-invalid @enderror" name="" id="banco" placeholder="Banco">
+                                    <label for="banco_id">Banco</label>
+                                    <select wire:model.defer="state.banco_id" class="form-control inputForm inputType @error('banco_id') is-invalid @enderror" name="" id="banco_id">
                                         <option value="0">Selecciona una opción</option>
                                         @foreach($bancos as $ban)
-                                            <option value="{{ $ban->name }}">{{ $ban->name }}</option>
+                                            <option value="{{ $ban->id }}">{{ $ban->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('banco')
+                                    @error('banco_id')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

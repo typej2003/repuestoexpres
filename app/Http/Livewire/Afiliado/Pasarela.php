@@ -13,6 +13,7 @@ use App\Models\Comercio;
 use App\Models\Banco;
 use App\Models\Transaccion;
 use App\Models\Pedido;
+use App\Models\MetodoPagoC;
 
 class Pasarela extends Component
 {
@@ -37,6 +38,9 @@ class Pasarela extends Component
     public $rifNumber = ''; // J G
     public $identificationNac = 'V'; // V E P
     public $identificationNumber = '';
+
+    public $pagosmoviles;
+    public $transferencias;
 
     public function mount($pedido, $comercioId)
 	{
@@ -97,8 +101,8 @@ class Pasarela extends Component
 		
 	}
 
-    public function enviarDataPasarela(Request $request){
-
+    public function enviarDataPasarela(Request $request)
+    {
         
         $operacion = $request->get('datos');
 
@@ -127,6 +131,10 @@ class Pasarela extends Component
 
     public function render()
     {
+        $this->pagosmoviles = MetodoPagoC::select(['id', 'metodo','cellphonecode','cellphone','identificationNumber','banco', 'codigo'])->where('comercio_id', $this->comercio_id)->where('metodo','pagomovil')->get()->toArray();
+        
+        $this->transferencias = MetodoPagoC::select(['id', 'metodo','banco','titular','nrocuenta'])->where('comercio_id', $this->comercio_id)->where('metodo','transferencia')->get()->toArray();
+        
         return view('livewire.afiliado.pasarela');
     }
 }
