@@ -73,6 +73,11 @@ class ResultsProducts extends AdminComponent
         $products = $products
             ->orWhere('description', 'like', '%'. $this->parametro . '%');
         
+        $products = $products
+            ->orWhereHas('categories', function($q){
+                $q->where('name', 'like', '%'. $this->parametro . '%');
+            });
+        
         $products = $products->paginate(15);
 
         return view('livewire.components.results-products', [

@@ -60,10 +60,10 @@
                     </div><!-- /.col -->
                 </div><!-- /.row -->
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <img style="width:100%; height: 100%;" src="<?php echo e($product->avatar_url); ?>" alt="">
+                    <div class="col-md-4">
+                        <img style="width:80%; height: 80%;" src="<?php echo e($product->avatar_url); ?>" alt="">
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
+                    <div class="col-md-8">
                         <div class="row">
                             <?php echo e($product->name); ?>
 
@@ -75,7 +75,7 @@
                             <span>$ <?php echo e($product->price1); ?></span>
                         </div>
                         <div class="row">
-                            <form class="d-flex justify-content-between" action="/add" method="post">
+                            <form class="col-md-12 d-flex justify-content-between" action="/add" method="post">
                                 <?php echo csrf_field(); ?>
                                 <input name="product_id" type="hidden" value="<?php echo e($product->id); ?>">
                                 <input name="name" type="hidden" value="<?php echo e($product->name); ?>">
@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <button class="btn btn-danger  h-75"><i class="text-white fa fa-shopping-cart" aria-hidden="true"></i></button>
+                                    <button class="btn btn-sale"><i class="text-white fa fa-shopping-cart" aria-hidden="true"></i> Comprar</button>
                                 </div>
                                 <div class="col-md-3">
                                     <button class="btn h-75  border border-secondary"><i class="fa fa-solid fa-heart"></i></button>                        

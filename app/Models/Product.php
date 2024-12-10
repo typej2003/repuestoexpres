@@ -244,7 +244,7 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->hasMany(Category::class, 'category_id', 'id');
+        return $this->hasMany(Category::class, 'id', 'category_id');
     }
 
     public function subcategories()

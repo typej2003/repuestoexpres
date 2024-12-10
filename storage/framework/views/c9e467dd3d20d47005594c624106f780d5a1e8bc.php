@@ -24,6 +24,20 @@
                 </form>
             </div>
         </li>
+        <li>
+            <div class="row">
+                <div class="col-md-12 mx-2">
+                    <div class="dropdown-cart-drop">
+                        <a class="btn-cart-drop d-flex justify-content-between botonera">
+                            <img src="/img/icon_carrito.png" style="height:25px cursor:pointer;">
+                            <span class="text-dark">(<?php echo e($totalQuantityCart); ?>)</span>
+                            <!-- <span class="text-dark">(<?php echo e(\Cart::getTotalQuantity()); ?>)</span> -->
+                        </a>
+                        <?php echo $__env->make('livewire.carrito.cart-drop', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    </div>
+                </div>
+            </div>
+        </li>
     </ul>
 </nav>
 <?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/layouts/navbar-in.blade.php ENDPATH**/ ?>

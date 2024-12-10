@@ -106,6 +106,8 @@ echo $html;
                                                 </div>
                                                 <div class="row my-3">
                                                     <div class="col-md-12">
+                                                        <?php echo e($product->categories->name); ?>
+
                                                         <a href="/routedetails/<?php echo e($product->comercio_id); ?>/<?php echo e($product->id); ?>" class="btn btn-view ">Ver</a>
                                                     </div>
                                                 </div>
