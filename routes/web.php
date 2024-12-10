@@ -26,6 +26,8 @@ use App\Http\Livewire\Components\Star;
 
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
+use App\Http\Livewire\Error\ShowError;
+
 Route::get('/star', Star::class)->name('star'); 
 
 /*
@@ -133,3 +135,5 @@ Route::get('/google-callback', function () {
     return redirect('/');
     // $user->token
 });
+
+Route::get('/errorFound/{error}', ShowError::class)->name('errorFound');

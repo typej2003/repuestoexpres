@@ -85,19 +85,8 @@ var bancosAsociadosZelle =  [
 
 var categoryOption = []
 
-var clienteId = 0;
-var currency = 1; // Bolivar
-var currencyValue = '$'
-var amount = 1;
-var reference = '12345678'; // Pedido a pagar
-var title = 'Esto es un titulo';
-var description = 'Esto es una descripcion';
-var email = 'eefdsfse';
-var cellphone = '';
-var rifLetter = 'J';
-var rifNumber = ''; // J G
-var identificationNac = 'V' // V E P
-var identificationNumber = ''
+
+
 
 /*
 "currency" => $paymentRequest->currency,

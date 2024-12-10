@@ -22,6 +22,7 @@ class Pasarela extends Component
     public $showEditModal = false;
     public $comercio_id;
     public $pedido;
+    public $comercio;
 
     public $clienteId = 0;
     public $currency = 1; // Bolivar
@@ -37,12 +38,13 @@ class Pasarela extends Component
     public $identificationNac = 'V'; // V E P
     public $identificationNumber = '';
 
-    public function mount($pedido, $comercio_id = 1)
+    public function mount($pedido, $comercioId)
 	{
-		$this->comercio_id = $comercio_id;
-        $this->autenticarComercio($this->comercio_id);
-        
         $this->pedido = Pedido::where('pedido', $pedido)->first();
+		$this->comercio_id = $comercioId;
+
+        $this->autenticarComercio($comercioId, $this->pedido->comercio_id);        
+        
         if($this->pedido)
         {
             $this->reference = $this->pedido->pedido;
@@ -54,9 +56,11 @@ class Pasarela extends Component
             $this->currencyValue = $this->searchCurrency($this->pedido->currency);
             $cliente = $this->pedido->client;            
             $this->email = $cliente->email;
-            $this->cellphone = $cliente->datosbasicos->cellphonecode.$cliente->datosbasicos->cellphone;
+            $this->cellphonecode = $cliente->datosbasicos->cellphonecode;
+            $this->cellphone = $cliente->datosbasicos->cellphone;
             $this->identificationNac = $cliente->identificationNac;
             $this->identificationNumber = $cliente->identificationNumber;
+            $this->comercio = Comercio::find($this->pedido->comercio_id);
         }
         
 	}
@@ -74,24 +78,13 @@ class Pasarela extends Component
         }
     }
 
-    public function autenticarComercio($comercio_id)
+    public function autenticarComercio($comercio_id, $comercio2_id)
     {
-        
-        $comercio = Comercio::find($comercio_id);
-        
-        if($comercio)
+        if($comercio_id != $comercio2_id)
         {
-            $user_id = $comercio->user_id;
-            if(auth()->user()->id == $user_id){
-                return true;
-            }else{
-                return redirect('/errorFound/11');
-            }
-            
-        }else{
-            dd('ok');
-            return redirect('/errorFound/10');
+            return redirect('/errorFound/12');
         }
+        
     }
 
     public function procesado(Request $request)

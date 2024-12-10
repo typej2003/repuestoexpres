@@ -19,7 +19,7 @@
     
     <div class="row">
         <div class="col-lg-12">
-            <a href="/"><img style="width: 100%;" src="/img/banner_repuestoexpres.png" alt=""></a>
+            <a href="/"><img style="width: 100%; height: 110px;"  src="<?php echo e($comercio->banner_url); ?>" alt=""></a>
         </div>
     </div>
 
@@ -77,6 +77,13 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('livewire:load', function () {
+            
+            
+        })        
+    </script>
+
     <div class="container-fluid d-flex flex-row">
         <div class="card mx-auto" style="width: 32rem;">
             <div class="card-body">
@@ -91,8 +98,25 @@
     </div>
 
 <script>
-    let divPrincipal = document.getElementById('divPrincipal')
-    divPrincipal.appendChild(selectMetodoPago(0))  
+    document.addEventListener('livewire:load', function () {
+        var reference = window.livewire.find('<?php echo e($_instance->id); ?>').reference 
+        var title = window.livewire.find('<?php echo e($_instance->id); ?>').title 
+        var description  = window.livewire.find('<?php echo e($_instance->id); ?>').description 
+        var clienteId = window.livewire.find('<?php echo e($_instance->id); ?>').clienteId 
+        var amount = window.livewire.find('<?php echo e($_instance->id); ?>').amount
+        var currency = window.livewire.find('<?php echo e($_instance->id); ?>').currency 
+        var currencyValue  = window.livewire.find('<?php echo e($_instance->id); ?>').currencyValue 
+        var email = window.livewire.find('<?php echo e($_instance->id); ?>').email 
+        var cellphone = window.livewire.find('<?php echo e($_instance->id); ?>').cellphone 
+        var cellphonecode = window.livewire.find('<?php echo e($_instance->id); ?>').cellphonecode 
+        var identificationNac = window.livewire.find('<?php echo e($_instance->id); ?>').identificationNac
+        var identificationNumber = window.livewire.find('<?php echo e($_instance->id); ?>').identificationNumber
+        var rifLetter = 'J';
+        var rifNumber = ''; // J G
+
+        let divPrincipal = document.getElementById('divPrincipal')
+        divPrincipal.appendChild(selectMetodoPago(0, reference, title, description, clienteId,amount,currency,currencyValue,email,cellphonecode, cellphone, identificationNac, identificationNumber,rifLetter, rifNumber))  
+    })
     
 </script>
 

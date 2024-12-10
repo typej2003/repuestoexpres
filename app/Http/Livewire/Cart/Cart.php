@@ -102,28 +102,27 @@ class Cart extends AdminComponent
         $cart = new CartController;
         $contenido = $cart->contenido();
         $title = 'Compra';
-        $description = '';
+        $descripcion = '';
 
         foreach($contenido as $elemento)
         {
-            if($description !== '')
+            if($descripcion !== '')
             {
-                $description .= ' - ';
+                $descripcion .= ' / ';
             }
-            $description .= $elemento->name;
-            $description .= ' / '. $elemento->quantity;
-            $description .= ' / '. $elemento->price;
+            $descripcion .= $elemento->name;
+            $descripcion .= ' - '. $elemento->quantity;
+            $descripcion .= ' - '. $elemento->price;
         }
         
         $pedidoref = auth()->user()->identificationNumber . '-' . str_replace("-", "", date("Y-m-d")) . str_replace(":", "", date("H:i:s"));
-        
+
         $pedido = Pedido::create([
             'pedido' => $pedidoref,
             'title' => $title,
-            'description' => 'XXXX',
+            'description' => $descripcion,
             'comercio_id' => $this->comercio_id,
             'user_id' => auth()->user()->id,
-            'description' => '',
             'coste' => $cart->total(),
             'currency' => 1,
             'in_delivery' => 0,

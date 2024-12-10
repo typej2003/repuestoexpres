@@ -1,5 +1,34 @@
-function selectMetodoPago(index1 = 0)
+var reference
+var title
+var description
+var clienteId
+var amount
+var currency
+var currencyValue
+var email
+var cellphone
+var identificationNac
+var identificationNumber
+var rifLetter
+var rifNumber
+
+function selectMetodoPago(index1 = 0,referenceP, titleP, descriptionP, clienteIdP,amountP,currencyP,currencyValueP,emailP, cellphonecodeP, cellphoneP, identificationNacP, identificationNumberP,rifLetterP, rifNumberP)
 {    
+    reference = referenceP
+    title = titleP
+    description  = descriptionP
+    clienteId = clienteIdP
+    amount = amountP
+    currency = currencyP
+    currencyValue  = currencyValueP
+    email = emailP
+    cellphone = cellphoneP
+    cellphonecode = cellphonecodeP
+    identificationNac = identificationNacP
+    identificationNumber = identificationNumberP
+    rifLetter = rifLetterP;
+    rifNumber = rifNumberP; // J G
+    
     let index = index1
     let bloque = document.createElement('div')
     bloque.id = index
@@ -54,7 +83,7 @@ function selectMetodoPago(index1 = 0)
     spanP.innerText = "Monto a Pagar"
     let spanT = document.createElement('div')
     spanT.classList.add('montoPagar')
-    spanT.innerText = currencyValue + ' ' + monto
+    spanT.innerText = currencyValue + ' ' + amount
     bloque.appendChild(row0)
     row0.appendChild(h40)
     row0.appendChild(group)
@@ -76,7 +105,6 @@ function selectMetodoPago(index1 = 0)
 }
 
 function selectModo(e) {
-    
     let elementos = {
         'pantalla': '',
         'modopago': '',
@@ -148,11 +176,13 @@ function selectModo(e) {
                 break;
             
             case 'pagomovil':
+                console.log('switch ' + identificationNac)
                 bloque[0].appendChild(crearPantallaPagoMovil(pantalla))
                 document.getElementById('identificationNacPM').value = identificationNac
                 document.getElementById('identificationNumberPM').value = identificationNumber
                 document.getElementById('cellphonecodePM').value = cellphonecode
                 document.getElementById('cellphonePM').value = cellphone
+                console.log('switch ' + cellphone)
                 break;
             
             case 'transferencia':

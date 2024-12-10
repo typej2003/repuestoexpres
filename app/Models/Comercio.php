@@ -47,7 +47,7 @@ class Comercio extends Model
         if ($this->banner && Storage::disk('bannerscomercios')->exists($this->banner)) {
             return Storage::disk('bannerscomercios')->url($this->banner);
         }
-        return asset('noimage.png');
+        return asset('nobanner.png');
     }
 
     public function propietario()

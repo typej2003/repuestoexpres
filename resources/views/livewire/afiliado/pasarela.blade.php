@@ -19,7 +19,7 @@
     
     <div class="row">
         <div class="col-lg-12">
-            <a href="/"><img style="width: 100%;" src="/img/banner_repuestoexpres.png" alt=""></a>
+            <a href="/"><img style="width: 100%; height: 110px;"  src="{{ $comercio->banner_url }}" alt=""></a>
         </div>
     </div>
 
@@ -77,6 +77,13 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('livewire:load', function () {
+            
+            
+        })        
+    </script>
+
     <div class="container-fluid d-flex flex-row">
         <div class="card mx-auto" style="width: 32rem;">
             <div class="card-body">
@@ -91,8 +98,25 @@
     </div>
 
 <script>
-    let divPrincipal = document.getElementById('divPrincipal')
-    divPrincipal.appendChild(selectMetodoPago(0))  
+    document.addEventListener('livewire:load', function () {
+        var reference = @this.reference 
+        var title = @this.title 
+        var description  = @this.description 
+        var clienteId = @this.clienteId 
+        var amount = @this.amount
+        var currency = @this.currency 
+        var currencyValue  = @this.currencyValue 
+        var email = @this.email 
+        var cellphone = @this.cellphone 
+        var cellphonecode = @this.cellphonecode 
+        var identificationNac = @this.identificationNac
+        var identificationNumber = @this.identificationNumber
+        var rifLetter = 'J';
+        var rifNumber = ''; // J G
+
+        let divPrincipal = document.getElementById('divPrincipal')
+        divPrincipal.appendChild(selectMetodoPago(0, reference, title, description, clienteId,amount,currency,currencyValue,email,cellphonecode, cellphone, identificationNac, identificationNumber,rifLetter, rifNumber))  
+    })
     
 </script>
 

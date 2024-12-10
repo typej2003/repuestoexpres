@@ -16,17 +16,20 @@ class CreateMetodoPagoCSTable extends Migration
         Schema::create('metodo_pago_c_s', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('comercio_id');
-            $table->string('metodopago');
+            $table->string('metodo')->nullable();
+            $table->string('banco')->nullable();
             $table->string('tipocuenta')->nullable();
-            $table->string('moneda')->nullable();
+            $table->string('currency')->nullable();
             $table->string('marcaInternaciona')->nullable();
             $table->string('nrocuenta')->nullable();
             $table->string('ccv-cvv')->nullable();
             $table->date('fechavencimiento')->nullable();
-            $table->string('telefono')->nullable();
+            $table->date('fecha')->nullable();
+            $table->string('cellphonecode')->nullable();
+            $table->string('cellphone')->nullable();
             $table->string('titular')->nullable();
-            $table->string('tipodocumento')->nullable()->default('V');
-            $table->string('documento')->nullable();
+            $table->string('identificationNac')->nullable()->default('V');
+            $table->string('identificationNumber')->nullable();
             $table->string('descripcion')->nullable();
             $table->string('pagoonline')->nullable();
             $table->string('email')->nullable();
