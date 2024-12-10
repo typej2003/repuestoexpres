@@ -56,9 +56,9 @@ class ListMetodosPagosC extends AdminComponent
 		'identificationNumber.required' => 'Debe ingresar un número de documento!',
 	];
 
-    public function mount($comercio_id = 1)
+    public function mount($comercioId)
     {
-        $this->comercio_id = $comercio_id;
+        $this->comercio_id = $comercioId;
     }
 
 	public function changeRole(Comercio $comercio, $status)
@@ -343,17 +343,18 @@ class ListMetodosPagosC extends AdminComponent
 
     public function render()
     {
-        if($this->comercio_id == 0 ){
-            $metodosC = MetodoPagoC::query();
-        }else{
-            $metodosC = MetodoPagoC::query()
-                ->where('comercio_id', $this->comercio_id);
+		$metodosC = MetodoPagoC::query();
+
+        if($this->comercio_id > 0 )
+		{
+            $metodosC = $metodosC->where('comercio_id', $this->comercio_id);
         }
         
     	$metodosC = $metodosC
             ->where(function($q){
                 $q->where('metodo', 'like', '%'.$this->searchTerm.'%');                
-            })
+            });
+		$metodosC = $metodosC
     		->orderBy($this->sortColumnName, $this->sortDirection)
             ->paginate(15);
         

@@ -73,8 +73,7 @@ class Currency extends AdminComponent
         $this->emit('emitCurrency', $currency);
         $this->currencyValue = $currency;
 
-        $this->dispatchBrowserEvent('refreshPage', ['message' => 'Refresh pagina!']);  
-        
+        //$this->dispatchBrowserEvent('refreshPage', ['message' => 'Refresh pagina!']);        
         
     }
 

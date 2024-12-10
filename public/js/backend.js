@@ -35,5 +35,11 @@ $('[x-ref="profileLink"]').on('click', function () {
 $('[x-ref="changePasswordLink"]').on('click', function () {
   localStorage.setItem('_x_currentTab', '"changePassword"');
 });
+
+window.addEventListener('refreshPage', event => {
+  let message = event.detail.message
+  location.reload()
+}) 
+
 /******/ })()
 ;

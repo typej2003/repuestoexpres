@@ -19,8 +19,7 @@
 	    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/app.css">
-    <link rel="stylesheet" href="/css/infiniteSlider.css">
-    
+    <link rel="stylesheet" href="/css/showProducts.css">    
     
     @stack('styles')
     <livewire:styles />

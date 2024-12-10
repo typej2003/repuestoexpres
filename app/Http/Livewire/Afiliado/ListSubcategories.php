@@ -34,17 +34,16 @@ class ListSubcategories extends AdminComponent
 
     public $sortDirection = 'desc';
 
-    public $comercioId, $categoryId;
+    public $comercio_id, $category_id, $user_id;
 
-    public function mount($comercioId = 0, $categoryId = 0)
+    public function mount($comercioId = 1, $categoryId = 0)
     {
-        $this->comercioId = $comercioId;
-        $this->categoryId = $categoryId;
+        $this->comercio_id = $comercioId;
+        $this->category_id = $categoryId;
         if($comercioId > 0){
             $comercio = Comercio::find($comercioId);
-            $this->userId = $comercio->user_id;
-        }
-        
+			$this->user_id = $comercio->user_id;
+        }        
     }
 
 	public function changeMenu(Subcategory $category, $itemMenu)
@@ -57,13 +56,14 @@ class ListSubcategories extends AdminComponent
 
 	public function addNew()
 	{
-        $userId = $this->userId;
-        $comercioId = $this->comercioId;
-        $categoryId = $this->categoryId;
+        $user_id = $this->user_id;
+		
+        $comercio_id = $this->comercio_id;
+        $category_id = $this->category_id;
 		$this->reset();
-        $this->userId = $userId;
-        $this->comercioId = $comercioId;
-        $this->categoryId = $categoryId;
+        $this->user_id = $user_id;
+        $this->comercio_id = $comercio_id;
+        $this->category_id = $category_id;
 
 		$this->showEditModal = false;
 
@@ -77,9 +77,11 @@ class ListSubcategories extends AdminComponent
             'itemMenu' => 'required',
 		])->validate();
         
-        $validatedData['user_id'] = $this->userId;
-        $validatedData['comercio_id'] = $this->comercioId;
-        $validatedData['category_id'] = $this->categoryId;
+        $validatedData['user_id'] = $this->user_id;
+        $validatedData['comercio_id'] = $this->comercio_id;
+        $validatedData['category_id'] = $this->category_id;
+		$validatedData['posicionMenu'] = 0;
+		$validatedData['posicionSubmenu'] = 0;
 
 		if ($this->photo) {
 			$validatedData['avatar'] = $this->photo->store('/', 'avatarssubcategories');
@@ -172,15 +174,15 @@ class ListSubcategories extends AdminComponent
         {
             
         }else{
-            $subcategories = $subcategories->where('comercio_id', $this->comercioId);
+            $subcategories = $subcategories->where('comercio_id', $this->comercio_id);
         }
     	$subcategories = $subcategories
     		->where('name', 'like', '%'.$this->searchTerm.'%')
     		->orderBy($this->sortColumnName, $this->sortDirection)
             ->paginate(15);
 
-        $comercio = Comercio::find($this->comercioId);
-        $category = Category::find($this->categoryId);
+        $comercio = Comercio::find($this->comercio_id);
+        $category = Category::find($this->category_id);
 
         return view('livewire.afiliado.list-subcategories', [
             'comercio' => $comercio,

@@ -117,6 +117,8 @@ class ListComercios extends AdminComponent
 		// session()->flash('message', 'User added successfully!');
 
 		$this->dispatchBrowserEvent('hide-form', ['message' => 'Comercio agregado satisfactoriamente!']);
+
+		$this->dispatchBrowserEvent('refreshPage', ['message' => 'Refresh pagina!']);  
 	}
 
 	public function edit(Comercio $comercio)
@@ -189,6 +191,9 @@ class ListComercios extends AdminComponent
 		$comercio->delete();
 
 		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Comercio eliminado satisfactoriamente!']);
+
+		$this->dispatchBrowserEvent('refreshPage', ['message' => 'Refresh pagina!']);  
+		
 	}
 
 	public function searchClass($puntuacion)

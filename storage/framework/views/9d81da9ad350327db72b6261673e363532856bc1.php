@@ -15,9 +15,6 @@
 
 
     <script>
-        window.addEventListener('refreshPage', event => {
-            let message = event.detail.message
-            //location.reload()
-        }) 
+        
     </script>
 </div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/currency.blade.php ENDPATH**/ ?>

@@ -19,6 +19,7 @@ class Subcategory extends Model
         'category_id',
         'itemMenu',
         'posicionMenu',
+        'posicionSubmenu',
     ];
 
     protected $appends = [
@@ -51,7 +52,7 @@ class Subcategory extends Model
 
     public function categoria()
     {
-        return $this->hasOne(Category::class)->withDefault([
+        return $this->hasOne(Category::class, 'id', 'category_id')->withDefault([
             'name' => '',
         ]);
     }

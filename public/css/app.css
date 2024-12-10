@@ -147,27 +147,81 @@
     }
     /*   Fin de botones de incremento y decremento */
 
-    .btn-sale{
-        background-color: #28221B !important;
-        color: #FFCC2A !important;
-        min-width: 130px!important;
-        width: 140px!important;
-        height: 45px !important;
-        font-size: .8rem!important;
-        margin-top: 5px !important;
-        margin-left: 0px!important;
-    }
-    .btn-sale:hover {
-        background-color: #332c24 !important;
-        color: #FFCC2A !important;
-    }
-    .btn-sale:active { 
-        transform: scale(0.98); 
-        /* Scaling button to 0.98 to its original size */ 
-        box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
-        /* Lowering the shadow */ 
-        color: #FFCC2A!important;
-        background-color: #3d362d!important;
-    }
-
+    /**/
+.btn-app{
+    padding: 0%;
+  background-color: #28221B;
+  color: #FFCC2A!important;
+    min-width: 130px!important;
+  width: 140px!important;
+  height: 45px;
+  font-size: .8rem!important;
+    font-weight: bold;
+    border-radius: 15px;
+  }
+  .btn-app:hover {
+  background-color: #332c24!important;
+    font-size: .9rem!important;
+  color: #ffe07b;
+  }
+  .btn-app:active { 
+  /*transform: scale(0.98); */
+  /* Scaling button to 0.98 to its original size */ 
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+  /* Lowering the shadow */ 
+    padding: 0%;
+  color: #FFCC2A!important;
+    font-size: 1rem!important;
+  background-color: #3d362d!important;
+  }
+  
+  .btn-sale{
+      background-color: #28221B !important;
+      color: #FFCC2A !important;
+      min-width: 130px!important;
+      width: 140px!important;
+      height: 45px !important;
+      font-size: .8rem!important;
+      margin-top: 5px !important;
+      margin-left: 0px!important;
+  }
+  .btn-sale:hover {
+      background-color: #332c24 !important;
+      color: #FFCC2A !important;
+  }
+  .btn-sale:active { 
+      transform: scale(0.98); 
+      /* Scaling button to 0.98 to its original size */ 
+      box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+      /* Lowering the shadow */ 
+      color: #FFCC2A!important;
+      background-color: #3d362d!important;
+  }
+  
+  .btn-view{
+      background-color: #722c2c !important;
+      color: #FFCC2A !important;
+    min-width: 130px!important;
+      width: 140px!important;
+      height: 45px !important;
+      font-size: .8rem!important;
+      margin-top: 5px !important;
+      margin-left: 0px!important;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .btn-view:hover {
+      background-color: #722c2c !important;
+      color: #FFCC2A !important;
+  }
+  .btn-view:active { 
+      transform: scale(0.98); 
+      /* Scaling button to 0.98 to its original size */ 
+      box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+      /* Lowering the shadow */ 
+      color: #FFCC2A!important;
+      background-color: #722c2c!important;
+  }
+  
     

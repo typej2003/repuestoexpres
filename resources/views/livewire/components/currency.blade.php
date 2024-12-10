@@ -15,9 +15,6 @@
 
 
     <script>
-        window.addEventListener('refreshPage', event => {
-            let message = event.detail.message
-            //location.reload()
-        }) 
+        
     </script>
 </div>
