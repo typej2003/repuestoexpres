@@ -74,7 +74,7 @@ class ResultsProducts extends AdminComponent
             ->orWhere('description', 'like', '%'. $this->parametro . '%');
         
         $products = $products
-            ->orWhereHas('categories', function($q){
+            ->WhereHas('categories', function($q){
                 $q->where('name', 'like', '%'. $this->parametro . '%');
             });
         
