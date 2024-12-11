@@ -35,28 +35,34 @@ class NewProductRE extends AdminComponent
     public $photo3;
     public $photo4;
 
-    public function mount($comercioId, $editModal )
+    public function mount($comercioId, $productId, $editModal )
     {
 
         $this->comercioId = $comercioId;
+        $this->product_id = $productId;
         $this->editModal = $editModal;
 
         // dd($this->showEditModal);
 
         if($editModal == 'false'){
             $this->controlActivity = false;
+            $this->state['delivery'] = false;
+            $this->state['container_id'] = "0";
+            $this->comercio = Comercio::find($comercioId);
+            $this->state['area_id'] = $this->comercio->area_id;
+            $this->state['in_pedido'] = "0";
+            $this->state['in_envio_gratis'] = "0";
+            $this->state['in_offer'] = "0";
+            $this->state['in_fragil'] = "0";
+            $this->state['in_por_encargo'] = "0";
+            $this->state['in_valido'] = "1";
+        }else{
+            $this->product = Product::find($this->product_id);
+
+		    $this->state = $this->product->toArray();
         }
 
-        $this->state['delivery'] = false;
-        $this->state['container_id'] = "0";
-        $this->comercio = Comercio::find($comercioId);
-        $this->state['area_id'] = $this->comercio->area_id;
-        $this->state['in_pedido'] = "0";
-        $this->state['in_envio_gratis'] = "0";
-        $this->state['in_offer'] = "0";
-        $this->state['in_fragil'] = "0";
-        $this->state['in_por_encargo'] = "0";
-        $this->state['in_valido'] = "1";
+        
     }
 
     public function changeCategory($categoryId, $subcategory)
@@ -133,10 +139,10 @@ class NewProductRE extends AdminComponent
         $filename = $validatedData['code'].'-'.$this->comercioId;
 
 		if ($this->photo1) {
-			//$validatedData['image_path1'] = $this->photo->store('/', 'avatarsproducts');
-            $validatedData['image_path1'] = $this->photo1->storeAs(null,
+            // $validatedData['avatar'] = $this->photo->store('/', 'avatarscomercios');
+			$validatedData['image_path1'] = $this->photo1->storeAs(null,
                 $filename . '-1.png', 'avatarsproducts'
-            ); 
+            );     
 		}
         if ($this->photo2) {
 			//$validatedData['image_path1'] = $this->photo->store('/', 'avatarsproducts');
@@ -175,7 +181,71 @@ class NewProductRE extends AdminComponent
 
     public function updateProduct()
 	{
-        dd('update');
+        $validatedData = Validator::make($this->state, [
+            'code_lote' => 'nullable',
+            'code' => 'required',
+			'name' => 'required',
+            'manufacturer_id' => 'nullable',
+            'brand_id'  => 'nullable',
+            'model_id' => 'nullable',
+            'motor_id' => 'nullable',
+            'container_id' => 'required|not_in:0',
+            'details1' => 'nullable',
+            'details2' => 'nullable',
+            'description' => 'nullable',
+            'price1' => 'required',
+            'price2' => 'nullable',
+            'profit_price' => 'nullable',
+            'price_mayor' => 'nullable',
+            'profit_mayor' => 'nullable',
+            'price_offer' => 'nullable',
+            'profit_offer' => 'nullable',
+            'price_divisa' => 'nullable',
+            'delivery' => 'nullable',
+            'shipping_cost' => 'nullable',
+            'stock_min' => 'nullable',
+            'stock_max' => 'nullable',
+            'stock' => 'nullable',
+            'area_id' => 'required|not_in:0',
+            'category_id' => 'required|not_in:0',
+            'subcategory_id' => 'nullable',
+            'supplier_id' => 'required|not_in:0',
+            'pack_products_id' => 'required|not_in:0',
+            'pack_price' => 'nullable',
+
+            'tx_peso' => 'nullable',
+            'tx_tamanio' => 'nullable',
+            'tx_presentacion' => 'nullable',
+            'tx_tamanio_carga' => 'nullable',
+            'tx_tamanio_venta' => 'nullable',
+            'fe_expedicion' => 'nullable',
+            'madein' => 'nullable',
+            'in_pedido' => 'nullable',
+            'tx_adicionales' => 'nullable',
+            'in_envio_gratis' => 'nullable',
+            'in_offer' => 'nullable',
+            'tx_recomendacion_consumo' => 'nullable',
+            'in_fragil' => 'nullable',
+            'in_por_encargo' => 'nullable',
+            'ca_valoracion' => 'nullable',
+            'in_valido' => 'nullable',
+		])->validate();
+        
+        $filename = $validatedData['code'].'-'.$this->comercioId;
+
+        if ($this->photo1) {
+            // $validatedData['avatar'] = $this->photo->store('/', 'avatarscomercios');
+			if (Storage::disk('avatarsproducts')->exists($this->product->image_path1)) {
+				Storage::disk('avatarsproducts')->delete($this->product->image_path1);
+			}
+			$validatedData['image_path1'] = $this->photo1->storeAs(null,
+                $filename . '-1.png', 'avatarsproducts'
+            );     
+		}
+
+        $this->product->update($validatedData);
+
+		$this->dispatchBrowserEvent('hide-form', ['message' => 'Producto actualizado satisfactoriamente!']);
     }
 
     public function render()

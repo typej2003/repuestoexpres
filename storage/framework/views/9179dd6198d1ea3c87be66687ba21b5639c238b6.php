@@ -89,7 +89,7 @@ echo $html;
                                             <input name="price1" type="hidden" value="<?php echo e($product->price1); ?>">
 
                                             <div class="col-md-2 d-flex">
-                                                <img class="mx-auto" style="width:150px;" src="/noimage.png" alt="">
+                                                <img class="mx-auto" style="width:150px;" src="<?php echo e($product->image1_url); ?>" alt="">
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">

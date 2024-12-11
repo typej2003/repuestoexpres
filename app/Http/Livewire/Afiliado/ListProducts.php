@@ -70,7 +70,7 @@ class ListProducts extends AdminComponent
 		$this->screenResolution = $screenResolution;
 	}	
 
-    public function mount($comercioId = 0)
+    public function mount($comercioId = 1)
     {
         $this->comercio_id = $comercioId;
 
@@ -165,8 +165,20 @@ class ListProducts extends AdminComponent
 		$this->dispatchBrowserEvent('hide-form', ['message' => 'Producto agregado satisfactoriamente!']);
 	}
 
-	public function edit(Product $product)
+	public function edit($product_id)
 	{
+		$editModal = 'true';
+		
+		if ($this->screenResolution < 1024) {
+			return redirect()->route('editProductRE', ['comercioId' => $this->comercio_id, 'productId' => $product_id, 'editModal' => $editModal] );
+			$this->dispatchBrowserEvent('show-form');	
+		}elseif ($this->screenResolution < 1280) {
+			return redirect()->route('editProductRE', ['comercioId' => $this->comercio_id, 'productId' => $product_id, 'editModal' => $editModal] );
+			$this->dispatchBrowserEvent('show-form');
+		}else {
+			return redirect()->route('editProductRE', ['comercioId' => $this->comercio_id, 'productId' => $product_id, 'editModal' => $editModal] );
+		}
+
 		$comercio_id = $this->comercio_id;
 
 		$this->reset();

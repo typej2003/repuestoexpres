@@ -72,6 +72,8 @@ Route::get('/listTasas/{comercioId}', ListTasas::class)->name('listTasas')->midd
 
 Route::get('/newProductRE/{comercioId}/{editModal}', NewProductRE::class)->name('newProductRE')->middleware('auth');
 
+Route::get('/editProductRE/{comercioId}/{productId}/{editModal}', NewProductRE::class)->name('editProductRE')->middleware('auth');
+
 Route::get('/newComboRE/{comercioId}/{editModal}', NewComboRE::class)->name('newComboRE')->middleware('auth');
 
 Route::get('/listBrand/{comercioId}', ListBrand::class)->name('listBrand')->middleware('auth');

@@ -117,7 +117,7 @@
                                         </td>
                                         <td><?php echo e($product->created_at->toFormattedDate() ?? 'N/A'); ?></td>
                                         <td>
-                                            <a href="" wire:click.prevent="edit(<?php echo e($product); ?>)">
+                                            <a href="" wire:click.prevent="edit(<?php echo e($product->id); ?>)">
                                                 <i class="fa fa-edit mr-2"></i>
                                             </a>
 
@@ -501,13 +501,12 @@ unset($__errorArgs, $__bag); ?>
 
     <script>
         
-        document.addEventListener('livewire:load', () => {
-
-            Livewire.emit('sendResolution', screen.width);
-
-        });
-
         window.onpageshow = function() {
+            document.addEventListener('livewire:load', () => {
+                //Livewire.emit('sendResolution', screen.width);
+                window.livewire.find('<?php echo e($_instance->id); ?>').screenResolution = screen.width
+            });
+
             window.addEventListener('show-formCategory', event => {
                 
                 $('#formCategory').modal('show');

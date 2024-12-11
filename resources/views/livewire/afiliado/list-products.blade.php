@@ -105,7 +105,7 @@
                                         </td>
                                         <td>{{ $product->created_at->toFormattedDate() ?? 'N/A' }}</td>
                                         <td>
-                                            <a href="" wire:click.prevent="edit({{ $product }})">
+                                            <a href="" wire:click.prevent="edit({{ $product->id }})">
                                                 <i class="fa fa-edit mr-2"></i>
                                             </a>
 
@@ -412,13 +412,12 @@
 
     <script>
         
-        document.addEventListener('livewire:load', () => {
-
-            Livewire.emit('sendResolution', screen.width);
-
-        });
-
         window.onpageshow = function() {
+            document.addEventListener('livewire:load', () => {
+                //Livewire.emit('sendResolution', screen.width);
+                @this.screenResolution = screen.width
+            });
+
             window.addEventListener('show-formCategory', event => {
                 
                 $('#formCategory').modal('show');
