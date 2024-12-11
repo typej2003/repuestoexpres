@@ -12,11 +12,12 @@ class MenuSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
         DB::table('menus')->insert([
-            'texto' => 'Automovil',
-            'ruta' => 'automovil',
+            'texto' => 'Carro',
+            'ruta' => 'Automovil',
             'origen' => 'categories', // view or categories
             'menu' => 1,
             'posicion' => 1,
@@ -26,8 +27,8 @@ class MenuSeeder extends Seeder
         ]);
 
         DB::table('menus')->insert([
-            'texto' => 'Motocicleta',
-            'ruta' => 'motocicleta',
+            'texto' => 'Moto',
+            'ruta' => 'Motocicleta',
             'origen' => 'categories', // view or categories
             'menu' => 1,
             'posicion' => 2,
@@ -37,8 +38,8 @@ class MenuSeeder extends Seeder
         ]);
 
         DB::table('menus')->insert([
-            'texto' => 'Menu 3',
-            'ruta' => 'categories',
+            'texto' => 'Aceites',
+            'ruta' => 'aceites',
             'origen' => 'categories', // view or categories
             'menu' => 1,
             'posicion' => 3,
@@ -48,8 +49,8 @@ class MenuSeeder extends Seeder
         ]);
 
         DB::table('menus')->insert([
-            'texto' => 'Menu 4',
-            'ruta' => 'categories',
+            'texto' => 'Baterias',
+            'ruta' => 'baterias',
             'origen' => 'categories', // view or categories
             'menu' => 1,
             'posicion' => 4,
@@ -59,11 +60,44 @@ class MenuSeeder extends Seeder
         ]);
 
         DB::table('menus')->insert([
-            'texto' => 'Menu 5',
-            'ruta' => 'listNavidad',
-            'origen' => 'view', // view or categories
+            'texto' => 'Frenos',
+            'ruta' => 'categories',
+            'origen' => 'categories', // view or categories
             'menu' => 1,
             'posicion' => 5,
+            'comercio_id' => '1',
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('menus')->insert([
+            'texto' => 'Ofertas',
+            'ruta' => 'listOfertas',
+            'origen' => 'view', // view or categories
+            'menu' => 1,
+            'posicion' => 6,
+            'comercio_id' => '1',
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('menus')->insert([
+            'texto' => 'Vende desde Acá',
+            'ruta' => 'vendedesdeaca',
+            'origen' => 'view', // view or categories
+            'menu' => 1,
+            'posicion' => 7,
+            'comercio_id' => '1',
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('menus')->insert([
+            'texto' => 'Aliados',
+            'ruta' => 'listAliados',
+            'origen' => 'view', // view or categories
+            'menu' => 1,
+            'posicion' => 8,
             'comercio_id' => '1',
             'created_at' => '2022-05-16 12:20:36',
             'updated_at' => '2022-05-16 12:20:36'

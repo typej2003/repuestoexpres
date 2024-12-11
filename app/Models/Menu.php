@@ -24,7 +24,7 @@ class Menu extends Model
     {
         if($this->origen == 'categories')
         {
-            $category = Category::where('name', $this->texto)->first();
+            $category = Category::where('name', $this->ruta)->first();
 
             if($category){
                 if($category->subcategories()->count()>0){
