@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Components;
 use App\Http\Livewire\Admin\AdminComponent;
 use Illuminate\Support\Facades\Validator;
 
+use App\Http\Controllers\CartController;
+
 use App\Models\Product;
 use App\Models\Comercio;
 use App\Models\Setting;
@@ -46,22 +48,23 @@ class ShowRecommended extends AdminComponent
             )
         ));
 
-        $this->emit('changeQuantity');
+        // $this->emit('changeQuantity');
         //return redirect()->back();
-        //return redirect()->route('cart.index')->with('success_msg', 'Item Agregado a su Carrito!');
+        return redirect()->route('goCart');
     }
 
     public function actualizarInfo($data, $manufacturer, $products)
     {
-        $this->parametro = $manufacturer;
+        //$this->parametro = $manufacturer;
 
         $this->informacion = $data;
 
     }
 
-    public function mount($comercioId = 1)
+    public function mount($comercioId = 1, $parametro)
     {
         $this->comercio_id = $comercioId;
+        $this->parametro = $parametro;
 
         $this->comercio = Comercio::find($this->comercio_id);
 
@@ -174,7 +177,24 @@ class ShowRecommended extends AdminComponent
 
     public function render()
     {
-        $products = Product::where('comercio_id', $this->comercio_id)
+        $exceptIds = [];
+
+        $cartCollection = \Cart::getContent();
+        
+        foreach($cartCollection as $elemento)
+        {
+            array_push($exceptIds, $elemento->id);     
+        }
+
+        $products = Product::query();
+        $products = $products
+            ->where('comercio_id', $this->comercio_id);
+                // ->where(function($q){
+                //     $q->where('name', '%' . $this->parametro . '%')
+                //         ->orWhere('description', '%' . $this->parametro . '%');
+                // })
+        $products = $products
+                ->whereNotIn('id', $exceptIds) 
                     ->with('valoracionProduct')
                             ->paginate();
         
