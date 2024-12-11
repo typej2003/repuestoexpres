@@ -128,15 +128,16 @@ class ListProducts extends AdminComponent
 		$this->showEditModal = false;
 
 		$editModal = 'false';
+		$product_id = 0;
 		
 		if ($this->screenResolution < 1024) {
-			return redirect()->route('newProductRE', ['comercioId' => $this->comercio_id, 'editModal' => $editModal] );
+			return redirect()->route('newProductRE', ['comercioId' => $this->comercio_id, 'productId' => $product_id, 'editModal' => $editModal] );
 			$this->dispatchBrowserEvent('show-form');	
 		}elseif ($this->screenResolution < 1280) {
-			return redirect()->route('newProductRE', ['comercioId' => $this->comercio_id, 'editModal' => $editModal] );
+			return redirect()->route('newProductRE', ['comercioId' => $this->comercio_id, 'productId' => $product_id,  'editModal' => $editModal] );
 			$this->dispatchBrowserEvent('show-form');
 		}else {
-			return redirect()->route('newProductRE', ['comercioId' => $this->comercio_id, 'editModal' => $editModal] );
+			return redirect()->route('newProductRE', ['comercioId' => $this->comercio_id, 'productId' => $product_id,  'editModal' => $editModal] );
 		}
 		
 	}

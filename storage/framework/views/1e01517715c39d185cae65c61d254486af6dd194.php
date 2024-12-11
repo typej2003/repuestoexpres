@@ -430,9 +430,9 @@ unset($__errorArgs, $__bag); ?>
                                                 </div>
 
                                                 <?php if($photo1): ?>
-                                                <img src="<?php echo e($photo1->temporaryUrl()); ?>" class="img d-block mt-2 w-100 rounded">
+                                                <img src="<?php echo e($photo1->temporaryUrl()); ?>" class="img d-block mt-2 w-100 rounded" style="width:280px !important;">
                                                 <?php else: ?>
-                                                <img src="<?php echo e($state['avatar_url'] ?? ''); ?>" class="img d-block mb-2 w-100 rounded">
+                                                <img src="<?php echo e($state['image1_url'] ?? ''); ?>" class="img d-block mb-2 w-100 rounded" style="width:280px !important;">
                                                 <?php endif; ?>
                                             </div>
                                             <div class="form-group">
@@ -457,9 +457,9 @@ unset($__errorArgs, $__bag); ?>
                                                 </div>
 
                                                 <?php if($photo2): ?>
-                                                <img src="<?php echo e($photo2->temporaryUrl()); ?>" class="img d-block mt-2 w-100 rounded">
+                                                <img src="<?php echo e($photo2->temporaryUrl()); ?>" class="img d-block mt-2 w-100 rounded" style="width:280px !important;">
                                                 <?php else: ?>
-                                                <img src="<?php echo e($state['avatar_url'] ?? ''); ?>" class="img d-block mb-2 w-100 rounded">
+                                                <img src="<?php echo e($state['image2_url'] ?? ''); ?>" class="img d-block mb-2 w-100 rounded" style="width:280px !important;">
                                                 <?php endif; ?>
                                             </div>
                                             <div class="form-group">
@@ -484,9 +484,9 @@ unset($__errorArgs, $__bag); ?>
                                                 </div>
 
                                                 <?php if($photo3): ?>
-                                                <img src="<?php echo e($photo3->temporaryUrl()); ?>" class="img d-block mt-2 w-100 rounded">
+                                                <img src="<?php echo e($photo3->temporaryUrl()); ?>" class="img d-block mt-2 w-100 rounded" style="width:280px !important;">
                                                 <?php else: ?>
-                                                <img src="<?php echo e($state['avatar_url'] ?? ''); ?>" class="img d-block mb-2 w-100 rounded">
+                                                <img src="<?php echo e($state['image3_url'] ?? ''); ?>" class="img d-block mb-2 w-100 rounded" style="width:280px !important;">
                                                 <?php endif; ?>
                                             </div>
                                             <div class="form-group">
@@ -511,9 +511,9 @@ unset($__errorArgs, $__bag); ?>
                                                 </div>
 
                                                 <?php if($photo4): ?>
-                                                <img src="<?php echo e($photo4->temporaryUrl()); ?>" class="img d-block mt-2 w-100 rounded">
+                                                <img src="<?php echo e($photo4->temporaryUrl()); ?>" class="img d-block mt-2 w-100 rounded" style="width:280px !important;">
                                                 <?php else: ?>
-                                                <img src="<?php echo e($state['avatar_url'] ?? ''); ?>" class="img d-block mb-2 w-100 rounded">
+                                                <img src="<?php echo e($state['image4_url'] ?? ''); ?>" class="img d-block mb-2 w-100 rounded" style="width:280px !important;">
                                                 <?php endif; ?>
                                             </div>
                                         </div>

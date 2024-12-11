@@ -264,9 +264,9 @@
                                                 </div>
 
                                                 @if ($photo1)
-                                                <img src="{{ $photo1->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded">
+                                                <img src="{{ $photo1->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded" style="width:280px !important;">
                                                 @else
-                                                <img src="{{ $state['avatar_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded">
+                                                <img src="{{ $state['image1_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded" style="width:280px !important;">
                                                 @endif
                                             </div>
                                             <div class="form-group">
@@ -290,9 +290,9 @@
                                                 </div>
 
                                                 @if ($photo2)
-                                                <img src="{{ $photo2->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded">
+                                                <img src="{{ $photo2->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded" style="width:280px !important;">
                                                 @else
-                                                <img src="{{ $state['avatar_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded">
+                                                <img src="{{ $state['image2_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded" style="width:280px !important;">
                                                 @endif
                                             </div>
                                             <div class="form-group">
@@ -316,9 +316,9 @@
                                                 </div>
 
                                                 @if ($photo3)
-                                                <img src="{{ $photo3->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded">
+                                                <img src="{{ $photo3->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded" style="width:280px !important;">
                                                 @else
-                                                <img src="{{ $state['avatar_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded">
+                                                <img src="{{ $state['image3_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded" style="width:280px !important;">
                                                 @endif
                                             </div>
                                             <div class="form-group">
@@ -342,9 +342,9 @@
                                                 </div>
 
                                                 @if ($photo4)
-                                                <img src="{{ $photo4->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded">
+                                                <img src="{{ $photo4->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded" style="width:280px !important;">
                                                 @else
-                                                <img src="{{ $state['avatar_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded">
+                                                <img src="{{ $state['image4_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded" style="width:280px !important;">
                                                 @endif
                                             </div>
                                         </div>

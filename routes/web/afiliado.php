@@ -70,7 +70,7 @@ Route::get('/listCombos/{comercioId}', ListCombos::class)->name('listCombos')->m
 
 Route::get('/listTasas/{comercioId}', ListTasas::class)->name('listTasas')->middleware('auth');
 
-Route::get('/newProductRE/{comercioId}/{editModal}', NewProductRE::class)->name('newProductRE')->middleware('auth');
+Route::get('/newProductRE/{comercioId}/{productId}/{editModal}', NewProductRE::class)->name('newProductRE')->middleware('auth');
 
 Route::get('/editProductRE/{comercioId}/{productId}/{editModal}', NewProductRE::class)->name('editProductRE')->middleware('auth');
 
