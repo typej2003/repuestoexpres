@@ -61,7 +61,7 @@ class MenuSeeder extends Seeder
 
         DB::table('menus')->insert([
             'texto' => 'Frenos',
-            'ruta' => 'categories',
+            'ruta' => 'frenos',
             'origen' => 'categories', // view or categories
             'menu' => 1,
             'posicion' => 5,

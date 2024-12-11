@@ -58,7 +58,6 @@
                                                 </div>
                                                 <div class="row my-3">
                                                     <div class="col-md-12">
-                                                        {{ $product->categories->name }}
                                                         <a href="/routedetails/{{ $product->comercio_id }}/{{ $product->id }}" class="btn btn-view ">Ver</a>
                                                     </div>
                                                 </div>

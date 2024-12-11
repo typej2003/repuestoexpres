@@ -1,21 +1,7 @@
 <div>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css'>
     <style>
-        .profile-menu { 
-            .dropdown-menu{
-                right: 0;
-                left: unset;
-            }
-            .fa-fw{
-                margin-right: 10px;
-            }  
-            }
-            .toggle-change{
-                &::after {
-                border-top: 0;
-                border-bottom: .3em solid;
-                }
-            } 
+        
     </style>
     <div class="row">
         <div class="col-lg-12 col-xs-12 col-md-12 col-sm-12">
@@ -230,7 +216,7 @@ echo $html;
                                 <a class="dropdown-toggle botonera" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                                
                                     <img style="height:45px" src="/img/icon_miperfil.png" id="profileImage" alt="User Image">Perfil
                                 </a>                            
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div class="d-flex justify-content-between mb-2 ml-3">
                                         <a class="dropdown-item" href="#">
                                             <img class="" src="/img/icon_soporte.png" style="width: 18px; height: 25px;">
@@ -275,7 +261,7 @@ echo $html;
                     </ul>                    
                 </div>
 
-                <div class="menu">
+                <div class="menu" style="z-index: 6!important">
                     <div class="menu-left" onclick="openNav()">&#9776; <span class="wordMenu">MENÚ</span></div> 
                     <div class="menu-center w-full d-flex justify-content-around">                        
                         <?php
