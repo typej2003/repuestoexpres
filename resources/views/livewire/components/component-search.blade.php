@@ -93,8 +93,7 @@
             let savedServer  = localStorage.getItem('serverManufacturer');
 
             if (savedServer)
-            {
-                
+            {                
                 modelo_id.value = localStorage.getItem('serverModelo');
                 motor_id.value = localStorage.getItem('serverMotor');;
             }

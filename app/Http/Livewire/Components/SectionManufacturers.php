@@ -31,7 +31,7 @@ class SectionManufacturers extends Component
                                 $z->where('name', 'like', '%'.$this->parametro.'%')
                                     ->orWhere('description', 'like', '%'.$this->parametro.'%');
                             })
-                            ->paginate();
+                            ->get();
 
         return view('livewire.components.section-manufacturers',[
             'manufacturers' => $manufacturers 

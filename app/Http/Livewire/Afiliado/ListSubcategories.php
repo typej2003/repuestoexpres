@@ -36,14 +36,14 @@ class ListSubcategories extends AdminComponent
 
     public $comercio_id, $category_id, $user_id;
 
-    public function mount($comercioId = 1, $categoryId = 0)
+    public function mount($comercioId = 1, $categoryId)
     {
         $this->comercio_id = $comercioId;
         $this->category_id = $categoryId;
-        if($comercioId > 0){
+        if($comercioId > 1){
             $comercio = Comercio::find($comercioId);
 			$this->user_id = $comercio->user_id;
-        }        
+        }
     }
 
 	public function changeMenu(Subcategory $category, $itemMenu)
@@ -170,13 +170,18 @@ class ListSubcategories extends AdminComponent
     public function render()
     {
         $subcategories = Subcategory::query();
+
         if(auth()->user()->role== 'admin')
         {
             
-        }else{
+        }else
+		{
             $subcategories = $subcategories->where('comercio_id', $this->comercio_id);
         }
-    	$subcategories = $subcategories
+		$subcategories = $subcategories
+    		->where('category_id', $this->category_id);
+    	
+		$subcategories = $subcategories
     		->where('name', 'like', '%'.$this->searchTerm.'%')
     		->orderBy($this->sortColumnName, $this->sortDirection)
             ->paginate(15);

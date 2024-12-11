@@ -45,6 +45,7 @@ Route::get('/star', Star::class)->name('star');
 //      return view('welcome');
 //  });
 
+
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome'); 
 
 Route::get('/search', [WelcomeController::class, 'index'])->name('search'); 
@@ -53,6 +54,8 @@ Route::get('/cat', [WelcomeController::class, 'index'])->name('cat');
 
 
  Route::get('/searchMotor', [WelcomeController::class, 'index'])->name('searchMotor'); 
+
+ Route::get('/searchMenu', [WelcomeController::class, 'index'])->name('searchMenu');  
 
 
 // Route::get('/com/{comercio}', WelcomeController::class)->name('welcomecomercio');

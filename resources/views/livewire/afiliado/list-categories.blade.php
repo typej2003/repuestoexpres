@@ -72,6 +72,7 @@
                                     <tr>
                                         <th scope="row">{{ $categories->firstItem() + $index }}</th>
                                         <td>
+                                            <img src="{{ $categoria->avatar_url }}" style="width: 50px;" class="img img-circle mr-1" alt="">
                                             {{ $categoria->name }}
                                         </td>
                                         <td>
@@ -155,6 +156,32 @@
                                 {{ $message }}
                             </div>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="customFile">Imagen</label>
+                            <div class="custom-file">
+                                <div x-data="{ isUploading: false, progress: 5 }" x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false; progress = 5" x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                    <input wire:model="photo" type="file" class="custom-file-input" id="customFile">
+                                    <div x-show.transition="isUploading" class="progress progress-sm mt-2 rounded">
+                                        <div class="progress-bar bg-primary progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" x-bind:style="`width: ${progress}%`">
+                                            <span class="sr-only">40% Completo (exito)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="custom-file-label" for="customFile">
+                                    @if ($photo)
+                                    {{ $photo->getClientOriginalName() }}
+                                    @else
+                                    Seleccione la imagen
+                                    @endif
+                                </label>
+                            </div>
+
+                            @if ($photo)
+                            <img src="{{ $photo->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded">
+                            @else
+                            <img src="{{ $state['avatar_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded">
+                            @endif
                         </div>
                     </div>
                     <div class="modal-footer">

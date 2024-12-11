@@ -133,6 +133,13 @@
             </li>
 
             <li class="nav-item">
+              <a href="/listCategories/1" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>CATEGORIA</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
               <a href="{{ route('listBrand', 1) }}" class="nav-link {{ request()->is('listBrand') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>

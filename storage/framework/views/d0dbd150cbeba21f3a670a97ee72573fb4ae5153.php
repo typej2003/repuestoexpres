@@ -56,7 +56,8 @@
         /* Change the background color of the dropdown button when the dropdown content is shown */
         .dropdownM:hover .dropbtnM {/*background-color: #3e8e41;*/}
     </style>
-
+            
+                <?php echo csrf_field(); ?>
                 <?php $__currentLoopData = $menus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $menu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="dropdownM">
                         <a class="dropbtnM"><?php echo e($menu->texto); ?></a>
@@ -65,7 +66,12 @@
                                 <?php if($menu->subcategories() != null): ?>
                                     <?php if($menu->subcategories->count() > 0): ?>
                                         <?php $__currentLoopData = $menu->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <a href="<?php echo e($subcategory->name); ?>"><?php echo e($subcategory->name); ?></a>
+                                            <form class="formulario mx-auto" action="/searchMenu" method="get">
+                                                <a href="#" class="enviar" onclick="cerrar();"><?php echo e($subcategory->name); ?></a>
+                                                <input type="text" class="manufacturer">
+                                                <input type="text" class="modelo">
+                                                <input type="text" class="motor">
+                                            </form>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php endif; ?>
                                 <?php endif; ?>
@@ -73,6 +79,29 @@
                         <?php endif; ?>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+    <script>
+        let formulario = document.querySelector('.formulario')
+        let manufacturerM = document.querySelector('.manufacturer')
+        let modeloM = document.querySelector('.modelo')
+        let motorM = document.querySelector('.motor')
+        
+        window.addEventListener('DOMContentLoaded', () =>
+        {
+            function cerrar() {
+                formulario.submit();
+            }
+            let savedServer  = localStorage.getItem('serverManufacturer');
+
+            if (savedServer)
+            {   
+                manufacturerM.value = localStorage.getItem('serverModelo');             
+                modeloM.value = localStorage.getItem('serverModelo');
+                motorM.value = localStorage.getItem('serverMotor');;
+            }
+        });
+    </script>
+                
 </div>
 
 <?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/menu-component.blade.php ENDPATH**/ ?>

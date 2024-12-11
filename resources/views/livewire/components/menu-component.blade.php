@@ -56,7 +56,8 @@
         /* Change the background color of the dropdown button when the dropdown content is shown */
         .dropdownM:hover .dropbtnM {/*background-color: #3e8e41;*/}
     </style>
-
+            
+                @csrf
                 @foreach($menus as $menu)
                     <div class="dropdownM">
                         <a class="dropbtnM">{{ $menu->texto }}</a>
@@ -65,7 +66,12 @@
                                 @if($menu->subcategories() != null)
                                     @if($menu->subcategories->count() > 0)
                                         @foreach($menu->subcategories as $subcategory)
-                                            <a href="{{ $subcategory->name }}">{{ $subcategory->name }}</a>
+                                            <form class="formulario mx-auto" action="/searchMenu" method="get">
+                                                <a href="#" class="enviar" onclick="cerrar();">{{ $subcategory->name }}</a>
+                                                <input type="text" class="manufacturer">
+                                                <input type="text" class="modelo">
+                                                <input type="text" class="motor">
+                                            </form>
                                         @endforeach
                                     @endif
                                 @endif
@@ -73,5 +79,28 @@
                         @endif
                     </div>
                 @endforeach
+
+    <script>
+        let formulario = document.querySelector('.formulario')
+        let manufacturerM = document.querySelector('.manufacturer')
+        let modeloM = document.querySelector('.modelo')
+        let motorM = document.querySelector('.motor')
+        
+        window.addEventListener('DOMContentLoaded', () =>
+        {
+            function cerrar() {
+                formulario.submit();
+            }
+            let savedServer  = localStorage.getItem('serverManufacturer');
+
+            if (savedServer)
+            {   
+                manufacturerM.value = localStorage.getItem('serverModelo');             
+                modeloM.value = localStorage.getItem('serverModelo');
+                motorM.value = localStorage.getItem('serverMotor');;
+            }
+        });
+    </script>
+                
 </div>
 

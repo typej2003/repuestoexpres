@@ -141,6 +141,175 @@ class SubCategorySeeder extends Seeder
             'updated_at' => '2022-05-16 12:20:36'
         ]);
 
+        // Moto
+        DB::table('subcategories')->insert([
+            'name' => 'Honda',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 1,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'Yamaha',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 2,
+            'posicionSubmenu' => 0,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'Suzuki',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 3,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'Empire Keeway',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 4,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'Escuda Motorcycles',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 5,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'Bera Motorcycles',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 6,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'MD-Haojin',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 7,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'Skygo',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 7,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'Toro motorcycles',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 9,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'Suzuki-haojue',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 10,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'AVA Motocicletas',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 10,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('subcategories')->insert([
+            'name' => 'Hj Motocicletas',
+            'avatar' => 'chery.png',
+            'user_id' => '1',
+            'comercio_id' => '1',
+            'category_id' => '3',
+            'itemMenu' => '0',
+            'itemSubmenu' => '1',
+            'posicionMenu' => 0,
+            'posicionSubmenu' => 10,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);        
+
         // Aceite y liquidos
         DB::table('subcategories')->insert([
             'name' => 'Aceite de motor',

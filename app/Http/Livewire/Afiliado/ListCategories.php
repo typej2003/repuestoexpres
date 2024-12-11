@@ -6,13 +6,16 @@ use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\User;
 use App\Models\Comercio;
 use App\Models\Category;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
 
 class ListCategories extends AdminComponent
 {
-
+    use WithFileUploads;
+    
 	public $state = [];
 
 	public $category;
@@ -32,6 +35,7 @@ class ListCategories extends AdminComponent
     public $userId = 0;
     public $comercioId = 0;
     public $categoryId = 0;
+    public $photo;
 
     public function mount($comercioId = 0)
     {
@@ -86,6 +90,10 @@ class ListCategories extends AdminComponent
         $validatedData['user_id'] = $this->userId;
         $validatedData['comercio_id'] = $this->comercioId;
 
+        if ($this->photo) {
+			$validatedData['avatar'] = $this->photo->store('/', 'avatarscategories');
+		}
+
         $nro = Category::where('user_id', $this->userId)->count();
         
         $validatedData['posicionMenu'] = $nro+1;
@@ -124,6 +132,13 @@ class ListCategories extends AdminComponent
 			'name' => 'required',
             'itemMenu' => 'required',
 		])->validate();
+
+        if ($this->photo) {
+			if (Storage::disk('avatarscategories')->exists($this->category->avatar)) {
+				Storage::disk('avatarscategories')->delete($this->category->avatar);
+			}
+            $validatedData['avatar'] = $this->photo->store('/', 'avatarscategories');
+		}
 
 		$this->category->update($validatedData);
 

@@ -17,7 +17,7 @@ class MenuSeeder extends Seeder
     {
         DB::table('menus')->insert([
             'texto' => 'Carro',
-            'ruta' => 'Automovil',
+            'ruta' => 'Carro',
             'origen' => 'categories', // view or categories
             'menu' => 1,
             'posicion' => 1,
@@ -28,7 +28,7 @@ class MenuSeeder extends Seeder
 
         DB::table('menus')->insert([
             'texto' => 'Moto',
-            'ruta' => 'Motocicleta',
+            'ruta' => 'Moto',
             'origen' => 'categories', // view or categories
             'menu' => 1,
             'posicion' => 2,
