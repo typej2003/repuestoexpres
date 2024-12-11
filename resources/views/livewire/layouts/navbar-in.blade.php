@@ -29,8 +29,8 @@
                 <div class="col-md-12 mx-2">
                     <div class="dropdown-cart-drop">
                         <a class="btn-cart-drop d-flex justify-content-between botonera">
-                            <img src="/img/icon_carrito.png" style="height:25px cursor:pointer;">
-                            <span class="text-dark">({{$totalQuantityCart}})</span>
+                            <img  src="/img/icon_carrito.png" style="height:25px !important; cursor:pointer !important;">
+                            <span class="text-dark">({{ $totalQuantityCart}} )</span>
                             <!-- <span class="text-dark">({{\Cart::getTotalQuantity()}})</span> -->
                         </a>
                         @include('livewire.carrito.cart-drop')

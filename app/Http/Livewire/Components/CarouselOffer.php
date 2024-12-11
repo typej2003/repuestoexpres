@@ -36,7 +36,7 @@ class CarouselOffer extends AdminComponent
             'price' => $product->price1,
             'quantity' => $quantity,
             'attributes' => array(
-                'image' => $product->avatar_url,
+                'image' => $product->image1_url,
                 'comercio_id' => $product->comercio_id,
                 'categoria_id' => $product->categoria_id,
                 'subcategoria_id' => $product->subcategoria_id,

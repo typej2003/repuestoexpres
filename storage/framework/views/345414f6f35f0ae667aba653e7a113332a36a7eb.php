@@ -49,7 +49,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="">
-                                                <img class="mx-auto" src="<?php echo e($product->avatar_url); ?>" alt="">
+                                                <img class="mx-auto" src="<?php echo e($product->image1_url); ?>" alt="">
                                             </div>
                                         </div>
                                         <div class="row text-left">

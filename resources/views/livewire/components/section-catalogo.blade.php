@@ -85,7 +85,7 @@
                     <div>
                         <div class="card cardCatalogo mx-auto text-center mx-2">
                             <div class="card-body">
-                                <img class="mx-auto border border-1" src="{{$product->avatar_url}}" alt="">                                
+                                <img class="mx-auto border border-1" src="{{$product->image1_url}}" alt="">                                
                             </div>
                         </div>
                     </div>

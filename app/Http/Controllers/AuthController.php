@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\DatosBasicos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +20,7 @@ use Mail;
 
 class AuthController extends Controller
 {
+    
     public $messages = [
         'required'  => 'Campo requerido.',
     ];
@@ -66,39 +72,28 @@ class AuthController extends Controller
     public function registrarse(Request $request)
     {
         //Validación y recopilación de datos
-        Validator::make($input, [
-            'identificationNac' => ['required', 'string', 'max:1'],
-            'identificationNumber' => ['required', 'string', 'max:12'],
-            'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique(User::class),
-            ],
-            'password' => $this->passwordRules(),
-        ])->validate();
+
+        $validatedData = Validator::make($request->all(), [
+			'name' => 'required',
+			'email' => 'required|email|unique:users',
+			'password' => 'required|confirmed',
+            'role' => 'required',
+		])->validate();
+
+		$validatedData['password'] = bcrypt($validatedData['password']);
         
-        $user = User::create([
-            'identificationNac' => $input['identificationNac'],
-            'identificationNumber' => $input['identificationNumber'],
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'role' => $input['role'],
-            'password' => Hash::make($input['password']),
-        ]);
+        $user = User::create($validatedData);
 
         DatosBasicos::create([
             'user_id' => $user->id,
-            'cellphonecode' => $input['cellphonecode'],
-            'cellphone' => $input['cellphone'],
+            'cellphonecode' => $request->post('cellphonecode'),
+            'cellphone' => $request->post('cellphone'),
         ]);
         
         //Login de usuario
         Auth::login($user);
 
-        return back();
+        return redirect()->route('cart');
 
         //Redirección
         // return redirect("admin")->with('success','Te has registrado correctamente. Bienvenido');

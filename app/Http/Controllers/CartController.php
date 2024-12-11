@@ -88,7 +88,7 @@ class CartController extends Controller
             'price' => $product->price1,
             'quantity' => $request->quantity,
             'attributes' => array(
-                'image' => $product->avatar_url,
+                'image' => $product->image1_url,
                 'comercio_id' => $product->comercio_id,
                 'categoria_id' => $request->categoria_id,
                 'subcategoria_id' => $request->subcategoria_id,

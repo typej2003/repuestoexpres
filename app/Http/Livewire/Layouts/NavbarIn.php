@@ -10,6 +10,8 @@ class NavbarIn extends Component
     
     public function render()
     {
+        $this->totalQuantityCart = \Cart::getTotalQuantity();
+
         return view('livewire.layouts.navbar-in');
     }
 }
