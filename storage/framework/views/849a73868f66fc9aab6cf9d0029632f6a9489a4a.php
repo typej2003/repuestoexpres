@@ -8,14 +8,14 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        @auth
-        <img src="{{ auth()->user()->avatar_url }}" id="profileImage" class="img-circle elevation-2" alt="User Image">
-        @endauth
+        <?php if(auth()->guard()->check()): ?>
+        <img src="<?php echo e(auth()->user()->avatar_url); ?>" id="profileImage" class="img-circle elevation-2" alt="User Image">
+        <?php endif; ?>
       </div>
       <div class="info">
-        @auth
-        <a href="#" class="d-block" x-ref="username">{{ auth()->user()->name }}</a>
-        @endauth
+        <?php if(auth()->guard()->check()): ?>
+        <a href="#" class="d-block" x-ref="username"><?php echo e(auth()->user()->name); ?></a>
+        <?php endif; ?>
       </div>
     </div>
 
@@ -24,7 +24,7 @@
     <nav class="mt-2 overflowul">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}">
+          <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-link <?php echo e(request()->is('admin/dashboard') ? 'active' : ''); ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Escritorio
@@ -32,10 +32,10 @@
           </a>
         </li>
 
-        @auth
-          @if(auth()->user()->role == 'admin')
+        <?php if(auth()->guard()->check()): ?>
+          <?php if(auth()->user()->role == 'admin'): ?>
             <li class="nav-item">
-              <a href="{{ route('star') }}" class="nav-link {{ request()->is('star') ? 'active' : '' }}">
+              <a href="<?php echo e(route('star')); ?>" class="nav-link <?php echo e(request()->is('star') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Star
@@ -43,7 +43,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('admin.listAreas') }}" class="nav-link {{ request()->is('admin/listAreas') ? 'active' : '' }}">
+              <a href="<?php echo e(route('admin.listAreas')); ?>" class="nav-link <?php echo e(request()->is('admin/listAreas') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Área Económica
@@ -51,7 +51,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/listTasas/1" class="nav-link {{ request()->is('listTasas') ? 'active' : '' }}">
+              <a href="/listTasas/1" class="nav-link <?php echo e(request()->is('listTasas') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Tasa de cambio
@@ -60,7 +60,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('emailexample') }}" class="nav-link {{ request()->is('emailexample') ? 'active' : '' }}">
+              <a href="<?php echo e(route('emailexample')); ?>" class="nav-link <?php echo e(request()->is('emailexample') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Prueba de Email
@@ -69,7 +69,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="/api/apicontroller" class="nav-link {{ request()->is('api.apicontroller') ? 'active' : '' }}">
+              <a href="/api/apicontroller" class="nav-link <?php echo e(request()->is('api.apicontroller') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Probar Api
@@ -78,7 +78,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="/pasarela" class="nav-link {{ request()->is('pasarela') ? 'active' : '' }}">
+              <a href="/pasarela" class="nav-link <?php echo e(request()->is('pasarela') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Pasarela
@@ -87,7 +87,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('admin.users') }}" class="nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
+              <a href="<?php echo e(route('admin.users')); ?>" class="nav-link <?php echo e(request()->is('admin/users') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Usuarios
@@ -96,7 +96,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listPedidosCliente') }}" class="nav-link {{ request()->is('listPedidosCliente') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listPedidosCliente')); ?>" class="nav-link <?php echo e(request()->is('listPedidosCliente') ? 'active' : ''); ?>">
                 <i class="fa fa-solid fa-file-invoice-dollar"></i>
                 <p>
                   Pedidos
@@ -105,7 +105,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listClients', 1) }}" class="nav-link {{ request()->is('listClients') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listClients', 1)); ?>" class="nav-link <?php echo e(request()->is('listClients') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Clientes
@@ -114,7 +114,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listMetodosPagos') }}" class="nav-link {{ request()->is('listMetodosPagos') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listMetodosPagos')); ?>" class="nav-link <?php echo e(request()->is('listMetodosPagos') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Métodos de Pagos
@@ -123,7 +123,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listComercios', 1) }}" class="nav-link {{ request()->is('listComercios') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listComercios', 1)); ?>" class="nav-link <?php echo e(request()->is('listComercios') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Afiliado / Comercios
@@ -132,7 +132,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listManufacturers', 1) }}" class="nav-link {{ request()->is('listManufacturers') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listManufacturers', 1)); ?>" class="nav-link <?php echo e(request()->is('listManufacturers') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Fabricantes
@@ -148,7 +148,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listBrand', 1) }}" class="nav-link {{ request()->is('listBrand') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listBrand', 1)); ?>" class="nav-link <?php echo e(request()->is('listBrand') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Afiliado / Marca
@@ -157,7 +157,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listContainers', 1) }}" class="nav-link {{ request()->is('listContainers') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listContainers', 1)); ?>" class="nav-link <?php echo e(request()->is('listContainers') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Afiliado / Contenedor
@@ -166,7 +166,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listProducts', 1) }}" class="nav-link {{ request()->is('listProducts') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listProducts', 1)); ?>" class="nav-link <?php echo e(request()->is('listProducts') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Afiliado / Productos
@@ -175,7 +175,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listCombos', 1) }}" class="nav-link {{ request()->is('listCombos') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listCombos', 1)); ?>" class="nav-link <?php echo e(request()->is('listCombos') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Afiliado / Combos
@@ -184,7 +184,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listCategorieslist', 1) }}" class="nav-link {{ request()->is('listCategorieslist') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listCategorieslist', 1)); ?>" class="nav-link <?php echo e(request()->is('listCategorieslist') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Categorieslist
@@ -193,7 +193,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listMetodosPagosC', 1) }}" class="nav-link {{ request()->is('listMetodosPagosC') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listMetodosPagosC', 1)); ?>" class="nav-link <?php echo e(request()->is('listMetodosPagosC') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Comercio / Métodos de Pagos
@@ -202,7 +202,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listMenus', 1) }}" class="nav-link {{ request()->is('listMenus') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listMenus', 1)); ?>" class="nav-link <?php echo e(request()->is('listMenus') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Menú
@@ -211,7 +211,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listPedidos', 1) }}" class="nav-link {{ request()->is('listPedidos') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listPedidos', 1)); ?>" class="nav-link <?php echo e(request()->is('listPedidos') ? 'active' : ''); ?>">
                 <i class="fa fa-solid fa-file-invoice-dollar"></i>
                 <p>
                   Pedidos
@@ -220,7 +220,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('listTransacciones', 1) }}" class="nav-link {{ request()->is('listTransacciones') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listTransacciones', 1)); ?>" class="nav-link <?php echo e(request()->is('listTransacciones') ? 'active' : ''); ?>">
                 <i class="fa fa-solid fa-file-invoice-dollar"></i>
                 <p>
                   Transacciones
@@ -229,18 +229,18 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('MakePayment', 1) }}" class="nav-link {{ request()->is('MakePayment') ? 'active' : '' }}">
+              <a href="<?php echo e(route('MakePayment', 1)); ?>" class="nav-link <?php echo e(request()->is('MakePayment') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Hacer Operacion
                 </p>
               </a>
             </li>
-          @endif
+          <?php endif; ?>
 
-          @if(auth()->user()->role == 'cliente')
+          <?php if(auth()->user()->role == 'cliente'): ?>
             <li class="nav-item">
-              <a href="{{ route('listPedidosCliente') }}" class="nav-link {{ request()->is('listPedidosCliente') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listPedidosCliente')); ?>" class="nav-link <?php echo e(request()->is('listPedidosCliente') ? 'active' : ''); ?>">
                 <i class="fa fa-solid fa-file-invoice-dollar"></i>
                 <p>
                   Pedidos
@@ -276,11 +276,11 @@
                 </li>
               </ul>
             </li>
-          @endif
+          <?php endif; ?>
 
-          @if(auth()->user()->role == 'afiliado')
+          <?php if(auth()->user()->role == 'afiliado'): ?>
             <li class="nav-item">
-              <a href="{{ route('listComercios', auth()->user()->id) }}" class="nav-link {{ request()->is('listComercios') ? 'active' : '' }}">
+              <a href="<?php echo e(route('listComercios', auth()->user()->id)); ?>" class="nav-link <?php echo e(request()->is('listComercios') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Afiliado / Comercios
@@ -288,20 +288,21 @@
               </a>
             </li>
             <!--  POR COMERCIO -->
-            @if(count(auth()->user()->comercios) > 0)
-              @foreach(auth()->user()->comercios as $comercio)
+            <?php if(count(auth()->user()->comercios) > 0): ?>
+              <?php $__currentLoopData = auth()->user()->comercios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comercio): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
-                      {{$comercio->name}}
+                      <?php echo e($comercio->name); ?>
+
                       <i class="fas fa-angle-left right"></i>
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
 
                     <li class="nav-item">
-                      <a href="{{ route('listManufacturers', $comercio->id) }}" class="nav-link">
+                      <a href="<?php echo e(route('listManufacturers', $comercio->id)); ?>" class="nav-link">
                         <i class="nav-icon fas fa-comments"></i>
                         <p>
                           FABRICANTES
@@ -310,45 +311,45 @@
                     </li>
 
                     <li class="nav-item">
-                      <a href="/listCategories/{{$comercio->id}}" class="nav-link">
+                      <a href="/listCategories/<?php echo e($comercio->id); ?>" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>CATEGORIA</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="/listProducts/{{$comercio->id}}" class="nav-link">
+                      <a href="/listProducts/<?php echo e($comercio->id); ?>" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>PRODUCTOS</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="/listMetodosPagosC/{{$comercio->id}}" class="nav-link">
+                      <a href="/listMetodosPagosC/<?php echo e($comercio->id); ?>" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>METODOS DE PAGOS</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="/listTransacciones/{{$comercio->id}}" class="nav-link">
+                      <a href="/listTransacciones/<?php echo e($comercio->id); ?>" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>TRANSACCIONES</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="/listClients/{{$comercio->id}}" class="nav-link {{ request()->is('listClients') ? 'active' : '' }}">
+                      <a href="/listClients/<?php echo e($comercio->id); ?>" class="nav-link <?php echo e(request()->is('listClients') ? 'active' : ''); ?>">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Clientes</p>
                       </a>
                     </li>
                   </ul>
                 </li>
-              @endforeach
-            @endif
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
             <!--  FIN CATEGORIA POR COMERCIO -->
-          @endif
-        @endauth
+          <?php endif; ?>
+        <?php endif; ?>
 
         <!-- <li class="nav-item">
-          <a href="{{ route('admin.messages') }}" class="nav-link {{ request()->is('admin/messages') ? 'active' : '' }}">
+          <a href="<?php echo e(route('admin.messages')); ?>" class="nav-link <?php echo e(request()->is('admin/messages') ? 'active' : ''); ?>">
             <i class="nav-icon fas fa-comments"></i>
             <p>
               Messages
@@ -357,7 +358,7 @@
         </li> -->
 
         <li class="nav-item">
-          <a href="{{ route('admin.settings') }}" class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}">
+          <a href="<?php echo e(route('admin.settings')); ?>" class="nav-link <?php echo e(request()->is('admin/settings') ? 'active' : ''); ?>">
             <i class="nav-icon fas fa-cog"></i>
             <p>
               Configuraciones
@@ -366,7 +367,7 @@
         </li>
 
         <li class="nav-item">
-          <a x-ref="profileLink" href="{{ route('admin.profile.edit') }}" class="nav-link {{ request()->is('admin/profile') ? 'active' : '' }}">
+          <a x-ref="profileLink" href="<?php echo e(route('admin.profile.edit')); ?>" class="nav-link <?php echo e(request()->is('admin/profile') ? 'active' : ''); ?>">
             <i class="nav-icon fas fa-user"></i>
             <p>
               Perfil
@@ -375,9 +376,9 @@
         </li>
 
         <li class="nav-item">
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="nav-link">
+          <form method="POST" action="<?php echo e(route('logout')); ?>">
+            <?php echo csrf_field(); ?>
+            <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); this.closest('form').submit();" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Salir
@@ -391,3 +392,4 @@
   </div>
   <!-- /.sidebar -->
 </aside>
+<?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/layouts/partials/aside.blade.php ENDPATH**/ ?>

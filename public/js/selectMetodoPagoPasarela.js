@@ -16,7 +16,7 @@ var pagosmoviles
 var transferencias
 
 function selectMetodoPago(index1 = 0, comercio_idP, referenceP, titleP, descriptionP, clienteIdP,amountP,currencyP,currencyValueP,emailP, cellphonecodeP, cellphoneP, identificationNacP, identificationNumberP,rifLetterP, rifNumberP, pagosmovilesP, transferenciasP)
-{    
+{
     comercio_id = comercio_idP
     reference = referenceP
     title = titleP
@@ -35,7 +35,7 @@ function selectMetodoPago(index1 = 0, comercio_idP, referenceP, titleP, descript
 
     pagosmoviles = pagosmovilesP
     transferencias = transferenciasP
-    
+
     let index = index1
     let bloque = document.createElement('div')
     bloque.id = index
@@ -54,7 +54,7 @@ function selectMetodoPago(index1 = 0, comercio_idP, referenceP, titleP, descript
     select.classList.add('form-control', 'inputForm', 'my-2', 'noradiance', 'selectModoPago')
     select.id = "s"+index
     select.pantalla = pantalla
-    
+
     let option0 = document.createElement('option')
     option0.classList.add('optionModoPago')
     option0.value="0"
@@ -104,7 +104,7 @@ function selectMetodoPago(index1 = 0, comercio_idP, referenceP, titleP, descript
     select.appendChild(option2)
     select.appendChild(option3)
     select.appendChild(option4)
-    
+
     select.addEventListener('change', selectModo)
 
     return bloque
@@ -124,7 +124,7 @@ function selectModo(e) {
         'fecha': '',
         'monto': '',
     }
-    
+
     let index = e.target.selectedIndex;
     //transaccion.banco = e.target.options[index].text
     if(index !== 0 )
@@ -139,7 +139,7 @@ function selectModo(e) {
     let pantalla = '' + e.target.pantalla
 
     let ele = elementos
-    
+
     ele.modopago = e.target.value
     ele.pantalla = pantalla
 
@@ -151,12 +151,12 @@ function selectModo(e) {
     // Eliminar pantalla anterior si existe
     let element = document.querySelector(".sub-"+pantalla);
 
-    //app.firstElementChild; 
+    //app.firstElementChild;
     if(element)
         element.remove(); // Elimina el div
     // Fin de eliminar pantalla
 
-    if(index!==0){   
+    if(index!==0){
         switch (e.target.value) {
             case 'tarjetadebito':
                 bloque[0].appendChild(crearPantallaTarjetaDebito(pantalla))
@@ -165,7 +165,7 @@ function selectModo(e) {
                 document.getElementById('identificationNumber1').value = identificationNumber
                 document.getElementById('premovil').value = cellphonecode;
                 document.getElementById('movil').value = cellphone
-                //crear form                
+                //crear form
                 //bloque[0].appendChild(crearFormPagoTarjeja())
                 document.querySelector('#identificationNac').value = identificationNac
                 document.querySelector('#identificationNumber').value = identificationNumber
@@ -178,10 +178,10 @@ function selectModo(e) {
                 document.querySelector('#cellphone').value = cellphone
                 document.querySelector('#email').value = email
                 document.querySelector('#title').value = title
-                document.querySelector('#description').innerText = description                
+                document.querySelector('#description').innerText = description
                 initFormulario()
                 break;
-            
+
             case 'pagomovil':
                 bloque[0].appendChild(crearPantallaPagoMovil(pantalla))
                 document.getElementById('identificationNacPM').value = identificationNac
@@ -189,19 +189,19 @@ function selectModo(e) {
                 document.getElementById('cellphonecodePM').value = cellphonecode
                 document.getElementById('cellphonePM').value = cellphone
                 break;
-            
+
             case 'transferencia':
                 bloque[0].appendChild(crearPantallaTransferencia(pantalla))
                 document.getElementById('identificationNacT').value = identificationNac
                 document.getElementById('identificationNumberT').value = identificationNumber
                 break;
-            
+
             case 'zelle':
                 bloque[0].appendChild(crearPantallaZelle(pantalla))
                 break;
-        
+
             default:
-                
+
                 //bloque[0].appendChild(crearPantalla(pantalla))
                 break;
         }
@@ -317,15 +317,15 @@ function crearFormPagoTarjeja(){
             </div>
 
         </div>
-        
+
             <img src="/images/botondepago.png" alt="App Logo" height="50px" width="100px" />
-        
+
         <div class="row mb-2 mt-3">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <input id="btnCreatePayment" type="submit" value="Iniciar Proceso de Pago" class="btn btn-success">                
+                <input id="btnCreatePayment" type="submit" value="Iniciar Proceso de Pago" class="btn btn-success">
             </div>
         </div>
-    </form>    
+    </form>
     `
     //return formQue
     return formulario
@@ -333,8 +333,8 @@ function crearFormPagoTarjeja(){
 
 //PAGO MOVIL
 function crearPantallaPagoMovil(pantalla)
-{   
-    var bloqueP= document.createElement('div') 
+{
+    var bloqueP= document.createElement('div')
     bloqueP.classList.add('sub-' + pantalla) //para agregar el footer al final
 
     let montopagar = document.createElement('div')
@@ -352,14 +352,14 @@ function crearPantallaPagoMovil(pantalla)
     let option = document.createElement('option')
     option.value='0'
     option.innerHTML = 'Seleccione un Banco'
-    bancoasociadoPM.appendChild(option)       
+    bancoasociadoPM.appendChild(option)
     //Llena el select bancoasociado
-    
+
     pagosmoviles.forEach(element => {
         let option = document.createElement('option')
         option.value=element.codigo
         option.innerHTML = element.banco
-        bancoasociadoPM.appendChild(option)       
+        bancoasociadoPM.appendChild(option)
     });
 
     bloqueP.appendChild(bancoasociadoPM)
@@ -379,7 +379,7 @@ function crearPantallaPagoMovil(pantalla)
         //transaccion.banco = e.target.options[index].text
         var codigo = this.value
         var pagomovil;
-        
+
         if(codigo === '0'){
             spanDP.innerHTML = ``
             spanGroup.classList.add('d-none')
@@ -389,10 +389,10 @@ function crearPantallaPagoMovil(pantalla)
                 if(buscar.codigo === codigo)
                 {
                     pagomovil = buscar
-                }                    
+                }
             });
-            
-            spanGroup.classList.remove('d-none')            
+
+            spanGroup.classList.remove('d-none')
             spanDP.innerHTML = `<div class='negrita'>RIF/CEDULA</div><div>${pagomovil.identificationNumber}</div>
                             <div class='negrita'>BANCO</div><div>${pagomovil.banco} (${pagomovil.codigo})</div>
                             <div class='negrita'>TELÉFONO</div><div>${pagomovil.cellphone}</div>
@@ -405,7 +405,7 @@ function crearPantallaPagoMovil(pantalla)
     let bottopP = document.createElement('div')
     bottopP.classList.add('bottopP', 'negrita1')
     bloqueP.appendChild(bottopP)
-    
+
     let a = document.createElement('a')
     a.src = "#"
     a.index = pantalla
@@ -414,13 +414,13 @@ function crearPantallaPagoMovil(pantalla)
     let span = document.createElement('span')
     span.innerText = 'Método de Pago Múltiple'
     span.classList.add('textInfo', 'negrita')
-    a.classList.add('c-a', 'mx-1')    
+    a.classList.add('c-a', 'mx-1')
     if(pantalla == 'p-0'){
         //bottopP.appendChild(span)
         //bottopP.appendChild(a)
     }
     a.addEventListener('click', nuevoBloque)
-    
+
     let a1 = document.createElement('a')
     a1.src = "#"
     a1.classList.add('enlaceEliminar')
@@ -433,7 +433,7 @@ function crearPantallaPagoMovil(pantalla)
     }
 
     let formulario = document.createElement('div')
-    
+
     formulario.innerHTML = showFormGrupoPagoMovil()
 
     bloqueP.appendChild(formulario)
@@ -443,23 +443,23 @@ function crearPantallaPagoMovil(pantalla)
 
 function nuevoBloque()
 {
-    
+
     //let index = Object.keys(transaccion).length
-    
+
     function verificarCampo(elemento){
 
         for (let x = 0; x < transaccion.length; x++) {
-            
+
             let busqueda = transaccion.some((buscar) => buscar.pantalla === "p-"+x);
             console.log(x + ' - ' + busqueda)
             if(!busqueda){
                 return x
             }
-            
+
         }
 
         return Object.keys(transaccion).length
-        
+
     }
 
     let result = verificarCampo('pantalla')
@@ -467,9 +467,9 @@ function nuevoBloque()
     console.log(result)
 
     let divPrincipal = document.getElementById('divPrincipal')
-    divPrincipal.appendChild(selectMetodoPago(result))        
+    divPrincipal.appendChild(selectMetodoPago(result))
     //Tamaño del array
-    
+
 }
 
 function eliminarBloque()
@@ -494,14 +494,14 @@ function eliminarBloque()
         return Indice;
     }
 
-    
+
     // Eliminar pantalla anterior si existe
     let element = document.querySelector("."+this.index);
 
     //delete transaccion[this.index];
 
 
-    //app.firstElementChild; 
+    //app.firstElementChild;
     if(element)
         element.remove(); // Elimina el div
     // Fin de eliminar pantalla
@@ -510,7 +510,7 @@ function eliminarBloque()
 
 function showFormGrupoPagoMovil ()
 {
-    
+
     let formGrupo = `
     <div class="formPM">
     <div class="row">
@@ -532,7 +532,7 @@ function showFormGrupoPagoMovil ()
                     <label for="identificationNumberPM">Documento</label>
                     <input type="text" id="identificationNumberPM" class="form-control inputForm" placeholder="Documento">
                 </div>
-            </div>                        
+            </div>
         </div>
 
         <div class="row">
@@ -572,10 +572,10 @@ function showFormGrupoPagoMovil ()
                         `
                     });
     formGrupo += option
-                    
+
     formGrupo += `
                 </select>
-            </div>                        
+            </div>
         </div>
 
         <div class="form-group pt-3">
@@ -584,7 +584,7 @@ function showFormGrupoPagoMovil ()
                     <label for="amountPM">Monto cancelado</label>
                     <input type="number" class="form-control inputForm" name="amountPM" id="amountPM" placeholder="Monto cancelado"/>
                 </div>
-            </div>                
+            </div>
         </div>
 
         <div class="form-group pt-3">
@@ -593,15 +593,15 @@ function showFormGrupoPagoMovil ()
                     <label for="referencePM">Registra la referencia del pago</label>
                     <input type="number" class="form-control inputForm" name="referencePM" id="referencePM" placeholder="Registra la referencia del pago"/>
                 </div>
-            </div>                
+            </div>
         </div>
-        
+
         <div class="form-group">
             <div class="row mx-auto my-3 p-3">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <button id="enviarPagoMovil" class="btn boton1 w-100" onClick="enviarPagoMovil()">Reporta el pago</button>
                 </div>
-            </div>    
+            </div>
         </div>
         `
     return formGrupo
@@ -613,19 +613,19 @@ function enviarPagoMovil(){
         objeto['currency'] = 1
         objeto['cliente_id'] = cliente_id
         objeto['comercio_id'] = comercio_id
-        
+
         document.querySelectorAll('.formPM input').forEach((input, i) => {
             let name = input.id + ''
             //let nuevaData = objeto.push({`${name}`: input.value})
             objeto[name.replace('PM', '')] = input.value
         });
-        
+
         document.querySelectorAll('.formPM select').forEach((input, i) => {
             let name = input.id
             //let nuevaData = objeto.push({name: input.value})
             objeto[name.replace('PM', '')] = input.value
-        });        
-        
+        });
+
         enviarDatos(objeto)
     }
 }
@@ -680,8 +680,8 @@ function controlPagoMovil() {
 
 //TARJETA DE DEBITO
 function crearPantallaTarjetaDebito(pantalla)
-{   
-    var bloqueP = document.createElement('div') 
+{
+    var bloqueP = document.createElement('div')
     bloqueP.id = "bloqueP"
     bloqueP.classList.add('sub-' + pantalla) //para agregar el footer al final
 
@@ -697,18 +697,18 @@ function crearPantallaTarjetaDebito(pantalla)
     let formGrupoTarjetaDebito = document.createElement('div')
     formGrupoTarjetaDebito.id = "formGrupoTarjetaDebito"
     formGrupoTarjetaDebito.innerHTML = showFormGrupoTarjetaDebito()
-    
+
     bloqueP.appendChild(formGrupoTarjetaDebito)
     var spanGroupT = document.createElement('div')
     spanGroupT.classList.add('d-none')
     spanGroupT.id = 'spanGroup'
     spanGroupT.innerHTML = ""
     bloqueP.appendChild(spanGroupT)
-    
+
     let bottopP = document.createElement('div')
     bottopP.classList.add('bottopP', 'negrita1')
     bloqueP.appendChild(bottopP)
-    
+
     let a = document.createElement('a')
     a.src = "#"
     a.index = pantalla
@@ -717,13 +717,13 @@ function crearPantallaTarjetaDebito(pantalla)
     let span = document.createElement('span')
     span.innerText = 'Método de Pago Múltiple'
     span.classList.add('textInfo', 'negrita')
-    a.classList.add('c-a', 'mx-1')    
+    a.classList.add('c-a', 'mx-1')
     if(pantalla == 'p-0'){
         //bottopP.appendChild(span)
         //bottopP.appendChild(a)
     }
     a.addEventListener('click', nuevoBloque)
-    
+
     let a1 = document.createElement('a')
     a1.src = "#"
     a1.classList.add('enlaceEliminar')
@@ -771,7 +771,7 @@ function showFormGrupoTarjetaDebito()
                     <label for="identificationNumber1">Documento</label>
                     <input type="text" id="identificationNumber1" class="form-control inputForm" placeholder="Documento">
                 </div>
-            </div>                        
+            </div>
         </div>
 
         <div class="row">
@@ -794,14 +794,14 @@ function showFormGrupoTarjetaDebito()
                 <input type="text" class="form-control inputForm" id="movil">
             </div>
         </div>
-    
+
         <div class="form-group">
             <div class="row mx-auto my-3 p-3">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <button id="procesarTarjeta" class="btn boton1 w-100" onClick="procesarTarjeta()">PROCESAR</button>
                 </div>
-            </div>                
-        `    
+            </div>
+        `
     return formGrupo
 }
 
@@ -817,9 +817,9 @@ function showFormGrupoProcesarTarjetaDebito ()
     let spanInfo = document.createElement('div')
     spanInfo.classList.add('divInfo')
     spanInfo.innerText = "Se ha enviado un código temporal al número de teléfono afiliado al BDV, por favor ingresa el código para finalizar el pago"
-    
+
     let formGrupo = document.createElement('div')
-    
+
     formGrupo.innerHTML = `
         <div class="form-group pt-3">
             <div class="row">
@@ -827,7 +827,7 @@ function showFormGrupoProcesarTarjetaDebito ()
                     <label for="codigorecibido">Código recibido</label>
                     <input type="number" class="form-control inputForm" name="codigorecibido" id="codigorecibido" placeholder="Código recibido"/>
                 </div>
-            </div>                
+            </div>
         </div>
 
         <div class="form-group">
@@ -835,7 +835,7 @@ function showFormGrupoProcesarTarjetaDebito ()
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <button class="btn boton1 w-100">PROCESAR PAGO</button>
                 </div>
-            </div>                
+            </div>
         `
     contenedor.innerHTML = ""
     contenedor.appendChild(spanInfo)
@@ -844,7 +844,7 @@ function showFormGrupoProcesarTarjetaDebito ()
 }
 
 function initFormulario() {
-    
+
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl, { container: 'body', trigger: 'hover' })
@@ -1051,7 +1051,7 @@ function createPayment() {
                 $('#btnNewPayment').show();
 
                 let bloqueP = document.getElementById('bloqueP')
-                
+
 
                 let cadena = `<iframe id="ventana" width="420px" height="620px" wire:ignore></iframe>`
 
@@ -1091,7 +1091,7 @@ function enabledControls(enabled) {
         $('#form input').each(function () { $(this).attr('disabled', 'disabled'); });
         $('#form select').each(function () { $(this).attr('disabled', 'disabled'); });
         $('#form textarea').each(function () { $(this).attr('disabled', 'disabled'); });
-    } else {    
+    } else {
         $('#form input').each(function () { $(this).removeAttr('disabled'); });
         $('#form select').each(function () { $(this).removeAttr('disabled'); });
         $('#form textarea').each(function () { $(this).removeAttr('disabled'); });
@@ -1104,23 +1104,25 @@ function procesarTarjeta(){
 
 function enviarDatos(datos){
     var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
-    var datos = datos 
+    var datos = datos
     var path = "/enviarDataPasarela";
     $.ajax({
         url: path,
         //type: "POST",
         type: "get",
         datatype:"json",
-        data: { 
+        data: {
             _token: token,
             datos: datos
             },
         success: function (data) {
             if(data.state == 'ok'){
                 console.log('operación exitosa!')
+                //window.location.href = "{{ route('listPedidosCliente')}}";
+                window.location.href = "/listPedidosCliente";
             }else{
                 console.log('operación fallida!')
-            }            
+            }
 
         }
     });
@@ -1128,8 +1130,8 @@ function enviarDatos(datos){
 
 /**** TRANSFERENCIA *******/
 function crearPantallaTransferencia(pantalla)
-{   
-    var bloqueP= document.createElement('div') 
+{
+    var bloqueP= document.createElement('div')
     bloqueP.classList.add('sub-' + pantalla) //para agregar el footer al final
 
     let montopagar = document.createElement('div')
@@ -1147,7 +1149,7 @@ function crearPantallaTransferencia(pantalla)
     let option = document.createElement('option')
     option.value='0'
     option.innerHTML = 'Seleccione un Cuenta Bancaria'
-    bancoasociadoT.appendChild(option)       
+    bancoasociadoT.appendChild(option)
     //Llena el select bancoasociado
     bancosAsociadosT.forEach(element => {
         let option = document.createElement('option')
@@ -1164,7 +1166,7 @@ function crearPantallaTransferencia(pantalla)
     spanGroup.innerHTML = ""
     bloqueP.appendChild(spanGroup)
 
-    bancoasociadoT.addEventListener('change', function(){        
+    bancoasociadoT.addEventListener('change', function(){
         var spanDP = document.createElement('div')
         spanDP.classList.add('textInfo', 'divInfo', 'text-center', 'font-weight-bold')
         var spanGroupBotones = document.createElement('div')
@@ -1173,7 +1175,7 @@ function crearPantallaTransferencia(pantalla)
         //transaccion.banco = e.target.options[index].text
         var codigo = this.value
         var cuentabancaria;
-        
+
         if(codigo === '0'){
             spanDP.innerHTML = ``
             spanGroup.classList.add('d-none')
@@ -1183,10 +1185,10 @@ function crearPantallaTransferencia(pantalla)
                 if(buscar.codigo === codigo)
                 {
                     cuentabancaria = buscar
-                }                    
+                }
             });
 
-            spanGroup.classList.remove('d-none')            
+            spanGroup.classList.remove('d-none')
             spanDP.innerHTML = `<div class='negrita'>RIF/CEDULA</div><div>${cuentabancaria.cedula}</div>
                             <div class='negrita'>BANCO</div><div>${cuentabancaria.banco}</div>
                             <div class='negrita'>NRO DE CUENTA</div><div>${cuentabancaria.nrocuenta}</div>
@@ -1197,7 +1199,7 @@ function crearPantallaTransferencia(pantalla)
     let bottopP = document.createElement('div')
     bottopP.classList.add('bottopP', 'negrita1')
     bloqueP.appendChild(bottopP)
-    
+
     let a = document.createElement('a')
     a.src = "#"
     a.index = pantalla
@@ -1206,12 +1208,12 @@ function crearPantallaTransferencia(pantalla)
     let span = document.createElement('span')
     span.innerText = 'Método de Pago Múltiple'
     span.classList.add('textInfo', 'negrita')
-    a.classList.add('c-a', 'mx-1')    
+    a.classList.add('c-a', 'mx-1')
     if(pantalla == 'p-0'){
         //bottopP.appendChild(span)
         //bottopP.appendChild(a)
     }
-    a.addEventListener('click', nuevoBloque)    
+    a.addEventListener('click', nuevoBloque)
     let a1 = document.createElement('a')
     a1.src = "#"
     a1.classList.add('enlaceEliminar')
@@ -1221,7 +1223,7 @@ function crearPantallaTransferencia(pantalla)
     if(pantalla !== 'p-0'){
         //bottopP.appendChild(a1)
     }
-    let formulario = document.createElement('div')    
+    let formulario = document.createElement('div')
     formulario.innerHTML = showFormGrupoTransferencia()
     bloqueP.appendChild(formulario)
 
@@ -1230,7 +1232,7 @@ function crearPantallaTransferencia(pantalla)
 
 function showFormGrupoTransferencia()
 {
-    
+
     let formGrupo = `
     <div class="formT">
     <div class="row">
@@ -1252,7 +1254,7 @@ function showFormGrupoTransferencia()
                     <label for="identificationNumberT">Documento</label>
                     <input type="text" id="identificationNumberT" class="form-control inputForm" placeholder="Documento">
                 </div>
-            </div>                        
+            </div>
         </div>
 
         <div class="row">
@@ -1271,10 +1273,10 @@ function showFormGrupoTransferencia()
                         `
                     });
     formGrupo += option
-                    
+
     formGrupo += `
                 </select>
-            </div>                        
+            </div>
         </div>
 
         <div class="form-group pt-3">
@@ -1283,7 +1285,7 @@ function showFormGrupoTransferencia()
                     <label for="amountT">Monto cancelado</label>
                     <input type="number" class="form-control inputForm" name="amountT" id="amountT" placeholder="Monto cancelado"/>
                 </div>
-            </div>                
+            </div>
         </div>
 
         <div class="form-group pt-3">
@@ -1292,15 +1294,15 @@ function showFormGrupoTransferencia()
                     <label for="referenceT">Registra la referencia del pago</label>
                     <input type="number" class="form-control inputForm" name="referenceT" id="referenceT" placeholder="Registra la referencia del pago"/>
                 </div>
-            </div>                
+            </div>
         </div>
-        
+
         <div class="form-group">
             <div class="row mx-auto my-3 p-3">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <button id="enviarTransferencia" class="btn boton1 w-100" onClick="enviarTransferencia()">Reporta el pago</button>
                 </div>
-            </div>    
+            </div>
         </div>
         `
     return formGrupo
@@ -1312,19 +1314,19 @@ function enviarTransferencia(){
         objeto['cliente_id'] = cliente_id
         objeto['currency'] = 1
         objeto['comercio_id'] = comercio_id
-        
+
         document.querySelectorAll('.formT input').forEach((input, i) => {
             let name = input.id + ''
             //let nuevaData = objeto.push({`${name}`: input.value})
             objeto[name.replace('T', '')] = input.value
         });
-        
+
         document.querySelectorAll('.formT select').forEach((input, i) => {
             let name = input.id
             //let nuevaData = objeto.push({name: input.value})
             objeto[name.replace('T', '')] = input.value
         });
-        
+
         enviarDatos(objeto)
     }
 }
@@ -1362,14 +1364,14 @@ function controlTransferencia() {
         document.getElementById('referenceT').focus();
         return false;
     }
-    
+
     return true;
 }
 
 /**** ZELLE *******/
 function crearPantallaZelle(pantalla)
-{   
-    var bloqueP= document.createElement('div') 
+{
+    var bloqueP= document.createElement('div')
     bloqueP.classList.add('sub-' + pantalla) //para agregar el footer al final
 
     let montopagar = document.createElement('div')
@@ -1387,7 +1389,7 @@ function crearPantallaZelle(pantalla)
     let option = document.createElement('option')
     option.value='0'
     option.innerHTML = 'Seleccione un Cuenta Zelle'
-    bancoasociadoZelle.appendChild(option)       
+    bancoasociadoZelle.appendChild(option)
     //Llena el select bancoasociado
     bancosAsociadosZelle.forEach(element => {
         let option = document.createElement('option')
@@ -1404,7 +1406,7 @@ function crearPantallaZelle(pantalla)
     spanGroup.innerHTML = ""
     bloqueP.appendChild(spanGroup)
 
-    bancoasociadoZelle.addEventListener('change', function(){        
+    bancoasociadoZelle.addEventListener('change', function(){
         var spanDP = document.createElement('div')
         spanDP.classList.add('textInfo', 'divInfo', 'text-center', 'font-weight-bold')
         var spanGroupBotones = document.createElement('div')
@@ -1413,7 +1415,7 @@ function crearPantallaZelle(pantalla)
         //transaccion.banco = e.target.options[index].text
         var codigo = this.value
         var cuentazelle;
-        
+
         if(codigo === '0'){
             spanDP.innerHTML = ``
             spanGroup.classList.add('d-none')
@@ -1423,16 +1425,16 @@ function crearPantallaZelle(pantalla)
                 if(buscar.email === codigo)
                 {
                     cuentazelle = buscar
-                }                    
+                }
             });
 
-            spanGroup.classList.remove('d-none')            
+            spanGroup.classList.remove('d-none')
             // spanDP.innerHTML = `
             //                 <div class='negrita'>EMAIL A DONDE REALIZAR EL PAGO</div><div>${cuentazelle.email}</div>
             // `
             spanGroup.innerHTML = infoZelle(cuentazelle.email)
 
-            let formulario = document.createElement('div')    
+            let formulario = document.createElement('div')
             formulario.innerHTML = showFormGrupoZelle()
             bloqueP.appendChild(formulario)
         }
@@ -1441,7 +1443,7 @@ function crearPantallaZelle(pantalla)
     let bottopP = document.createElement('div')
     bottopP.classList.add('bottopP', 'negrita1')
     bloqueP.appendChild(bottopP)
-    
+
     let a = document.createElement('a')
     a.src = "#"
     a.index = pantalla
@@ -1450,12 +1452,12 @@ function crearPantallaZelle(pantalla)
     let span = document.createElement('span')
     span.innerText = 'Método de Pago Múltiple'
     span.classList.add('textInfo', 'negrita')
-    a.classList.add('c-a', 'mx-1')    
+    a.classList.add('c-a', 'mx-1')
     if(pantalla == 'p-0'){
         //bottopP.appendChild(span)
         //bottopP.appendChild(a)
     }
-    a.addEventListener('click', nuevoBloque)    
+    a.addEventListener('click', nuevoBloque)
     let a1 = document.createElement('a')
     a1.src = "#"
     a1.classList.add('enlaceEliminar')
@@ -1471,13 +1473,13 @@ function crearPantallaZelle(pantalla)
 
 function showFormGrupoZelle()
 {
-    
+
     let formGrupo = `
     <div class="formZelle">
         <div class="row">
             <div class="col-lg-12 text-justity pt-3 negrita">Ingresa los datos de tu pago</div>
         </div>
-        
+
         <div class="row">
             <div class="col-lg-12 text-justity pt-3 negrita">Email hacia donde realizaste el pago</div>
         </div>
@@ -1494,10 +1496,10 @@ function showFormGrupoZelle()
                         `
                     });
     formGrupo += option
-                    
+
     formGrupo += `
                 </select>
-            </div>                        
+            </div>
         </div>
 
         <div class="form-group pt-3">
@@ -1506,7 +1508,7 @@ function showFormGrupoZelle()
                     <label for="amountZelle">Monto cancelado</label>
                     <input type="number" class="form-control inputForm" name="amountZelle" id="amountZelle" placeholder="Monto cancelado"/>
                 </div>
-            </div>                
+            </div>
         </div>
 
         <div class="form-group pt-3">
@@ -1515,15 +1517,15 @@ function showFormGrupoZelle()
                     <label for="referenceZelle">Registra el código envia a su correo</label>
                     <input type="number" class="form-control inputForm" name="referenceZelle" id="referenceZelle" placeholder="Registra el código del pago"/>
                 </div>
-            </div>                
+            </div>
         </div>
-        
+
         <div class="form-group">
             <div class="row mx-auto my-3 p-3">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <button id="enviarZelle" class="btn boton1 w-100" onClick="enviarZelle()">Reporta el código</button>
                 </div>
-            </div>    
+            </div>
         </div>
         `
     return formGrupo
@@ -1538,19 +1540,19 @@ function enviarZelle(){
         objeto['title'] = title
         objeto['description'] = description
         objeto['codigo'] = ''
-        
+
         document.querySelectorAll('.formZelle input').forEach((input, i) => {
             let name = input.id + ''
             //let nuevaData = objeto.push({`${name}`: input.value})
             objeto[name.replace('Zelle', '')] = input.value
         });
-        
+
         document.querySelectorAll('.formZelle select').forEach((input, i) => {
             let name = input.id
             //let nuevaData = objeto.push({name: input.value})
             objeto[name.replace('Zelle', '')] = input.value
         });
-        
+
         enviarDatos(objeto)
     }
 }
@@ -1578,7 +1580,7 @@ function infoZelle(email){
                                 <div class="mx-auto marco my-3">Para realizar tu pago usa el código mostrando en letras naranjas</div>
                                 <div class="naranja negrita my-3"><span>N34712</div>
                                 <div class="w-75 border-azulado mx-auto my-3">
-                                    <div class="azulado mx-auto negrita">Ingresa el codigo en letras moradas</div>                                
+                                    <div class="azulado mx-auto negrita">Ingresa el codigo en letras moradas</div>
                                     <div class="fontSize p-1">En el campo comentario de tu banco (message, reference, code, description, comment, note)</div>
                                 </div>
                                 <div class="w-75 border-azulado mx-auto my-3">
@@ -1594,7 +1596,7 @@ function infoZelle(email){
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     `
@@ -1602,7 +1604,7 @@ function infoZelle(email){
 }
 
 function controlZelle() {
-    
+
     if (document.getElementById('emailZelle') == null
         || document.getElementById('emailZelle').value == "0") {
         alert("El email no puede estar vacío.");
@@ -1621,7 +1623,7 @@ function controlZelle() {
         alert("El código no puede estar vacío.");
         document.getElementById('referenceZelle').focus();
         return false;
-    }    
-    
+    }
+
     return true;
 }

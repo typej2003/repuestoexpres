@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center border bg-white pr-2">
-  <input {{ $attributes }} type="text" class="form-control border-0" placeholder="Buscar">
+  <input <?php echo e($attributes); ?> type="text" class="form-control border-0" placeholder="Buscar">
   <div wire:loading.delay wire:target="searchTerm">
     <div class="la-ball-clip-rotate la-dark la-sm">
       <div></div>
@@ -7,7 +7,7 @@
   </div>
 </div>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
   <style>
     /*!
  * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
@@ -123,7 +123,7 @@
            transform: rotate(360deg);
     }
 }
-@keyframes ball-clip-rotate {
+@keyframes  ball-clip-rotate {
     0% {
         -webkit-transform: rotate(0deg);
            -moz-transform: rotate(0deg);
@@ -144,4 +144,4 @@
     }
 }
 </style>
-@endpush
+<?php $__env->stopPush(); ?><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/components/search-input.blade.php ENDPATH**/ ?>

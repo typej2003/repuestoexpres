@@ -235,7 +235,7 @@
                         ])
                         
                     </div>
-                    <div class="button-search w-full" style="display: none; cursor: pointer;"><img src="./img/icon_buscar.png" alt=""></div>
+                    <div class="button-search w-full" style="display: none; cursor: pointer;"><img src="/img/icon_buscar.png" alt=""></div>
                     <div class="menu-right w-full">
                         @livewire('components.currency')
                     </div>

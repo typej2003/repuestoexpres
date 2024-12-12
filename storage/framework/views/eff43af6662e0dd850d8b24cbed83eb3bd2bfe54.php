@@ -12,54 +12,54 @@
         </div>    
         <div class="row">
             <div class="col-md-12">
-                <section class="regular slider slider-recommended" @if($renderizar) wire:ignore @endif wire:ignore.self>
-                    @forelse ($products as $index => $product)
+                <section class="regular slider slider-recommended" <?php if($renderizar): ?> wire:ignore <?php endif; ?> wire:ignore.self>
+                    <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <div>
                             <form action="/add" method="post">
-                                @csrf
-                                <input name="product_id" type="hidden" value="{{ $product->id }}">
-                                <input name="name" type="hidden" value="{{ $product->name }}">
-                                <input name="price1" type="hidden" value="{{ $product->price1 }}">
+                                <?php echo csrf_field(); ?>
+                                <input name="product_id" type="hidden" value="<?php echo e($product->id); ?>">
+                                <input name="name" type="hidden" value="<?php echo e($product->name); ?>">
+                                <input name="price1" type="hidden" value="<?php echo e($product->price1); ?>">
                                 <input name="quantity" type="hidden" value="1">
                                 <div class="card showProductCard mx-auto text-center mx-2">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="">
-                                                <img class="mx-auto" src="{{$product->image1_url}}" alt="">
+                                                <img class="mx-auto" src="<?php echo e($product->image1_url); ?>" alt="">
                                             </div>
                                         </div>
                                         <div class="row text-left">
-                                            <div class="negrita">{{$product->name}}</div>
-                                                @if($product->on_offer)
-                                                    <div class="text-decoration-line-through">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
-                                                    <div class="">Promoción: {{$currencyValue}}. {{ $product->getPrice_offer() }}</div>
-                                                @else
-                                                    <div class="">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
-                                                @endif
+                                            <div class="negrita"><?php echo e($product->name); ?></div>
+                                                <?php if($product->on_offer): ?>
+                                                    <div class="text-decoration-line-through">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                                    <div class="">Promoción: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice_offer()); ?></div>
+                                                <?php else: ?>
+                                                    <div class="">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
+                                                <?php endif; ?>
                                                 <div style="display: flex; flex-direction: row;">
                                                     <div class="">
                                                     <!-- <button type="submit" class="btn btn-sale text-center">Comprar ahora</button> -->
-                                                    <a wire:click.prevent="sendCard({{ $product->id }}, 1)" class="btn btn-sale text-center">Comprar ahora</a>
-                                                    <a href="/routedetails/{{ $product->comercio_id }}/{{ $product->id }}" class="btn btn-view ">Ver</a>
+                                                    <a wire:click.prevent="sendCard(<?php echo e($product->id); ?>, 1)" class="btn btn-sale text-center">Comprar ahora</a>
+                                                    <a href="/routedetails/<?php echo e($product->comercio_id); ?>/<?php echo e($product->id); ?>" class="btn btn-view ">Ver</a>
                                                     </div>
                                                     <br>                                                     
-                                                    <div class="cardStar" product="{{$product->id}}" >
-                                                        @for ($i = 1; $i <=5; $i++)
-                                                            @if($product->valoracionProduct->ca_valoracion >= $i)
-                                                                <span wire:click.prevent="valorar({{ $product->id }}, {{ $product->valoracionProduct->ca_valoracion }}, '{{ $product->valoracionProduct->class }}')" product="{{ $product->id }}" star = "{{ $i }}" class="star {{ $product->valoracionProduct->class }}">★</span>
-                                                            @else
-                                                                <span wire:click.prevent="valorar({{ $product->id }}, {{ $product->valoracionProduct->ca_valoracion }}, '{{ $product->valoracionProduct->class }}')" product="{{ $product->id }}" star = "{{ $i }}" class="star">★</span>
-                                                            @endif
-                                                        @endfor
-                                                        <h5 class="output" output="show{{ $product->id }}">
-                                                            Puntuación: {{ $product->valoracionProduct->ca_valoracion }}/5
+                                                    <div class="cardStar" product="<?php echo e($product->id); ?>" >
+                                                        <?php for($i = 1; $i <=5; $i++): ?>
+                                                            <?php if($product->valoracionProduct->ca_valoracion >= $i): ?>
+                                                                <span wire:click.prevent="valorar(<?php echo e($product->id); ?>, <?php echo e($product->valoracionProduct->ca_valoracion); ?>, '<?php echo e($product->valoracionProduct->class); ?>')" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star <?php echo e($product->valoracionProduct->class); ?>">★</span>
+                                                            <?php else: ?>
+                                                                <span wire:click.prevent="valorar(<?php echo e($product->id); ?>, <?php echo e($product->valoracionProduct->ca_valoracion); ?>, '<?php echo e($product->valoracionProduct->class); ?>')" product="<?php echo e($product->id); ?>" star = "<?php echo e($i); ?>" class="star">★</span>
+                                                            <?php endif; ?>
+                                                        <?php endfor; ?>
+                                                        <h5 class="output" output="show<?php echo e($product->id); ?>">
+                                                            Puntuación: <?php echo e($product->valoracionProduct->ca_valoracion); ?>/5
                                                         </h5>
                                                     </div>
                                                 </div>
                                         </div>
-                                        @if($product->in_envio_gratis)
+                                        <?php if($product->in_envio_gratis): ?>
                                         <div class="text-left" style="color: blue;">Envío Gratis</div>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                     <div class="card-footer">
                                         <span class="">Tienda: Auto Repuestos Fred</span>
@@ -67,7 +67,7 @@
                                 </div>
                             </form>
                         </div>
-                    @empty
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <div class="card showProductCard mx-auto text-center">
                             <div class="card-body">
                                 <span>No tiene productos disponibles</span>
@@ -75,7 +75,7 @@
                             <div class= "card-footer">
                             </div>                    
                         </div>
-                    @endforelse
+                    <?php endif; ?>
                 </section>       
             </div>
         </div>
@@ -105,17 +105,46 @@
                                 <div class="modal-body">
                                     
                                     <div class="form-group my-2">
-                                        @livewire('components.star', ['product_id' => $state['product_id'], 'ca_valoracion' => $state['ca_valoracion'], 'class' => $state['class']])
+                                        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.star', ['product_id' => $state['product_id'], 'ca_valoracion' => $state['ca_valoracion'], 'class' => $state['class']])->html();
+} elseif ($_instance->childHasBeenRendered('l340087703-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l340087703-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l340087703-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l340087703-0');
+} else {
+    $response = \Livewire\Livewire::mount('components.star', ['product_id' => $state['product_id'], 'ca_valoracion' => $state['ca_valoracion'], 'class' => $state['class']]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l340087703-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                                     </div>
                                     
                                     <div class="form-group">
                                         <label for="comment">Comentario</label>
-                                        <textarea wire:model.defer="state.comment" autofocus class="form-control @error('comment') is-invalid @enderror" id="comment" rows = "5"></textarea>
-                                        @error('comment')
+                                        <textarea wire:model.defer="state.comment" autofocus class="form-control <?php $__errorArgs = ['comment'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="comment" rows = "5"></textarea>
+                                        <?php $__errorArgs = ['comment'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                         <div class="invalid-feedback">
-                                            {{ $message }}
+                                            <?php echo e($message); ?>
+
                                         </div>
-                                        @enderror
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
                             </div>
@@ -192,4 +221,4 @@
         }
     </script>
 
-</div>
+</div><?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/components/show-recommended.blade.php ENDPATH**/ ?>
