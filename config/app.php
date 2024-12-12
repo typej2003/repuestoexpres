@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'site_title' => 'RespuestoExpres',
+
     'currencyGlobal' => env('APP_CURRENCY', 'Bs'),
 
     /*
