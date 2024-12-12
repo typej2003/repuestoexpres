@@ -157,7 +157,7 @@
                         </form>
                     </div>
                     <!-- Menu horizontal -->
-                    <ul class="menu-horizontal" style="z-index: 10!important;">
+                    <ul class="menu-horizontal d-flex justify-content-end" style="z-index: 10!important;">
                         @auth
                             <li class="nav-item p-3 py-md-1">
                                 <ul class="navbar-nav ml-auto">
@@ -202,7 +202,7 @@
                                 
                             </li> 
                         @endguest
-                        <li>
+                        <li class="d-none">
                             <a class="botonera" href="">
                                 <img style="height:45px" src="/img/icon_heart.png" alt="">
                             </a>
@@ -245,7 +245,7 @@
                             <img class="logo-responsive" src="/img/logo_repuestos.png" alt="">
                             <div class="button-search"><img src="/img/icon_buscar.png" alt=""></div>
                             <div><a href=""><img class="icon" src="/img/icon_miperfil.png" alt=""></a></div>
-                            <div><a href=""><img class="icon" src="/img/icon_heart.png" alt=""></a></div>
+                            <div class="d-none"><a href=""><img class="icon" src="/img/icon_heart.png" alt=""></a></div>
                             <div><a href=""><img class="icon" src="/img/icon_carrito.png" alt=""></a></div>
                         </div>                                
                         

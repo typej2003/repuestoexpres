@@ -59,6 +59,7 @@ class WelcomeController extends Controller
 
     public function index(Request $request)
     {
+        
         $peticion = explode('/', \Request::getRequestUri());
         if($peticion[0] == '')
         {
@@ -103,16 +104,12 @@ class WelcomeController extends Controller
             // event(new NewEventCreated());
 
         }else{ // Method get
-            
             if($request->get('words'))
             {
                 if($request->get('words') !== '')
                 {
                     $words = $request->get('words');
-                    
                 }
-
-                dd($words);
             }
             if($request->get('categ'))
             {

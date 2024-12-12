@@ -39,7 +39,7 @@ class MenuSeeder extends Seeder
 
         DB::table('menus')->insert([
             'texto' => 'Aceites',
-            'ruta' => 'aceites',
+            'ruta' => 'Aceites y líquidos',
             'origen' => 'categories', // view or categories
             'menu' => 1,
             'posicion' => 3,
