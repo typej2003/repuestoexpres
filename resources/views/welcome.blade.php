@@ -3,10 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="x-icon" href="http://192.168.1.4:8000/img/logo_repuestos.png" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    
-    <link rel="icon" type="image/png" href="/logo_repuestos.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ setting('site_title') }} | {{ setting('site_name') }}</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
