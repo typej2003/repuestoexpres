@@ -48,6 +48,9 @@
                                             <a class="dropdown-item" href="{{ route('admin.dashboard') }}" x-ref="profileLink">Escritorio</a>
                                         </div>
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
+                                            <a class="dropdown-item" href="{{ route('listPedidosCliente') }}" x-ref="profileLink">Mis Pedidos</a>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
                                             <a class="dropdown-item" href="{{ route('admin.profile.edit') }}" x-ref="changePasswordLink">Cambiar Contraseña</a>
                                         </div>
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
@@ -168,6 +171,7 @@
                                         <div class="dropdown-menu p-4" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="{{ route('admin.dashboard') }}" x-ref="profileLink">Escritorio</a>
                                             <a class="dropdown-item" href="{{ route('admin.profile.edit') }}" x-ref="profileLink">Perfil</a>
+                                            <a class="dropdown-item" href="{{ route('listPedidosCliente') }}" x-ref="profileLink">Mis Pedidos</a>
                                             <a class="dropdown-item" href="{{ route('admin.profile.edit') }}" x-ref="changePasswordLink">Cambiar Contraseña</a>
                                             <a class="dropdown-item" href="{{ route('admin.settings') }}">Configuración</a>
                                             <div class="dropdown-divider"></div>

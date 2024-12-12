@@ -25,8 +25,16 @@ class Comercio extends Model
         'user_id',
         'avatar',
         'banner',
-        'cellphonecontact',
         'dominio',
+        'cellphonecontact',
+        'phonecontact',
+        'email',
+        'youtube',
+        'twitter',
+        'facebook',
+        'address',
+        'rifLetter',
+        'rifNumber',
     ];
 
     protected $appends = [

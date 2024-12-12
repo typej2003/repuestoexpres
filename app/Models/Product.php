@@ -156,7 +156,7 @@ class Product extends Model
         if(auth()->user()){
             $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
             if($settingUser){
-                $currency = $settingsUser->currency;
+                $currency = $settingUser->currency;
             }else{
                 $currency = $setting->currency;
             }            

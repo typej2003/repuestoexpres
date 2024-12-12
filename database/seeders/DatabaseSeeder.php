@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ContainerSeeder::class,
             ProductsSeeder::class,
             MenuSeeder::class,
+            MetodoPagoComercioSeeder::class,
         ]);
     }
 }

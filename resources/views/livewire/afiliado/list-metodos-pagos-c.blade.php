@@ -184,13 +184,13 @@
                                 </div>
                                 <div class="form-group" wire:ignore>
                                     <label for="">Banco</label>
-                                    <select name="" id="banco" wire:model.defer="state.banco" class="form-control @error('banco') is-invalid @enderror">
+                                    <select name="" id="banco_id" wire:model.defer="state.banco_id" class="form-control @error('banco_id') is-invalid @enderror">
                                         <option value="0">Selecciona una opción</option>
                                         @foreach($bancos as $ban)
-                                            <option value="{{ $ban->name }}">{{ $ban->name }}</option>
+                                            <option value="{{ $ban->id }}">{{ $ban->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('banco')
+                                    @error('banco_id')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

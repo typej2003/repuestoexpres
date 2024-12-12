@@ -31,6 +31,16 @@ class CreateComerciosTable extends Migration
             $table->string('keyword')->unique();
             $table->string('dominio')->nullable();
             $table->string('cellphonecontact')->nullable();
+            $table->string('phonecontact')->nullable();
+            $table->string('email')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('tiktok')->nullable();
+            $table->string('instagram')->nullable();
+            $table->text('address')->nullable();
+            $table->text('rifLetter')->nullable();
+            $table->text('rifNumber')->nullable();
             $table->timestamps();
         });
     }

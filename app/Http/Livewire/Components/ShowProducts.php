@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 use App\Models\Comercio;
 use App\Models\Setting;
+use App\Models\SettingUser;
 use App\Models\ValoracionProduct;
 
 use Cart;
@@ -78,9 +79,17 @@ class ShowProducts extends AdminComponent
         $this->state['ca_valoracion'] = 0;
         $this->state['class'] = 'star';
 
-        if($setting){
-            $this->currencyValue = $setting->currency;
+        if(auth()->user()){
+            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
+            if($settingUser){
+                $currency = $settingUser->currency;
+            }else{
+                $currency = $setting->currency;
+            }            
+        }else{
+            $currency = request()->cookie('currency');
         }
+        
     }
 
     public function searchClass($puntuacion)

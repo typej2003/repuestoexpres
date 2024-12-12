@@ -25,6 +25,7 @@ class Pasarela extends Component
     public $pedido;
     public $comercio;
 
+    public $nropedido;
     public $clienteId = 0;
     public $currency = 1; // Bolivar
     public $currencyValue = '$';
@@ -41,6 +42,7 @@ class Pasarela extends Component
 
     public $pagosmoviles;
     public $transferencias;
+    public $zelles;
 
     public function mount($pedido, $comercioId)
 	{
@@ -51,6 +53,7 @@ class Pasarela extends Component
         
         if($this->pedido)
         {
+            $this->nropedido = $this->pedido->pedido;
             $this->reference = $this->pedido->pedido;
             $this->title = $this->pedido->title;
             $this->description = $this->pedido->description;
@@ -111,12 +114,17 @@ class Pasarela extends Component
         $operacion['user_id'] = $comercio->user_id;
 
         $operacion['banco'] = '';
+
         if($operacion['codigo']){
             $banco = Banco::where('codigo', $operacion['codigo'])->first();
             $operacion['banco'] = $banco->name;
         }
         
         $transaccion = Transaccion::create($operacion);
+
+        $pedido = Pedido::where('pedido', $operacion['nropedido'])->first();
+
+        $pedido->update(['reference' => $operacion['reference']]);
 
         if($transaccion){
             $data = ['state'=> 'ok'];
@@ -133,7 +141,9 @@ class Pasarela extends Component
     {
         $this->pagosmoviles = MetodoPagoC::select(['id', 'metodo','cellphonecode','cellphone','identificationNumber','banco', 'codigo'])->where('comercio_id', $this->comercio_id)->where('metodo','pagomovil')->get()->toArray();
         
-        $this->transferencias = MetodoPagoC::select(['id', 'metodo','banco','titular','nrocuenta'])->where('comercio_id', $this->comercio_id)->where('metodo','transferencia')->get()->toArray();
+        $this->transferencias = MetodoPagoC::select(['id', 'metodo','banco', 'codigo', 'titular','identificationNumber','nrocuenta'])->where('comercio_id', $this->comercio_id)->where('metodo','transferencia')->get()->toArray();
+
+        $this->zelles = MetodoPagoC::select(['id', 'metodo', 'cellphonecode','cellphone','identificationNumber','pagoonline', 'email'])->where('comercio_id', $this->comercio_id)->where('pagoonline','zelle')->get()->toArray();
         
         return view('livewire.afiliado.pasarela');
     }

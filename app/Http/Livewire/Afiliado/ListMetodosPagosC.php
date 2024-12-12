@@ -221,11 +221,14 @@ class ListMetodosPagosC extends AdminComponent
 					'cellphone' => 'nullable',
 					'identificationNac' => 'required',
 					'identificationNumber' => 'required',
-					'banco' => 'required',
+					'banco_id' => 'required|not_in:0',
 					'tipocuenta' => 'required',
 					'nrocuenta' => 'required',
 					'titular' => 'required',
 				])->validate();
+				$banco = Banco::find($validatedData['banco_id']);
+				$validatedData['codigo'] = $banco->codigo;
+				$validatedData['banco'] = $banco->name;
 				break;
 			
 			case 'pagomovil':

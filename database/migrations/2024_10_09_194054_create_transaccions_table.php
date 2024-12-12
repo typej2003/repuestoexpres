@@ -20,6 +20,7 @@ class CreateTransaccionsTable extends Migration
             $table->bigInteger('cliente_id');
             $table->string('paymentId')->nullable();
             $table->string('codigoFactura')->nullable();
+            $table->string('pedido')->nullable();
             $table->string('metodo')->nullable();
             $table->string('currency')->nullable();
             $table->string('banco')->nullable();

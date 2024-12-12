@@ -25,10 +25,11 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="">
-                                                <img class="mx-auto" src="{{$product->image1_url}}" alt="">
+                                                <a href="/routedetails/{{ $product->comercio_id }}/{{ $product->id }}" ><img class="mx-auto" src="{{ $product->image1_url }}" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="row text-left">
+                                            <div class="col-md-12">
                                             <div class="negrita">{{$product->name}}</div>
                                                 @if($product->on_offer)
                                                     <div class="text-decoration-line-through">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
@@ -40,7 +41,6 @@
                                                     <div class="">
                                                     <!-- <button type="submit" class="btn btn-sale text-center">Comprar ahora</button> -->
                                                     <a wire:click.prevent="sendCard({{ $product->id }}, 1)" class="btn btn-sale text-center">Comprar ahora</a>
-                                                    <a href="/routedetails/{{ $product->comercio_id }}/{{ $product->id }}" class="btn btn-view ">Ver</a>
                                                     </div>
                                                     <br>                                                     
                                                     <div class="cardStar" product="{{$product->id}}" >
@@ -56,6 +56,8 @@
                                                         </h5>
                                                     </div>
                                                 </div>
+                                        
+                                            </div>    
                                         </div>
                                         @if($product->in_envio_gratis)
                                         <div class="text-left" style="color: blue;">Envío Gratis</div>

@@ -243,7 +243,7 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div class="form-group" wire:ignore>
                                     <label for="">Banco</label>
-                                    <select name="" id="banco" wire:model.defer="state.banco" class="form-control <?php $__errorArgs = ['banco'];
+                                    <select name="" id="banco_id" wire:model.defer="state.banco_id" class="form-control <?php $__errorArgs = ['banco_id'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -253,10 +253,10 @@ endif;
 unset($__errorArgs, $__bag); ?>">
                                         <option value="0">Selecciona una opción</option>
                                         <?php $__currentLoopData = $bancos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ban): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($ban->name); ?>"><?php echo e($ban->name); ?></option>
+                                            <option value="<?php echo e($ban->id); ?>"><?php echo e($ban->name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
-                                    <?php $__errorArgs = ['banco'];
+                                    <?php $__errorArgs = ['banco_id'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

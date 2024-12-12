@@ -74,13 +74,14 @@
                                                 <option value="0" <?php echo e(($pedido->confirmed === 0) ? 'selected' : ''); ?>>NO CONFIRMADO</option>
                                             </select>
                                         </td>
-                                        <td><a href="/pasarela/<?php echo e($pedido->pedido); ?>/<?php echo e($pedido->comercio_id); ?>"><?php echo e($pedido->pedido); ?></a></td>
+                                        <td><a href="/detallespedido/<?php echo e($pedido->pedido); ?>/<?php echo e($pedido->comercio_id); ?>"><?php echo e($pedido->pedido); ?></a></td>
                                         <td><?php echo e($pedido->reference); ?></td>
                                         <td><?php echo e($pedido->client->identificationNumber); ?></td>
                                         <td><?php echo e($pedido->client->name); ?></td>
                                         <td></td>
                                         <td><?php echo e($pedido->created_at ?? 'N/A'); ?></td>
                                         <td>
+                                            <a class="mx-1" href="/pasarela/<?php echo e($pedido->pedido); ?>/<?php echo e($pedido->comercio_id); ?>"><img style="width:20px;" src="/img/pagar.png" alt=""></a>
                                             
                                             <a href="" wire:click.prevent="edit(<?php echo e($pedido); ?>)">
                                                 <i class="fa fa-edit mr-2"></i>

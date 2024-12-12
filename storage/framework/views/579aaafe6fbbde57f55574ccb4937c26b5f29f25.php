@@ -99,6 +99,7 @@
 
 <script>
     document.addEventListener('livewire:load', function () {
+        var nropedido = window.livewire.find('<?php echo e($_instance->id); ?>').nropedido 
         var reference = window.livewire.find('<?php echo e($_instance->id); ?>').reference 
         var title = window.livewire.find('<?php echo e($_instance->id); ?>').title 
         var description  = window.livewire.find('<?php echo e($_instance->id); ?>').description 
@@ -116,13 +117,14 @@
 
         var pagosmoviles = window.livewire.find('<?php echo e($_instance->id); ?>').pagosmoviles;
         var transferencias = window.livewire.find('<?php echo e($_instance->id); ?>').transferencias;
+        var zelles = window.livewire.find('<?php echo e($_instance->id); ?>').zelles;
 
         var comercio_id = window.livewire.find('<?php echo e($_instance->id); ?>').comercio_id;
         
-        //console.log(comercio_id)
+        console.log(transferencias)
 
         let divPrincipal = document.getElementById('divPrincipal')
-        divPrincipal.appendChild(selectMetodoPago(0, comercio_id, reference, title, description, clienteId,amount,currency,currencyValue,email,cellphonecode, cellphone, identificationNac, identificationNumber,rifLetter, rifNumber, pagosmoviles, transferencias))  
+        divPrincipal.appendChild(selectMetodoPago(0, comercio_id, nropedido, reference, title, description, clienteId,amount,currency,currencyValue,email,cellphonecode, cellphone, identificationNac, identificationNumber,rifLetter, rifNumber, pagosmoviles, transferencias, zelles))  
     })
     
 </script>

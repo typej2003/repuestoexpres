@@ -92,7 +92,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="">
-                                            <img class="mx-auto" src="{{$product->image1_url}}" alt="">
+                                            <a href="/routedetails/{{ $product->comercio_id }}/{{ $product->id }}" ><img class="mx-auto" src="{{ $product->image1_url }}" alt=""></a>
                                         </div>
                                     </div>
                                     <div class="row text-left">
@@ -107,7 +107,6 @@
                                                 <div class="">
                                                 <!-- <button type="submit" class="btn btn-sale text-center">Comprar ahora</button> -->
                                                 <a wire:click.prevent="sendCard({{ $product->id }}, 1)" class="btn btn-sale text-center">Comprar ahora</a>
-                                                <a href="/routedetails/{{ $product->comercio_id }}/{{ $product->id }}" class="btn btn-view ">Ver</a>
                                                 </div>
                                                 <br>                                                     
                                                 <div class="cardStar" product="{{$product->id}}" >

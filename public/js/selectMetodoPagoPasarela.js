@@ -1,4 +1,5 @@
 var comercio_id
+var nropedido
 var reference
 var title
 var description
@@ -15,10 +16,12 @@ var rifLetter
 var rifNumber
 var pagosmoviles
 var transferencias
+var zelles
 
-function selectMetodoPago(index1 = 0, comercio_idP, referenceP, titleP, descriptionP, clienteIdP,amountP,currencyP,currencyValueP,emailP, cellphonecodeP, cellphoneP, identificationNacP, identificationNumberP,rifLetterP, rifNumberP, pagosmovilesP, transferenciasP)
+function selectMetodoPago(index1 = 0, comercio_idP, nropedidoP, referenceP, titleP, descriptionP, clienteIdP,amountP,currencyP,currencyValueP,emailP, cellphonecodeP, cellphoneP, identificationNacP, identificationNumberP,rifLetterP, rifNumberP, pagosmovilesP, transferenciasP, zellesP)
 {
     comercio_id = comercio_idP
+    nropedido = nropedidoP
     reference = referenceP
     title = titleP
     description  = descriptionP
@@ -36,7 +39,8 @@ function selectMetodoPago(index1 = 0, comercio_idP, referenceP, titleP, descript
 
     pagosmoviles = pagosmovilesP
     transferencias = transferenciasP
-
+    zelles = zellesP
+    
     let index = index1
     let bloque = document.createElement('div')
     bloque.id = index
@@ -176,7 +180,7 @@ function selectModo(e) {
                 document.querySelector('#rifNumber').value = rifNumber
                 document.querySelector('#amount').value = amount
                 document.querySelector('#currency').value = currency
-                document.querySelector('#reference').value = reference
+                document.querySelector('#reference').value = nropedido
                 //document.querySelector('#cellphonecode').value = cellphonecode
                 document.querySelector('#cellphone').value = cellphonecode + cellphone
                 document.querySelector('#email').value = email
@@ -398,7 +402,7 @@ function crearPantallaPagoMovil(pantalla)
             spanGroup.classList.remove('d-none')
             spanDP.innerHTML = `<div class='negrita'>RIF/CEDULA</div><div>${pagomovil.identificationNumber}</div>
                             <div class='negrita'>BANCO</div><div>${pagomovil.banco} (${pagomovil.codigo})</div>
-                            <div class='negrita'>TELÉFONO</div><div>${pagomovil.cellphone}</div>
+                            <div class='negrita'>TELÉFONO</div><div>${pagomovil.cellphonecode}-${pagomovil.cellphone}</div>
             `
 
         }
@@ -608,29 +612,6 @@ function showFormGrupoPagoMovil ()
         </div>
         `
     return formGrupo
-}
-
-function enviarPagoMovil(){
-    if(controlPagoMovil()){
-        let objeto= {'metodo': 'pagomovil'}
-        objeto['currency'] = 1
-        objeto['cliente_id'] = cliente_id
-        objeto['comercio_id'] = comercio_id
-
-        document.querySelectorAll('.formPM input').forEach((input, i) => {
-            let name = input.id + ''
-            //let nuevaData = objeto.push({`${name}`: input.value})
-            objeto[name.replace('PM', '')] = input.value
-        });
-
-        document.querySelectorAll('.formPM select').forEach((input, i) => {
-            let name = input.id
-            //let nuevaData = objeto.push({name: input.value})
-            objeto[name.replace('PM', '')] = input.value
-        });
-
-        enviarDatos(objeto)
-    }
 }
 
 function controlPagoMovil() {
@@ -1104,32 +1085,6 @@ function procesarTarjeta(){
     createPayment()
 }
 
-function enviarDatos(datos){
-    var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
-    var datos = datos
-    var path = "/enviarDataPasarela";
-    $.ajax({
-        url: path,
-        //type: "POST",
-        type: "get",
-        datatype:"json",
-        data: {
-            _token: token,
-            datos: datos
-            },
-        success: function (data) {
-            if(data.state == 'ok'){
-                console.log('operación exitosa!')
-                //window.location.href = "{{ route('listPedidosCliente')}}";
-                window.location.href = "/listPedidosCliente";
-            }else{
-                console.log('operación fallida!')
-            }
-
-        }
-    });
-}
-
 /**** TRANSFERENCIA *******/
 function crearPantallaTransferencia(pantalla)
 {
@@ -1153,7 +1108,7 @@ function crearPantallaTransferencia(pantalla)
     option.innerHTML = 'Seleccione un Cuenta Bancaria'
     bancoasociadoT.appendChild(option)
     //Llena el select bancoasociado
-    bancosAsociadosT.forEach(element => {
+    transferencias.forEach(element => {
         let option = document.createElement('option')
         option.value = element.codigo
         option.innerHTML = element.banco
@@ -1176,6 +1131,7 @@ function crearPantallaTransferencia(pantalla)
         spanGroup.appendChild(spanDP)
         //transaccion.banco = e.target.options[index].text
         var codigo = this.value
+        console.log(codigo)
         var cuentabancaria;
 
         if(codigo === '0'){
@@ -1183,15 +1139,17 @@ function crearPantallaTransferencia(pantalla)
             spanGroup.classList.add('d-none')
             return 0
         }else{
-            var banco = bancosAsociadosT.some(function(buscar){
+            var banco = transferencias.some(function(buscar){
                 if(buscar.codigo === codigo)
                 {
                     cuentabancaria = buscar
                 }
             });
 
+            console.log(cuentabancaria)
+
             spanGroup.classList.remove('d-none')
-            spanDP.innerHTML = `<div class='negrita'>RIF/CEDULA</div><div>${cuentabancaria.cedula}</div>
+            spanDP.innerHTML = `<div class='negrita'>RIF/CEDULA</div><div>${cuentabancaria.identificationNumber}</div>
                             <div class='negrita'>BANCO</div><div>${cuentabancaria.banco}</div>
                             <div class='negrita'>NRO DE CUENTA</div><div>${cuentabancaria.nrocuenta}</div>
             `
@@ -1269,7 +1227,7 @@ function showFormGrupoTransferencia()
                     <option value="0">Seleccione una Cuenta</option>
                     `
                     let option = ''
-                    bancosAsociadosT.forEach(element => {
+                    transferencias.forEach(element => {
                         option += `
                             <option value="${element.codigo}">${element.banco}</option>
                         `
@@ -1308,29 +1266,6 @@ function showFormGrupoTransferencia()
         </div>
         `
     return formGrupo
-}
-
-function enviarTransferencia(){
-    if(controlTransferencia()){
-        let objeto= {'metodo': 'transferencia'}
-        objeto['cliente_id'] = cliente_id
-        objeto['currency'] = 1
-        objeto['comercio_id'] = comercio_id
-
-        document.querySelectorAll('.formT input').forEach((input, i) => {
-            let name = input.id + ''
-            //let nuevaData = objeto.push({`${name}`: input.value})
-            objeto[name.replace('T', '')] = input.value
-        });
-
-        document.querySelectorAll('.formT select').forEach((input, i) => {
-            let name = input.id
-            //let nuevaData = objeto.push({name: input.value})
-            objeto[name.replace('T', '')] = input.value
-        });
-
-        enviarDatos(objeto)
-    }
 }
 
 function controlTransferencia() {
@@ -1393,7 +1328,7 @@ function crearPantallaZelle(pantalla)
     option.innerHTML = 'Seleccione un Cuenta Zelle'
     bancoasociadoZelle.appendChild(option)
     //Llena el select bancoasociado
-    bancosAsociadosZelle.forEach(element => {
+    zelles.forEach(element => {
         let option = document.createElement('option')
         option.value = element.email
         option.innerHTML = element.email
@@ -1423,7 +1358,7 @@ function crearPantallaZelle(pantalla)
             spanGroup.classList.add('d-none')
             return 0
         }else{
-            var banco = bancosAsociadosZelle.some(function(buscar){
+            var banco = zelles.some(function(buscar){
                 if(buscar.email === codigo)
                 {
                     cuentazelle = buscar
@@ -1492,7 +1427,7 @@ function showFormGrupoZelle()
                     <option value="0">Seleccione una dirección Zelle</option>
                     `
                     let option = ''
-                    bancosAsociadosZelle.forEach(element => {
+                    zelles.forEach(element => {
                         option += `
                             <option value="${element.email}">${element.email}</option>
                         `
@@ -1533,47 +1468,21 @@ function showFormGrupoZelle()
     return formGrupo
 }
 
-function enviarZelle(){
-    if(controlZelle()){
-        let objeto= {'metodo': 'zelle'}
-        objeto['cliente_id'] = cliente_id
-        objeto['currency'] = 1
-        objeto['comercio_id'] = comercio_id
-        objeto['title'] = title
-        objeto['description'] = description
-        objeto['codigo'] = ''
-
-        document.querySelectorAll('.formZelle input').forEach((input, i) => {
-            let name = input.id + ''
-            //let nuevaData = objeto.push({`${name}`: input.value})
-            objeto[name.replace('Zelle', '')] = input.value
-        });
-
-        document.querySelectorAll('.formZelle select').forEach((input, i) => {
-            let name = input.id
-            //let nuevaData = objeto.push({name: input.value})
-            objeto[name.replace('Zelle', '')] = input.value
-        });
-
-        enviarDatos(objeto)
-    }
-}
-
 function infoZelle(email){
     let content = `
         <div class="row">
             <div class="col-md-12 position-relative">
-                <div class="card border border-0">
-                    <div class="tituloPasos text-center position-absolute">Sigue los pasos</div>
+                
                     <div class="card cardPasos">
+                        <span class="tituloPasos text-center negrita">Sigue los pasos</span>
                         <div class="row my-5">
                             <div class="col-md-12 text-center">
                                 <span class="negrita">Confirma </span><span>el monto a transferir en dolares</span>
                                 <div class="border-punteada mx-auto">
                                     <span class="mx-auto text-secundary">Monto a pagar</span>
-                                    <div class="cuadroDolar mx-auto w-50">$</div>
+                                    <div class="cuadroDolar mx-auto w-50">${currencyValue}${amount}</div>
                                     <div class="mx-auto d-flex justify-content-between">
-                                        <img class=" mx-2 exclamation-solid" src="/fontawesome/exclamation-solid.svg" alt="">
+                                        <img class=" mx-2 exclamation-solid" src="/fontawesome/exclamation-solid.svg" alt="" style="width:25px;height:45px;">
                                         <span class="fontSize p-1">EL MONTO DEBE SER EXACTO PARA QUE SE PUEDA PROCESAR EL PAGO CORRECTO</span>
                                     </div>
                                 </div>
@@ -1597,7 +1506,6 @@ function infoZelle(email){
                             </div>
                         </div>
                     </div>
-                </div>
 
             </div>
         </div>
@@ -1628,4 +1536,108 @@ function controlZelle() {
     }
 
     return true;
+}
+
+// Enviar datos
+function enviarPagoMovil(){
+    if(controlPagoMovil()){
+        let objeto= {'metodo': 'pagomovil'}
+        objeto['currency'] = 1
+        objeto['cliente_id'] = cliente_id
+        objeto['comercio_id'] = comercio_id
+        objeto['nropedido'] = nropedido
+
+        console.log(objeto)
+
+        document.querySelectorAll('.formPM input').forEach((input, i) => {
+            let name = input.id + ''
+            //let nuevaData = objeto.push({`${name}`: input.value})
+            objeto[name.replace('PM', '')] = input.value
+        });
+
+        document.querySelectorAll('.formPM select').forEach((input, i) => {
+            let name = input.id
+            //let nuevaData = objeto.push({name: input.value})
+            objeto[name.replace('PM', '')] = input.value
+        });
+
+        enviarDatos(objeto)
+    }
+}
+
+function enviarTransferencia(){
+    if(controlTransferencia()){
+        let objeto= {'metodo': 'transferencia'}
+        objeto['cliente_id'] = cliente_id
+        objeto['currency'] = 1
+        objeto['comercio_id'] = comercio_id
+        objeto['nropedido'] = nropedido
+
+        document.querySelectorAll('.formT input').forEach((input, i) => {
+            let name = input.id + ''
+            //let nuevaData = objeto.push({`${name}`: input.value})
+            objeto[name.replace('T', '')] = input.value
+        });
+
+        document.querySelectorAll('.formT select').forEach((input, i) => {
+            let name = input.id
+            //let nuevaData = objeto.push({name: input.value})
+            objeto[name.replace('T', '')] = input.value
+        });
+
+        enviarDatos(objeto)
+    }
+}
+
+function enviarZelle(){
+    if(controlZelle()){
+        let objeto= {'metodo': 'zelle'}
+        objeto['cliente_id'] = cliente_id
+        objeto['currency'] = 1
+        objeto['comercio_id'] = comercio_id
+        objeto['title'] = title
+        objeto['description'] = description
+        objeto['codigo'] = ''
+        objeto['nropedido'] = nropedido
+
+        document.querySelectorAll('.formZelle input').forEach((input, i) => {
+            let name = input.id + ''
+            //let nuevaData = objeto.push({`${name}`: input.value})
+            objeto[name.replace('Zelle', '')] = input.value
+        });
+
+        document.querySelectorAll('.formZelle select').forEach((input, i) => {
+            let name = input.id
+            //let nuevaData = objeto.push({name: input.value})
+            objeto[name.replace('Zelle', '')] = input.value
+        });
+
+        enviarDatos(objeto)
+    }
+}
+
+function enviarDatos(datos){
+    var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
+    var datos = datos
+    var path = "/enviarDataPasarela";
+    $.ajax({
+        url: path,
+        //type: "POST",
+        type: "get",
+        datatype:"json",
+        data: {
+            _token: token,
+            datos: datos
+            },
+        success: function (data) {
+            if(data.state == 'ok'){
+                console.log('operación exitosa!')
+                //window.location.href = "{{ route('listPedidosCliente')}}";
+                window.location.href = "/listPedidosCliente";
+            }else{
+                console.log('operación fallida!')
+            }
+
+        }
+    });
 }

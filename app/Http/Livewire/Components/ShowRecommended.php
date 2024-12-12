@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Models\Product;
 use App\Models\Comercio;
 use App\Models\Setting;
+use App\Models\SettingUser;
 use App\Models\ValoracionProduct;
 
 class ShowRecommended extends AdminComponent
@@ -74,8 +75,15 @@ class ShowRecommended extends AdminComponent
         $this->state['ca_valoracion'] = 0;
         $this->state['class'] = 'star';
 
-        if($setting){
-            $this->currencyValue = $setting->currency;
+        if(auth()->user()){
+            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
+            if($settingUser){
+                $currency = $settingUser->currency;
+            }else{
+                $currency = $setting->currency;
+            }            
+        }else{
+            $currency = request()->cookie('currency');
         }
     }
 

@@ -25,10 +25,11 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="">
-                                                <img class="mx-auto" src="<?php echo e($product->image1_url); ?>" alt="">
+                                                <a href="/routedetails/<?php echo e($product->comercio_id); ?>/<?php echo e($product->id); ?>" ><img class="mx-auto" src="<?php echo e($product->image1_url); ?>" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="row text-left">
+                                            <div class="col-md-12">
                                             <div class="negrita"><?php echo e($product->name); ?></div>
                                                 <?php if($product->on_offer): ?>
                                                     <div class="text-decoration-line-through">Precio: <?php echo e($currencyValue); ?>. <?php echo e($product->getPrice1()); ?></div>
@@ -40,7 +41,6 @@
                                                     <div class="">
                                                     <!-- <button type="submit" class="btn btn-sale text-center">Comprar ahora</button> -->
                                                     <a wire:click.prevent="sendCard(<?php echo e($product->id); ?>, 1)" class="btn btn-sale text-center">Comprar ahora</a>
-                                                    <a href="/routedetails/<?php echo e($product->comercio_id); ?>/<?php echo e($product->id); ?>" class="btn btn-view ">Ver</a>
                                                     </div>
                                                     <br>                                                     
                                                     <div class="cardStar" product="<?php echo e($product->id); ?>" >
@@ -56,6 +56,8 @@
                                                         </h5>
                                                     </div>
                                                 </div>
+                                        
+                                            </div>    
                                         </div>
                                         <?php if($product->in_envio_gratis): ?>
                                         <div class="text-left" style="color: blue;">Envío Gratis</div>

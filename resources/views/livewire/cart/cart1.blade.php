@@ -167,20 +167,8 @@
                                                     <div class="accordion-body">
                                                         <form action="{{ route('registrarse') }}" method="post">           
                                                             @csrf
-                                                            <div class="form-group">
-                                                                <label for="roleS">Tipo de usuario</label>
-                                                                <select class="form-control" name="roleS" id="roleS">
-                                                                    <option value="cliente" selected>CLIENTE</option>
-                                                                </select>
-                                                            </div>
                                                             <input type="hidden" value="cliente" id="role" name="role">
-                                                            <script>
-                                                                let selectElement = document.querySelector('#roleS')
-                                                                selectElement.addEventListener("change", (event) => {
-                                                                    document.querySelector('#role').value = event.target.value;
-                                                                });
-                                                            </script>
-
+                                                            
                                                             <div class="form-group">
                                                                 <div class="row">
                                                                     <div class="col-xs-6 col-md-4 col-sm-4 col-4">
