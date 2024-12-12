@@ -55,6 +55,7 @@
                 <div class="my-2"></div>    
                 <section class="">
                     <div class="my-2"></div>
+                    {{ setting('site_title') }}
                     
                     @if($words == '')    
                         <div class="row">

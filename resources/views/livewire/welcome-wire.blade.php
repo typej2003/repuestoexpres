@@ -7,21 +7,13 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.rtl.min.css" integrity="sha384-WJUUqfoMmnfkBLne5uxXj+na/c7sesSJ32gI7GfCk4zO4GthUKhSEGyvQ839BC51" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/03cf5139f1.js"></script> -->
-
-    <link rel="stylesheet" href="/css/style.css">
-    
+    <link rel="stylesheet" href="/css/style.css">    
     <!-- <link rel="stylesheet" href="/css/modopago.css" class="rel"> -->
     <!-- <link rel="stylesheet" href="/cs/swiper-bundle.min.css"> -->
-    
-    <title>{{config('app.name')}}</title>
-    <style>
-      
-    </style>
   </head>
   <body class="">
    <!--ENCABEZADO--> 
