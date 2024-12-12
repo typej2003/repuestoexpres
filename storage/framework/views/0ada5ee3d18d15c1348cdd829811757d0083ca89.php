@@ -39,12 +39,6 @@ echo $html;
                                     </a>
                                     <div class="content">
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
-                                            <a class="dropdown-item" href="#">
-                                                <img class="" src="/img/icon_soporte.png" style="width: 18px; height: 25px;">
-                                                <span class="mx-3">Soporte en Línea</span>
-                                            </a>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
                                             <a class="dropdown-item" href="/register" style="cursor:pointer;">
                                                 <img src="/img/icon_registrarse.png" style="width: 18px; height: 25px;"><span class="mx-3">Registrarse</span>
                                             </a>
@@ -75,12 +69,6 @@ echo $html;
                                         </div>
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
                                             <a class="dropdown-item" href="<?php echo e(route('admin.settings')); ?>">Configuración</a>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
-                                            <a class="dropdown-item" href="#">
-                                                <img class="" src="/img/icon_soporte.png" style="width: 18px; height: 25px;">
-                                                <span class="mx-3">Soporte en Línea</span>
-                                            </a>
                                         </div>
                                         <div class="dropdown-divider"></div>
                                         <div class="d-flex justify-content-between mb-2 ml-3 mx-3">
@@ -188,7 +176,7 @@ echo $html;
                         </form>
                     </div>
                     <!-- Menu horizontal -->
-                    <ul class="menu-horizontal">
+                    <ul class="menu-horizontal" style="z-index: 10!important;">
                         <?php if(auth()->guard()->check()): ?>
                             <li class="nav-item p-3 py-md-1">
                                 <ul class="navbar-nav ml-auto">
@@ -217,13 +205,7 @@ echo $html;
                                     <img style="height:45px" src="/img/icon_miperfil.png" id="profileImage" alt="User Image">Perfil
                                 </a>                            
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="d-flex justify-content-between mb-2 ml-3">
-                                        <a class="dropdown-item" href="#">
-                                            <img class="" src="/img/icon_soporte.png" style="width: 18px; height: 25px;">
-                                            <span class="mx-3">Soporte en Línea</span>
-                                        </a>
-                                    </div>
-
+                                    
                                     <div class="d-flex justify-content-between mb-2 ml-3">
                                         <a class="dropdown-item" href="/register" style="cursor:pointer;">
                                             <img src="/img/icon_registrarse.png" style="width: 18px; height: 25px;"><span class="mx-3">Registrarse</span>
@@ -266,19 +248,30 @@ echo $html;
                     <div class="menu-center w-full d-flex justify-content-around">                        
                         <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('components.menu-component')->html();
+    $html = \Livewire\Livewire::mount('components.menu-component',[
+                            'comercioId' => 1,
+                            'manufacturer_id' => $manufacturer_id,
+                            'modelo_id' => $modelo_id,
+                            'motor_id' => $motor_id,
+                        ])->html();
 } elseif ($_instance->childHasBeenRendered('l3862662930-1')) {
     $componentId = $_instance->getRenderedChildComponentId('l3862662930-1');
     $componentTag = $_instance->getRenderedChildComponentTagName('l3862662930-1');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
     $_instance->preserveRenderedChild('l3862662930-1');
 } else {
-    $response = \Livewire\Livewire::mount('components.menu-component');
+    $response = \Livewire\Livewire::mount('components.menu-component',[
+                            'comercioId' => 1,
+                            'manufacturer_id' => $manufacturer_id,
+                            'modelo_id' => $modelo_id,
+                            'motor_id' => $motor_id,
+                        ]);
     $html = $response->html();
     $_instance->logRenderedChild('l3862662930-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
+                        
                     </div>
                     <div class="button-search w-full" style="display: none; cursor: pointer;"><img src="./img/icon_buscar.png" alt=""></div>
                     <div class="menu-right w-full">

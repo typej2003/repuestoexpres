@@ -55,7 +55,7 @@ Route::get('/cat', [WelcomeController::class, 'index'])->name('cat');
 
  Route::get('/searchMotor', [WelcomeController::class, 'index'])->name('searchMotor'); 
 
- Route::get('/searchMenu', [WelcomeController::class, 'index'])->name('searchMenu');  
+ Route::get('/searchMenu/{word}/{manufacturer_id}/{modelo_id}/{motor_id}', [WelcomeController::class, 'index'])->name('searchMenu');  
 
 
 // Route::get('/com/{comercio}', WelcomeController::class)->name('welcomecomercio');

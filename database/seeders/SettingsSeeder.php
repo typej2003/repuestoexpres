@@ -16,9 +16,9 @@ class SettingsSeeder extends Seeder
     {
         DB::table('settings')->insert([
             'user_id' => '1',
-            'site_name' => 'RepuestoExpress',
-            'site_email' => 'repuestoexpress@gmail.com',
-            'site_title' => 'AutoRespuestos',
+            'site_name' => 'RepuestoExpres',
+            'site_email' => 'repuestoexpres@gmail.com',
+            'site_title' => 'RepuestoExpres',
             'footer_text' => '',
             'sidebar_collapse' => false,
             'in_cellphonecontact' => true,  

@@ -29,6 +29,7 @@ class ShowProducts extends AdminComponent
     public $renderizar = false;
 
     protected $listeners = [
+        'recibirSearch' => 'recibirSearch', 
         'infoRecibida' => 'actualizarInfo', 
         'refreshValoracion' => 'refreshValoracion', 
         'refreshShowProduct' => 'refreshShowProduct',
@@ -178,6 +179,7 @@ class ShowProducts extends AdminComponent
 
     public function render()
     {
+        
         $products = Product::where('comercio_id', $this->comercio_id)
                     ->with('valoracionProduct')
                             ->paginate();

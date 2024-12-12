@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Tasa;
 use App\Models\Setting;
 use App\Models\SettingUser;
+use App\Models\Menu; 
 
 class NavbarNuevo extends Component
 {
@@ -91,7 +92,16 @@ class NavbarNuevo extends Component
 
     public function render()
     {
-        return view('livewire.layouts.navbar-nuevo');
+        $this->emit('searchMenu', $this->manufacturer_id, $this->modelo_id, $this->motor_id);
+
+        $menus = Menu::where('comercio_id', $this->comercio_id)
+            ->where('menu', 1)
+            ->orderBy('posicion', 'asc')
+            ->get();
+
+        return view('livewire.layouts.navbar-nuevo', [
+            'menus' => $menus,
+        ]);
     }
 
     public function sendCategories ($postId=0)

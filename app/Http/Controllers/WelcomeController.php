@@ -59,7 +59,6 @@ class WelcomeController extends Controller
 
     public function index(Request $request)
     {
-        
         $peticion = explode('/', \Request::getRequestUri());
         if($peticion[0] == '')
         {
@@ -104,6 +103,7 @@ class WelcomeController extends Controller
             // event(new NewEventCreated());
 
         }else{ // Method get
+            
             if($request->get('words'))
             {
                 if($request->get('words') !== '')
@@ -126,6 +126,14 @@ class WelcomeController extends Controller
             $modelo_id = $request->get('modelo_id');
             $motor_id = $request->get('motor_id');
             $comercio_id = $request->get('comercio_id');
+
+            if($manufacturer_id == null)
+            {
+                $manufacturer_id = 0;
+                $modelo_id = 0;
+                $motor_id = 0;
+            }
+
             if(empty($comercio_id)){
                 $comercio_id = 1;
             }
@@ -165,6 +173,7 @@ class WelcomeController extends Controller
             $comercio_id = 1;
         }
         $setting = Setting::find($comercio_id)->first();
+
         return view('welcome', [
             'words' => $words,
             'manufacturer_id' => $manufacturer_id,
