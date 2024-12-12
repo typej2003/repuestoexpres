@@ -11,11 +11,21 @@ class ApiController extends Component
     public $cedula = '13053081';
     public $sistema = 'ddrsistema';
     public $total = '1';
-    public $reference = '1';
+    public $referencia = '1';
     public $celular= '1';
     public $correo= '1';
     public $titulo= '1';
     public $descripcion= '1';
+
+	public $tokenId;
+
+	public $id_suc;
+
+	public function procesado(Request $request)
+	{
+		$this->tokenId = $request->get('ID');
+		return view('livewire.recursos.procesado');
+	}
 
     public function render()
     {
@@ -76,7 +86,7 @@ class ApiController extends Component
 		//$Payment->urlToReturn= "https://panexpres.com/pagosatisfactorio/{ID}";
 
 		//$Payment->urlToReturn= "http://localhost:8585/";
-		$Payment->urlToReturn= "http://127.0.0.1:8000/api/apicontroller";
+		$Payment->urlToReturn= "https://repuestoexpres.com/pagosatisfactorio/{ID}";
 
 		$Payment->rifLetter= $request->get('rifLetter') ?? ''; //Letra de la cédula - V, E o P
 		$Payment->rifNumber= $request->get('rifNumber') ?? ''; //Número de cédula
@@ -131,6 +141,47 @@ class ApiController extends Component
             return response()->json(json_encode($response));
             echo json_encode($response);
         
+    }
+
+	public function pagosatisfactorio($id){
+        $token = $id;
+
+		$datos = IpgBdv2::checkPayment($token);
+        //$datos = $this->SearchPayment($token);
+    
+        if($datos->success == 'true')
+        {
+          $reference = $datos->reference;
+    
+          //$pedido_id = explode('-', str_replace('Pedido ', '', $reference, ))[0];
+    
+          //$pedido = Pedido::find($pedido_id);
+		  $pedido = Pedido::where('pedido', $reference)->first();
+    
+          $paymentDate = date('Y-m-d H:i:s', strtotime($datos->paymentDate));
+    
+          $transaccion = Transacciones::create([
+           'token' => $token,
+           'paymentId' => auth()->user()->id,
+           'comercio_id' => 1,
+           'identificationNumber' => $datos->idNumber,
+           'id_transaccion' => $datos->transactionId,
+           'reference' => $datos->reference,
+           'totalbs' => $datos->amount,
+           'fechaPago' => $paymentDate,
+           'title' => $datos->title,
+           'description' => $datos->description,
+           'status' => 1,
+          ]);
+    
+           $pedido->update(
+             [
+               'reference' => $datos->transactionId,
+               'confirmed' => 1,
+             ]);
+        }
+    
+        return view('externalviews.procesado', ['id_suc' => $token, 'success' => $datos->success] );
     }
 }
 

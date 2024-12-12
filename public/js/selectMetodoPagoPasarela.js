@@ -8,6 +8,7 @@ var currency
 var currencyValue
 var email
 var cellphone
+var cellphonecode
 var identificationNac
 var identificationNumber
 var rifLetter
@@ -112,6 +113,7 @@ function selectMetodoPago(index1 = 0, comercio_idP, referenceP, titleP, descript
 }
 
 function selectModo(e) {
+    
     let elementos = {
         'pantalla': '',
         'modopago': '',
@@ -159,6 +161,7 @@ function selectModo(e) {
     if(index!==0){
         switch (e.target.value) {
             case 'tarjetadebito':
+
                 bloque[0].appendChild(crearPantallaTarjetaDebito(pantalla))
                 /* asignar valores */
                 document.getElementById('identificationNac1').value = identificationNac
@@ -174,8 +177,8 @@ function selectModo(e) {
                 document.querySelector('#amount').value = amount
                 document.querySelector('#currency').value = currency
                 document.querySelector('#reference').value = reference
-                document.querySelector('#cellphonecode').value = cellphonecode
-                document.querySelector('#cellphone').value = cellphone
+                //document.querySelector('#cellphonecode').value = cellphonecode
+                document.querySelector('#cellphone').value = cellphonecode + cellphone
                 document.querySelector('#email').value = email
                 document.querySelector('#title').value = title
                 document.querySelector('#description').innerText = description
@@ -844,7 +847,6 @@ function showFormGrupoProcesarTarjetaDebito ()
 }
 
 function initFormulario() {
-
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl, { container: 'body', trigger: 'hover' })
