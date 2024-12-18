@@ -59,7 +59,8 @@ class AuthController extends Controller
         //Si no, muestro mensaje de error
         return back()->withErrors([
             'email' => 'El email no está registrado.',
-        ]);
+            'showLogin' => 'SI',
+        ])->withInput(['showLogin' => 'SI']);
     }
 
     //Muestra la vista de registro

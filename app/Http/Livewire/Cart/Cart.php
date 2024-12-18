@@ -60,7 +60,7 @@ class Cart extends AdminComponent
         }
         switch ($this->currencyValue) {
             case 'Bs':
-                $subtotal = round($subtotal*tasa, 2) - $this->amountImpuesto();
+                $subtotal = round($subtotal*$tasa, 2) - $this->amountImpuesto();
                 break;
             case '$':
                 $subtotal = round($subtotal, 2) - $this->amountImpuesto();

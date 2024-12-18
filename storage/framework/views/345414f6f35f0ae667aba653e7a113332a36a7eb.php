@@ -14,6 +14,9 @@
     
     <script src="/js/jquery-3.6.4.min.js"></script>  
     <script src="/js/slick.min.js"></script>
+    <?php $__env->startPush('js'); ?>
+    <script src="/js/slick.min.js"></script>
+    <?php $__env->stopPush(); ?>
     <link rel="stylesheet" href="/css/slick-theme.min.css">
     <link rel="stylesheet" href="/css/slick.min.css">
     <link rel="stylesheet" href="/css/carouselOffer.css">
@@ -34,9 +37,9 @@
                 <span class="h4 text-white"></span>  
             </div>
         </div>    
-        <div class="row">
+        <div class="row" wire:ignore>
             <div class="col-md-12">
-                <section class="regular slider slider-products" <?php if($renderizar): ?> wire:ignore <?php endif; ?> wire:ignore.self>
+                <section class="regular slider slider-products" wire:key="w_price">
                     <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <div>
                             <form action="/add" method="post">

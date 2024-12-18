@@ -17,6 +17,7 @@ use Cart;
 
 class ShowProducts extends AdminComponent
 {
+    public $todos = 5; 
     public $comercio_id;
 
     public $state = [];

@@ -14,7 +14,7 @@
                         <br><small>Cant: <?php echo e($item->quantity); ?></small>
                     </div>
                     <div class="col-md-4">
-                        <p><?php echo e(\Cart::get($item->id)->getPriceSum()); ?> <?php echo e($currencyValue); ?></p>
+                        <p><?php echo e($this->getPrice( \Cart::get($item->id)->getPriceSum(), $item->attributes->comercio_id )); ?> <?php echo e($currencyValue); ?></p>
                     </div>
                     <br><br>
                 </div>
@@ -23,7 +23,7 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-lg-10">
-                    <b>Total: </b><?php echo e(\Cart::getTotal()); ?> <?php echo e($currencyValue); ?> 
+                    <b>Total: </b><?php echo e($this->getPrice( \Cart::getTotal() )); ?> <?php echo e($currencyValue); ?> 
                 </div>
                 <div class="col-lg-2">
                     <form action="<?php echo e(route('cart.clear')); ?>" method="POST">

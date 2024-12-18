@@ -155,18 +155,20 @@ class Product extends Model
 
         $setting = Setting::where('user_id', $this->user_id)->first();
 
-        if(auth()->user()){
-            $settingComercio = SettingComercio::where('user_id', auth()->user()->id)->first();
-            if($settingComercio){
-                $currency = $settingComercio->currency;
-            }else{
-                $currency = $setting->currency;
-            }            
-        }else{
-            $currency = request()->cookie('currency');
-        }        
-
-        $tasaValues = Tasa::where('user_id', $this->user_id)->first();
+        // if(auth()->user()){
+        //     $settingComercio = SettingComercio::where('user_id', auth()->user()->id)->first();
+        //     if($settingComercio){
+        //         $currency = $settingComercio->currency;
+        //     }else{
+        //         $currency = $setting->currency;
+        //     }            
+        //     $currency = request()->cookie('currency');
+        // }else{
+        //     $currency = request()->cookie('currency');
+        // }        
+        $currency = request()->cookie('currency');
+        
+        $tasaValues = Tasa::where('comercio_id', $this->comercio_id)->first();
 
         if(!$tasaValues){
             $tasa = 1;

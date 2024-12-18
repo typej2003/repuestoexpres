@@ -1,4 +1,4 @@
-<div>
+<div class="container-fluid">
     <form wire:submit.prevent="updateBasicData" class="form-horizontal">
         <div class="form-group">
             <div class="row">
@@ -21,7 +21,6 @@
                 @enderror
             </div>                            
         </div>
-
         <div class="group-control my-3">
             <label for="names" for="">Nombres <span class="text-danger">*</span></label>
             <input type="text" class="form-control @error('names') is-invalid @enderror" id="names">
@@ -36,7 +35,6 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
-
         <div class="form-group">
             <label for="cellphonecode">Teléfono <span class="text-danger">*</span></label>        
             <div class="row ">
@@ -66,33 +64,44 @@
         </div>
         <div class="form-group">
             <label for="country" class="">País <span class="text-danger">*</span></label>
-            <select wire:model.defer="state.country" class="form-control @error('country') is-invalid @enderror" id="country">
-                <option value="Venezuela" selected>Venezuela</option>
+            <select wire:model="country" class="form-control @error('country') is-invalid @enderror" id="country">
+                <option value="0">Seleccione una opción</option>
+                @foreach($countries as $country)
+                    @if($country->name == 'Venezuela')
+                    <option value="{{ $country->id }}" selected>{{ $country->name }}</option>
+                    @else
+                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                    @endif
+                @endforeach
             </select>
             @error('country')
             <div class="invalid-feedback">
-                {{ $message}}
+                {{ $message }}
             </div>
             @enderror
         </div>
         <div class="form-group">
             <label for="province" class="">Estado/Provincia </label>
-            <select wire:model.defer="state.province" class="form-control @error('province') is-invalid @enderror" id="province">
-                <option value="0">Por favor seleccione una región, estado o provincia</option>
-                <option value="Distrito capital" selected>Distrito capital</option>
-                <option value="Miranda" selected>Miranda</option>
+            <select wire:model="province" class="form-control @error('province') is-invalid @enderror" id="province">
+            <option value="0">Seleccione una opción</option>
+                @foreach($provinces as $province)
+                    <option value="{{ $province->id }}">{{ $province->name }}</option>
+                @endforeach
             </select>
             @error('province')
             <div class="invalid-feedback">
-                {{ $message}}
+                {{ $message }}
             </div>
             @enderror
         </div>
+
         <div class="form-group">
             <label for="city" class="">Ciudad/Sector <span class="text-danger">*</span></label>
-            <select wire:model.defer="state.city" class="form-control @error('city') is-invalid @enderror" id="city">
+            <select wire:model="city" class="form-control @error('city') is-invalid @enderror" id="city">
                 <option value="0">Por favor seleccione una ciudad</option>
-                <option value="Caracas" selected>Caracas</option>
+                @foreach($cities as $city)
+                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                @endforeach
             </select>
             @error('city')
             <div class="invalid-feedback">

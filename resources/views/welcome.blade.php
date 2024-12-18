@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <script src="/js/jquery-3.6.4.min.js"></script>  
-    <script src="/js/slick.min.js"></script>
+    <!-- <script src="/js/slick.min.js"></script>
     <link rel="stylesheet" href="/css/slick-theme.min.css">
-    <link rel="stylesheet" href="/css/slick.min.css">
+    <link rel="stylesheet" href="/css/slick.min.css"> -->
     <link rel="stylesheet" href="/css/carouselOffer.css">
     <link rel="stylesheet" href="/css/showProducts.css">
     <link rel="stylesheet" href="/css/star.css">

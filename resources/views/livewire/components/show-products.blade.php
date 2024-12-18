@@ -14,6 +14,9 @@
     
     <script src="/js/jquery-3.6.4.min.js"></script>  
     <script src="/js/slick.min.js"></script>
+    @push('js')
+    <script src="/js/slick.min.js"></script>
+    @endpush
     <link rel="stylesheet" href="/css/slick-theme.min.css">
     <link rel="stylesheet" href="/css/slick.min.css">
     <link rel="stylesheet" href="/css/carouselOffer.css">
@@ -33,9 +36,9 @@
                 <span class="h4 text-white"></span>  
             </div>
         </div>    
-        <div class="row">
+        <div class="row" wire:ignore>
             <div class="col-md-12">
-                <section class="regular slider slider-products" @if($renderizar) wire:ignore @endif wire:ignore.self>
+                <section class="regular slider slider-products" wire:key="w_price">
                     @forelse ($products as $index => $product)
                         <div>
                             <form action="/add" method="post">

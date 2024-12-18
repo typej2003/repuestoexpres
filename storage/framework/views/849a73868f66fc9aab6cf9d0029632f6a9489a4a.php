@@ -141,6 +141,15 @@
             </li>
 
             <li class="nav-item">
+              <a href="<?php echo e(route('listDeliveryArea', 1)); ?>" class="nav-link <?php echo e(request()->is('listDeliveryArea') ? 'active' : ''); ?>">
+                <i class="nav-icon fas fa-comments"></i>
+                <p>
+                  Zona de entrega
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
               <a href="<?php echo e(route('listImpuestos', 1)); ?>" class="nav-link <?php echo e(request()->is('listImpuestos') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
