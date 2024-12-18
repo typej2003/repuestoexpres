@@ -126,7 +126,25 @@
               <a href="<?php echo e(route('listComercios', 1)); ?>" class="nav-link <?php echo e(request()->is('listComercios') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
-                  Afiliado / Comercios
+                  Comercios
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="<?php echo e(route('settingComercio', 1)); ?>" class="nav-link <?php echo e(request()->is('settingComercio') ? 'active' : ''); ?>">
+                <i class="nav-icon fas fa-comments"></i>
+                <p>
+                  Configurar Comercio
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="<?php echo e(route('listImpuestos', 1)); ?>" class="nav-link <?php echo e(request()->is('listImpuestos') ? 'active' : ''); ?>">
+                <i class="nav-icon fas fa-comments"></i>
+                <p>
+                  Listar Impuestos
                 </p>
               </a>
             </li>

@@ -18,6 +18,8 @@ use App\Http\Livewire\Afiliado\Product\Repuestoexpres\NewComboRE;
 use App\Http\Livewire\Afiliado\ListBrand;
 use App\Http\Livewire\Afiliado\ListContainers;
 use App\Http\Livewire\Afiliado\Repuestoexpres\ListClients;
+use App\Http\Livewire\Afiliado\Repuestoexpres\UpdateSettingComercio;
+use App\Http\Livewire\Afiliado\Repuestoexpres\ListImpuestos;
 use App\Http\Livewire\Afiliado\MetodosPagos;
 
 use App\Models\Comercio;
@@ -81,6 +83,10 @@ Route::get('/listBrand/{comercioId}', ListBrand::class)->name('listBrand')->midd
 Route::get('/listContainers/{comercioId}', ListContainers::class)->name('listContainers')->middleware('auth');
 
 Route::get('/listClients/{comercioId}', listClients::class)->name('listClients')->middleware('auth');
+
+Route::get('/settingComercio/{comercioId}', UpdateSettingComercio::class)->name('settingComercio')->middleware('auth');
+
+Route::get('/listImpuestos/{comercioId}', ListImpuestos::class)->name('listImpuestos')->middleware('auth');
 
 Route::get('/metodospagos/{pedido}', MetodosPagos::class)->name('metodospagos')->middleware('auth');
 

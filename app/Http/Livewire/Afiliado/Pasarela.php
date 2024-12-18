@@ -44,6 +44,10 @@ class Pasarela extends Component
     public $transferencias;
     public $zelles;
 
+    protected $listeners = [
+        'emitCurrency' => 'emitCurrency'
+    ];
+
     public function mount($pedido, $comercioId)
 	{
         $this->pedido = Pedido::where('pedido', $pedido)->first();
@@ -69,8 +73,17 @@ class Pasarela extends Component
             $this->identificationNumber = $cliente->identificationNumber;
             $this->comercio = Comercio::find($this->pedido->comercio_id);
         }
+
+        $this->currencyValue = request()->cookie('currency');
         
 	}
+
+    public function emitCurrency($currencyValue, Request $request)
+    {
+        $this->currencyValue = $request->cookie('currency');
+
+        $this->dispatchBrowserEvent('refreshPage', ['message' => "Refresh."]);
+    }
 
     public function searchCurrency($currency)
     {

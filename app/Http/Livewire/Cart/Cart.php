@@ -10,26 +10,232 @@ use App\Models\Setting;
 use App\Models\Pedido;
 use App\Models\PedidoDetalles;
 use App\Http\Controllers\CartController;
+use App\Models\SettingComercio;
+use App\Models\Impuesto;
+use App\Models\Tasa;
 
 class Cart extends AdminComponent
 {
     public $comercio_id;
 
+    public $currencyValue;
+
+    public $pedido = [];
+
+    public $IGTF = 0;
+    public $impuesto = 0;
+    public $subtotal = 0;
+
+    protected $listeners = [
+        'emitCurrency' => 'emitCurrency'
+    ];
+
     public function mount($comercioId = 1)
     {
         $this->comercio_id = $comercioId;
+
+        $this->currencyValue = request()->cookie('currency');
+    }
+
+    public function emitCurrency($currencyValue, Request $request)
+    {
+        $this->currencyValue = $request->cookie('currency');
+    }
+
+    public function getTotal()
+    {
+        return round($this->subtotal + $this->impuesto + $this->IGTF, 2);
+    }
+
+    public function getSubTotal($comercio_id = 1)
+    {
+        $subtotal = \Cart::getTotal();
+
+        $tasaValues = Tasa::where('comercio_id', $comercio_id)->first();
+
+        if(!$tasaValues){
+            $tasa = 1;
+        }else{
+            $tasa = $tasaValues->tasa;
+        }
+        switch ($this->currencyValue) {
+            case 'Bs':
+                $subtotal = round($subtotal*tasa, 2) - $this->amountImpuesto();
+                break;
+            case '$':
+                $subtotal = round($subtotal, 2) - $this->amountImpuesto();
+                break;            
+        }
+
+        $this->subtotal = $subtotal;
+
+        return $subtotal;
+    }
+
+    public function amountImpuesto($comercio_id = 1)
+    {
+        $totalProducts = \Cart::getTotal();
+        $settingComercio = SettingComercio::where('comercio_id', $comercio_id)->first();
+
+        $tasaValues = Tasa::where('comercio_id', $comercio_id)->first();
+
+        if(!$tasaValues){
+            $tasa = 1;
+        }else{
+            $tasa = $tasaValues->tasa;
+        }
+
+        
+        //realiza cambio monetario para sacar el impuesto
+        switch ($this->currencyValue) {
+            case 'Bs':
+                if($settingComercio->in_impuesto == 'SI'){
+                    $impuesto = Impuesto::where('comercio_id', $comercio_id)->where('name', 'IVA')->first();
+                    if($impuesto){
+                        $result = $tasa * $totalProducts - $tasa * $totalProducts*$impuesto->amount/100;
+                        $this->impuesto = $result;
+                    }else{
+                        $this->impuesto = 0;
+                        return '0,00';
+                    }
+                }else{
+                    $this->impuesto = 0;
+                    return '0,00';
+                }
+                return round($result, 2);
+                break;            
+            case '$':
+                
+                if($settingComercio->in_impuesto == 'SI'){
+                    $impuesto = Impuesto::where('comercio_id', $comercio_id)->where('name', 'IVA')->first();
+                    if($impuesto){
+                        $result = $tasa * $totalProducts*$impuesto->amount/100;
+                        $this->impuesto = $result;
+                    }else{
+                        $this->impuesto = 0;
+                        return '0,00';
+                    }
+                }else{
+                    $this->impuesto = 0;
+                    return '0,00';
+                }
+                return round($result, 2);
+                break;            
+        }
+        // fin de cambio
+        
+    }
+
+    public function amountIGTF($comercio_id = 1)
+    {
+        $totalProducts = \Cart::getTotal();
+        $settingComercio = SettingComercio::where('comercio_id', $comercio_id)->first();
+
+        $tasaValues = Tasa::where('comercio_id', $comercio_id)->first();
+
+        if(!$tasaValues){
+            $tasa = 1;
+        }else{
+            $tasa = $tasaValues->tasa;
+        }
+
+        //realiza cambio monetario para sacar el impuesto
+        switch ($this->currencyValue) {
+            case 'Bs':
+                if($settingComercio->in_impuesto == 'SI'){
+                    $impuesto = Impuesto::where('comercio_id', $comercio_id)->where('name', 'IVA')->first();
+                    if($impuesto){
+                        $result = $tasa * $totalProducts - $tasa * $totalProducts*$impuesto->amount/100;
+                        $this->IGTF = $result;
+                    }else{
+                        $this->IGTF = 0;
+                        return '0,00';
+                    }
+                }else{
+                    $this->IGTF = 0;
+                    return '0,00';
+                }
+                return round($result, 2);
+                break;            
+            case '$':
+                if($settingComercio->in_impuesto == 'SI'){
+                    $impuesto = Impuesto::where('comercio_id', $comercio_id)->where('name', 'IGTF')->first();
+                    if($impuesto){
+                        $result = $tasa * $totalProducts*$impuesto->amount/100;
+                        $this->IGTF = $result;
+                    }else{
+                        $this->IGTF = 0;
+                        return '0,00';
+                    }
+                }else{
+                    $this->IGTF = 0;
+                    return '0,00';
+                }
+                return round($result, 2);
+                break;            
+        }
+        // fin de cambio
+    }
+
+    public function  crearArray()
+    {
+        $ordena = [];
+        $pedidos = [];
+        $listpedidos = array();
+        $elementArray = array();
+        $products = [];
+
+        $cartCollection = \Cart::getContent();
+
+        foreach($cartCollection as $item){
+            array_push($products, new PedidoProduct($item->id, $item->name, $item->price, $item->quantity, $item->attributes->comercio_id));
+            
+        }
+
+        
+        $x = 0;
+        foreach($products as $item){
+            $x++;
+            //revisa si se encuentra en la lista
+            $existe = false;
+            
+            for ($i=0; $i < count($listpedidos); $i++) { 
+                $arr = $listpedidos[$i];
+                
+                foreach($arr as $element){
+                    
+                    if($item->comercio_id == $element->comercio_id){
+                        array_push($arr, $item);
+                        $listpedidos[$i] = $arr;
+                        $existe = true;
+                        break;
+                    }
+                }
+            }
+            
+            if(!$existe){
+                
+                array_push($elementArray, $item);
+                array_push($listpedidos, $elementArray);
+            }
+        }
+
+        return $listpedidos;
+
     }
 
     public function render()
     {
+        $this->currencyValue = request()->cookie('currency');
+
+        $cartCollection = \Cart::getContent();
+
         $setting = Setting::find(1)->first();
 
         $words = '';
 
-        $conf = Setting::where('id', 1)->first();
+        $conf = Setting::where('id', 1)->first();        
         
-        $cartCollection = \Cart::getContent();
-
         return view('livewire.cart.cart', [
             'in_cellphonecontact' => $setting->in_cellphonecontact, 
             'comercio_id' => $this->comercio_id,
@@ -38,6 +244,7 @@ class Cart extends AdminComponent
             'motor_id' => 0, 
             'words' => $words,
             'cartCollection' => $cartCollection,
+            'listpedidos' => $this->crearArray(),
         ]);
     }
 
@@ -54,6 +261,7 @@ class Cart extends AdminComponent
             'modelo_id' => 0,
             'motor_id' => 0, 
             'words' => $words,
+            'listpedidos' => $this->crearArray(),
         ]);
     }
 
@@ -152,4 +360,61 @@ class Cart extends AdminComponent
         return redirect()->route('pasarela', ['pedido' => $pedido->pedido, 'comercioId' => $this->comercio_id]);
     }
 
+}
+
+class PedidoProduct {
+    public $id;
+    public $name;
+    public $quantity;
+    public $price;
+    public $comercio_id;
+
+    function __construct($id, $name, $price, $quantity, $comercio_id){
+        $this->id = $id;
+        $this->name = $name;
+        $this->quantity = $quantity;
+        $this->price = $price;
+        $this->comercio_id = $comercio_id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    }
+    public function getPrice()
+    {
+        return $this->price;
+    }
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+    public function getComercio_id()
+    {
+        return $this->comercio_id;
+    }
+    public function setComercio_id($comercio_id)
+    {
+        $this->comercio_id = $comercio_id;
+    }
 }

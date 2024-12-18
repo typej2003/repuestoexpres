@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             MetodoPagoSeeder::class,
             AreaSeeder::class,
             ComercioSeeder::class,
+            SettingComercioSeeder::class,
+            ImpuestoSeeder::class,
             CategorySeeder::class,
             SubCategorySeeder::class,
             SupplierSeeder::class,

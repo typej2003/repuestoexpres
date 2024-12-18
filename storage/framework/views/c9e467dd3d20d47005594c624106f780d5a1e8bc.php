@@ -27,7 +27,7 @@
                 </form>
             </div>
         </li>
-        <li>
+        <li class="nav-item">
             <div class="row">
                 <div class="col-md-12 mx-2">
                     <div class="dropdown-cart-drop">
@@ -36,8 +36,45 @@
                             <span class="text-dark">(<?php echo e($totalQuantityCart); ?> )</span>
                             <!-- <span class="text-dark">(<?php echo e(\Cart::getTotalQuantity()); ?>)</span> -->
                         </a>
-                        <?php echo $__env->make('livewire.carrito.cart-drop', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('carrito.cart-drop', ['currencyValue' => $currencyValue ])->html();
+} elseif ($_instance->childHasBeenRendered('l1612777719-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1612777719-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1612777719-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1612777719-0');
+} else {
+    $response = \Livewire\Livewire::mount('carrito.cart-drop', ['currencyValue' => $currencyValue ]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1612777719-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                     </div>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="row">
+                <div class="col-md-12 my-2">
+                    
+                        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.currency')->html();
+} elseif ($_instance->childHasBeenRendered('l1612777719-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1612777719-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1612777719-1');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1612777719-1');
+} else {
+    $response = \Livewire\Livewire::mount('components.currency');
+    $html = $response->html();
+    $_instance->logRenderedChild('l1612777719-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+                    
                 </div>
             </div>
         </li>

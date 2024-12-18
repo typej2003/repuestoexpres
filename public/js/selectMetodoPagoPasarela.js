@@ -65,25 +65,40 @@ function selectMetodoPago(index1 = 0, comercio_idP, nropedidoP, referenceP, titl
     option0.value="0"
     option0.innerHTML = "Seleccione.."
 
-    let option1 = document.createElement('option')
-    option1.classList.add('optionModoPago')
-    option1.value="tarjetadebito"
-    option1.innerHTML = "TARJETA DE DÉBITO"
+    switch (currencyValue) {
+        case 'Bs':
+            let option1 = document.createElement('option')
+            option1.classList.add('optionModoPago')
+            option1.value="tarjetadebito"
+            option1.innerHTML = "TARJETA DE DÉBITO"
 
-    let option2 = document.createElement('option')
-    option2.classList.add('optionModoPago')
-    option2.value="transferencia"
-    option2.innerHTML = "TRANSFERENCIA"
+            let option2 = document.createElement('option')
+            option2.classList.add('optionModoPago')
+            option2.value="transferencia"
+            option2.innerHTML = "TRANSFERENCIA"  
+            
+            let option3 = document.createElement('option')
+            option3.classList.add('optionModoPago')
+            option3.value="pagomovil"
+            option3.innerHTML = "PAGO MÓVIL"
 
-    let option3 = document.createElement('option')
-    option3.classList.add('optionModoPago')
-    option3.value="pagomovil"
-    option3.innerHTML = "PAGO MÓVIL"
-
-    let option4 = document.createElement('option')
-    option4.classList.add('optionModoPago')
-    option4.value="zelle"
-    option4.innerHTML = "ZELLE"
+            select.appendChild(option0)
+            select.appendChild(option1)
+            select.appendChild(option2)
+            select.appendChild(option3)
+            
+            break;
+    
+        case '$':
+            let option4 = document.createElement('option')
+            option4.classList.add('optionModoPago')
+            option4.value="zelle"
+            option4.innerHTML = "ZELLE"
+            select.appendChild(option0)
+            select.appendChild(option4)
+            break;
+    }
+    
 
     let spanR = document.createElement('div')
     spanR.classList.add('my-2')
@@ -104,11 +119,7 @@ function selectMetodoPago(index1 = 0, comercio_idP, nropedidoP, referenceP, titl
 
     group.appendChild(select)
     group.appendChild(spanR)
-    select.appendChild(option0)
-    select.appendChild(option1)
-    select.appendChild(option2)
-    select.appendChild(option3)
-    select.appendChild(option4)
+    
 
     select.addEventListener('change', selectModo)
 

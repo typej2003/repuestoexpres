@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Comercio;
 use App\Models\Category;
 use App\Models\Setting;
+use App\Models\SettingUser;
 use App\Models\User;
 
 
@@ -59,7 +60,6 @@ class WelcomeController extends Controller
 
     public function index(Request $request)
     {
-        
         $peticion = explode('/', \Request::getRequestUri());
         if($peticion[0] == '')
         {
@@ -170,6 +170,29 @@ class WelcomeController extends Controller
             $comercio_id = 1;
         }
         $setting = Setting::find($comercio_id)->first();
+
+        // Evaluar currency
+        $minutes = 10;
+        $this->comercio = Comercio::find($comercio_id);
+        $setting = Setting::where('user_id', $this->comercio->user_id)->first();    
+        if(auth()->user())
+        {
+            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first(); 
+            if($settingUser){
+                \Cookie::queue('currency', $settingUser->currency, $minutes);
+                $this->currencyValue = $settingUser->currency;
+            }else{
+                \Cookie::queue('currency', $setting->currency, $minutes);
+                $this->currencyValue = $setting->currency;
+            }
+            
+        }else{  
+                      
+            \Cookie::queue('currency', $setting->currency, $minutes);
+            $this->currencyValue = $setting->currency;
+            
+        }
+        // Fin evaluar currency
 
         return view('welcome', [
             'words' => $words,

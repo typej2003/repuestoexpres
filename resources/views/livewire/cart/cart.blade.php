@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-md-12">
-        <a href="/"><h6><i class="fa fa-solid fa-arrow-left"></i> Continuar con la compra</h6></a>
+            <a href="/"><h6><i class="fa fa-solid fa-arrow-left"></i> Continuar con la compra</h6></a>
         </div>
     </div>
 
@@ -39,7 +39,7 @@
                         </td>
                         <td><strong>{{ $item->attributes->comercio_id }}</strong></td>
                         <td><strong>{{ $item->name }}</strong></td>
-                        <td>{{ $item->price }} USD</td>
+                        <td>{{ $item->price }} {{ $currencyValue }}</td>
                         <td>
                             <div class="col-md-12 d-flex justify-content-between">
                                 <div class="input-group input-number-group">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td>{{ \Cart::get($item->id)->getPriceSum() }} USD </td>
+                        <td>{{ \Cart::get($item->id)->getPriceSum() }} {{ $currencyValue }} </td>
                         <td>
                             <form action="{{ route('cart.remove') }}"   method="POST">
                                 {{ csrf_field() }}
@@ -85,46 +85,56 @@
             </div>                
         </div>
         <div class="col-md-4">
-            <div>Su pedido</div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Precio total artículos</th>
-                            <th scope="col">$ {{ \Cart::getTotal() }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Total</th>
-                            <td>$ {{ \Cart::getTotal() }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan = "2">
-                                @if(count($cartCollection)>0)
-                                    @auth
-                                    <button wire:click.prevent="finalizarCompra" class="form-control btn btn-danger">Finalizar la compra</button>
-                                    @else
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                            <strong>Ya Eres Usuario</strong> 
-                                            <br>Nos gustaria que Colocaras tus credenciales
-                                            <p class="mb-3">
-                                                <a href="/login" class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar al Sistema</a>
-                                            </p>
-                                            </div>
+            <div>Su pedido (cant: {{ count($listpedidos)}})</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Precio total artículos</th>
+                        <th scope="col">{{ $currencyValue }} {{$this->getSubTotal() }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Impuestos</th>
+                        <td>{{ $currencyValue }} {{ $this->amountImpuesto() }}</td>
+                    </tr>
+                    @if($currencyValue == '$')
+                    <tr>
+                        <th scope="row">IGTF</th>
+                        <td>{{ $currencyValue }} {{ $this->amountIGTF() }}</td>
+                    </tr>
+                    @endif
+                    <tr>
+                        <th scope="row">Total</th>
+                        <td>{{ $currencyValue }} {{ $this->getTotal() }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan = "2">
+                            @if(count($cartCollection)>0)
+                                @auth
+                                <button wire:click.prevent="finalizarCompra" class="form-control btn btn-danger">Finalizar la compra</button>
+                                @else
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                        <strong>Ya Eres Usuario</strong> 
+                                        <br>Nos gustaria que Colocaras tus credenciales
+                                        <p class="mb-3">
+                                            <a href="/login" class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar al Sistema</a>
+                                        </p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                            <strong>Aun no tienes cuenta?</strong> 
-                                                <a href="/register" class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarte</a>
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                        <strong>Aun no tienes cuenta?</strong> 
+                                            <a href="/register" class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarte</a>
                                         </div>
-                                    @endauth
-                                @endif
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
+                                    </div>
+                                @endauth
+                            @endif
+                        </th>
+                    </tr>
+                </tbody>
+            </table>            
         </div>
     </div>
 

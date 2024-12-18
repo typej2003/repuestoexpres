@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-md-12">
-        <a href="/"><h6><i class="fa fa-solid fa-arrow-left"></i> Continuar con la compra</h6></a>
+            <a href="/"><h6><i class="fa fa-solid fa-arrow-left"></i> Continuar con la compra</h6></a>
         </div>
     </div>
 
@@ -39,7 +39,7 @@
                         </td>
                         <td><strong><?php echo e($item->attributes->comercio_id); ?></strong></td>
                         <td><strong><?php echo e($item->name); ?></strong></td>
-                        <td><?php echo e($item->price); ?> USD</td>
+                        <td><?php echo e($item->price); ?> <?php echo e($currencyValue); ?></td>
                         <td>
                             <div class="col-md-12 d-flex justify-content-between">
                                 <div class="input-group input-number-group">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td><?php echo e(\Cart::get($item->id)->getPriceSum()); ?> USD </td>
+                        <td><?php echo e(\Cart::get($item->id)->getPriceSum()); ?> <?php echo e($currencyValue); ?> </td>
                         <td>
                             <form action="<?php echo e(route('cart.remove')); ?>"   method="POST">
                                 <?php echo e(csrf_field()); ?>
@@ -87,46 +87,56 @@
             </div>                
         </div>
         <div class="col-md-4">
-            <div>Su pedido</div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Precio total artículos</th>
-                            <th scope="col">$ <?php echo e(\Cart::getTotal()); ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Total</th>
-                            <td>$ <?php echo e(\Cart::getTotal()); ?></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan = "2">
-                                <?php if(count($cartCollection)>0): ?>
-                                    <?php if(auth()->guard()->check()): ?>
-                                    <button wire:click.prevent="finalizarCompra" class="form-control btn btn-danger">Finalizar la compra</button>
-                                    <?php else: ?>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                            <strong>Ya Eres Usuario</strong> 
-                                            <br>Nos gustaria que Colocaras tus credenciales
-                                            <p class="mb-3">
-                                                <a href="/login" class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar al Sistema</a>
-                                            </p>
-                                            </div>
+            <div>Su pedido (cant: <?php echo e(count($listpedidos)); ?>)</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Precio total artículos</th>
+                        <th scope="col"><?php echo e($currencyValue); ?> <?php echo e($this->getSubTotal()); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Impuestos</th>
+                        <td><?php echo e($currencyValue); ?> <?php echo e($this->amountImpuesto()); ?></td>
+                    </tr>
+                    <?php if($currencyValue == '$'): ?>
+                    <tr>
+                        <th scope="row">IGTF</th>
+                        <td><?php echo e($currencyValue); ?> <?php echo e($this->amountIGTF()); ?></td>
+                    </tr>
+                    <?php endif; ?>
+                    <tr>
+                        <th scope="row">Total</th>
+                        <td><?php echo e($currencyValue); ?> <?php echo e($this->getTotal()); ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan = "2">
+                            <?php if(count($cartCollection)>0): ?>
+                                <?php if(auth()->guard()->check()): ?>
+                                <button wire:click.prevent="finalizarCompra" class="form-control btn btn-danger">Finalizar la compra</button>
+                                <?php else: ?>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                        <strong>Ya Eres Usuario</strong> 
+                                        <br>Nos gustaria que Colocaras tus credenciales
+                                        <p class="mb-3">
+                                            <a href="/login" class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Entrar al Sistema</a>
+                                        </p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                            <strong>Aun no tienes cuenta?</strong> 
-                                                <a href="/register" class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarte</a>
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                        <strong>Aun no tienes cuenta?</strong> 
+                                            <a href="/register" class="boton dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal" style="cursor: pointer;">Registrarte</a>
                                         </div>
-                                    <?php endif; ?>
+                                    </div>
                                 <?php endif; ?>
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
+                            <?php endif; ?>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>            
         </div>
     </div>
 

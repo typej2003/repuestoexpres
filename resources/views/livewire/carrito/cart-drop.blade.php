@@ -14,7 +14,7 @@
                         <br><small>Cant: {{$item->quantity}}</small>
                     </div>
                     <div class="col-md-4">
-                        <p>{{ \Cart::get($item->id)->getPriceSum() }} USD<br>{{ \Cart::get($item->id)->getPriceSum() * 35.41 }} Bs</p>
+                        <p>{{ \Cart::get($item->id)->getPriceSum() }} {{$currencyValue}}</p>
                     </div>
                     <br><br>
                 </div>
@@ -23,7 +23,7 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-lg-10">
-                    <b>Total: </b>{{ \Cart::getTotal() }} USD / {{ \Cart::getTotal() * 35.41 }} Bs
+                    <b>Total: </b>{{ \Cart::getTotal() }} {{ $currencyValue }} 
                 </div>
                 <div class="col-lg-2">
                     <form action="{{ route('cart.clear') }}" method="POST">

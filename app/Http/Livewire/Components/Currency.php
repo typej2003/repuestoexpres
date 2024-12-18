@@ -26,25 +26,31 @@ class Currency extends AdminComponent
 
     public function mount($comercioId = 1)
     {
-        $minutes = 10;
-        $this->comercio = Comercio::find($comercioId);
-        $setting = Setting::where('user_id', $this->comercio->user_id)->first();    
-
-        if(auth()->user())
+        if(\Cookie::get('currency') == null)
         {
-            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first(); 
-            if($settingUser){
-                \Cookie::queue('currency', $settingUser->currency, $minutes);
-                $this->currencyValue = $settingUser->currency;
-            }else{
+            $minutes = 10;
+            $this->comercio = Comercio::find($comercioId);
+            $setting = Setting::where('user_id', $this->comercio->user_id)->first();    
+            if(auth()->user())
+            {
+                $settingUser = SettingUser::where('user_id', auth()->user()->id)->first(); 
+                if($settingUser){
+                    \Cookie::queue('currency', $settingUser->currency, $minutes);
+                    $this->currencyValue = $settingUser->currency;
+                }else{
+                    \Cookie::queue('currency', $setting->currency, $minutes);
+                    $this->currencyValue = $setting->currency;
+                }
+                
+            }else{            
                 \Cookie::queue('currency', $setting->currency, $minutes);
                 $this->currencyValue = $setting->currency;
+                
             }
-            
-        }else{            
-            \Cookie::queue('currency', $setting->currency, $minutes);
-            $this->currencyValue = $setting->currency;
+        }else{
+            $this->currencyValue = \Cookie::get('currency');
         }
+
         
     }
 
@@ -65,13 +71,15 @@ class Currency extends AdminComponent
                 
             }
             \Cookie::queue('currency', $settingUser->currency, $minutes);
+            $this->currencyValue = $settingUser->currency;
             
         }else{
             \Cookie::queue('currency', $currency, $minutes);
+            $this->currencyValue = $currency;
         }
 
-        $this->emit('emitCurrency', $currency);
-        $this->currencyValue = $currency;
+        $this->emit('emitCurrency', $this->currencyValue);
+        
 
         //$this->dispatchBrowserEvent('refreshPage', ['message' => 'Refresh pagina!']);        
         
@@ -79,6 +87,7 @@ class Currency extends AdminComponent
 
     public function render()
     {
+        
         return view('livewire.components.currency');
     }
 }

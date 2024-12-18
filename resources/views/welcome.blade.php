@@ -45,7 +45,7 @@
                         ])
 
                 @if($in_sliderprincipal > 0)
-                    @include('livewire.components.slider-principal')
+                    @include('livewire.components.promociones')
                 @endif
 
                 @if($in_marcasproductos > 0)
@@ -70,7 +70,7 @@
                         </div>
                     
                         <div class="my-2"></div>
-                        @livewire('components.show-products')
+                        @livewire('components.show-products', ['comercioId' => $comercio_id, 'currencyValue' => $currencyValue])
                     @endif
                     
                     @if($words != '' )                    

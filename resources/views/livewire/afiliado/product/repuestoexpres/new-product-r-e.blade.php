@@ -355,7 +355,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="details1">Detalle 1</label>
-                                                <input type="text" wire:model.defer="state.details1" autofocus class="font-costo form-control @error('details1') is-invalid @enderror" id="details1">
+                                                <textarea wire:model.defer="state.details1" autofocus class="font-costo form-control @error('details1') is-invalid @enderror" id="details1"></textarea>
                                                 @error('details1')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -366,7 +366,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="details2">Detalle 2</label>
-                                                <input type="text" wire:model.defer="state.details2" autofocus class="font-costo form-control @error('details2') is-invalid @enderror" id="details2">
+                                                <textarea wire:model.defer="state.details2" autofocus class="font-costo form-control @error('details2') is-invalid @enderror" id="details2"></textarea>
                                                 @error('details2')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

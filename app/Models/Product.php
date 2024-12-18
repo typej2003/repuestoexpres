@@ -151,19 +151,20 @@ class Product extends Model
 
     public function getPrice1()
     {
-        
+        $settingComercio = SettingComercio::where('comercio_id', $this->comercio_id)->first();
+
         $setting = Setting::where('user_id', $this->user_id)->first();
+
         if(auth()->user()){
-            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
-            if($settingUser){
-                $currency = $settingUser->currency;
+            $settingComercio = SettingComercio::where('user_id', auth()->user()->id)->first();
+            if($settingComercio){
+                $currency = $settingComercio->currency;
             }else{
                 $currency = $setting->currency;
             }            
         }else{
             $currency = request()->cookie('currency');
-        }
-        
+        }        
 
         $tasaValues = Tasa::where('user_id', $this->user_id)->first();
 
@@ -179,6 +180,125 @@ class Product extends Model
                 break;            
             case '$':
                 return round($this->price1, 2);                
+                break;
+        }
+    }
+
+    public function getImpuestoProduct()
+    {
+        $settingComercio = SettingComercio::where('comercio_id', $this->comercio_id)->first();
+
+        $setting = Setting::where('user_id', $this->user_id)->first();
+        
+        if(auth()->user()){
+            $settingComercio = SettingComercio::where('user_id', auth()->user()->id)->first();
+            if($settingComercio){
+                $currency = $settingComercio->currency;
+            }else{
+                $currency = $setting->currency;
+            }            
+        }else{
+            $currency = request()->cookie('currency');
+        }
+
+        switch ($currency) {
+            case 'Bs':
+                if($settingComercio->in_impuesto){
+                    $impuesto = Impuesto::where('name', 'IVA')->first();
+                    if($impuesto){
+                        $result = $tasa * $this->price1*$impuesto->amount;
+                    }else{
+                        $result = 0;
+                    }
+                }
+                return round($result, 2);
+                break;            
+            case '$':
+                return round($this->price1, 2);                
+                break;
+        }
+    }
+
+    public function getPriceSinImpuesto()
+    {
+        $settingComercio = SettingComercio::where('comercio_id', $this->comercio_id)->first();
+
+        $setting = Setting::where('user_id', $this->user_id)->first();
+        
+        if(auth()->user()){
+            $settingComercio = SettingComercio::where('user_id', auth()->user()->id)->first();
+            if($settingComercio){
+                $currency = $settingComercio->currency;
+            }else{
+                $currency = $setting->currency;
+            }            
+        }else{
+            $currency = request()->cookie('currency');
+        }
+
+        switch ($currency) {
+            case 'Bs':
+                if($settingComercio->in_impuesto){
+                    $impuesto = Impuesto::where('name', 'IVA')->first();
+                    if($impuesto){
+                        $result = $tasa * $this->price1 - $tasa * $this->price1*$impuesto->amount;
+                    }else{
+                        $result = $tasa * $this->price1;
+                    }
+                }else{
+                    $result = $tasa * $this->price1;
+                }
+                return round($result, 2);
+                break;            
+            case '$':
+                return round($this->price1, 2);                
+                break;
+        }
+    }
+
+    public function getPriceIGTF()
+    {
+        $settingComercio = SettingComercio::where('comercio_id', $this->comercio_id)->first();
+
+        $setting = Setting::where('user_id', $this->user_id)->first();
+        
+        if(auth()->user()){
+            $settingComercio = SettingComercio::where('user_id', auth()->user()->id)->first();
+            if($settingComercio){
+                $currency = $settingComercio->currency;
+            }else{
+                $currency = $setting->currency;
+            }            
+        }else{
+            $currency = request()->cookie('currency');
+        }
+
+        switch ($currency) {
+            case 'Bs':
+                if($settingComercio->in_impuesto){
+                    $impuesto = Impuesto::where('name', 'IVA')->first();
+                    if($impuesto){
+                        $result = $tasa * $this->price1 - $tasa * $this->price1*$impuesto->amount;
+                    }else{
+                        $result = $tasa * $this->price1;
+                    }
+                }else{
+                    $result = $tasa * $this->price1;
+                }
+                return round($result, 2);
+                break;            
+            case '$':
+                if($settingComercio->in_impuesto){
+                    $impuesto = Impuesto::where('name', 'IGTF')->first();
+                    if($impuesto){
+                        $result = $tasa * $this->price1*$impuesto->amount;
+                    }else{
+                        $result = 0;
+                    }
+                }else{
+                    $result = 0;
+                }
+                return round($result, 2);
                 break;
         }
     }

@@ -126,7 +126,25 @@
               <a href="{{ route('listComercios', 1) }}" class="nav-link {{ request()->is('listComercios') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
-                  Afiliado / Comercios
+                  Comercios
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{{ route('settingComercio', 1) }}" class="nav-link {{ request()->is('settingComercio') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-comments"></i>
+                <p>
+                  Configurar Comercio
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{{ route('listImpuestos', 1) }}" class="nav-link {{ request()->is('listImpuestos') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-comments"></i>
+                <p>
+                  Listar Impuestos
                 </p>
               </a>
             </li>

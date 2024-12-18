@@ -66,20 +66,6 @@ class CartController extends Controller
 
     public function add(Request $request )
     {
-        
-        // \Cart::add(array(
-        //     'id' => $request->id,
-        //     'name' => $request->name,
-        //     'price' => $request->price,
-        //     'quantity' => $request->quantity,
-        //     'attributes' => array(
-        //         'image' => $request->img,
-        //         'afiliado_id' => $request->afiliado_id,
-        //         'sucursal_id' => $request->sucursal_id,
-        //         'name_sucursal' => $request->name_sucursal,
-        //         'categoria' => $request->categoria,
-        //     )
-        // ));
         $product = Product::find($request->product_id);
         
         \Cart::add(array(

@@ -14,7 +14,7 @@
                         <br><small>Cant: <?php echo e($item->quantity); ?></small>
                     </div>
                     <div class="col-md-4">
-                        <p><?php echo e(\Cart::get($item->id)->getPriceSum()); ?> USD<br><?php echo e(\Cart::get($item->id)->getPriceSum() * 35.41); ?> Bs</p>
+                        <p><?php echo e(\Cart::get($item->id)->getPriceSum()); ?> <?php echo e($currencyValue); ?></p>
                     </div>
                     <br><br>
                 </div>
@@ -23,7 +23,7 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-lg-10">
-                    <b>Total: </b><?php echo e(\Cart::getTotal()); ?> USD / <?php echo e(\Cart::getTotal() * 35.41); ?> Bs
+                    <b>Total: </b><?php echo e(\Cart::getTotal()); ?> <?php echo e($currencyValue); ?> 
                 </div>
                 <div class="col-lg-2">
                     <form action="<?php echo e(route('cart.clear')); ?>" method="POST">

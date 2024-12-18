@@ -27,7 +27,7 @@
                 </form>
             </div>
         </li>
-        <li>
+        <li class="nav-item">
             <div class="row">
                 <div class="col-md-12 mx-2">
                     <div class="dropdown-cart-drop">
@@ -36,8 +36,17 @@
                             <span class="text-dark">({{ $totalQuantityCart}} )</span>
                             <!-- <span class="text-dark">({{\Cart::getTotalQuantity()}})</span> -->
                         </a>
-                        @include('livewire.carrito.cart-drop')
+                        @livewire('carrito.cart-drop', ['currencyValue' => $currencyValue ])
                     </div>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="row">
+                <div class="col-md-12 my-2">
+                    
+                        @livewire('components.currency')
+                    
                 </div>
             </div>
         </li>

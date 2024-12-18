@@ -36,7 +36,7 @@ class NavbarNuevo extends Component
 
     public $totalQuantityCart = 0;
 
-    protected $listeners = ['sendCategories' => 'sendCategories', 'receiveManufacturerS' => 'receiveManufacturerS', 'receiveModeloS' => 'receiveModeloS', 'receiveMotorS' => 'receiveMotorS', 'changeQuantity' => 'changeQuantity'];
+    protected $listeners = ['sendCategories' => 'sendCategories', 'receiveManufacturerS' => 'receiveManufacturerS', 'receiveModeloS' => 'receiveModeloS', 'receiveMotorS' => 'receiveMotorS', 'changeQuantity' => 'changeQuantity', 'emitCurrency' => 'emitCurrency'];
 
 
     public function mount($comercioId = 1, $manufacturer_id = 0, $modelo_id = 0, $motor_id = 0){
@@ -82,7 +82,32 @@ class NavbarNuevo extends Component
         }
 
         $this->totalQuantityCart = \Cart::getTotalQuantity();
+
+        $minutes = 10;
+        $this->comercio = Comercio::find($comercioId);
+        $setting = Setting::where('user_id', $this->comercio->user_id)->first();    
+        if(auth()->user())
+        {
+            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first(); 
+            if($settingUser){
+                \Cookie::queue('currency', $settingUser->currency, $minutes);
+                $this->currencyValue = $settingUser->currency;
+            }else{
+                \Cookie::queue('currency', $setting->currency, $minutes);
+                $this->currencyValue = $setting->currency;
+            }
+            
+        }else{            
+            \Cookie::queue('currency', $setting->currency, $minutes);
+            $this->currencyValue = $setting->currency;
+            
+        }
         
+    }
+
+    public function emitCurrency($currencyValue)
+    {
+        $this->currencyValue = $currencyValue;
     }
 
     public function changeQuantity()

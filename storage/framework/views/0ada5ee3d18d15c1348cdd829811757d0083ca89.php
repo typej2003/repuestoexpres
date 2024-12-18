@@ -237,7 +237,21 @@ echo $html;
                                             <span class="text-dark">(<?php echo e($totalQuantityCart); ?>)</span>
                                             <!-- <span class="text-dark">(<?php echo e(\Cart::getTotalQuantity()); ?>)</span> -->
                                         </a>
-                                        <?php echo $__env->make('livewire.carrito.cart-drop', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('carrito.cart-drop')->html();
+} elseif ($_instance->childHasBeenRendered('l3862662930-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l3862662930-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l3862662930-1');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l3862662930-1');
+} else {
+    $response = \Livewire\Livewire::mount('carrito.cart-drop');
+    $html = $response->html();
+    $_instance->logRenderedChild('l3862662930-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                                     </div>
                                 </div>
                             </div>
@@ -256,11 +270,11 @@ if (! isset($_instance)) {
                             'modelo_id' => $modelo_id,
                             'motor_id' => $motor_id,
                         ])->html();
-} elseif ($_instance->childHasBeenRendered('l3862662930-1')) {
-    $componentId = $_instance->getRenderedChildComponentId('l3862662930-1');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l3862662930-1');
+} elseif ($_instance->childHasBeenRendered('l3862662930-2')) {
+    $componentId = $_instance->getRenderedChildComponentId('l3862662930-2');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l3862662930-2');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l3862662930-1');
+    $_instance->preserveRenderedChild('l3862662930-2');
 } else {
     $response = \Livewire\Livewire::mount('components.menu-component',[
                             'comercioId' => 1,
@@ -269,7 +283,7 @@ if (! isset($_instance)) {
                             'motor_id' => $motor_id,
                         ]);
     $html = $response->html();
-    $_instance->logRenderedChild('l3862662930-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l3862662930-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -280,15 +294,15 @@ echo $html;
                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.currency')->html();
-} elseif ($_instance->childHasBeenRendered('l3862662930-2')) {
-    $componentId = $_instance->getRenderedChildComponentId('l3862662930-2');
-    $componentTag = $_instance->getRenderedChildComponentTagName('l3862662930-2');
+} elseif ($_instance->childHasBeenRendered('l3862662930-3')) {
+    $componentId = $_instance->getRenderedChildComponentId('l3862662930-3');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l3862662930-3');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('l3862662930-2');
+    $_instance->preserveRenderedChild('l3862662930-3');
 } else {
     $response = \Livewire\Livewire::mount('components.currency');
     $html = $response->html();
-    $_instance->logRenderedChild('l3862662930-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('l3862662930-3', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

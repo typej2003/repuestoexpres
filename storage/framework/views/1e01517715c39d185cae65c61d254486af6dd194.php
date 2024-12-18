@@ -524,14 +524,14 @@ unset($__errorArgs, $__bag); ?>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="details1">Detalle 1</label>
-                                                <input type="text" wire:model.defer="state.details1" autofocus class="font-costo form-control <?php $__errorArgs = ['details1'];
+                                                <textarea wire:model.defer="state.details1" autofocus class="font-costo form-control <?php $__errorArgs = ['details1'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="details1">
+unset($__errorArgs, $__bag); ?>" id="details1"></textarea>
                                                 <?php $__errorArgs = ['details1'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -550,14 +550,14 @@ unset($__errorArgs, $__bag); ?>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="details2">Detalle 2</label>
-                                                <input type="text" wire:model.defer="state.details2" autofocus class="font-costo form-control <?php $__errorArgs = ['details2'];
+                                                <textarea wire:model.defer="state.details2" autofocus class="font-costo form-control <?php $__errorArgs = ['details2'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="details2">
+unset($__errorArgs, $__bag); ?>" id="details2"></textarea>
                                                 <?php $__errorArgs = ['details2'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

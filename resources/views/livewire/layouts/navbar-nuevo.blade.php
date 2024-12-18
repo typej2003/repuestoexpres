@@ -220,7 +220,7 @@
                                             <span class="text-dark">({{$totalQuantityCart}})</span>
                                             <!-- <span class="text-dark">({{\Cart::getTotalQuantity()}})</span> -->
                                         </a>
-                                        @include('livewire.carrito.cart-drop')
+                                        @livewire('carrito.cart-drop')
                                     </div>
                                 </div>
                             </div>

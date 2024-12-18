@@ -67,28 +67,17 @@ class ShowProducts extends AdminComponent
 
     }
 
-    public function mount($comercioId = 1)
+    public function mount($comercioId = 1, $currencyValue)
     {
         $this->comercio_id = $comercioId;
 
         $this->comercio = Comercio::find($this->comercio_id);
 
-        $setting = Setting::where('user_id', $this->comercio->user_id)->first();
-
         $this->state['product_id'] = '0';
         $this->state['ca_valoracion'] = 0;
         $this->state['class'] = 'star';
 
-        if(auth()->user()){
-            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
-            if($settingUser){
-                $currency = $settingUser->currency;
-            }else{
-                $currency = $setting->currency;
-            }            
-        }else{
-            $currency = request()->cookie('currency');
-        }
+        $this->currencyValue = $currencyValue;
         
     }
 
@@ -188,6 +177,22 @@ class ShowProducts extends AdminComponent
 
     public function render()
     {
+
+        $setting = Setting::where('user_id', $this->comercio->user_id)->first();
+        if(auth()->user()){
+            $settingUser = SettingUser::where('user_id', auth()->user()->id)->first();
+            if($settingUser){
+                $currency = $settingUser->currency;
+            }else{
+                $currency = $setting->currency;
+                $this->currencyValue = $currency;
+            }            
+        }else{
+            $currency = request()->cookie('currency');
+            $this->currencyValue = $currency;
+        }
+        
+        
         
         $products = Product::where('comercio_id', $this->comercio_id)
                     ->with('valoracionProduct')
