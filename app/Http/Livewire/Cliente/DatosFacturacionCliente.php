@@ -2,18 +2,23 @@
 
 namespace App\Http\Livewire\Cliente;
 
-use Livewire\Component;
+use App\Http\Livewire\Admin\AdminComponent;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
+use App\Models\DatosFacturacion;
 use App\Models\Country;
 use App\Models\Estado;
 use App\Models\Cities;
+use App\Models\DeliveryArea;
 
-class DatosFacturacion extends Component
+class DatosFacturacionCliente extends AdminComponent
 {
 
     public $country = 237;
     public $province;
     public $city;
+    public $zona;
     public $countries = [], $provinces = [], $cities = [];
     public $comercio_id;
 
@@ -22,6 +27,7 @@ class DatosFacturacion extends Component
         $this->comercio_id = $comercioId;
         $this->provinces = collect();
         $this->cities = collect();
+        $this->zonas = collect();
 
         $this->countries = Country::all();
 
@@ -40,8 +46,14 @@ class DatosFacturacion extends Component
 		// $this->subcategory = $this->subcategories->first()->id ?? null;
 	}
 
+    public function updatedCity($value)
+	{
+		$this->zonas = DeliveryArea::where('city_id', $value)->get();
+		// $this->subcategory = $this->subcategories->first()->id ?? null;
+	}
+
     public function render()
     {
-        return view('livewire.cliente.datos-facturacion');
+        return view('livewire.cliente.datos-facturacion-cliente');
     }
 }

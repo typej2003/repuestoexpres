@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Mis Pedidos</h1>
+                    <h1 class="m-0 text-dark"><i class="fa fa-solid fa-file-invoice-dollar"></i> Mis Pedidos</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -22,7 +22,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-between mb-2">
-                        <button wire:click.prevent="addNew" class="btn btn-primary"><i class="fa fa-plus-circle mr-1"></i> Nuevo Pedido</button>
+                        <!-- <button wire:click.prevent="addNew" class="btn btn-primary"><i class="fa fa-plus-circle mr-1"></i> Nuevo Pedido</button> -->
+                        <div></div>
                         <x-search-input wire:model="searchTerm" />
                     </div>
                     <div class="card" style="width: 100% !important;">
@@ -49,6 +50,7 @@
                                         <th scope="col">Cédula</th>
                                         <th scope="col">Cliente</th>
                                         <th scope="col">Productos</th>
+                                        <th scope="col">Costo</th>
                                         <th scope="col">Fecha de Registro</th>
                                         <th scope="col">Opciones</th>
                                     </tr>
@@ -68,6 +70,7 @@
                                         <td>{{ $pedido->client->identificationNumber }}</td>
                                         <td>{{ $pedido->client->name }}</td>
                                         <td></td>
+                                        <td>{{ $pedido->coste }} {{ $currencyValue }}</td>
                                         <td>{{ $pedido->created_at ?? 'N/A' }}</td>
                                         <td>
                                             <a class="mx-1" href="/pasarela/{{ $pedido->pedido }}/{{ $pedido->comercio_id }}"><img style="width:20px;" src="/img/pagar.png" alt=""></a>
@@ -76,9 +79,11 @@
                                                 <i class="fa fa-edit mr-2"></i>
                                             </a>
 
+                                            @if($pedido->confirmed == 0)
                                             <a href="" wire:click.prevent="confirmPedidoRemoval({{ $pedido->id }})">
                                                 <i class="fa fa-trash text-danger"></i>
                                             </a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @empty
@@ -123,9 +128,9 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="cedula">Cédula</label>
-                            <input type="text" wire:model.defer="state.cedula" id="cedula" autofocus class="form-control @error('cedula') is-invalid @enderror">
-                            @error('cedula')
+                            <label for="pedido">Pedido</label>
+                            <input type="text" wire:model.defer="state.pedido" id="pedido" autofocus class="form-control @error('pedido') is-invalid @enderror" readonly>
+                            @error('pedido')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -144,7 +149,7 @@
                         
                         <div class="form-group">
                             <label for="description">Descripción</label>
-                            <textarea wire:model.defer="state.description" id="description" autofocus class="form-control @error('description') is-invalid @enderror"></textarea>
+                            <textarea wire:model.defer="state.description" id="description" autofocus class="form-control @error('description') is-invalid @enderror" readonly rows="5"></textarea>
                             @error('description')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -153,8 +158,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="coste">Costo</label>
-                            <input type="text" wire:model.defer="state.coste" id="coste" autofocus class="form-control @error('coste') is-invalid @enderror">
+                            <label for="coste">Costo ({{ $currencyValue }})</label>
+                            <input type="text" wire:model.defer="state.coste" id="coste" autofocus class="form-control @error('coste') is-invalid @enderror" readonly>
                             @error('coste')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -166,7 +171,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="custom-control custom-switch">
-                                        <input wire:model.defer="state.in_delivery" type="checkbox" class="custom-control-input" id="in_delivery">
+                                        <input wire:model.defer="state.in_delivery" type="checkbox" class="custom-control-input" id="in_delivery" disabled>
                                         <label class="custom-control-label  mx-3" for="in_delivery">Posee Delivery</label>
                                     </div>
 
@@ -209,8 +214,5 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </div>
 

@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Mis Pedidos</h1>
+                    <h1 class="m-0 text-dark"><i class="fa fa-solid fa-file-invoice-dollar"></i> Mis Pedidos</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -22,7 +22,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-between mb-2">
-                        <button wire:click.prevent="addNew" class="btn btn-primary"><i class="fa fa-plus-circle mr-1"></i> Nuevo Pedido</button>
+                        <!-- <button wire:click.prevent="addNew" class="btn btn-primary"><i class="fa fa-plus-circle mr-1"></i> Nuevo Pedido</button> -->
+                        <div></div>
                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.search-input','data' => ['wire:model' => 'searchTerm']]); ?>
 <?php $component->withName('search-input'); ?>
@@ -60,6 +61,7 @@
                                         <th scope="col">Cédula</th>
                                         <th scope="col">Cliente</th>
                                         <th scope="col">Productos</th>
+                                        <th scope="col">Costo</th>
                                         <th scope="col">Fecha de Registro</th>
                                         <th scope="col">Opciones</th>
                                     </tr>
@@ -79,6 +81,7 @@
                                         <td><?php echo e($pedido->client->identificationNumber); ?></td>
                                         <td><?php echo e($pedido->client->name); ?></td>
                                         <td></td>
+                                        <td><?php echo e($pedido->coste); ?> <?php echo e($currencyValue); ?></td>
                                         <td><?php echo e($pedido->created_at ?? 'N/A'); ?></td>
                                         <td>
                                             <a class="mx-1" href="/pasarela/<?php echo e($pedido->pedido); ?>/<?php echo e($pedido->comercio_id); ?>"><img style="width:20px;" src="/img/pagar.png" alt=""></a>
@@ -87,9 +90,11 @@
                                                 <i class="fa fa-edit mr-2"></i>
                                             </a>
 
+                                            <?php if($pedido->confirmed == 0): ?>
                                             <a href="" wire:click.prevent="confirmPedidoRemoval(<?php echo e($pedido->id); ?>)">
                                                 <i class="fa fa-trash text-danger"></i>
                                             </a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
@@ -135,16 +140,16 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="cedula">Cédula</label>
-                            <input type="text" wire:model.defer="state.cedula" id="cedula" autofocus class="form-control <?php $__errorArgs = ['cedula'];
+                            <label for="pedido">Pedido</label>
+                            <input type="text" wire:model.defer="state.pedido" id="pedido" autofocus class="form-control <?php $__errorArgs = ['pedido'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>">
-                            <?php $__errorArgs = ['cedula'];
+unset($__errorArgs, $__bag); ?>" readonly>
+                            <?php $__errorArgs = ['pedido'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -193,7 +198,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"></textarea>
+unset($__errorArgs, $__bag); ?>" readonly rows="5"></textarea>
                             <?php $__errorArgs = ['description'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -210,7 +215,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="form-group">
-                            <label for="coste">Costo</label>
+                            <label for="coste">Costo (<?php echo e($currencyValue); ?>)</label>
                             <input type="text" wire:model.defer="state.coste" id="coste" autofocus class="form-control <?php $__errorArgs = ['coste'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -218,7 +223,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>">
+unset($__errorArgs, $__bag); ?>" readonly>
                             <?php $__errorArgs = ['coste'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -238,7 +243,7 @@ unset($__errorArgs, $__bag); ?>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="custom-control custom-switch">
-                                        <input wire:model.defer="state.in_delivery" type="checkbox" class="custom-control-input" id="in_delivery">
+                                        <input wire:model.defer="state.in_delivery" type="checkbox" class="custom-control-input" id="in_delivery" disabled>
                                         <label class="custom-control-label  mx-3" for="in_delivery">Posee Delivery</label>
                                     </div>
 
@@ -281,9 +286,6 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </div>
 
 <?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/cliente/list-pedidos-cliente.blade.php ENDPATH**/ ?>

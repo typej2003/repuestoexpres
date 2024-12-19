@@ -1463,7 +1463,7 @@ function showFormGrupoZelle()
             <div class="row">
                 <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12">
                     <label for="referenceZelle">Registra el código envia a su correo</label>
-                    <input type="number" class="form-control inputForm" name="referenceZelle" id="referenceZelle" placeholder="Registra el código del pago"/>
+                    <input type="text" class="form-control inputForm" name="referenceZelle" id="referenceZelle" placeholder="Registra el código del pago"/>
                 </div>
             </div>
         </div>

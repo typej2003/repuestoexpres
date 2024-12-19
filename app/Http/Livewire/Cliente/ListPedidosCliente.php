@@ -33,9 +33,11 @@ class ListPedidosCliente extends AdminComponent
 
     public $sortDirection = 'desc';
 
+	public $currencyValue = 'Bs';
+
     public function mount()
     {
-    	
+		$this->currencyValue = request()->cookie('currency');
     }
 
 	public function changeConfirmation(Pedido $pedido, $confirmed)
@@ -67,6 +69,8 @@ class ListPedidosCliente extends AdminComponent
 		$comercioId = $this->comercioId;
 		$this->reset();
 		$this->comercioId = $comercioId;
+
+		$this->currencyValue = request()->cookie('currency');
 
 		$this->showEditModal = false;
 
@@ -111,6 +115,8 @@ class ListPedidosCliente extends AdminComponent
 		$this->reset();
 		$this->comercioId = $comercioId;
 
+		$this->currencyValue = request()->cookie('currency');
+
 		$this->showEditModal = true;
 
 		$this->pedido = $pedido;
@@ -123,14 +129,9 @@ class ListPedidosCliente extends AdminComponent
 	public function updatePedido()
 	{
 		$validatedData = Validator::make($this->state, [
-			'pedido' => 'required',
-            'description' => 'nullable',
-            'cedula' => 'required',
-            'coste'  => 'required',
-            'in_delivery' => 'nullable',
+			'reference' => 'required',
 		])->validate();
 
-        $validatedData['comercio_id'] = $this->comercio_id;
 		$this->pedido->update($validatedData);
 
 		$this->dispatchBrowserEvent('hide-form', ['message' => 'Pedido actualizado satisfactoriamente!']);

@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark"> <i class="fa fa-solid fa-layer-group"></i>Zonas de entregas</h1>
+                    <h1 class="m-0 text-dark">Pedidos</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -18,35 +18,11 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-            <?php if($user): ?>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card w-50">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <span>Propietario: </span>
-                            </div>
-                            <div class="col-lg-6">
-                                <span><?php echo e($user->name); ?></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <span>Comercio: </span>
-                            </div>
-                            <div class="col-lg-6">
-                                <span><?php echo e($comercio->name); ?></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-between mb-2">
-                        <button wire:click.prevent="addNew" class="btn btn-primary"><i class="fa fa-plus-circle mr-1"></i> Nueva Zona</button>
+                        <button wire:click.prevent="addNew" class="btn btn-primary"><i class="fa fa-plus-circle mr-1"></i> Nuevo Pedido</button>
                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.search-input','data' => ['wire:model' => 'searchTerm']]); ?>
 <?php $component->withName('search-input'); ?>
@@ -66,47 +42,58 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">País</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Ciudad</th>
+                                        <th scope="col">Confirmado</th>
                                         <th scope="col">
-                                            Zona
-                                            <span wire:click="sortBy('name')" class="float-right text-sm" style="cursor: pointer;">
-                                                <i class="fa fa-arrow-up <?php echo e($sortColumnName === 'name' && $sortDirection === 'asc' ? '' : 'text-muted'); ?>"></i>
-                                                <i class="fa fa-arrow-down <?php echo e($sortColumnName === 'name' && $sortDirection === 'desc' ? '' : 'text-muted'); ?>"></i>
+                                            Pedido
+                                            <span wire:click="sortBy('pedido')" class="float-right text-sm" style="cursor: pointer;">
+                                                <i class="fa fa-arrow-up <?php echo e($sortColumnName === 'pedido' && $sortDirection === 'asc' ? '' : 'text-muted'); ?>"></i>
+                                                <i class="fa fa-arrow-down <?php echo e($sortColumnName === 'pedido' && $sortDirection === 'desc' ? '' : 'text-muted'); ?>"></i>
                                             </span>
                                         </th>
-                                        <th scope="col">Distancia</th>
-                                        <th scope="col">Costo</th>
+                                        <th scope="col">
+                                            Referencia
+                                            <span wire:click="sortBy('reference')" class="float-right text-sm" style="cursor: pointer;">
+                                                <i class="fa fa-arrow-up <?php echo e($sortColumnName === 'reference' && $sortDirection === 'asc' ? '' : 'text-muted'); ?>"></i>
+                                                <i class="fa fa-arrow-down <?php echo e($sortColumnName === 'reference' && $sortDirection === 'desc' ? '' : 'text-muted'); ?>"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col">Cédula</th>
+                                        <th scope="col">Cliente</th>
+                                        <th scope="col">Productos</th>
                                         <th scope="col">Fecha de Registro</th>
                                         <th scope="col">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody wire:loading.class="text-muted">
-                                    <?php $__empty_1 = true; $__currentLoopData = $zonas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $zona): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                    <?php $__empty_1 = true; $__currentLoopData = $pedidos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $pedido): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr>
-                                        <th scope="row"><?php echo e($zonas->firstItem() + $index); ?></th>
-                                        <td><?php echo e($zona->country->name); ?></td>
-                                        <td><?php echo e($zona->province->name); ?></td>
-                                        <td><?php echo e($zona->city->name); ?></td>
-                                        <td><?php echo e($zona->name); ?></td>
-                                        <td><?php echo e($zona->distance); ?></td>
-                                        <td><?php echo e($zona->coste); ?></td>
-                                        <td><?php echo e($zona->created_at ?? 'N/A'); ?></td>
+                                        <th scope="row"><?php echo e($pedidos->firstItem() + $index); ?></th>
+                                        <td>
+                                            <select class="form-control" wire:change="changeConfirmation(<?php echo e($pedido); ?>, $event.target.value)">
+                                                <option value="1" <?php echo e(($pedido->confirmed === 1) ? 'selected' : ''); ?>>CONFIRMADO</option>
+                                                <option value="0" <?php echo e(($pedido->confirmed === 0) ? 'selected' : ''); ?>>NO CONFIRMADO</option>
+                                            </select>
+                                        </td>
+                                        <td><a href="/pasarela/<?php echo e($pedido->pedido); ?>/<?php echo e($pedido->comercio_id); ?>"><?php echo e($pedido->pedido); ?></a></td>
+                                        <td><?php echo e($pedido->reference); ?></td>
+                                        <td><?php echo e($pedido->client->identificationNumber); ?></td>
+                                        <td><?php echo e($pedido->client->name); ?></td>
+                                        <td></td>
+                                        <td><?php echo e($pedido->created_at ?? 'N/A'); ?></td>
                                         <td>
                                             
-                                            <a href="" wire:click.prevent="edit(<?php echo e($zona); ?>)">
+                                            <a href="" wire:click.prevent="edit(<?php echo e($pedido); ?>)">
                                                 <i class="fa fa-edit mr-2"></i>
                                             </a>
 
-                                            <a href="" wire:click.prevent="confirmZonaRemoval(<?php echo e($zona->id); ?>)">
+                                            <a href="" wire:click.prevent="confirmPedidoRemoval(<?php echo e($pedido->id); ?>)">
                                                 <i class="fa fa-trash text-danger"></i>
                                             </a>
                                         </td>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                     <tr class="text-center">
-                                        <td colspan="6">
+                                        <td colspan="9">
                                             <img src="https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/v2/assets/empty.svg" alt="No results found" style="width: 150px;">
                                             <p class="mt-2">No se encontro resultado</p>
                                         </td>
@@ -116,7 +103,7 @@
                             </table>
                         </div>
                         <div class="card-footer d-flex justify-content-end">
-                            <?php echo e($zonas->links()); ?>
+                            <?php echo e($pedidos->links()); ?>
 
                         </div>
                     </div>
@@ -130,14 +117,14 @@
     <!-- Modal -->
     <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
-            <form autocomplete="off" wire:submit.prevent="<?php echo e($showEditModal ? 'updateZona' : 'createZona'); ?>">
+            <form autocomplete="off" wire:submit.prevent="<?php echo e($showEditModal ? 'updatePedido' : 'createPedido'); ?>">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
                             <?php if($showEditModal): ?>
-                            <span>Editar Zona</span>
+                            <span>Editar Pedido</span>
                             <?php else: ?>
-                            <span>Nuevo Zona</span>
+                            <span>Nuevo Pedido</span>
                             <?php endif; ?>
                         </h5>
                         <button type="button" class="close text-dark" data-dismiss="modal" aria-label="Close">
@@ -145,101 +132,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="country" class="">País <span class="text-danger">*</span></label>
-                            <select wire:model="country" class="form-control <?php $__errorArgs = ['country'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="country">
-                                <option value="0">Seleccione una opción</option>
-                                <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($country->name == 'Venezuela'): ?>
-                                    <option value="<?php echo e($country->id); ?>" selected><?php echo e($country->name); ?></option>
-                                    <?php else: ?>
-                                    <option value="<?php echo e($country->id); ?>"><?php echo e($country->name); ?></option>
-                                    <?php endif; ?>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <?php $__errorArgs = ['country'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                            <div class="invalid-feedback">
-                                <?php echo e($message); ?>
-
-                            </div>
-                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                        </div>
-                        <div class="form-group">
-                            <label for="province" class="">Estado/Provincia </label>
-                            <select wire:model="province" class="form-control <?php $__errorArgs = ['province'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="province">
-                            <option value="0">Seleccione una opción</option>
-                                <?php $__currentLoopData = $provinces; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $province): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($province->id); ?>"><?php echo e($province->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <?php $__errorArgs = ['province'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                            <div class="invalid-feedback">
-                                <?php echo e($message); ?>
-
-                            </div>
-                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                        </div>
 
                         <div class="form-group">
-                            <label for="city" class="">Ciudad/Sector <span class="text-danger">*</span></label>
-                            <select wire:model="city" class="form-control <?php $__errorArgs = ['city'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="city">
-                                <option value="0">Por favor seleccione una ciudad</option>
-                                <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($city->id); ?>"><?php echo e($city->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <?php $__errorArgs = ['city'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                            <div class="invalid-feedback">
-                                <?php echo e($message); ?>
-
-                            </div>
-                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Zona</label>
-                            <input type="text" wire:model.defer="state.name" id="name" autofocus class="form-control <?php $__errorArgs = ['name'];
+                            <label for="cedula">Cédula</label>
+                            <input type="text" wire:model.defer="state.cedula" id="cedula" autofocus class="form-control <?php $__errorArgs = ['cedula'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -247,7 +143,32 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>">
-                            <?php $__errorArgs = ['name'];
+                            <?php $__errorArgs = ['cedula'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback">
+                                <?php echo e($message); ?>
+
+                            </div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>                    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reference">Referencia</label>
+                            <input type="text" wire:model.defer="state.reference" id="reference" autofocus class="form-control <?php $__errorArgs = ['reference'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                            <?php $__errorArgs = ['reference'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -261,11 +182,35 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         </div>
-                    </div>
-                    <div class="modal-body">
+                        
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea wire:model.defer="state.description" id="description" autofocus class="form-control <?php $__errorArgs = ['description'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"></textarea>
+                            <?php $__errorArgs = ['description'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback">
+                                <?php echo e($message); ?>
+
+                            </div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        </div>
+
                         <div class="form-group">
                             <label for="coste">Costo</label>
-                            <input type="number" wire:model.defer="state.coste" id="coste" autofocus class="form-control <?php $__errorArgs = ['coste'];
+                            <input type="text" wire:model.defer="state.coste" id="coste" autofocus class="form-control <?php $__errorArgs = ['coste'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -285,33 +230,20 @@ $message = $__bag->first($__errorArgs[0]); ?>
                             <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>
+unset($__errorArgs, $__bag); ?>                    
                         </div>
-                    </div>
-                    <div class="modal-body">
+                    
                         <div class="form-group">
-                            <label for="distance">Distancia</label>
-                            <input type="number" wire:model.defer="state.distance" id="distance" autofocus class="form-control <?php $__errorArgs = ['distance'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>">
-                            <?php $__errorArgs = ['distance'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                            <div class="invalid-feedback">
-                                <?php echo e($message); ?>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="custom-control custom-switch">
+                                        <input wire:model.defer="state.in_delivery" type="checkbox" class="custom-control-input" id="in_delivery">
+                                        <label class="custom-control-label  mx-3" for="in_delivery">Posee Delivery</label>
+                                    </div>
 
+                                </div>
                             </div>
-                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                            
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -334,21 +266,23 @@ unset($__errorArgs, $__bag); ?>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header text-white" style="background-color: #6C2689;">
-                    <h5>Eliminar Zona</h5>
+                    <h5>Eliminar Pedido</h5>
                 </div>
 
                 <div class="modal-body">
-                    <h4>Esta usted seguro de querer eliminar esta Zona?</h4>
+                    <h4>Esta usted seguro de querer eliminar este Pedido?</h4>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</button>
-                    <button type="button" wire:click.prevent="deleteZona" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Eliminar Zona</button>
+                    <button type="button" wire:click.prevent="deletePedido" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Eliminar Pedido</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </div>
 
-<?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/afiliado/list-delivery-area.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/afiliado/list-pedidos.blade.php ENDPATH**/ ?>

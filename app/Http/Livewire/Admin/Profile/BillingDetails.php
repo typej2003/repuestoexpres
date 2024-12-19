@@ -3,8 +3,14 @@
 namespace App\Http\Livewire\Admin\Profile;
 
 use App\Http\Livewire\Admin\AdminComponent;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 use App\Models\DatosFacturacion;
+use App\Models\Country;
+use App\Models\Estado;
+use App\Models\Cities;
+use App\Models\DeliveryArea;
 
 class BillingDetails extends AdminComponent
 {
@@ -12,6 +18,11 @@ class BillingDetails extends AdminComponent
     public $state = [];
 
     public $user_id;
+    public $country = 237;
+    public $province;
+    public $city;
+    public $zona;
+    public $countries = [], $provinces = [], $cities = [];
 
     public function mount($user_id)
     {
@@ -24,31 +35,67 @@ class BillingDetails extends AdminComponent
             $this->state = $datosfacturacion->toArray();
         }
 
+        $this->provinces = collect();
+        $this->cities = collect();
+        $this->zonas = collect();
+
+        $this->countries = Country::all();
+
+        $this->provinces = Estado::where('country_id', 237)->get();
+
         
     }
 
     public function updateBillingDetails()
     {
         $validatedData = Validator::make($this->state, [
-			'address' => 'nullable',
-            'cellphonecode' => 'nullable',
-            'cellphone' => 'nullable',
+            'identificationNac' => 'require|not_in:0',
+            'identificationNumber' => 'require',
+            'names' => 'require',
+            'surnames' => 'require',
+            'cellphonecode' => 'require|not_in:0',
+            'cellphone' => 'require',
+			'address' => 'require',
+            'zipcode' => 'require',
 		])->validate();
 
-        $datosbasicos = DatosBasicos::where('user_id', $this->user_id)->first();
+        $validatedData['country'] = $this->country;
+        $validatedData['state'] = $this->province;
+        $validatedData['city'] = $this->city;
+        $validatedData['deliveryarea'] = $this->zona;        
 
-        if($datosbasicos)
+        $datosfacturacion = DatosFacturacion::where('user_id', $this->user_id)->first();
+
+        if($datosfacturacion)
         {
-            $datosbasicos->update($validatedData);
+            $datosfacturacion->update($validatedData);
         }else{
             $validatedData['user_id'] = $this->user_id;
 
-            DatosBasicos::create($validatedData);
+            DatosFacturacion::create($validatedData);
 
         }
 
 		$this->dispatchBrowserEvent('hide-form', ['message' => 'Datos Básicos actualizados satisfactoriamente!']);
     }
+
+    public function updatedCountry($value)
+	{
+		$this->provinces = Estado::where('country_id', $value)->get();
+		// $this->subcategory = $this->subcategories->first()->id ?? null;
+	}
+
+    public function updatedProvince($value)
+	{
+		$this->cities = Cities::where('state_id', $value)->get();
+		// $this->subcategory = $this->subcategories->first()->id ?? null;
+	}
+
+    public function updatedCity($value)
+	{
+		$this->zonas = DeliveryArea::where('city_id', $value)->get();
+		// $this->subcategory = $this->subcategories->first()->id ?? null;
+	}
 
     public function render()
     {

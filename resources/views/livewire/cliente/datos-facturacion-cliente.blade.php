@@ -1,6 +1,6 @@
 <div class="container-fluid d-flex">
     <div class="card my-3 mx-auto" style="width: 80%!important;">
-        <form wire:submit.prevent="updateBillingDetails" class="form-horizontal p-2">
+        <form wire:submit.prevent="updateBasicData" class="form-horizontal p-2">
             <div class="form-group">
                 <div class="row">
                     <div class="col-xs-6 col-md-4 col-sm-4 col-4">
