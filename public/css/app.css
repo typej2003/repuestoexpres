@@ -275,4 +275,33 @@
 
   a {text-decoration: none !important; }
   
-
+  .btn-app{
+    padding: 0%;
+    background-color: #28221B;
+    color: #FFCC2A!important;
+    min-width: 80px!important;
+    width: auto !important;
+    height: 45px;
+    font-size: .8rem!important;
+    font-weight: bold;    
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  .btn-app:hover {
+  background-color: #332c24!important;
+    font-size: .9rem!important;
+  color: #ffe07b;
+  }
+  .btn-app:active { 
+  /*transform: scale(0.98); */
+  /* Scaling button to 0.98 to its original size */ 
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+  /* Lowering the shadow */ 
+    padding: 0%;
+  color: #FFCC2A!important;
+    font-size: 1rem!important;
+  background-color: #3d362d!important;
+  }

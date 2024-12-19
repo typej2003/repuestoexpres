@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class User2Seender extends Seeder
+class User2Seeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,8 +17,8 @@ class User2Seender extends Seeder
         DB::table('users')->insert([
             'identificationNac' => 'V',
             'identificationNumber' => '13053082',
-            'name' => 'typej2004',
-            'email' => 'typej2004@gmail.com',
+            'name' => 'usuario 3',
+            'email' => 'usuario3@gmail.com',
             'password' => bcrypt('12345678'),
             'role' => 'afiliado',
             'created_at' => '2022-05-16 12:20:36',
@@ -37,8 +37,8 @@ class User2Seender extends Seeder
         DB::table('users')->insert([
             'identificationNac' => 'V',
             'identificationNumber' => '20111222',
-            'name' => 'luis',
-            'email' => 'luis@gmail.com',
+            'name' => 'usuario 4',
+            'email' => 'usuario4@gmail.com',
             'password' => bcrypt('12345678'),
             'role' => 'afiliado',
             'created_at' => '2022-05-16 12:20:36',

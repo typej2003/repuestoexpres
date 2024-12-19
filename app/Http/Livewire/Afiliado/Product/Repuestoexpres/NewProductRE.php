@@ -46,7 +46,7 @@ class NewProductRE extends AdminComponent
 
         if($editModal == 'false'){
             $this->controlActivity = false;
-            $this->state['delivery'] = false;
+            $this->state['in_delivery'] = false;
             $this->state['container_id'] = "0";
             $this->comercio = Comercio::find($comercioId);
             $this->state['area_id'] = $this->comercio->area_id;
@@ -58,11 +58,32 @@ class NewProductRE extends AdminComponent
             $this->state['in_valido'] = "1";
         }else{
             $this->product = Product::find($this->product_id);
-
+            
 		    $this->state = $this->product->toArray();
-        }
+            
+            $this->state['in_pedido'] = $this->checkear($this->state['in_pedido']);
+            $this->state['in_envio_gratis'] = $this->checkear($this->state['in_envio_gratis']);
+            $this->state['in_offer'] = $this->checkear($this->state['in_offer']);
+            $this->state['in_fragil'] = $this->checkear($this->state['in_fragil']);
+            $this->state['in_por_encargo'] = $this->checkear($this->state['in_por_encargo']);
+            $this->state['in_olor_fuerte'] = $this->checkear($this->state['in_olor_fuerte']);
+            $this->state['in_valido'] = $this->checkear($this->state['in_valido']);
+            $this->state['in_combo'] = $this->checkear($this->state['in_combo']);
 
+        }
         
+    }
+
+    public function checkear($value)
+    {
+        switch ($value) {
+            case '0':
+                return false;
+                break;
+            case '1':
+                return true;
+                break;
+        }
     }
 
     public function changeCategory($categoryId, $subcategory)
@@ -106,7 +127,7 @@ class NewProductRE extends AdminComponent
             'price_offer' => 'nullable',
             'profit_offer' => 'nullable',
             'price_divisa' => 'nullable',
-            'delivery' => 'nullable',
+            'in_delivery' => 'nullable',
             'shipping_cost' => 'nullable',
             'stock_min' => 'nullable',
             'stock_max' => 'nullable',
@@ -127,6 +148,7 @@ class NewProductRE extends AdminComponent
             'madein' => 'nullable',
             'in_pedido' => 'nullable',
             'tx_adicionales' => 'nullable',
+            'in_envio_nacional' => 'nullable',
             'in_envio_gratis' => 'nullable',
             'in_offer' => 'nullable',
             'tx_recomendacion_consumo' => 'nullable',
@@ -189,7 +211,7 @@ class NewProductRE extends AdminComponent
             'brand_id'  => 'nullable',
             'model_id' => 'nullable',
             'motor_id' => 'nullable',
-            'container_id' => 'required|not_in:0',
+            'container_id' => 'nullable',
             'details1' => 'nullable',
             'details2' => 'nullable',
             'description' => 'nullable',
@@ -201,7 +223,7 @@ class NewProductRE extends AdminComponent
             'price_offer' => 'nullable',
             'profit_offer' => 'nullable',
             'price_divisa' => 'nullable',
-            'delivery' => 'nullable',
+            'in_delivery' => 'nullable',
             'shipping_cost' => 'nullable',
             'stock_min' => 'nullable',
             'stock_max' => 'nullable',
@@ -210,7 +232,7 @@ class NewProductRE extends AdminComponent
             'category_id' => 'required|not_in:0',
             'subcategory_id' => 'nullable',
             'supplier_id' => 'required|not_in:0',
-            'pack_products_id' => 'required|not_in:0',
+            'pack_products_id' => 'nullable',
             'pack_price' => 'nullable',
 
             'tx_peso' => 'nullable',
@@ -222,6 +244,7 @@ class NewProductRE extends AdminComponent
             'madein' => 'nullable',
             'in_pedido' => 'nullable',
             'tx_adicionales' => 'nullable',
+            'in_envio_nacional' => 'nullable',
             'in_envio_gratis' => 'nullable',
             'in_offer' => 'nullable',
             'tx_recomendacion_consumo' => 'nullable',
@@ -230,6 +253,7 @@ class NewProductRE extends AdminComponent
             'ca_valoracion' => 'nullable',
             'in_valido' => 'nullable',
 		])->validate();
+
         
         $filename = $validatedData['code'].'-'.$this->comercioId;
 

@@ -55,12 +55,12 @@
                                             </div>
                                         </div>
                                         <div class="row text-left">
-                                            <div class="negrita">{{$product->name}}</div>
+                                            <div class="negrita d-flex align-item-start">{{$product->name}}</div>
                                                 @if($product->on_offer)
-                                                    <div class="text-decoration-line-through">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
-                                                    <div class="">Promoción: {{$currencyValue}}. {{ $product->getPrice_offer() }}</div>
+                                                    <div class="text-decoration-line-through d-flex align-item-start">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
+                                                    <div class="d-flex align-item-start">Promoción: {{$currencyValue}}. {{ $product->getPrice_offer() }}</div>
                                                 @else
-                                                    <div class="">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
+                                                    <div class="d-flex align-item-start">Precio: {{$currencyValue}}. {{ $product->getPrice1() }}</div>
                                                 @endif
                                                 <div style="display: flex; flex-direction: row;">
                                                     <div class="">
@@ -87,7 +87,7 @@
                                         @endif
                                     </div>
                                     <div class="card-footer">
-                                        <span class="">Tienda: Auto Repuestos Fred</span>
+                                        <span class="d-flex align-item-start">{{$product->comercio->name}}</span>
                                     </div>
                                 </div>
                             </form>

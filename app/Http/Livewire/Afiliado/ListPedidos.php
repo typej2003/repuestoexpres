@@ -19,7 +19,7 @@ class ListPedidos extends AdminComponent
 
 	public $pedido;
 
-	public $comercioId;
+	public $comercio_id;
 
 	public $showEditModal = false;
 
@@ -35,7 +35,7 @@ class ListPedidos extends AdminComponent
 
     public function mount($comercioId)
     {
-    	$this->comercioId = $comercioId;
+    	$this->comercio_id = $comercioId;
     	
     }
 

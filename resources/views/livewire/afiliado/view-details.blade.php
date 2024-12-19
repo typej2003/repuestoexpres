@@ -66,7 +66,7 @@
                             <div>Ver mas los productos de<span class="mx-1"><a href="">{{ $product->comercio->name}}</a></span></div>
                         </div>
                         <div class="row">
-                            <span>$ {{ $product->price1 }}</span>
+                            <span>{{ $currencyValue }} {{ $product->getPrice1() }}</span>
                         </div>
                         <div class="row">
                             <form class="col-md-12 d-flex justify-content-between" action="/add" method="post">
@@ -97,8 +97,12 @@
                             <span>Disponibilidad: </span><span class="mx-1">{{ $product->stock }}</span>
                         </div> -->
                         <div class="row d-flex justify-content-start">
+                            @if($product->in_envio_nacional)
                             <div style="width: auto;"><img style="width:60px" src="/img/envio_auto.png" alt=""><span>Envío nacional</span></div>
+                            @endif
+                            @if($product->in_delivery)
                             <div style="width: auto;"><img style="width:60px" src="/img/envio_moto.png" alt=""><span>Delivery</span></div>
+                            @endif
                             <div style="width: auto;"><img style="width:60px" src="/img/envio_pickup.png" alt=""><span>Pickup</span></div>
                         </div>
                         <div class="row">
@@ -111,7 +115,7 @@
                                     </h4>
                                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                            {{$product->description}}
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +127,17 @@
                                     </h4>
                                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                            <strong>Peso: </strong>{{ $product->tx_peso }}
+                                            <br>
+                                            <strong>Tamaño: </strong>{{ $product->tx_tamanio }}
+                                            <br>
+                                            <strong>Pedido: </strong>{{ $product->getPedido() }}
+                                            <br>
+                                            <strong>Envio Gratis: </strong>{{ $product->getEnvioGratis() }}
+                                            <br>
+                                            <strong>Frágil: </strong>{{ $product->getFragil() }}
+                                            <br>
+                                            <strong>Oferta: </strong>{{ $product->getOferta() }}
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +149,8 @@
                                     </h4>
                                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                            <p>Dirección: {{$product->comercio->address}}</p>
+                                            <p><a href="https://api.whatsapp.com/send?phone={{$product->comercio->cellphonecontact}}&text=Hola%20,te%20asesoramos%20por %20whatsapp%20gestiona%20tu%20compra%20por%20este%20canal." target="_blank">{{$product->comercio->cellphonecontact}}</a> {{$product->comercio->phonecontact}}</p>
                                         </div>
                                     </div>
                                 </div>

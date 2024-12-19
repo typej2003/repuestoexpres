@@ -39,7 +39,7 @@ class CreateProductsTable extends Migration
             $table->json('subcategories')->nullable();
             $table->bigInteger('supplier_id')->nullable(); //proveedor
             $table->string('code_lote')->nullable();
-            $table->string('code')->unique();
+            $table->string('code')->nullable();
             $table->string('name')->nullable();
             $table->bigInteger('manufacturer_id')->nullable();
             $table->bigInteger('brand_id')->nullable();
@@ -64,7 +64,6 @@ class CreateProductsTable extends Migration
             $table->decimal('price_offer',12,2)->nullable(); //precio de oferta
             $table->decimal('profit_offer',12,2)->nullable(); // porcentaje de ganancia
             $table->decimal('price_divisa',12,2)->nullable(); //precio del dolar cuando se adquirió
-            $table->string('delivery')->nullable(); // Si o No
             $table->decimal('shipping_cost', 12,2)->nullable(); // costo de envio
             $table->decimal('stock_min',12,2)->nullable();
             $table->decimal('stock_max',12,2)->nullable();
@@ -86,6 +85,8 @@ class CreateProductsTable extends Migration
             $table->string('in_pedido')->nullable();
             $table->string('tx_adicionales')->nullable();
             $table->string('tx_alergenos')->nullable();
+            $table->string('in_delivery')->nullable()->default('1'); // Si o No
+            $table->string('in_envio_nacional')->nullable()->default('0'); // Si o No
             $table->string('in_envio_gratis')->nullable()->default('0');
             $table->string('in_offer')->nullable()->default('0');
             $table->string('tx_datos_vencimiento')->nullable();

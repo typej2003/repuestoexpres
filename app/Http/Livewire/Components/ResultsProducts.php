@@ -68,6 +68,12 @@ class ResultsProducts extends AdminComponent
     public function render()
     {
         $products = Product::query();
+
+        if($this->comercio_id !== 1)
+        {
+            $products = $products
+                ->where('comercio_id', $this->comercio_id);    
+        }
         $products = $products
             ->where('name', 'like', '%'. $this->parametro . '%');
         $products = $products

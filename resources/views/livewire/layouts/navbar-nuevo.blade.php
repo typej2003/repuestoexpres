@@ -215,7 +215,7 @@
                             <div class="row">
                                 <div class="col-md-12 mx-2">
                                     <div class="dropdown-cart-drop">
-                                        <a class="btn-cart-drop d-flex justify-content-between botonera">
+                                        <a class="btn-cart-drop d-flex justify-content-between botonera" href="/goCart">
                                             <img src="/img/icon_carrito.png" style="height:45px cursor:pointer;">
                                             <span class="text-dark">({{$totalQuantityCart}})</span>
                                             <!-- <span class="text-dark">({{\Cart::getTotalQuantity()}})</span> -->

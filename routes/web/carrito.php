@@ -7,7 +7,7 @@
 	use App\Http\Livewire\Cart\Cart1;
 	use App\Http\Livewire\Cart\LiveCartController;
 	use App\Http\Livewire\Layouts\Navbar;
-	use App\Http\Livewire\Afiliado\Pasarela;
+	
 
 	// Route::get('/cart', Cart::class)->name('cart');
 
@@ -41,6 +41,6 @@
 
 	Route::get('/formasdepago', [CartController::class, 'formasdepago'])->name('cart.formasdepago')->middleware('auth');	
 
-	Route::get('/pasarela/{pedido}/{comercioId}', Pasarela::class)->name('pasarela')->middleware('auth');
+	
 
-	Route::get('/enviarDataPasarela', [Pasarela::class, 'enviarDataPasarela'])->name('enviardataPasarela');
+	

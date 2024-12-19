@@ -68,7 +68,7 @@
                             <div>Ver mas los productos de<span class="mx-1"><a href=""><?php echo e($product->comercio->name); ?></a></span></div>
                         </div>
                         <div class="row">
-                            <span>$ <?php echo e($product->price1); ?></span>
+                            <span><?php echo e($currencyValue); ?> <?php echo e($product->getPrice1()); ?></span>
                         </div>
                         <div class="row">
                             <form class="col-md-12 d-flex justify-content-between" action="/add" method="post">
@@ -99,8 +99,12 @@
                             <span>Disponibilidad: </span><span class="mx-1"><?php echo e($product->stock); ?></span>
                         </div> -->
                         <div class="row d-flex justify-content-start">
+                            <?php if($product->in_envio_nacional): ?>
                             <div style="width: auto;"><img style="width:60px" src="/img/envio_auto.png" alt=""><span>Envío nacional</span></div>
+                            <?php endif; ?>
+                            <?php if($product->in_delivery): ?>
                             <div style="width: auto;"><img style="width:60px" src="/img/envio_moto.png" alt=""><span>Delivery</span></div>
+                            <?php endif; ?>
                             <div style="width: auto;"><img style="width:60px" src="/img/envio_pickup.png" alt=""><span>Pickup</span></div>
                         </div>
                         <div class="row">
@@ -113,7 +117,8 @@
                                     </h4>
                                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                            <?php echo e($product->description); ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +130,23 @@
                                     </h4>
                                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                            <strong>Peso: </strong><?php echo e($product->tx_peso); ?>
+
+                                            <br>
+                                            <strong>Tamaño: </strong><?php echo e($product->tx_tamanio); ?>
+
+                                            <br>
+                                            <strong>Pedido: </strong><?php echo e($product->getPedido()); ?>
+
+                                            <br>
+                                            <strong>Envio Gratis: </strong><?php echo e($product->getEnvioGratis()); ?>
+
+                                            <br>
+                                            <strong>Frágil: </strong><?php echo e($product->getFragil()); ?>
+
+                                            <br>
+                                            <strong>Oferta: </strong><?php echo e($product->getOferta()); ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +158,8 @@
                                     </h4>
                                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                            <p>Dirección: <?php echo e($product->comercio->address); ?></p>
+                                            <p><a href="https://api.whatsapp.com/send?phone=<?php echo e($product->comercio->cellphonecontact); ?>&text=Hola%20,te%20asesoramos%20por %20whatsapp%20gestiona%20tu%20compra%20por%20este%20canal." target="_blank"><?php echo e($product->comercio->cellphonecontact); ?></a> <?php echo e($product->comercio->phonecontact); ?></p>
                                         </div>
                                     </div>
                                 </div>

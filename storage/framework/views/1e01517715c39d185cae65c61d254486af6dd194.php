@@ -531,7 +531,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="details1"></textarea>
+unset($__errorArgs, $__bag); ?>" id="details1" rows="5"></textarea>
                                                 <?php $__errorArgs = ['details1'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -557,7 +557,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="details2"></textarea>
+unset($__errorArgs, $__bag); ?>" id="details2" rows="5"></textarea>
                                                 <?php $__errorArgs = ['details2'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -824,35 +824,6 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
                                     <!-- Delivery  -->
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="delivery">Delivery</label>
-                                                <select type="number" wire:model.defer="state.delivery" autofocus class="font-costo form-control <?php $__errorArgs = ['delivery'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="delivery">
-                                                    <option value="SI">SI</option>
-                                                    <option value="NO">NO</option>
-                                                </select>
-                                                <?php $__errorArgs = ['delivery'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                                <div class="invalid-feedback">
-                                                    <?php echo e($message); ?>
-
-                                                </div>
-                                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                            </div>
-                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="shipping_cost">Costo de Envio</label>
@@ -1389,12 +1360,8 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!-- Caracteristica del paquete -->
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
+                                        <div class="col-md-2">
+                                            <div class="form-group">                                            
                                                 <input type="checkbox" wire:model.defer="state.in_pedido" autofocus class="my-2 <?php $__errorArgs = ['in_pedido'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -1418,7 +1385,61 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                    </div>
+
+                                    <!-- Caracteristica del paquete -->
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <input type="checkbox" wire:model.defer="state.in_envio_nacional" autofocus class="my-2 <?php $__errorArgs = ['in_envio_nacional'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="in_envio_nacional"> <span class="font-costo my-2">Envio Nacional</span>
+                                                <?php $__errorArgs = ['in_envio_nacional'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                <div class="invalid-feedback">
+                                                    <?php echo e($message); ?>
+
+                                                </div>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <input type="checkbox" wire:model.defer="state.in_delivery" autofocus class="my-2 <?php $__errorArgs = ['in_delivery'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="in_delivery"> <span class="font-costo my-2">Delivery</span>
+                                                <?php $__errorArgs = ['in_delivery'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                <div class="invalid-feedback">
+                                                    <?php echo e($message); ?>
+
+                                                </div>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <input type="checkbox" wire:model.defer="state.in_envio_gratis" autofocus class="my-2 <?php $__errorArgs = ['in_envio_gratis'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -1443,8 +1464,8 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group my-2">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
                                                 <input type="checkbox" wire:model.defer="state.in_fragil" autofocus class="my-2 <?php $__errorArgs = ['in_fragil'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -1468,17 +1489,17 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group my-2">
-                                                <input type="checkbox" wire:model.defer="state.in_oferta" autofocus class="my-2 <?php $__errorArgs = ['in_oferta'];
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <input type="checkbox" wire:model.defer="state.in_offer" class="my-2 <?php $__errorArgs = ['in_offer'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="in_oferta"> <span class="font-costo my-2">En Oferta</span>
-                                                <?php $__errorArgs = ['in_oferta'];
+unset($__errorArgs, $__bag); ?>" id="in_offer"> <span class="font-costo my-2">En Oferta</span>
+                                                <?php $__errorArgs = ['in_offer'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -1769,7 +1790,8 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
                             <a href="/listProducts/<?php echo e($comercio->id); ?>" type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</a>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
+                            <button type="submit" class="btn btn-app">
+                                <i class="fa fa-save mr-1"></i>
                                 <?php if($controlActivity): ?>
                                 <span>Guardar Cambios</span>
                                 <?php else: ?>

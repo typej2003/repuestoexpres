@@ -194,11 +194,15 @@ class ShowProducts extends AdminComponent
         }
         
         
-        
-        $products = Product::where('comercio_id', $this->comercio_id)
+        if($this->comercio_id == 1){
+            $products = Product::query()
                     ->with('valoracionProduct')
                             ->paginate();
-        
+        }else{
+            $products = Product::where('comercio_id', $this->comercio_id)
+                    ->with('valoracionProduct')
+                            ->paginate();
+        }
         if($this->parametro == null){
             return view('livewire.components.show-products',[
                 'products' => $products 

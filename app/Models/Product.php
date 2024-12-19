@@ -63,7 +63,7 @@ class Product extends Model
         'price_offer', //precio de oferta
         'profit_offer', // porcentaje de ganancia
         'price_divisa', //precio del dolar cuando se adquirió
-        'delivery', // Si o No
+        'in_delivery', // Si o No
         'shipping_cost', // costo de envio
         'stock_min',
         'stock_max',
@@ -83,7 +83,7 @@ class Product extends Model
         'madein',
         'in_pedido',
         'tx_adicionales',
-        'tx_alergenos',
+        'tx_alergenos',        
         'in_envio_gratis',
         'in_offer',
         'tx_datos_vencimiento',
@@ -326,6 +326,51 @@ class Product extends Model
                 break;
             case '€':
                 return 0;
+                break;
+        }
+    }
+
+    public function getPedido()
+    {
+        switch ($this->in_pedido) {
+            case '0':
+                return "No";
+                break;
+            case '1':
+                return "Si";
+                break;
+        }
+    }
+    public function getEnvioGratis()
+    {
+        switch ($this->in_envio_gratis) {
+            case '0':
+                return "No";
+                break;
+            case '1':
+                return "Si";
+                break;
+        }
+    }
+    public function getFragil()
+    {
+        switch ($this->in_fragil) {
+            case '0':
+                return "No";
+                break;
+            case '1':
+                return "Si";
+                break;
+        }
+    }
+    public function getOferta()
+    {
+        switch ($this->in_offer) {
+            case '0':
+                return "No";
+                break;
+            case '1':
+                return "Si";
                 break;
         }
     }

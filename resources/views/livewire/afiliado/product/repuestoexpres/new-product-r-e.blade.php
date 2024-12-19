@@ -355,7 +355,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="details1">Detalle 1</label>
-                                                <textarea wire:model.defer="state.details1" autofocus class="font-costo form-control @error('details1') is-invalid @enderror" id="details1"></textarea>
+                                                <textarea wire:model.defer="state.details1" autofocus class="font-costo form-control @error('details1') is-invalid @enderror" id="details1" rows="5"></textarea>
                                                 @error('details1')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -366,7 +366,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="details2">Detalle 2</label>
-                                                <textarea wire:model.defer="state.details2" autofocus class="font-costo form-control @error('details2') is-invalid @enderror" id="details2"></textarea>
+                                                <textarea wire:model.defer="state.details2" autofocus class="font-costo form-control @error('details2') is-invalid @enderror" id="details2" rows="5"></textarea>
                                                 @error('details2')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -490,20 +490,6 @@
                                     </div>
                                     <!-- Delivery  -->
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="delivery">Delivery</label>
-                                                <select type="number" wire:model.defer="state.delivery" autofocus class="font-costo form-control @error('delivery') is-invalid @enderror" id="delivery">
-                                                    <option value="SI">SI</option>
-                                                    <option value="NO">NO</option>
-                                                </select>
-                                                @error('delivery')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
-                                            </div>
-                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="shipping_cost">Costo de Envio</label>
@@ -755,12 +741,8 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!-- Caracteristica del paquete -->
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
+                                        <div class="col-md-2">
+                                            <div class="form-group">                                            
                                                 <input type="checkbox" wire:model.defer="state.in_pedido" autofocus class="my-2 @error('in_pedido') is-invalid @enderror" id="in_pedido"> <span class="font-costo my-2">En pedido</span>
                                                 @error('in_pedido')
                                                 <div class="invalid-feedback">
@@ -769,7 +751,31 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                    </div>
+
+                                    <!-- Caracteristica del paquete -->
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <input type="checkbox" wire:model.defer="state.in_envio_nacional" autofocus class="my-2 @error('in_envio_nacional') is-invalid @enderror" id="in_envio_nacional"> <span class="font-costo my-2">Envio Nacional</span>
+                                                @error('in_envio_nacional')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <input type="checkbox" wire:model.defer="state.in_delivery" autofocus class="my-2 @error('in_delivery') is-invalid @enderror" id="in_delivery"> <span class="font-costo my-2">Delivery</span>
+                                                @error('in_delivery')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <input type="checkbox" wire:model.defer="state.in_envio_gratis" autofocus class="my-2 @error('in_envio_gratis') is-invalid @enderror" id="in_envio_gratis"> <span class="font-costo my-2">Envio gratis</span>
                                                 @error('in_envio_gratis')
@@ -779,8 +785,8 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group my-2">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
                                                 <input type="checkbox" wire:model.defer="state.in_fragil" autofocus class="my-2 @error('in_fragil') is-invalid @enderror" id="in_fragil"> <span class="font-costo my-2">Es frágil</span>
                                                 @error('in_fragil')
                                                 <div class="invalid-feedback">
@@ -789,10 +795,10 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group my-2">
-                                                <input type="checkbox" wire:model.defer="state.in_oferta" autofocus class="my-2 @error('in_oferta') is-invalid @enderror" id="in_oferta"> <span class="font-costo my-2">En Oferta</span>
-                                                @error('in_oferta')
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <input type="checkbox" wire:model.defer="state.in_offer" class="my-2 @error('in_offer') is-invalid @enderror" id="in_offer"> <span class="font-costo my-2">En Oferta</span>
+                                                @error('in_offer')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -925,7 +931,8 @@
                         </div>
                         <div class="card-footer d-flex justify-content-between">
                             <a href="/listProducts/{{$comercio->id}}" type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancelar</a>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
+                            <button type="submit" class="btn btn-app">
+                                <i class="fa fa-save mr-1"></i>
                                 @if($controlActivity)
                                 <span>Guardar Cambios</span>
                                 @else

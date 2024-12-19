@@ -115,6 +115,10 @@
                                                 <i class="fa fa-solid fa-layer-group"></i>
                                             </a>
 
+                                            <a href="/listCentrodistribucion/<?php echo e($comercio->id); ?>">
+                                                <i class="fa fa-solid fa-dolly mr-2 mx-2"></i>
+                                            </a>
+
                                             <a href="" wire:click.prevent="edit(<?php echo e($comercio); ?>)">
                                                 <i class="fa fa-edit mr-2 mx-2"></i>
                                             </a>

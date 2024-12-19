@@ -54,6 +54,8 @@ class DatosFacturacionCliente extends AdminComponent
 
     public function render()
     {
-        return view('livewire.cliente.datos-facturacion-cliente');
+        $direcciones = DatosFacturacion::where('user_id', auth()->user()->id)->paginate();
+
+        return view('livewire.cliente.datos-facturacion-cliente', ['direcciones'=>$direcciones]);
     }
 }

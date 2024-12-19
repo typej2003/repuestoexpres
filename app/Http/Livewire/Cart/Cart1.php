@@ -11,6 +11,7 @@ use App\Models\PedidoDetalles;
 use App\Models\Tasa;
 use App\Models\SettingComercio;
 use App\Http\Controllers\CartController;
+use App\Http\Livewire\Cart\PedidoProduct;
 
 use Cart;
 
@@ -167,7 +168,8 @@ class Cart1 extends AdminComponent
 
         $cart->onlyClear();
 
-        return redirect()->route('pasarela', ['pedido' => $pedido->pedido, 'comercioId' => $this->comercio_id]);
+        return redirect()->route('shipping', ['pedido' => $pedido->pedido]);
+        // return redirect()->route('pasarela', ['pedido' => $pedido->pedido, 'comercioId' => $this->comercio_id]);
     }
     
 
@@ -357,22 +359,17 @@ class Cart1 extends AdminComponent
         $cartCollection = \Cart::getContent();
 
         foreach($cartCollection as $item){
-            array_push($products, new PedidoProduct($item->id, $item->name, $item->price, $item->quantity, $item->attributes->comercio_id));
-            
+            array_push($products, new PedidoProduct($item->id, $item->name, $item->price, $item->quantity, $item->attributes->comercio_id));            
         }
-
         
         $x = 0;
         foreach($products as $item){
             $x++;
             //revisa si se encuentra en la lista
-            $existe = false;
-            
+            $existe = false;            
             for ($i=0; $i < count($listpedidos); $i++) { 
-                $arr = $listpedidos[$i];
-                
-                foreach($arr as $element){
-                    
+                $arr = $listpedidos[$i];                
+                foreach($arr as $element){                    
                     if($item->comercio_id == $element->comercio_id){
                         array_push($arr, $item);
                         $listpedidos[$i] = $arr;
@@ -382,8 +379,7 @@ class Cart1 extends AdminComponent
                 }
             }
             
-            if(!$existe){
-                
+            if(!$existe){                
                 array_push($elementArray, $item);
                 array_push($listpedidos, $elementArray);
             }

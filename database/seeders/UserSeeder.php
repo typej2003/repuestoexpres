@@ -36,9 +36,9 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'identificationNac' => 'V',
-            'identificationNumber' => '20111222',
-            'name' => 'luis',
-            'email' => 'luis@gmail.com',
+            'identificationNumber' => '22111222',
+            'name' => 'usuario 2',
+            'email' => 'usuario2@gmail.com',
             'password' => bcrypt('12345678'),
             'role' => 'afiliado',
             'created_at' => '2022-05-16 12:20:36',

@@ -3,26 +3,26 @@
 namespace App\Http\Livewire\Afiliado;
 
 use App\Http\Livewire\Admin\AdminComponent;
-use App\Models\Brand;
+use App\Models\CentroDistribucion;
 use App\Models\Comercio;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
 
-class ListBrand extends AdminComponent
+class ListCentroDistribucion extends AdminComponent
 {
 	use WithFileUploads;
 
 	public $state = [];
 
-	public $brand;
+	public $centro;
 
 	public $comercio_id;
 
 	public $showEditModal = false;
 
-	public $brandIdBeingRemoved = null;
+	public $centroIdBeingRemoved = null;
 
 	public $searchTerm = null;
 
@@ -49,22 +49,24 @@ class ListBrand extends AdminComponent
 		$this->dispatchBrowserEvent('show-form');
 	}
 
-	public function createBrand()
+	public function createCentro()
 	{
 		$validatedData = Validator::make($this->state, [
-			'name' => 'required',
+			'address' => 'required',
+            'contactphone' => 'required',
+            'horario' => 'required',
 		])->validate();
 
 		$validatedData['comercio_id']=$this->comercio_id;
 
-		Brand::create($validatedData);
+		CentroDistribucion::create($validatedData);
 
 		// session()->flash('message', 'User added successfully!');
 
-		$this->dispatchBrowserEvent('hide-form', ['message' => 'Marca agregada satisfactoriamente!']);
+		$this->dispatchBrowserEvent('hide-form', ['message' => 'Centro de distribución agregado satisfactoriamente!']);
 	}
 
-	public function edit(Brand $brand)
+	public function edit(CentroDistribucion $centro)
 	{
 		$comercio_id = $this->comercio_id;
 		$this->reset();
@@ -72,38 +74,40 @@ class ListBrand extends AdminComponent
 
 		$this->showEditModal = true;
 
-		$this->brand = $brand;
+		$this->centro = $centro;
 
-		$this->state = $brand->toArray();
+		$this->state = $centro->toArray();
 
 		$this->dispatchBrowserEvent('show-form');
 	}
 
-	public function updateBrand()
+	public function updateCentro()
 	{
 		$validatedData = Validator::make($this->state, [
-			'name' => 'required',
+			'address' => 'required',
+            'contactphone' => 'required',
+            'horario' => 'required',
 		])->validate();
 
 		$this->brand->update($validatedData);
 
-		$this->dispatchBrowserEvent('hide-form', ['message' => 'Marca actualizada satisfactoriamente!']);
+		$this->dispatchBrowserEvent('hide-form', ['message' => 'Centro de distribución actualizado satisfactoriamente!']);
 	}
 
-	public function confirmBrandRemoval($brandId)
+	public function confirmCentroRemoval($centroId)
 	{
-		$this->brandIdBeingRemoved = $brandId;
+		$this->centroIdBeingRemoved = $centroId;
 
 		$this->dispatchBrowserEvent('show-delete-modal');
 	}
 
-	public function deleteBrand()
+	public function deleteCentro()
 	{
-		$brand = Brand::findOrFail($this->brandIdBeingRemoved);
+		$centro = CentroDistribucion::findOrFail($this->$centroIdBeingRemoved);
 
-		$brand->delete();
+		$centro->delete();
 
-		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Marca eliminada satisfactoriamente!']);
+		$this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'Centro de distribución eliminado satisfactoriamente!']);
 	}
 
     public function sortBy($columnName)
@@ -129,15 +133,16 @@ class ListBrand extends AdminComponent
 
     public function render()
     {
-    	$brands = Brand::query()
+		
+    	$centros = CentroDistribucion::query()
     		->where('comercio_id', $this->comercio_id)
             ->orderBy($this->sortColumnName, $this->sortDirection)
             ->paginate(15);
 
             $comercio = Comercio::find($this->comercio_id);
 
-        return view('livewire.afiliado.list-brand', [
-        	'brands' => $brands,
+        return view('livewire.afiliado.list-centro-distribucion', [
+        	'centros' => $centros,
             'comercio' => $comercio,
         ]);
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Afiliado\ListComercios;
+use App\Http\Livewire\Afiliado\ListCentroDistribucion;
 use App\Http\Livewire\Afiliado\ListManufacturers;
 use App\Http\Livewire\Afiliado\ListMetodosPagosC;
 use App\Http\Livewire\Afiliado\ListCategories;
@@ -28,6 +29,8 @@ use App\Models\Product;
 use App\Models\Setting;
 
 Route::get('/listComercios/{userId}', ListComercios::class)->name('listComercios')->middleware('auth');
+
+Route::get('/listCentrodistribucion/{comercioId}', listCentroDistribucion::class)->name('listCentrodistribucion')->middleware('auth');
 
 Route::get('/listManufacturers/{comercioId}', listManufacturers::class)->name('listManufacturers')->middleware('auth');
 

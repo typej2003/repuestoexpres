@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ProductsSeeder extends Seeder
+class Products3Seeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +16,8 @@ class ProductsSeeder extends Seeder
     {
         DB::table('products')->insert([
             'code_lote' => 'A0001',
-            'code' => 'A0001',
-            'name' => 'ACEITE MINERAL 1',
+            'code' => 'P0001',
+            'name' => 'PRODUCTO 1',
             'description' => 'ACEITE DE MOTOR 15 40',
             'avatar' => 'aceite.png',
             'manufacturer_id' => 1, //marca
@@ -35,9 +35,9 @@ class ProductsSeeder extends Seeder
             'stock_min' => 10,
             'stock_max' => 100,
             'stock' => 50, // cant en almacen
-            'user_id' => 1,
+            'user_id' => 3,
             'area_id' => 2,
-            'comercio_id' => 1,
+            'comercio_id' => 3,
             'category_id' => 2,
             'subcategory_id' => 10,
             'supplier_id' => 1, //proveedor
@@ -49,9 +49,9 @@ class ProductsSeeder extends Seeder
 
         DB::table('products')->insert([
             'code_lote' => 'A0002',
-            'code' => 'A0002',
-            'name' => 'ACEITE S',
-            'description' => 'ACEITE DE MOTOR 15 40',
+            'code' => 'P0002',
+            'name' => 'PRODUCTO 2',
+            'description' => 'PRODUCTO 3ACEITE DE MOTOR 15 40',
             'avatar' => 'aceite1.png',
             'manufacturer_id' => 1, //marca
             'brand_id' => 1, //marca
@@ -68,9 +68,9 @@ class ProductsSeeder extends Seeder
             'stock_min' => 10,
             'stock_max' => 100,
             'stock' => 50, // cant en almacen
-            'user_id' => 1,
+            'user_id' => 3,
             'area_id' => 2,
-            'comercio_id' => 1,
+            'comercio_id' => 3,
             'category_id' => 2,
             'subcategory_id' => 11,
             'supplier_id' => 1, //proveedor
@@ -83,7 +83,7 @@ class ProductsSeeder extends Seeder
         DB::table('products')->insert([
             'code_lote' => 'A0003',
             'code' => 'A0003',
-            'name' => 'LIMPIADOR S',
+            'name' => 'PRODUCTO 3',
             'description' => 'LIMPIA Y LIMPIA Y NO SE CANSA DE LIMPIAR',
             'avatar' => 'limpiador.png',
             'manufacturer_id' => 1, //marca
@@ -101,9 +101,9 @@ class ProductsSeeder extends Seeder
             'stock_min' => 10,
             'stock_max' => 100,
             'stock' => 50, 
-            'user_id' => 1,
+            'user_id' => 3,
             'area_id' => 2,
-            'comercio_id' => 1,
+            'comercio_id' => 3,
             'category_id' => 3,
             'subcategory_id' => 1,
             'supplier_id' => 1, 
@@ -116,7 +116,7 @@ class ProductsSeeder extends Seeder
         DB::table('products')->insert([
             'code_lote' => 'A0004',
             'code' => 'A0004',
-            'name' => 'EMPACADURA',
+            'name' => 'PRODUCTO 4',
             'description' => 'EMPACADURA DURADERA DE LA MEJOR',
             'avatar' => 'empacadura.png',
             'manufacturer_id' => 1, //marca
@@ -134,8 +134,8 @@ class ProductsSeeder extends Seeder
             'stock_min' => 10,
             'stock_max' => 100,
             'stock' => 50, 
-            'user_id' => 1,
-            'comercio_id' => 1,
+            'user_id' => 3,
+            'comercio_id' => 3,
             'area_id' => 2,
             'category_id' => 4,
             'subcategory_id' => 1,
@@ -149,8 +149,8 @@ class ProductsSeeder extends Seeder
         DB::table('products')->insert([
             'code_lote' => 'A0005',
             'code' => 'A0005',
-            'name' => 'MOTOR EXPRES',
-            'description' => 'MOTOR EXPRES NUEVO UN SOLO USO',
+            'name' => 'PRODUCTO 5',
+            'description' => 'PRODUCTO 5 DESCRIPCIÓN',
             'avatar' => 'motor.png',
             'manufacturer_id' => 1, //marca
             'brand_id' => 1, //marca
@@ -167,9 +167,9 @@ class ProductsSeeder extends Seeder
             'stock_min' => 10,
             'stock_max' => 1,
             'stock' => 50, 
-            'user_id' => 1,
+            'user_id' => 3,
             'area_id' => 2,
-            'comercio_id' => 1,
+            'comercio_id' => 3,
             'category_id' => 5,
             'subcategory_id' => 1,
             'supplier_id' => 1, 
