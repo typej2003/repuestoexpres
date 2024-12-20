@@ -231,7 +231,7 @@ endif;
 unset($__errorArgs, $__bag); ?>" id="zona">
                     <option value="0">Por favor seleccione una ciudad</option>
                     <?php $__currentLoopData = $zonas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $zona): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($zona->name); ?>"><?php echo e($zona->name); ?></option>
+                        <option value="<?php echo e($zona->id); ?>"><?php echo e($zona->name); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
                 <?php $__errorArgs = ['zona'];

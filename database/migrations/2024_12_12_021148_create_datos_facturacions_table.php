@@ -28,10 +28,10 @@ class CreateDatosFacturacionsTable extends Migration
             $table->string('cellphonecode')->nullable();
             $table->string('cellphone')->nullable();
             $table->string('address')->nullable();
-            $table->string('country')->nullable();
-            $table->string('province')->nullable();
-            $table->string('city')->nullable();
-            $table->string('deliveryarea')->nullable();
+            $table->string('country_id')->nullable();
+            $table->string('state_id')->nullable();
+            $table->string('city_id')->nullable();
+            $table->string('deliveryarea_id')->nullable();
             $table->string('zipcode')->nullable();
             $table->timestamps();
         });

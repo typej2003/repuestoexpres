@@ -8,9 +8,9 @@ class Shipping extends Component
 {
     public $nropedido;
 
-    public function mount($pedido)
+    public function mount($nropedido)
     {
-        $this->nropedido = $pedido;
+        $this->nropedido = $nropedido;
     }
 
     public function render()

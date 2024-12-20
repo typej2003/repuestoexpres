@@ -25,6 +25,19 @@ class CreatePedidosTable extends Migration
             $table->string('currency')->default('1'); // 1 bs 2 $
             $table->string('in_delivery')->default('0');
             $table->boolean('confirmed')->default('0');
+            $table->string('shipping')->nullable();
+            $table->string('identificationNac')->nullable();
+            $table->string('identificationNumber')->nullable();
+            $table->string('names')->nullable();
+            $table->string('surnames')->nullable();
+            $table->string('cellphonecode')->nullable();
+            $table->string('cellphone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('country_id')->nullable();
+            $table->string('state_id')->nullable();
+            $table->string('city_id')->nullable();
+            $table->string('deliveryarea_id')->nullable();
+            $table->string('zipcode')->nullable();
             $table->timestamps();
         });
     }

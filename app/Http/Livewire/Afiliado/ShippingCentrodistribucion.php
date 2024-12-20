@@ -12,6 +12,10 @@ class ShippingCentrodistribucion extends Component
 
     public $showEditModal = false;
     public $nropedido; 
+    public $centro;
+    public $class = 'd-none';
+    public $centro_id;
+    public $metodo = 'pickup';
 
     public $searchTerm = null;
 
@@ -23,24 +27,35 @@ class ShippingCentrodistribucion extends Component
 
     public function mount($nropedido)
     {
-    	$this->nropedido = $nropedido;
-    	
+    	$this->nropedido = $nropedido;    	
     }
 
     public function addNew()
 	{
 		$nropedido = $this->nropedido;
+        $centro = $this->centro;
+        $class = $this->class;
 		$this->reset();
 		$this->nropedido = $nropedido;
+        $this->centro = $centro;
+        $this->class = $class;
 
 		$this->showEditModal = false;
 
 		$this->dispatchBrowserEvent('show-form');
 	}
 
-	public function selectCentro()
+    public function siguiente()
+    {
+        dd('metodo: '. $this->metodo . 'centro: '. $this->centro);
+    }
+
+	public function selectCentro(CentroDistribucion $centro)
 	{
-		
+		$this->centro = '<div>'.$centro->address . '<br>' . $centro->contactphone . '<br>' . $centro->horario.'</div>';
+        
+        $this->class = '';
+        $this->centro_id = $centro->id;
 		// session()->flash('message', 'User added successfully!');
 
 		$this->dispatchBrowserEvent('hide-form', ['message' => 'Centro seleccionado satisfactoriamente!']);

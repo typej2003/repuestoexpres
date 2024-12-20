@@ -23,6 +23,19 @@ class Pedido extends Model
         'currency',
         'in_delivery',
         'confirmed',
+        'shipping',
+        'identificationNac',
+        'identificationNumber',
+        'names',
+        'surnames',
+        'cellphonecode',
+        'cellphone',
+        'address',
+        'country_id',
+        'state_id',
+        'city_id',
+        'deliveryarea_id',
+        'zipcode',
     ];
 
     public function client()

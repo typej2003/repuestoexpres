@@ -35,14 +35,14 @@
                                 <div class="tab-pane" :class="currentTab === 'changeEnvio' ? 'active' : ''" id="changeEnvio" wire:ignore.self>
                                     <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('afiliado.shipping-envio')->html();
+    $html = \Livewire\Livewire::mount('afiliado.shipping-envio', ['nropedido' => $nropedido])->html();
 } elseif ($_instance->childHasBeenRendered('l1385368387-0')) {
     $componentId = $_instance->getRenderedChildComponentId('l1385368387-0');
     $componentTag = $_instance->getRenderedChildComponentTagName('l1385368387-0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
     $_instance->preserveRenderedChild('l1385368387-0');
 } else {
-    $response = \Livewire\Livewire::mount('afiliado.shipping-envio');
+    $response = \Livewire\Livewire::mount('afiliado.shipping-envio', ['nropedido' => $nropedido]);
     $html = $response->html();
     $_instance->logRenderedChild('l1385368387-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }

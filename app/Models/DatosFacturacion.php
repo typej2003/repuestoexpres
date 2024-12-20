@@ -18,16 +18,16 @@ class DatosFacturacion extends Model
         'cellphonecode',
         'cellphone',
         'address',
-        'country',
-        'province',
-        'city',
-        'deliveryarea',
+        'country_id',
+        'state_id',
+        'city_id',
+        'deliveryarea_id',
         'zipcode',
     ];
 
     public function getCountry()
     {
-        $country = Country::find($this->country);
+        $country = Country::find($this->country_id);
         if($country){
             return $country->name;
         }else{
@@ -38,7 +38,7 @@ class DatosFacturacion extends Model
 
     public function getProvince()
     {
-        $province = Estado::find($this->province);
+        $province = Estado::find($this->state_id);
         if($province){
             return $province->name;
         }else{
@@ -48,7 +48,7 @@ class DatosFacturacion extends Model
 
     public function getCity()
     {
-        $city = Cities::find($this->city);
+        $city = Cities::find($this->city_id);
         if($city){
             return $city->name;
         }else{
@@ -59,7 +59,7 @@ class DatosFacturacion extends Model
 
     public function direccionCompleta()
     {
-        return $this->identificationNac . $this->identificationNumber . $this->names . $this->surnames . $this->cellphonecode . $this->cellphone . $this->address . $this->getCountry() . $this->getProvince() . $this->getCity() . $this->deliveryarea . $this->zipcode;
+        return $this->identificationNac . $this->identificationNumber . ' / ' .  $this->names . ' ' . $this->surnames . ' / ' . $this->cellphonecode . $this->cellphone . ' / ' . $this->address . ' / '. $this->getCountry() . '-' . $this->getProvince() . '-' .  $this->getCity() . '-' .  $this->deliveryarea . '-' .  $this->zipcode;
     }
 
     public function user()

@@ -84,7 +84,7 @@
                                         <td><?php echo e($pedido->coste); ?> <?php echo e($currencyValue); ?></td>
                                         <td><?php echo e($pedido->created_at ?? 'N/A'); ?></td>
                                         <td>
-                                            <a class="mx-1" href="/pasarela/<?php echo e($pedido->pedido); ?>/<?php echo e($pedido->comercio_id); ?>"><img style="width:20px;" src="/img/pagar.png" alt=""></a>
+                                            <a class="mx-1" href="/shipping/<?php echo e($pedido->pedido); ?>"><img style="width:20px;" src="/img/pagar.png" alt=""></a>
                                             
                                             <a href="" wire:click.prevent="edit(<?php echo e($pedido); ?>)">
                                                 <i class="fa fa-edit mr-2"></i>

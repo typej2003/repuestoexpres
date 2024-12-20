@@ -48,9 +48,9 @@ class Pasarela extends Component
         'emitCurrency' => 'emitCurrency'
     ];
 
-    public function mount($pedido, $comercioId)
+    public function mount($nropedido, $comercioId)
 	{
-        $this->pedido = Pedido::where('pedido', $pedido)->first();
+        $this->pedido = Pedido::where('pedido', $nropedido)->first();
 		$this->comercio_id = $comercioId;
 
         $this->autenticarComercio($comercioId, $this->pedido->comercio_id);        

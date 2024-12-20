@@ -99,7 +99,7 @@
               <a href="{{ route('listPedidosCliente') }}" class="nav-link {{ request()->is('listPedidosCliente') ? 'active' : '' }}">
                 <i class="fa fa-solid fa-file-invoice-dollar"></i>
                 <p>
-                  Pedidos
+                  Mis Pedidos
                 </p>
               </a>
             </li>

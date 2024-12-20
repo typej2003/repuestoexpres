@@ -13,10 +13,10 @@ use App\Http\Livewire\Components\MenuComponent;
 use App\Http\Livewire\Afiliado\Pasarela;
 use App\Http\Livewire\Afiliado\Shipping;
 
-Route::get('/pasarela/{pedido}/{comercioId}', Pasarela::class)->name('pasarela')->middleware('auth');
+Route::get('/pasarela/{nropedido}/{comercioId}', Pasarela::class)->name('pasarela')->middleware('auth');
 Route::get('/enviarDataPasarela', [Pasarela::class, 'enviarDataPasarela'])->name('enviardataPasarela');
 
-Route::get('/shipping/{pedido}', Shipping::class)->name('shipping')->middleware('auth');
+Route::get('/shipping/{nropedido}', Shipping::class)->name('shipping')->middleware('auth');
 
 // extras
 

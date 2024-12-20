@@ -11,6 +11,15 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-6">
+            {!! $centro !!} 
+        </div>
+        <div class="col-md-6">
+            <button class='btn btn-success {{$class}}' wire:click.prevent="siguiente">Siguiente</button>
+        </div>
+    </div>
+
     <!-- Modal -->
     <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog modal-lg" role="document">

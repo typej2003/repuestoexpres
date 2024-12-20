@@ -73,7 +73,7 @@
                                         <td>{{ $pedido->coste }} {{ $currencyValue }}</td>
                                         <td>{{ $pedido->created_at ?? 'N/A' }}</td>
                                         <td>
-                                            <a class="mx-1" href="/pasarela/{{ $pedido->pedido }}/{{ $pedido->comercio_id }}"><img style="width:20px;" src="/img/pagar.png" alt=""></a>
+                                            <a class="mx-1" href="/shipping/{{ $pedido->pedido }}"><img style="width:20px;" src="/img/pagar.png" alt=""></a>
                                             
                                             <a href="" wire:click.prevent="edit({{ $pedido }})">
                                                 <i class="fa fa-edit mr-2"></i>
