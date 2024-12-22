@@ -305,3 +305,9 @@
     font-size: 1rem!important;
   background-color: #3d362d!important;
   }
+
+  .centrar {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }

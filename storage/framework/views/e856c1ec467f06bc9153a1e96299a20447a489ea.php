@@ -1,58 +1,79 @@
 <div class="container-fluid">
-    
+    <script src="/js/bootstrap.bundle.min.js"></script>
     <div class="row">
         <div class="col-md-12">
-            <div class="card" style="width: 100% !important;">
-                <div class="card-header">
-                    <h4>Libreta de direcciones</h4>
-                </div>
-                <div class="card-body">
-                    <table class="table table-hover table-bordered table-responsive">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Seleccione</th>
-                                <th scope="col">Dirección</th>
-                                <th scope="col">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody wire:loading.class="text-muted">
-                            <?php $__empty_1 = true; $__currentLoopData = $direcciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $direccion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                            <tr>
-                                <th scope="row"><?php echo e($direcciones->firstItem() + $index); ?></th>
-                                <td>
-                                    <button wire:click.prevent="seleccionar(<?php echo e($direccion); ?>)" class="btn btn-primary"> Seleccionar</button>
-                                </td>
-                                <td><?php echo e($direccion->direccionCompleta()); ?> </td>
-                                <td>
-                                    
-                                    <a href="" wire:click.prevent="edit(<?php echo e($direccion); ?>)">
-                                        <i class="fa fa-edit mr-2"></i>
-                                    </a>
+            
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h4 class="accordion-header" id="headingOne">
+                            <a class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <h5>Libreta de direcciones</h5>
+                            </a>
+                        </h4>
+                        <div id="collapseOne" class="accordion-collapse collapse <?php $__errorArgs = ['showLogin'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> show <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="card" style="width: 100% !important;">
+                                    <div class="card-header">
+                                        
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-hover table-bordered table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Seleccione</th>
+                                                    <th scope="col">Dirección</th>
+                                                    <th scope="col">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody wire:loading.class="text-muted">
+                                                <?php $__empty_1 = true; $__currentLoopData = $direcciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $direccion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                                <tr>
+                                                    <th scope="row"><?php echo e($direcciones->firstItem() + $index); ?></th>
+                                                    <td>
+                                                        <button wire:click.prevent="seleccionar(<?php echo e($direccion); ?>)" class="btn btn-primary"> Seleccionar</button>
+                                                    </td>
+                                                    <td><?php echo e($direccion->direccionCompleta()); ?> </td>
+                                                    <td>
+                                                        
+                                                        <a href="" wire:click.prevent="edit(<?php echo e($direccion); ?>)">
+                                                            <i class="fa fa-edit mr-2"></i>
+                                                        </a>
 
-                                    <a href="" wire:click.prevent="confirmDireccionRemoval(<?php echo e($direccion->id); ?>)">
-                                        <i class="fa fa-trash text-danger"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                            <tr class="text-center">
-                                <td colspan="9">
-                                    <p class="mt-2">No dispone de direcciones</p>
-                                </td>
-                            </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card-footer d-flex justify-content-end">
-                    <?php echo e($direcciones->links()); ?>
+                                                        <a href="" wire:click.prevent="confirmDireccionRemoval(<?php echo e($direccion->id); ?>)">
+                                                            <i class="fa fa-trash text-danger"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                                <tr class="text-center">
+                                                    <td colspan="9">
+                                                        <p class="mt-2">No dispone de direcciones</p>
+                                                    </td>
+                                                </tr>
+                                                <?php endif; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <?php echo e($direcciones->links()); ?>
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <?php if($showEditModal): ?>
@@ -60,12 +81,25 @@
             <?php endif; ?>
         </div>
     </div>
+    <form class="formShipping" action="<?php echo e(route('pasarelaPost')); ?>" method="post">
+    <?php echo csrf_field(); ?>
     <div class="row">
         <div class="col-md-12">
-            <div class="card my-3 mx-auto" style="width: 80%!important;">
+            <div class="card my-3 mx-auto" style="width: 100% !important;">
                 <div class="form-horizontal p-2">
-
                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Dirección de envío</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+
+                        <input wire:model.defer="state.nropedido" type="text" name="nropedido" id="nropedido" >
+                        <input wire:model.defer="state.metodoentrega" type="text" name="metodoentrega" id="metodoentrega" >
+
                         <div class="row">
                             <div class="col-xs-6 col-md-4 col-sm-4 col-4">
                                 <label for="identificationNac">Tipo de documento <span class="text-danger">*</span></label>
@@ -208,30 +242,6 @@ unset($__errorArgs, $__bag); ?>
                         </div>                
                     </div>
                     <div class="form-group">
-                        <label for="address" class="">Dirección postal (Calle, Nº de Casa) <span class="text-danger">*</span></label>
-                        <textarea wire:model.defer="state.address" type="text" class="form-control <?php $__errorArgs = ['address'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="inpuAddress" placeholder="Dirección" <?php echo e($class); ?> <?php echo e($class1); ?>></textarea>
-                        <?php $__errorArgs = ['address'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                        <div class="invalid-feedback">
-                            <?php echo e($message); ?>
-
-                        </div>
-                        <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                    </div>
-                    <div class="form-group">
                         <label for="country" class="">País <span class="text-danger">*</span></label>
                         <select wire:model="country" class="form-control <?php $__errorArgs = ['country'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -325,7 +335,7 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                     <div class="form-group">
                         <label for="zona" class="">Zona de entrega <span class="text-danger">*</span></label>
-                        <select wire:model="zona" class="form-control <?php $__errorArgs = ['zona'];
+                        <select wire:model="zona" wire:change="changeZona( $event.target.value)" class="form-control <?php $__errorArgs = ['zona'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -352,6 +362,40 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
+                    <script>
+                        // const changeSelected = (e) => {
+                        //     alert(e.target.value)
+                        //     console.log(e)
+                        // };
+
+                        // document.querySelector('#zona').addEventListener('change', changeSelected);
+
+                    </script>
+                    <div class="form-group">
+                        <label for="address" class="">Dirección postal (Calle, Nº de Casa) <span class="text-danger">*</span></label>
+                        <textarea wire:model.defer="state.address" type="text" class="form-control <?php $__errorArgs = ['address'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="inpuAddress" placeholder="Dirección" <?php echo e($class); ?> <?php echo e($class1); ?>></textarea>
+                        <?php $__errorArgs = ['address'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="invalid-feedback">
+                            <?php echo e($message); ?>
+
+                        </div>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    </div>
+                    
                     <div class="form-group">
                         <label for="zipcode" class="">Código Postal <span class="text-danger">*</span></label>
                         <input type="text" wire:model.defer="state.zipcode" type="text" class="form-control <?php $__errorArgs = ['zipcode'];
@@ -376,6 +420,92 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
+
+                    <!-- Metodos de entrega -->
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <h4>Métodos de entrega</h4>
+                        </div>
+                    </div>
+                    <input wire:model.defer="state.metodoenvio" type="text"  class=" <?php $__errorArgs = ['metodoenvio'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="metodoenvio">
+                    <?php $__errorArgs = ['metodoenvio'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                    <div class="invalid-feedback">
+                        <?php echo e($message); ?>
+
+                    </div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    <div class="form-group">
+                        <div class="row border border-top my-4 centrar" style="height: 45px !important;">
+                            <div class="col-md-1">
+                                <input class="input my-1" type="radio" name="metodoenvio" value="enviodelivery" checked/>
+                            </div>
+                            <div class="col-md-2">
+                                <?php if($deliveryArea): ?> <?php echo e($deliveryArea->coste); ?> <?php else: ?> ? <?php endif; ?>
+                            </div>
+                            <div class="col-md-9">
+                                <span class="datos"><?php if($deliveryArea): ?> <?php echo e($deliveryArea->name); ?> <?php else: ?> Envío local <?php endif; ?></span>
+                            </div>
+                        </div>
+
+                        <div class="row border border-top my-4">
+                            <div class="col-md-12">
+                                <div class="row my-3" >
+                                    <div class="col-md-1">
+                                        <input class="input my-1" type="radio" name="metodoenvio" value="envionacional"/> 
+                                    </div>
+                                    <div class="col-md-2">
+                                        $
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span class="">Envío nacional</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="row my-3">
+                                    <div class="col-md-12">
+                                        <div class="row mx-5">
+                                            <div class="col-md-12">
+                                                <input type="checkbox"> Asegurado
+                                                <p>
+                                                    Monto mínimo asegurado por defecto es $ 8,35 por paquete y el monto máximo asegurado permitido es $ 8.354,43. El valor es referencial.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row mx-5">
+                                            <div class="col-md-12">
+                                                <input type="checkbox" checked> Es domicilio
+                                                <p>
+                                                    Ubicaremos la oficina más cercana a su domicilio si la zona seleccionada no dispone del servicio/oficina. Por favor escríbanos al +58 416 5800403
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                        <script>
+                            let metodoenvio = document.querySelector('.input')
+                            metodoenvio.addEventListener('change', function(){
+                                document.querySelector('#metodoenvio')
+                            });
+                        </script>                        
+                    </div>
+                     
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10 d-flex">
                             <button wire:click.prevent="siguiente" class="btn btn-success mx-auto"> Siguiente</button>
@@ -385,6 +515,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
+    </form>
 
     <!-- Modal -->
     <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
@@ -752,5 +883,12 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 
+    <script>
+        window.addEventListener('enviarFormularioShipping', function (event) {
+            let formShipping = document.querySelector('.formShipping');            
+            formShipping.submit();        
+        });
+    </script>
+    
 </div>
 <?php /**PATH C:\Users\typej\Documents\git\repuestoexpres\resources\views/livewire/cliente/datos-facturacion-cliente.blade.php ENDPATH**/ ?>

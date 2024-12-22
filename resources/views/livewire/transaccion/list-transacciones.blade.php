@@ -74,7 +74,7 @@
                                         <th scope="col">Código de Factura</th>
                                         <th scope="col" wire:ignore>
                                             <select wire:model.refer="metodoPago" class="form-control border-0" style="width:150px;font-weight: bold;" name="" id="">
-                                                <option value="all">Modo de Pago</option>
+                                                <option value="all">Método de Pago</option>
                                                 @foreach($modoPago as $metodo)
                                                     {{$valor = $metodo['modo']}}
                                                     <option value="{{$metodo['modo']}}" {{ ($metodoPago === $valor) ? 'selected' : '' }}> {{$metodo['nombre']}}</option> 
@@ -83,6 +83,7 @@
                                             </select>
                                         </th>
                                         <th scope="col">Referencia</th>
+                                        <th scope="col">Monto</th>
                                         <th scope="col">
                                             Cédula
                                             <span wire:click="sortBy('cedula')" class="float-right text-sm" style="cursor: pointer;">
@@ -115,9 +116,10 @@
                                             <span class="mr-2">{{ $trans->codigoFactura }}</span>
                                         </td>
                                         <td>
-                                            <span class="mr-2">{{ $trans->modopago }}</span>
+                                            <span class="mr-2">{{ $trans->metodo }}</span>
                                         </td>
                                         <td>{{ $trans->reference }}</td>
+                                        <td>{{ $trans->amount }}</td>
                                         <td>{{ $trans->identificationNumber }}</td>
                                         <td>{{ $trans->cellphone }}</td>
                                         <td>{{ $trans->banco }}</td>

@@ -2039,11 +2039,11 @@ INSERT INTO `parroquias` (`id`, `municipio_id`, `parroquia`) VALUES
 (1138, 462, '23 de enero');
 
 
-ALTER TABLE `cities`
-  ADD CONSTRAINT `id` FOREIGN KEY (`state_id`) REFERENCES `estados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- ALTER TABLE `cities`
+--   ADD CONSTRAINT `FK_cityestado` FOREIGN KEY (`state_id`) REFERENCES `estados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `municipios`
-  ADD CONSTRAINT `id` FOREIGN KEY (`state_id`) REFERENCES `estados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- ALTER TABLE `municipios`
+--   ADD CONSTRAINT `FK_municipioestado` FOREIGN KEY (`state_id`) REFERENCES `estados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `parroquias`
-  ADD CONSTRAINT `id` FOREIGN KEY (`municipio_id`) REFERENCES `municipios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- ALTER TABLE `parroquias`
+--   ADD CONSTRAINT `FK_parroquiamunicipio` FOREIGN KEY (`municipio_id`) REFERENCES `municipios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

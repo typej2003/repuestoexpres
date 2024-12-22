@@ -742,19 +742,15 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <div class="form-group">                                            
-                                                <input type="checkbox" wire:model.defer="state.in_pedido" autofocus class="my-2 @error('in_pedido') is-invalid @enderror" id="in_pedido"> <span class="font-costo my-2">En pedido</span>
-                                                @error('in_pedido')
+                                            <div class="form-group">
+                                                <input type="checkbox" wire:model.defer="state.in_pickup" autofocus class="my-2 @error('in_pickup') is-invalid @enderror" id="in_pickup"> <span class="font-costo my-2">Pickup</span>
+                                                @error('in_pickup')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!-- Caracteristica del paquete -->
-                                    <div class="row">
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <input type="checkbox" wire:model.defer="state.in_envio_nacional" autofocus class="my-2 @error('in_envio_nacional') is-invalid @enderror" id="in_envio_nacional"> <span class="font-costo my-2">Envio Nacional</span>
@@ -785,10 +781,25 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <!-- Caracteristica del paquete -->
+                                    <div class="row">
+                                        
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <input type="checkbox" wire:model.defer="state.in_fragil" autofocus class="my-2 @error('in_fragil') is-invalid @enderror" id="in_fragil"> <span class="font-costo my-2">Es frágil</span>
                                                 @error('in_fragil')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <input type="checkbox" wire:model.defer="state.in_olor_fuerte" autofocus class="my-2 @error('in_olor_fuerte') is-invalid @enderror" id="in_olor_fuerte"> <span class="font-costo my-2">Olor Fuerte</span>
+                                                @error('in_olor_fuerte')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -805,6 +816,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+
                                         
                                     </div>
 
@@ -869,7 +881,17 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
+                                            <div class="form-group">                                            
+                                                <input type="checkbox" wire:model.defer="state.in_pedido" autofocus class="my-2 @error('in_pedido') is-invalid @enderror" id="in_pedido"> <span class="font-costo my-2">En pedido</span>
+                                                @error('in_pedido')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <input type="checkbox" wire:model.defer="state.in_por_encargo" autofocus class="my-2 @error('in_por_encargo') is-invalid @enderror" id="in_envio_gratis"> <span class="font-costo my-2">Por Encargo</span>
                                                 @error('in_por_encargo')
@@ -879,18 +901,9 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group my-2">
-                                                <input type="checkbox" wire:model.defer="state.in_olor_fuerte" autofocus class="my-2 @error('in_olor_fuerte') is-invalid @enderror" id="in_olor_fuerte"> <span class="font-costo my-2">Olor Fuerte</span>
-                                                @error('in_olor_fuerte')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group my-2">
+                                        
+                                        <div class="col-md-2">
+                                            <div class="form-group">
                                                 <input type="checkbox" wire:model.defer="state.in_valido" autofocus class="my-2 @error('in_valido') is-invalid @enderror" id="in_valido"> <span class="font-costo my-2">Es Valido</span>
                                                 @error('in_valido')
                                                 <div class="invalid-feedback">

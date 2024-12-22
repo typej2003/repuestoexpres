@@ -61,7 +61,9 @@
                                         <th scope="col">Cédula</th>
                                         <th scope="col">Cliente</th>
                                         <th scope="col">Productos</th>
+                                        <th scope="col">Método de Pago</th>
                                         <th scope="col">Costo</th>
+                                        <th scope="col">Método de Entrega</th>
                                         <th scope="col">Fecha de Registro</th>
                                         <th scope="col">Opciones</th>
                                     </tr>
@@ -76,12 +78,14 @@
                                                 <option value="0" <?php echo e(($pedido->confirmed === 0) ? 'selected' : ''); ?>>NO CONFIRMADO</option>
                                             </select>
                                         </td>
-                                        <td><a href="/detallespedido/<?php echo e($pedido->pedido); ?>/<?php echo e($pedido->comercio_id); ?>"><?php echo e($pedido->pedido); ?></a></td>
+                                        <td><a href="/detallespedido/<?php echo e($pedido->pedido); ?>/<?php echo e($pedido->comercio_id); ?>"><?php echo e($pedido->nropedido); ?></a></td>
                                         <td><?php echo e($pedido->reference); ?></td>
                                         <td><?php echo e($pedido->client->identificationNumber); ?></td>
                                         <td><?php echo e($pedido->client->name); ?></td>
                                         <td></td>
+                                        <td><?php echo e($pedido->metodo); ?></td>
                                         <td><?php echo e($pedido->coste); ?> <?php echo e($currencyValue); ?></td>
+                                        <td><?php echo e($pedido->metodoentrega); ?></td>
                                         <td><?php echo e($pedido->created_at ?? 'N/A'); ?></td>
                                         <td>
                                             <a class="mx-1" href="/shipping/<?php echo e($pedido->pedido); ?>"><img style="width:20px;" src="/img/pagar.png" alt=""></a>

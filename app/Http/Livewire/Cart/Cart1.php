@@ -9,6 +9,7 @@ use App\Models\Setting;
 use App\Models\Pedido;
 use App\Models\PedidoDetalles;
 use App\Models\Tasa;
+use App\Models\Impuesto;
 use App\Models\SettingComercio;
 use App\Http\Controllers\CartController;
 use App\Http\Livewire\Cart\PedidoProduct;
@@ -24,9 +25,7 @@ class Cart1 extends AdminComponent
     public $IGTF = 0;
     public $impuesto = 0;
     public $subtotal = 0;
-    public $showLogin = "NO";
-    public $showRegister = "NO";
-
+    
     protected $listeners = [
         'emitCurrency' => 'emitCurrency'
     ];
@@ -34,6 +33,7 @@ class Cart1 extends AdminComponent
     public function mount($comercioId = 1)
     {
         $this->comercio_id = $comercioId;
+        $this->currencyValue = request()->cookie('currency');
     }
 
     public function emitCurrency($currencyValue, Request $request)
@@ -42,79 +42,7 @@ class Cart1 extends AdminComponent
 
     }
 
-    //Autentica al usuario
-    public function autenticar(Request $request)
-    {
-        //Validación de datos (incluyendo la de activo)
-        if($request->post('identificationNumber')){
-            $credentials = $request->validate([
-                'identificationNumber' => ['required'],
-                'password' => ['required']
-            ]);    
-        }else{
-            $credentials = $request->validate([
-                'email' => ['required', 'email'],
-                'password' => ['required']
-            ], $this->messages);    
-        }
-
-        //Si es correcto, inicio sesión y login
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            // return redirect()->route('welcome');
-
-            // return redirect()->intended('admin/dashboard')->with('success','Bienvenido al panel de Administración');
-        }
-
-        //Si no, muestro mensaje de error
-        return back()->withErrors([
-            'email' => 'El email está registrado.',
-        ])->withInput(['showLogin' => 'SI']);
-    }
-
-    //Registra al usuario
-    public function registrarse(Request $request)
-    {
-        //Validación y recopilación de datos
-        Validator::make($input, [
-            'identificationNac' => ['required', 'string', 'max:1'],
-            'identificationNumber' => ['required', 'string', 'max:12'],
-            'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique(User::class),
-            ],
-            'password' => $this->passwordRules(),
-        ])->validate();
-        
-        $user = User::create([
-            'identificationNac' => $input['identificationNac'],
-            'identificationNumber' => $input['identificationNumber'],
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'role' => $input['role'],
-            'password' => Hash::make($input['password']),
-        ]);
-
-        DatosBasicos::create([
-            'user_id' => $user->id,
-            'cellphonecode' => $input['cellphonecode'],
-            'cellphone' => $input['cellphone'],
-        ]);
-        
-        //Login de usuario
-        Auth::login($user);
-
-        return back();
-
-        //Redirección
-        // return redirect("admin")->with('success','Te has registrado correctamente. Bienvenido');
-    }
-
+    
     public function finalizarCompra()
     {        
         $cart = new CartController;
@@ -398,6 +326,8 @@ class Cart1 extends AdminComponent
         $conf = Setting::where('id', 1)->first();
         
         $cartCollection = \Cart::getContent();
+
+        $this->currencyValue = request()->cookie('currency');
 
         return view('cart.cart', [
             'in_cellphonecontact' => $setting->in_cellphonecontact, 

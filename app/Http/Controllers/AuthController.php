@@ -61,6 +61,7 @@ class AuthController extends Controller
             'email' => 'El email no está registrado.',
             'showLogin' => 'SI',
         ])->withInput(['showLogin' => 'SI']);
+
     }
 
     //Muestra la vista de registro
@@ -73,13 +74,23 @@ class AuthController extends Controller
     public function registrarse(Request $request)
     {
         //Validación y recopilación de datos
-
+        //$validatedData = $request->validate([
+        
         $validatedData = Validator::make($request->all(), [
+            'identificationNac' => 'required|not_in:0',
+            'identificationNumber' => 'required',
 			'name' => 'required',
+            'names' => 'required',
+            'surnames' => 'required',
 			'email' => 'required|email|unique:users',
 			'password' => 'required|confirmed',
+            'cellphonecode' => 'required|not_in:0',
+            'cellphone' => 'required',
             'role' => 'required',
-		])->validate();
+		//], $this->messages);
+        ], $this->messages)->validate();
+
+
 
 		$validatedData['password'] = bcrypt($validatedData['password']);
         
@@ -94,7 +105,15 @@ class AuthController extends Controller
         //Login de usuario
         Auth::login($user);
 
-        return redirect()->route('cart');
+        // return back()->withErrors([
+        //     'email' => 'El email no está registrado.',
+        //     'showRegister' => 'SI',
+        // ])->withInput(['showRegister' => 'SI']);
+
+        return back()->withErrors([
+            'email' => 'Email is invalid!',
+            'showRegister' => 'SI',
+            ])->withInput(['showRegister' => 'SI']);
 
         //Redirección
         // return redirect("admin")->with('success','Te has registrado correctamente. Bienvenido');

@@ -80,14 +80,17 @@ class CreateProductsTable extends Migration
             $table->string('tx_contiene')->nullable();
             $table->date('fe_vencimiento')->nullable();
             $table->date('fe_expedicion')->nullable();
+
+            $table->string('in_pickup')->nullable()->default('1'); // Si o No
+            $table->string('in_delivery')->nullable()->default('1'); // Si o No
+            $table->string('in_envio_nacional')->nullable()->default('0'); // Si o No
+            $table->string('in_envio_gratis')->nullable()->default('0');
             
             $table->string('madein')->nullable();
             $table->string('in_pedido')->nullable();
             $table->string('tx_adicionales')->nullable();
             $table->string('tx_alergenos')->nullable();
-            $table->string('in_delivery')->nullable()->default('1'); // Si o No
-            $table->string('in_envio_nacional')->nullable()->default('0'); // Si o No
-            $table->string('in_envio_gratis')->nullable()->default('0');
+            
             $table->string('in_offer')->nullable()->default('0');
             $table->string('tx_datos_vencimiento')->nullable();
             $table->string('tx_valores_nutricionales')->nullable();

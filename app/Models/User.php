@@ -21,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
     const ROLE_USER = 'user';
     const ROLE_CLIENTE = 'cliente';
     const ROLE_AFIL = 'afiliado';
+    const ROLE_DELIVERY = 'delivery';
 
     /**
      * The attributes that are mass assignable.
@@ -39,6 +40,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'external_id',
         'external_auth',
+        'active',
     ];
 
     /**
@@ -106,6 +108,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAfil()
     {
         if ($this->role !== self::ROLE_AFIL) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isDelivery()
+    {
+        if ($this->role !== self::ROLE_DELIVERY) {
             return false;
         }
 

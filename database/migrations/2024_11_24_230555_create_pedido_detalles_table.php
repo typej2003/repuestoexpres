@@ -16,7 +16,7 @@ class CreatePedidoDetallesTable extends Migration
         Schema::create('pedido_detalles', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('pedido_id');
-            $table->string('pedido');
+            $table->string('nropedido');
             $table->bigInteger('comercio_id');
             $table->bigInteger('user_id');
             $table->bigInteger('product_id');

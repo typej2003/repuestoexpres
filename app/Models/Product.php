@@ -63,7 +63,6 @@ class Product extends Model
         'price_offer', //precio de oferta
         'profit_offer', // porcentaje de ganancia
         'price_divisa', //precio del dolar cuando se adquirió
-        'in_delivery', // Si o No
         'shipping_cost', // costo de envio
         'stock_min',
         'stock_max',
@@ -81,10 +80,13 @@ class Product extends Model
         'fe_vencimiento',
         'fe_expedicion',
         'madein',
+        'in_pickup', // Si o No
+        'in_delivery', // Si o No
+        'in_envio_gratis',
+        'in_envio_nacional',
         'in_pedido',
         'tx_adicionales',
         'tx_alergenos',        
-        'in_envio_gratis',
         'in_offer',
         'tx_datos_vencimiento',
         'tx_valores_nutricionales',

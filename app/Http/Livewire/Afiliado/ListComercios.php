@@ -89,6 +89,7 @@ class ListComercios extends AdminComponent
 			'area_id'=> 'required|not_in:0',
 			'name' => 'required',
 			'cellphonecontact' => 'nullable',
+			'horario' => 'required',
 		])->validate();
 
 		if ($this->photo) {
@@ -146,6 +147,7 @@ class ListComercios extends AdminComponent
 			'name' => 'required',			
 			'area_id' => 'required',
 			'cellphonecontact' => 'nullable',
+			'horario' => 'required',
 		])->validate();
 
 		$validatedData['keyword'] = $this->state['keyword'];

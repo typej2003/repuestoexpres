@@ -11,7 +11,7 @@ use App\Models\Country;
 use App\Models\Estado;
 use App\Models\Cities;
 use App\Models\DeliveryArea;
-use App\Models\Pedido;
+use App\Models\PedidoTemporal;
 
 class DatosFacturacionCliente extends AdminComponent
 {
@@ -21,6 +21,7 @@ class DatosFacturacionCliente extends AdminComponent
     public $direccionIdBeingRemoved = null;
     public $class = '';
     public $class1 = '';
+    public $deliveryArea = '';
 
     public $country = 237;
     public $province;
@@ -28,7 +29,18 @@ class DatosFacturacionCliente extends AdminComponent
     public $zona;
     public $countries = [], $provinces = [], $cities = [], $zonas = [];
     public $nropedido;
-    public $metodo = 'shipment';
+    public $metodoentrega = 'shipment';
+
+    protected $rules = [
+        'country' => 'required|not_in:0',
+        'province' => 'required|not_in:0',
+        'city' => 'required|not_in:0',
+    ];
+
+    protected $messages = [
+        'required' => 'Valor requerido',
+        'zipcode.required' => 'Valor requerido',
+    ];
     
     public function mount($nropedido)
     {
@@ -40,8 +52,27 @@ class DatosFacturacionCliente extends AdminComponent
         $this->countries = Country::all();
         $this->provinces = Estado::where('country_id', 237)->get();
 
-        $this->state['identificationNac'] = "V";
+        $datosfacturacion = DatosFacturacion::where('user_id', auth()->user()->id)->first();
 
+        if($datosfacturacion)
+        {
+            $this->state = $datosfacturacion->toArray();    
+        }else{
+            $this->state = auth()->user()->toArray();
+            $this->state['cellphonecode'] = auth()->user()->datosbasicos->cellphonecode;
+            $this->state['cellphone'] = auth()->user()->datosbasicos->cellphone;
+            $this->state['address'] = auth()->user()->datosbasicos->address;
+        }
+        
+        $this->state['nropedido'] = $nropedido;
+        $this->state['metodoentrega'] = $this->metodoentrega;
+        $this->state['metodoenvio'] = 'enviodelivery';
+    }
+
+    public function changeZona($zona_id)
+    {
+        $zona = DeliveryArea::find($zona_id);
+        $this->deliveryArea = $zona;
     }
 
     public function addNew()
@@ -144,6 +175,7 @@ class DatosFacturacionCliente extends AdminComponent
 
     public function siguiente()
     {
+
         $validatedData = Validator::make($this->state, [
             'identificationNac' => 'required|not_in:0',
 			'identificationNumber' => 'required',
@@ -153,7 +185,14 @@ class DatosFacturacionCliente extends AdminComponent
             'cellphone' => 'required',
             'address' => 'required',
             'zipcode' => 'required',
-		])->validate();
+            'metodoenvio'=> 'required|in:enviodelivery,envionacional',
+            'metodoentrega'=> 'required|not_in:0' ,
+		],  [
+            'required' => 'Valor requerido',
+        ],)->validate();
+
+        
+        $this->validate();
         
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['country_id'] = $this->country;
@@ -168,15 +207,26 @@ class DatosFacturacionCliente extends AdminComponent
 
         // Agregar datos de facturacion al pedido
         //$validatedData['nropedido'] = $this->nropedido;
-        $validatedData['shipping'] = $this->metodo;
+        $validatedData['shipping'] = $validatedData['metodoenvio'];
+        if($validatedData['shipping'] == 'enviodelivery'){
+            $validatedData['in_delivery'] = 1;
+        }else{
+            $validatedData['in_delivery'] = 0;
+        }
 
-        $pedido = Pedido::where('pedido', $this->nropedido)->first();
+        $pedido = PedidoTemporal::where('nropedido', $this->state['nropedido'])->first();
 
         $pedido->update($validatedData);
 
+        // $pedido = Pedido::where('pedido', $this->nropedido)->first();
+
+        // $pedido->update($validatedData);
+        
+        $this->dispatchBrowserEvent('enviarFormularioShipping');
+
 		$this->dispatchBrowserEvent('hide-form', ['message' => 'Datos de facturacion actualizado satisfactoriamente!']);
 
-        return redirect()->route('pasarela', ['nropedido' => $pedido->pedido, 'comercioId' => $pedido->comercio_id]);
+        // return redirect()->route('pasarela', ['nropedido' => $pedido->pedido, 'comercioId' => $pedido->comercio_id]);
 
     }
 
@@ -184,6 +234,8 @@ class DatosFacturacionCliente extends AdminComponent
     {
         $direcciones = DatosFacturacion::where('user_id', auth()->user()->id)->paginate();
 
-        return view('livewire.cliente.datos-facturacion-cliente', ['direcciones'=>$direcciones]);
+        $pedido = PedidoTemporal::where('nropedido', $this->nropedido)->first();
+
+        return view('livewire.cliente.datos-facturacion-cliente', ['direcciones'=>$direcciones, 'pedido'=>$pedido]);
     }
 }

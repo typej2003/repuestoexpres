@@ -74,6 +74,7 @@ class CartController extends Controller
             'price' => $product->price1,
             'quantity' => $request->quantity,
             'attributes' => array(
+                'nropedido' => '',
                 'image' => $product->image1_url,
                 'comercio_id' => $product->comercio_id,
                 'categoria_id' => $request->categoria_id,
@@ -93,6 +94,7 @@ class CartController extends Controller
             'price' => $request->price.$id,
             'quantity' => $request->quantity.$id,
             'attributes' => array(
+                'nropedido' => '',
                 'image' => $request->img,
                 'afiliado_id' => $request->afiliado_id,
                 'sucursal_id' => $request->sucursal_id,

@@ -13,7 +13,7 @@ class Pedido extends Model
     const NOTCONFIRMED = '0';
 
     protected $fillable = [
-        'pedido',
+        'nropedido',
         'reference',
         'comercio_id',
         'user_id',
@@ -21,9 +21,22 @@ class Pedido extends Model
         'description',
         'coste',
         'currency',
+        'metodo',
         'in_delivery',
         'confirmed',
-        'shipping',
+        'shipping', 
+        'address',
+        'metodoentrega',
+        //envio o pickupt
+        //centro de distribucion
+        'centrodistribucion_id',
+        'comercio_id',
+        //'address',
+        'contactphone',
+        'horario',        
+        'comercio_id',
+        //envio
+        //'address',
         'identificationNac',
         'identificationNumber',
         'names',
@@ -36,7 +49,14 @@ class Pedido extends Model
         'city_id',
         'deliveryarea_id',
         'zipcode',
+        //delivery
+        
     ];
+
+    public function comercio()
+    {
+        return $this->hasOne(Comercio::class, 'id', 'comercio_id');
+    }
 
     public function client()
     {

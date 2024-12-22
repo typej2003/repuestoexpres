@@ -11,7 +11,7 @@ class PedidoDetalles extends Model
 
     protected $fillable = [
         'pedido_id',
-        'pedido',
+        'nropedido',
         'comercio_id',
         'user_id',
         'name',

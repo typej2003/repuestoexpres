@@ -18,9 +18,13 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     public function update($user, array $input)
     {
+        
         Validator::make($input, [
+            'identificationNac' => ['required'],
+            'identificationNumber' => ['required'],
             'name' => ['required', 'string', 'max:255'],
-
+            'names' => ['required', 'string', 'max:255'],
+            'surnames' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
@@ -35,7 +39,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $this->updateVerifiedUser($user, $input);
         } else {
             $user->forceFill([
+                'identificationNac' => $input['identificationNac'],
+                'identificationNumber' => $input['identificationNumber'],
                 'name' => $input['name'],
+                'names' => $input['names'],
+                'surnames' => $input['surnames'],
                 'email' => $input['email'],
             ])->save();
         }

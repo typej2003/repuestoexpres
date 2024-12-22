@@ -12,10 +12,7 @@
 	    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
-        <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
-
-        
-	    
+        <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->	    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/showProducts.css">    
@@ -37,15 +34,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('layouts.navbar')->html();
-} elseif ($_instance->childHasBeenRendered('Vmer5pM')) {
-    $componentId = $_instance->getRenderedChildComponentId('Vmer5pM');
-    $componentTag = $_instance->getRenderedChildComponentTagName('Vmer5pM');
+} elseif ($_instance->childHasBeenRendered('du2zpNq')) {
+    $componentId = $_instance->getRenderedChildComponentId('du2zpNq');
+    $componentTag = $_instance->getRenderedChildComponentTagName('du2zpNq');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('Vmer5pM');
+    $_instance->preserveRenderedChild('du2zpNq');
 } else {
     $response = \Livewire\Livewire::mount('layouts.navbar');
     $html = $response->html();
-    $_instance->logRenderedChild('Vmer5pM', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('du2zpNq', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -54,15 +51,15 @@ echo $html;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('layouts.navbar-in')->html();
-} elseif ($_instance->childHasBeenRendered('LlmkB2j')) {
-    $componentId = $_instance->getRenderedChildComponentId('LlmkB2j');
-    $componentTag = $_instance->getRenderedChildComponentTagName('LlmkB2j');
+} elseif ($_instance->childHasBeenRendered('RouSkwm')) {
+    $componentId = $_instance->getRenderedChildComponentId('RouSkwm');
+    $componentTag = $_instance->getRenderedChildComponentTagName('RouSkwm');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('LlmkB2j');
+    $_instance->preserveRenderedChild('RouSkwm');
 } else {
     $response = \Livewire\Livewire::mount('layouts.navbar-in');
     $html = $response->html();
-    $_instance->logRenderedChild('LlmkB2j', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('RouSkwm', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -94,15 +91,15 @@ echo $html;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('layouts.footer')->html();
-} elseif ($_instance->childHasBeenRendered('Om25FZy')) {
-    $componentId = $_instance->getRenderedChildComponentId('Om25FZy');
-    $componentTag = $_instance->getRenderedChildComponentTagName('Om25FZy');
+} elseif ($_instance->childHasBeenRendered('fwe5ljn')) {
+    $componentId = $_instance->getRenderedChildComponentId('fwe5ljn');
+    $componentTag = $_instance->getRenderedChildComponentTagName('fwe5ljn');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('Om25FZy');
+    $_instance->preserveRenderedChild('fwe5ljn');
 } else {
     $response = \Livewire\Livewire::mount('layouts.footer');
     $html = $response->html();
-    $_instance->logRenderedChild('Om25FZy', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('fwe5ljn', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

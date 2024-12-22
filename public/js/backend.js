@@ -41,5 +41,14 @@ window.addEventListener('refreshPage', event => {
   location.reload()
 }) 
 
+window.addEventListener('hide-form-centros', function (event) {
+  $('#form-centros').modal('hide');
+  toastr.success(event.detail.message, 'Success!');
+});
+
+window.addEventListener('show-form-centros', function (event) {
+  $('#form-centros').modal('show');
+});
+
 /******/ })()
 ;

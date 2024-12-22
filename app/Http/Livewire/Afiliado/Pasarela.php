@@ -7,12 +7,15 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\CartController;
+
 use App\Models\User;
 use App\Models\DatosBasicos;
 use App\Models\Comercio;
 use App\Models\Banco;
 use App\Models\Transaccion;
 use App\Models\Pedido;
+use App\Models\PedidoTemporal;
 use App\Models\MetodoPagoC;
 
 class Pasarela extends Component
@@ -40,6 +43,8 @@ class Pasarela extends Component
     public $identificationNac = 'V'; // V E P
     public $identificationNumber = '';
 
+    public $metodoentrega;
+
     public $pagosmoviles;
     public $transferencias;
     public $zelles;
@@ -48,35 +53,114 @@ class Pasarela extends Component
         'emitCurrency' => 'emitCurrency'
     ];
 
-    public function mount($nropedido, $comercioId)
+    public function mount(Request $request, $nropedido = '', $comercioId = 1, )
 	{
-        $this->pedido = Pedido::where('pedido', $nropedido)->first();
-		$this->comercio_id = $comercioId;
+            $this->pedido = PedidoTemporal::where('nropedido', $request->get('nropedido'))->first();
+            $this->comercio_id = $comercioId;
+            
+            //guardar variables de entrega
+            $this->metodoentrega = $request->get('metodoentrega');
 
-        $this->autenticarComercio($comercioId, $this->pedido->comercio_id);        
-        
-        if($this->pedido)
-        {
-            $this->nropedido = $this->pedido->pedido;
-            $this->reference = $this->pedido->pedido;
-            $this->title = $this->pedido->title;
-            $this->description = $this->pedido->description;
-            $this->clienteId = $this->pedido->user_id;
-            $this->amount = $this->pedido->coste;
-            $this->currency = $this->pedido->currency;
-            $this->currencyValue = $this->searchCurrency($this->pedido->currency);
-            $cliente = $this->pedido->client;            
-            $this->email = $cliente->email;
-            $this->cellphonecode = $cliente->datosbasicos->cellphonecode;
-            $this->cellphone = $cliente->datosbasicos->cellphone;
-            $this->identificationNac = $cliente->identificationNac;
-            $this->identificationNumber = $cliente->identificationNumber;
-            $this->comercio = Comercio::find($this->pedido->comercio_id);
-        }
+            $this->autenticarComercio($comercioId, $this->pedido->comercio_id);  
+            
+            if($this->pedido)
+            {
+                $this->nropedido = $this->pedido->nropedido;
+                $this->reference = $this->pedido->nropedido;
+                $this->title = $this->pedido->title;
+                $this->description = $this->pedido->description;
+                $this->clienteId = $this->pedido->user_id;
+                $this->amount = $this->pedido->coste;
+                $this->currency = $this->pedido->currency;
+                $this->currencyValue = $this->searchCurrency($this->pedido->currency);
+                
+                $cliente = $this->pedido->client;            
+                $this->email = $cliente->email;
+                $this->cellphonecode = $cliente->datosbasicos->cellphonecode;
+                $this->cellphone = $cliente->datosbasicos->cellphone;
+                $this->identificationNac = $cliente->identificationNac;
+                $this->identificationNumber = $cliente->identificationNumber;
+                $this->comercio = Comercio::find($this->pedido->comercio_id);
+            }
 
-        $this->currencyValue = request()->cookie('currency');
+            $this->currencyValue = request()->cookie('currency');
+       
         
 	}
+
+    public function pasarelaPost($request)
+    {
+        $cart = new CartController;
+        $contenido = $cart->contenido();
+        $title = 'Compra';
+        $description = '';
+
+        foreach($contenido as $elemento)
+        {
+            if($description !== '')
+            {
+                $description .= ' / ';
+            }
+            $description .= $elemento->name;
+            $description .= ' - '. $elemento->quantity;
+            $description .= ' - '. $elemento->price;
+        }
+        
+        $this->nropedido = auth()->user()->identificationNumber . '-' . str_replace("-", "", date("Y-m-d")) . str_replace(":", "", date("H:i:s"));
+        $this->reference = $this->nropedido;
+        $this->title = 'Compra';
+        $this->description = $description;
+        
+        $this->amount = $cart->total();
+
+        $this->currencyValue = request()->cookie('currency');
+
+        if($this->currencyValue == 'Bs')
+        {
+            $this->currency = '1';
+        }else{
+            $this->currency = '2';
+        }
+
+        $cliente = auth()->user();
+        $this->clienteId = $cliente->id;
+
+        $this->email = $cliente->email;
+        $this->cellphonecode = $cliente->datosbasicos->cellphonecode;
+        $this->cellphone = $cliente->datosbasicos->cellphone;
+        $this->identificationNac = $cliente->identificationNac;
+        $this->identificationNumber = $cliente->identificationNumber;
+
+        //$comercio es panexpress
+        $this->comercio = Comercio::find(1);
+
+        $this->pagosmoviles = MetodoPagoC::select(['id', 'metodo','cellphonecode','cellphone','identificationNumber','banco', 'codigo'])->where('comercio_id', $this->comercio_id)->where('metodo','pagomovil')->get()->toArray();
+        
+        $this->transferencias = MetodoPagoC::select(['id', 'metodo','banco', 'codigo', 'titular','identificationNumber','nrocuenta'])->where('comercio_id', $this->comercio_id)->where('metodo','transferencia')->get()->toArray();
+
+        $this->zelles = MetodoPagoC::select(['id', 'metodo', 'cellphonecode','cellphone','identificationNumber','pagoonline', 'email'])->where('comercio_id', $this->comercio_id)->where('pagoonline','zelle')->get()->toArray();
+        
+        // return view('livewire.afiliado.pasarela', [
+        //     'comercio' => $this->comercio,
+        //     'clienteId' => $this->clienteId,
+        //     'identificationNac' => $this->identificationNac,
+        //     'identificationNumber' => $this->identificationNumber,
+        //     'email' => $cliente->email,
+        //     'cellphonecode' => $cliente->datosbasicos->cellphonecode,
+        //     'cellphone' => $cliente->datosbasicos->cellphone,
+        //     'identificationNac' => $cliente->identificationNac,
+        //     'identificationNumber' => $cliente->identificationNumber,
+        //     'rifLetter' => 'J',
+        //     'rifNumber' => '',
+        //     'reference' => $this->reference,
+        //     'currency' => $this->currency,
+        //     'currencyValue' => $this->currencyValue,
+        //     'title' => $this->title,
+        //     'description' => $this->description,
+        //     'description' => $this->description,
+        // ]);
+    }
+
 
     public function emitCurrency($currencyValue, Request $request)
     {
@@ -135,9 +219,20 @@ class Pasarela extends Component
         
         $transaccion = Transaccion::create($operacion);
 
-        $pedido = Pedido::where('pedido', $operacion['nropedido'])->first();
+        $pedidoTemporal = PedidoTemporal::where('nropedido', $operacion['nropedido'])->first();
 
-        $pedido->update(['reference' => $operacion['reference']]);
+        $pedidoTemporal->update([
+            'reference' => $operacion['reference'],
+            'metodo' => $operacion['metodo'],
+        ]);
+
+        $pedido = $pedidoTemporal->toArray();
+
+        Pedido::create($pedido);
+
+        $cart = new CartController;
+
+        $cart->onlyClear();
 
         if($transaccion){
             $data = ['state'=> 'ok'];

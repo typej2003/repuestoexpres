@@ -144,7 +144,16 @@
               <a href="<?php echo e(route('listDeliveryArea', 1)); ?>" class="nav-link <?php echo e(request()->is('listDeliveryArea') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
-                  Zona de entrega
+                  Zona de entrega Delivery
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="<?php echo e(route('listCentrodistribucion', 1)); ?>" class="nav-link <?php echo e(request()->is('listCentrodistribucion') ? 'active' : ''); ?>">
+                <i class="nav-icon fas fa-comments"></i>
+                <p>
+                  Centro de Pickup
                 </p>
               </a>
             </li>

@@ -84,7 +84,7 @@ Route::get('/enviarData', [SearchAfiliado::class, 'enviarData'])->name('enviarda
 Route::get('/emailexample', EmailExample::class)->name('emailexample');
 
 Route::post('/autenticar', [AuthController::class, 'autenticar'])->name('autenticar');
-Route::post('/registarse', [AuthController::class, 'registrarse'])->name('registrarse');
+Route::post('/registrarse', [AuthController::class, 'registrarse'])->name('registrarse');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -102,6 +102,10 @@ Route::get('/login1', function(){
 
 Route::get('/register1', function(){
     return view('auth.register1');
+});
+
+Route::get('/registerDelivery', function(){
+    return view('auth.registerDelivery');
 });
 
 // autentica con google

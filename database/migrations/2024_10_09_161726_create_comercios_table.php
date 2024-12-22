@@ -30,8 +30,9 @@ class CreateComerciosTable extends Migration
             $table->string('banner')->nullable();
             $table->string('keyword')->unique();
             $table->string('dominio')->nullable();
-            $table->string('cellphonecontact')->nullable();
-            $table->string('phonecontact')->nullable();
+            $table->string('contactcellphone')->nullable();
+            $table->string('contactphone')->nullable();
+            $table->string('horario')->nullable();
             $table->string('email')->nullable();
             $table->string('youtube')->nullable();
             $table->string('twitter')->nullable();

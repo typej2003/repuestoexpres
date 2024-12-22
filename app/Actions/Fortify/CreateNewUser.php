@@ -36,6 +36,13 @@ class CreateNewUser implements CreatesNewUsers
             ],
             'password' => $this->passwordRules(),
         ])->validate();
+
+        if($input['role'] == 'delivery')
+        {
+            $active = 0;
+        }else{
+            $active = 1;
+        }
         
         $user = User::create([
             'identificationNac' => $input['identificationNac'],
@@ -43,6 +50,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'role' => $input['role'],
+            'active' => $active,
             'password' => Hash::make($input['password']),
         ]);
 

@@ -61,11 +61,65 @@
 
                                 <div class="tab-pane" :class="currentTab === 'profile' ? 'active' : ''" id="profile" wire:ignore.self>
                                     <form wire:submit.prevent="updateProfile" class="form-horizontal">
+
                                         <div class="form-group row">
                                             <label for="inputName" class="col-sm-2 col-form-label">Usuario</label>
                                             <div class="col-sm-10">
                                                 <input wire:model.defer="state.name" type="text" class="form-control @error('name') is-invalid @enderror" id="inputName" placeholder="Usuario">
                                                 @error('name')
+                                                <div class="invalid-feedback">
+                                                    {{ $message}}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="identificationNac"class="col-sm-2 col-form-label">Tipo </label>                                                    
+                                            <div class="col-sm-10">
+                                                <select wire:model.defer="state.identificationNac" class="form-control @error('identificationNac') is-invalid @enderror" name="identificationNac" id="identificationNac" placeholder="Tipo">
+                                                    <option value="J">J-</option>
+                                                    <option value="E">E-</option>
+                                                    <option value="G">G-</option>
+                                                    <option value="P">P-</option>
+                                                    <option value="V" selected>V-</option>
+                                                </select>
+                                                @error('identificationNac')
+                                                <div class="invalid-feedback">
+                                                    {{ $message}}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="identificationNumber" class="col-sm-2 col-form-label">Documento</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" wire:model.defer="state.identificationNumber" class="form-control @error('identificationNumber') is-invalid @enderror" name="identificationNumber" id="identificationNumber" placeholder="Documento">
+                                                @error('identificationNumber')
+                                                <div class="invalid-feedback">
+                                                    {{ $message}}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="names" class="col-sm-2 col-form-label">Nombres</label>
+                                            <div class="col-sm-10">
+                                                <input wire:model.defer="state.names" type="text" class="form-control @error('names') is-invalid @enderror" id="inputNames" placeholder="Nombres">
+                                                @error('names')
+                                                <div class="invalid-feedback">
+                                                    {{ $message}}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="surnames" class="col-sm-2 col-form-label">Apellidos</label>
+                                            <div class="col-sm-10">
+                                                <input wire:model.defer="state.surnames" type="text" class="form-control @error('surnames') is-invalid @enderror" id="inputSurName" placeholder="Apellidos">
+                                                @error('surnames')
                                                 <div class="invalid-feedback">
                                                     {{ $message}}
                                                 </div>

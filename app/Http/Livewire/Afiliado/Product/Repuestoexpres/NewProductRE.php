@@ -62,6 +62,9 @@ class NewProductRE extends AdminComponent
 		    $this->state = $this->product->toArray();
             
             $this->state['in_pedido'] = $this->checkear($this->state['in_pedido']);
+            $this->state['in_pickup'] = $this->checkear($this->state['in_pickup']);
+            $this->state['in_delivery'] = $this->checkear($this->state['in_delivery']);
+            $this->state['in_envio_nacional'] = $this->checkear($this->state['in_envio_nacional']);
             $this->state['in_envio_gratis'] = $this->checkear($this->state['in_envio_gratis']);
             $this->state['in_offer'] = $this->checkear($this->state['in_offer']);
             $this->state['in_fragil'] = $this->checkear($this->state['in_fragil']);
@@ -127,7 +130,6 @@ class NewProductRE extends AdminComponent
             'price_offer' => 'nullable',
             'profit_offer' => 'nullable',
             'price_divisa' => 'nullable',
-            'in_delivery' => 'nullable',
             'shipping_cost' => 'nullable',
             'stock_min' => 'nullable',
             'stock_max' => 'nullable',
@@ -148,8 +150,12 @@ class NewProductRE extends AdminComponent
             'madein' => 'nullable',
             'in_pedido' => 'nullable',
             'tx_adicionales' => 'nullable',
+
+            'in_pickup'  => 'nullable',
             'in_envio_nacional' => 'nullable',
+            'in_delivery' => 'nullable',            
             'in_envio_gratis' => 'nullable',
+            
             'in_offer' => 'nullable',
             'tx_recomendacion_consumo' => 'nullable',
             'in_fragil' => 'nullable',
@@ -223,7 +229,7 @@ class NewProductRE extends AdminComponent
             'price_offer' => 'nullable',
             'profit_offer' => 'nullable',
             'price_divisa' => 'nullable',
-            'in_delivery' => 'nullable',
+            
             'shipping_cost' => 'nullable',
             'stock_min' => 'nullable',
             'stock_max' => 'nullable',
@@ -244,7 +250,9 @@ class NewProductRE extends AdminComponent
             'madein' => 'nullable',
             'in_pedido' => 'nullable',
             'tx_adicionales' => 'nullable',
+            'in_pickup'  => 'nullable',
             'in_envio_nacional' => 'nullable',
+            'in_delivery' => 'nullable',            
             'in_envio_gratis' => 'nullable',
             'in_offer' => 'nullable',
             'tx_recomendacion_consumo' => 'nullable',

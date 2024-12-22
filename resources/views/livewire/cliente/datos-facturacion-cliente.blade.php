@@ -1,57 +1,71 @@
 <div class="container-fluid">
-    
+    <script src="/js/bootstrap.bundle.min.js"></script>
     <div class="row">
         <div class="col-md-12">
-            <div class="card" style="width: 100% !important;">
-                <div class="card-header">
-                    <h4>Libreta de direcciones</h4>
-                </div>
-                <div class="card-body">
-                    <table class="table table-hover table-bordered table-responsive">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Seleccione</th>
-                                <th scope="col">Dirección</th>
-                                <th scope="col">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody wire:loading.class="text-muted">
-                            @forelse ($direcciones as $index => $direccion)
-                            <tr>
-                                <th scope="row">{{ $direcciones->firstItem() + $index }}</th>
-                                <td>
-                                    <button wire:click.prevent="seleccionar({{$direccion}})" class="btn btn-primary"> Seleccionar</button>
-                                </td>
-                                <td>{{$direccion->direccionCompleta() }} </td>
-                                <td>
-                                    
-                                    <a href="" wire:click.prevent="edit({{ $direccion }})">
-                                        <i class="fa fa-edit mr-2"></i>
-                                    </a>
+            
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h4 class="accordion-header" id="headingOne">
+                            <a class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <h5>Libreta de direcciones</h5>
+                            </a>
+                        </h4>
+                        <div id="collapseOne" class="accordion-collapse collapse @error('showLogin') show @enderror" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="card" style="width: 100% !important;">
+                                    <div class="card-header">
+                                        
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-hover table-bordered table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Seleccione</th>
+                                                    <th scope="col">Dirección</th>
+                                                    <th scope="col">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody wire:loading.class="text-muted">
+                                                @forelse ($direcciones as $index => $direccion)
+                                                <tr>
+                                                    <th scope="row">{{ $direcciones->firstItem() + $index }}</th>
+                                                    <td>
+                                                        <button wire:click.prevent="seleccionar({{$direccion}})" class="btn btn-primary"> Seleccionar</button>
+                                                    </td>
+                                                    <td>{{$direccion->direccionCompleta() }} </td>
+                                                    <td>
+                                                        
+                                                        <a href="" wire:click.prevent="edit({{ $direccion }})">
+                                                            <i class="fa fa-edit mr-2"></i>
+                                                        </a>
 
-                                    <a href="" wire:click.prevent="confirmDireccionRemoval({{ $direccion->id }})">
-                                        <i class="fa fa-trash text-danger"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr class="text-center">
-                                <td colspan="9">
-                                    <p class="mt-2">No dispone de direcciones</p>
-                                </td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                                                        <a href="" wire:click.prevent="confirmDireccionRemoval({{ $direccion->id }})">
+                                                            <i class="fa fa-trash text-danger"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                @empty
+                                                <tr class="text-center">
+                                                    <td colspan="9">
+                                                        <p class="mt-2">No dispone de direcciones</p>
+                                                    </td>
+                                                </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-end">
+                                        {{ $direcciones->links() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer d-flex justify-content-end">
-                    {{ $direcciones->links() }}
-                </div>
-            </div>
+                
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             @if($showEditModal)
@@ -59,12 +73,25 @@
             @endif
         </div>
     </div>
+    <form class="formShipping" action="{{ route('pasarelaPost') }}" method="post">
+    @csrf
     <div class="row">
         <div class="col-md-12">
-            <div class="card my-3 mx-auto" style="width: 80%!important;">
+            <div class="card my-3 mx-auto" style="width: 100% !important;">
                 <div class="form-horizontal p-2">
-
                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Dirección de envío</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+
+                        <input wire:model.defer="state.nropedido" type="text" name="nropedido" id="nropedido" >
+                        <input wire:model.defer="state.metodoentrega" type="text" name="metodoentrega" id="metodoentrega" >
+
                         <div class="row">
                             <div class="col-xs-6 col-md-4 col-sm-4 col-4">
                                 <label for="identificationNac">Tipo de documento <span class="text-danger">*</span></label>
@@ -128,15 +155,6 @@
                         </div>                
                     </div>
                     <div class="form-group">
-                        <label for="address" class="">Dirección postal (Calle, Nº de Casa) <span class="text-danger">*</span></label>
-                        <textarea wire:model.defer="state.address" type="text" class="form-control @error('address') is-invalid @enderror" id="inpuAddress" placeholder="Dirección" {{$class}} {{$class1}}></textarea>
-                        @error('address')
-                        <div class="invalid-feedback">
-                            {{ $message}}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
                         <label for="country" class="">País <span class="text-danger">*</span></label>
                         <select wire:model="country" class="form-control @error('country') is-invalid @enderror" id="country" {{$class}} {{$class1}}>
                             <option value="0">Seleccione una opción</option>
@@ -185,7 +203,7 @@
                     </div>
                     <div class="form-group">
                         <label for="zona" class="">Zona de entrega <span class="text-danger">*</span></label>
-                        <select wire:model="zona" class="form-control @error('zona') is-invalid @enderror" id="zona" {{$class}} {{$class1}}>
+                        <select wire:model="zona" wire:change="changeZona( $event.target.value)" class="form-control @error('zona') is-invalid @enderror" id="zona" {{$class}} {{$class1}}>
                             <option value="0">Por favor seleccione una ciudad</option>
                             @foreach($zonas as $zona)
                                 <option value="{{ $zona->id }}">{{ $zona->name }}</option>
@@ -197,6 +215,25 @@
                         </div>
                         @enderror
                     </div>
+                    <script>
+                        // const changeSelected = (e) => {
+                        //     alert(e.target.value)
+                        //     console.log(e)
+                        // };
+
+                        // document.querySelector('#zona').addEventListener('change', changeSelected);
+
+                    </script>
+                    <div class="form-group">
+                        <label for="address" class="">Dirección postal (Calle, Nº de Casa) <span class="text-danger">*</span></label>
+                        <textarea wire:model.defer="state.address" type="text" class="form-control @error('address') is-invalid @enderror" id="inpuAddress" placeholder="Dirección" {{$class}} {{$class1}}></textarea>
+                        @error('address')
+                        <div class="invalid-feedback">
+                            {{ $message}}
+                        </div>
+                        @enderror
+                    </div>
+                    
                     <div class="form-group">
                         <label for="zipcode" class="">Código Postal <span class="text-danger">*</span></label>
                         <input type="text" wire:model.defer="state.zipcode" type="text" class="form-control @error('zipcode') is-invalid @enderror" id="zipcode" placeholder="Código Postal" {{$class}} {{$class1}}>
@@ -206,6 +243,77 @@
                         </div>
                         @enderror
                     </div>
+
+                    <!-- Metodos de entrega -->
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <h4>Métodos de entrega</h4>
+                        </div>
+                    </div>
+                    <input wire:model.defer="state.metodoenvio" type="text"  class=" @error('metodoenvio') is-invalid @enderror" id="metodoenvio">
+                    @error('metodoenvio')
+                    <div class="invalid-feedback">
+                        {{ $message}}
+                    </div>
+                    @enderror
+                    <div class="form-group">
+                        <div class="row border border-top my-4 centrar" style="height: 45px !important;">
+                            <div class="col-md-1">
+                                <input class="input my-1" type="radio" name="metodoenvio" value="enviodelivery" checked/>
+                            </div>
+                            <div class="col-md-2">
+                                @if($deliveryArea) {{$deliveryArea->coste}} @else ? @endif
+                            </div>
+                            <div class="col-md-9">
+                                <span class="datos">@if($deliveryArea) {{$deliveryArea->name}} @else Envío local @endif</span>
+                            </div>
+                        </div>
+
+                        <div class="row border border-top my-4">
+                            <div class="col-md-12">
+                                <div class="row my-3" >
+                                    <div class="col-md-1">
+                                        <input class="input my-1" type="radio" name="metodoenvio" value="envionacional"/> 
+                                    </div>
+                                    <div class="col-md-2">
+                                        $
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span class="">Envío nacional</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="row my-3">
+                                    <div class="col-md-12">
+                                        <div class="row mx-5">
+                                            <div class="col-md-12">
+                                                <input type="checkbox"> Asegurado
+                                                <p>
+                                                    Monto mínimo asegurado por defecto es $ 8,35 por paquete y el monto máximo asegurado permitido es $ 8.354,43. El valor es referencial.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row mx-5">
+                                            <div class="col-md-12">
+                                                <input type="checkbox" checked> Es domicilio
+                                                <p>
+                                                    Ubicaremos la oficina más cercana a su domicilio si la zona seleccionada no dispone del servicio/oficina. Por favor escríbanos al +58 416 5800403
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                        <script>
+                            let metodoenvio = document.querySelector('.input')
+                            metodoenvio.addEventListener('change', function(){
+                                document.querySelector('#metodoenvio')
+                            });
+                        </script>                        
+                    </div>
+                     
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10 d-flex">
                             <button wire:click.prevent="siguiente" class="btn btn-success mx-auto"> Siguiente</button>
@@ -215,6 +323,7 @@
             </div>
         </div>
     </div>
+    </form>
 
     <!-- Modal -->
     <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
@@ -413,4 +522,11 @@
         </div>
     </div>
 
+    <script>
+        window.addEventListener('enviarFormularioShipping', function (event) {
+            let formShipping = document.querySelector('.formShipping');            
+            formShipping.submit();        
+        });
+    </script>
+    
 </div>

@@ -103,7 +103,9 @@
                             @if($product->in_delivery)
                             <div style="width: auto;"><img style="width:60px" src="/img/envio_moto.png" alt=""><span>Delivery</span></div>
                             @endif
+                            @if($product->in_pickup)
                             <div style="width: auto;"><img style="width:60px" src="/img/envio_pickup.png" alt=""><span>Pickup</span></div>
+                            @endif
                         </div>
                         <div class="row">
                             <div class="accordion" id="accordionExample">

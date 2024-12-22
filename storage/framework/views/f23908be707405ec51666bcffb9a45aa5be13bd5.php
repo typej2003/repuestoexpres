@@ -114,7 +114,7 @@
                         <th scope="row" colspan = "2">
                             <?php if(count($cartCollection)>0): ?>
                                 <?php if(auth()->guard()->check()): ?>
-                                <button wire:click.prevent="finalizarCompra" class="form-control btn btn-danger">Finalizar la compra</button>
+                                <button wire:click.prevent="finalizarCompra" class="form-control btn btn-success">Compra</button>
                                 <?php else: ?>
                                     <div class="row">
                                         <div class="col-md-12">

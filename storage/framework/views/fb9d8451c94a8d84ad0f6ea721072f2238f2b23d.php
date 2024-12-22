@@ -121,7 +121,7 @@
                                         <div class="accordion-item">
                                             <h4 class="accordion-header" id="headingOne">
                                                 <a class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                    <strong>¿Ya Eres Usuario?</strong> 
+                                                    <strong>¿Ya Eres Usuario? </strong> 
                                                 </a>
                                             </h4>
                                             <div id="collapseOne" class="accordion-collapse collapse <?php $__errorArgs = ['showLogin'];
@@ -186,10 +186,17 @@ unset($__errorArgs, $__bag); ?>
                                         <div class="accordion-item">
                                             <h4 class="accordion-header" id="headingThree">
                                                 <a class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                    <strong>¿Aún no tienes cuenta?</strong> 
+                                                    <strong>¿Aún no tienes cuenta? </strong> 
                                                 </a>
                                             </h4>
-                                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                            <div id="collapseThree" class="accordion-collapse collapse <?php $__errorArgs = ['showRegister'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> show <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
                                                     <form action="<?php echo e(route('registrarse')); ?>" method="post">           
                                                         <?php echo csrf_field(); ?>
@@ -239,47 +246,98 @@ unset($__errorArgs, $__bag); ?>
                                                         </div>
                                                         
                                                         <div class="form-group">
-                                                            <label for="documento">Usuario <span class="text-danger">*</span></label>
+                                                            <label for="name">Usuario <span class="text-danger">*</span></label>
                                                             <div class="input-group mb-3">                
-                                                                <input type="text" name="name" class="form-control" placeholder="Usuario">
+                                                                <input type="text" name="name" class="form-control <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" placeholder="Usuario">
                                                                 <div class="input-group-append">
                                                                     <div class="input-group-text">
                                                                         <span class="fas fa-envelope"></span>
                                                                     </div>
                                                                 </div>
-                                                                <?php $__errorArgs = ['name'];
+                                                            </div>
+                                                            <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                                    <span class="text-danger"><?php echo e($message); ?></span>
-                                                                <?php unset($message);
+                                                                <span class="text-danger"><?php echo e($message); ?></span>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="names">Nombres <span class="text-danger">*</span></label>
+                                                            <div class="input-group mb-3">                
+                                                                <input type="text" name="names" class="form-control" placeholder="Nombre completo">
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text">
+                                                                        <span class="fas fa-envelope"></span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
+                                                            <?php $__errorArgs = ['names'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                                <span class="text-danger"><?php echo e($message); ?></span>
+                                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="surnames">Apellidos <span class="text-danger">*</span></label>
+                                                            <div class="input-group mb-3">                
+                                                                <input type="text" name="surnames" class="form-control" placeholder="Apellidos">
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text">
+                                                                        <span class="fas fa-envelope"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <?php $__errorArgs = ['surnames'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                                <span class="text-danger"><?php echo e($message); ?></span>
+                                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                         </div>
                                                         
                                                         <div class="form-group">
                                                             <label for="documento">Email <span class="text-danger">*</span></label>            
                                                             <div class="input-group mb-3">
-                                                                <input type="email" name="email" class="form-control" placeholder="Email">
+                                                                <input type="email" name="email" id="email" class="form-control" placeholder="Email">
                                                                 <div class="input-group-append">
                                                                     <div class="input-group-text">
                                                                         <span class="fas fa-envelope"></span>
                                                                     </div>
                                                                 </div>
-                                                                <?php $__errorArgs = ['email'];
+                                                            </div>
+                                                            <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                                    <span class="text-danger"><?php echo e($message); ?></span>
-                                                                <?php unset($message);
+                                                                <span class="text-danger"><?php echo e($message); ?></span>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                            </div>
                                                         </div>
 
                                                         <div class="form-group">
@@ -291,17 +349,17 @@ unset($__errorArgs, $__bag); ?>
                                                                         <span class="fas fa-lock"></span>
                                                                     </div>
                                                                 </div>
-                                                                <?php $__errorArgs = ['password'];
+                                                            </div>
+                                                            <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                                    <span class="text-danger"><?php echo e($message); ?></span>
-                                                                <?php unset($message);
+                                                                <span class="text-danger"><?php echo e($message); ?></span>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                            </div>
                                                         </div>
 
                                                         <div class="form-group">
@@ -313,24 +371,31 @@ unset($__errorArgs, $__bag); ?>
                                                                         <span class="fas fa-lock"></span>
                                                                     </div>
                                                                 </div>
-                                                                <?php $__errorArgs = ['password_confirmation'];
+                                                            </div>
+                                                            <?php $__errorArgs = ['password_confirmation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                                    <span class="text-danger"><?php echo e($message); ?></span>
-                                                                <?php unset($message);
+                                                                <span class="text-danger"><?php echo e($message); ?></span>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                            </div>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="documento">Teléfono </label>        
                                                             <div class="row ">
                                                                 <div class="col-xs-6 col-md-5 col-sm-4 col-4">
-                                                                    <select class="form-control" name="cellphonecode" id="cellphonecode">
+                                                                    <select class="form-control <?php $__errorArgs = ['cellphone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="cellphonecode" id="cellphonecode"> 
                                                                         <option value="0">Seleccione</option>
                                                                         <option value="0412">0412</option>
                                                                         <option value="0414">0414</option>
@@ -340,9 +405,36 @@ unset($__errorArgs, $__bag); ?>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-xs-6 col-md-7 col-sm-8 col-8">
-                                                                    <input type="text" class="form-control" name="cellphone" id="cellphone">
+                                                                    <input type="text" class="form-control <?php $__errorArgs = ['cellphone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="cellphone" id="cellphone">
                                                                 </div>
-                                                            </div>                
+                                                            </div>   
+                                                            <?php $__errorArgs = ['cellphonecode'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                                <span class="text-danger"><?php echo e($message); ?></span>
+                                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> 
+                                                            <?php $__errorArgs = ['cellphone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                                <span class="text-danger"><?php echo e($message); ?></span>
+                                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>            
                                                         </div>
 
                                                         <div class="form-group my-3 d-flex">

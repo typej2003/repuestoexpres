@@ -15,4 +15,9 @@ class CentroDistribucion extends Model
         'contactphone',
         'horario',
     ];
+
+    public function comercio()
+    {
+        return $this->hasOne(Comercio::class, 'id', 'comercio_id');
+    }
 }
