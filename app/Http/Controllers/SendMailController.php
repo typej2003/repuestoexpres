@@ -10,18 +10,18 @@ class SendMailController extends Controller
     {
         // Laravel 8
 
-        $mailData["email"] = $user->email;
-        $mailData["title"] = "Techsolutionstuff";
-        $mailData["body"] = "This is test mail with attachment";
+        $data["email"] = $user->email;
+        $data["title"] = "Techsolutionstuff";
+        $data["body"] = "This is test mail with attachment";
  
         $files = [
             public_path('img/regalo.png'),
             public_path('img/test_pdf.pdf'),
         ];
   
-        Mail::send('emails.test_mail', $mailData, function($message) use ($mailData, $files) {
-            $message->to($mailData["email"])
-                    ->subject($mailData["title"]);
+        Mail::send('emails.test_mail', $data, function($message) use ($data, $files) {
+            $message->to($data["email"])
+                    ->subject($data["title"]);
  
             foreach ($files as $file){
                 $message->attach($file);
