@@ -20,7 +20,7 @@ use App\Http\Livewire\Admin\Settings\ListMetodosPagos;
 
 use App\Http\Livewire\Recursos\ApiController;
 
-use App\Http\Livewire\Recursos\EmailExample;
+
 
 use App\Http\Livewire\Components\Star;
 
@@ -28,7 +28,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 use App\Http\Livewire\Error\ShowError;
 
-use App\Http\Controllers\SmsTwilioController;
+
 
 Route::get('/star', Star::class)->name('star'); 
 
@@ -83,7 +83,7 @@ Route::controller(SearchController::class)->group(function(){
 
 Route::get('/enviarData', [SearchAfiliado::class, 'enviarData'])->name('enviardata');
 
-Route::get('/emailexample', EmailExample::class)->name('emailexample');
+
 
 Route::post('/autenticar', [AuthController::class, 'autenticar'])->name('autenticar');
 Route::post('/registrarse', [AuthController::class, 'registrarse'])->name('registrarse');
@@ -146,5 +146,3 @@ Route::get('/google-callback', function () {
 });
 
 Route::get('/errorFound/{error}', ShowError::class)->name('errorFound');
-
-Route::get('sms/send', [SmsTwilioController::class, 'sendSms']);

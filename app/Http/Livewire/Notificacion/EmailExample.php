@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Recursos;
+namespace App\Http\Livewire\Notificacion;
 
 use App\Models\User;
 use Livewire\Component;
@@ -22,6 +22,6 @@ class EmailExample extends Component
 
     public function render()
     {
-        return view('livewire.recursos.email-example');
+        return view('livewire.notificacion.email-example');
     }
 }

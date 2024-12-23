@@ -99,6 +99,15 @@
                 </li>
 
                 <li class="nav-item">
+                  <a href="<?php echo e(route('emailFiles')); ?>" class="nav-link <?php echo e(request()->is('emailFiles') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Email con Files
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
                   <a href="/api/apicontroller" class="nav-link <?php echo e(request()->is('api.apicontroller') ? 'active' : ''); ?>">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
