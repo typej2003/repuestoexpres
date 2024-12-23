@@ -37,7 +37,6 @@ class SendMailController extends Controller
         // ];
            
         // Mail::to('to@gmail.com')->send(new TestMail($mailData));
-             
-        $this->dispatchBrowserEvent('hide-form', ['message' => 'Email enviado satisfactoriamente!']);
+ 
     }
 }
