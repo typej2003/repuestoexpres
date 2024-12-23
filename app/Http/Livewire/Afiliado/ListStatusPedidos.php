@@ -6,12 +6,13 @@ use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\User;
 use App\Models\Pedido;
 use App\Models\Comercio;
+use App\Models\UserComercio;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
 
-class ListPedidos extends AdminComponent
+class ListStatusPedidos extends AdminComponent
 {
 	use WithFileUploads;
 
@@ -35,8 +36,7 @@ class ListPedidos extends AdminComponent
 
     public function mount($comercioId)
     {
-    	$this->comercio_id = $comercioId;
-    	
+    	$this->comercio_id = $comercioId;    	
     }
 
 	public function changeConfirmation(Pedido $pedido, $confirmed)
@@ -61,6 +61,13 @@ class ListPedidos extends AdminComponent
 		}
 
 		$this->dispatchBrowserEvent('updated', ['message' => "Pedido cambió a: {$confirmed} satisfactoriamente."]);
+	}
+
+    public function changeDeliveryBoy(Pedido $pedido, $boy_id)
+	{
+		$pedido->update(['userdelivery_id' => $boy_id]);
+
+		$this->dispatchBrowserEvent('updated', ['message' => "Pedido asignado satisfactoriamente."]);
 	}
 
     public function addNew()
@@ -185,9 +192,13 @@ class ListPedidos extends AdminComponent
 
             $comercio = Comercio::find($this->comercio_id);
 
-        return view('livewire.afiliado.list-pedidos', [
+        $deliveryboys = UserComercio::where('comercio_id', $this->comercio_id)
+                        ->where('rolecomercio', 'delivery')->get();
+
+        return view('livewire.afiliado.list-status-pedidos', [
         	'pedidos' => $pedidos,
             'comercio' => $comercio,
+            'deliveryboys' => $deliveryboys,
         ]);
     }
 }

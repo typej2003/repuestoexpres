@@ -12,6 +12,8 @@ use App\Http\Livewire\Afiliado\ListProducts;
 use App\Http\Livewire\Afiliado\ViewDetails;
 use App\Http\Livewire\Afiliado\Repuestoexpres\ListMenus;
 use App\Http\Livewire\Afiliado\ListPedidos;
+use App\Http\Livewire\Afiliado\ListStatusPedidos;
+use App\Http\Livewire\Afiliado\ListPedidosDelivery;
 use App\Http\Livewire\Afiliado\Product\ListCombos;
 use App\Http\Livewire\Afiliado\ListTasas;
 use App\Http\Livewire\Afiliado\Product\Repuestoexpres\NewProductRE;
@@ -23,6 +25,7 @@ use App\Http\Livewire\Afiliado\Repuestoexpres\UpdateSettingComercio;
 use App\Http\Livewire\Afiliado\Repuestoexpres\ListImpuestos;
 use App\Http\Livewire\Afiliado\MetodosPagos;
 use App\Http\Livewire\Afiliado\listDeliveryArea;
+use App\Http\Livewire\Afiliado\Repuestoexpres\ListUsersComercio;
 
 use App\Models\Comercio;
 use App\Models\Product;
@@ -72,6 +75,10 @@ Route::get('/listMenus/{comercioId}', ListMenus::class)->name('listMenus')->midd
 
 Route::get('/listPedidos/{comercioId}', ListPedidos::class)->name('listPedidos')->middleware('auth');
 
+Route::get('/listStatusPedidos/{comercioId}', ListStatusPedidos::class)->name('listStatusPedidos')->middleware('auth');
+
+Route::get('/listPedidosDelivery', ListPedidosDelivery::class)->name('listPedidosDelivery')->middleware('auth');
+
 Route::get('/listCombos/{comercioId}', ListCombos::class)->name('listCombos')->middleware('auth');
 
 Route::get('/listTasas/{comercioId}', ListTasas::class)->name('listTasas')->middleware('auth');
@@ -96,5 +103,5 @@ Route::get('/metodospagos/{pedido}', MetodosPagos::class)->name('metodospagos')-
 
 Route::get('/listDeliveryArea/{comercioId}', listDeliveryArea::class)->name('listDeliveryArea')->middleware('auth');
 
-
+Route::get('/listUsersComercio/{comercioId}', ListUsersComercio::class)->name('listUsersComercio')->middleware('auth');
 

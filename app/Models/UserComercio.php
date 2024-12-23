@@ -5,13 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class UserComercio extends Model
 {
     use HasFactory;
+
+    const ROLE_DELIVERY = 'delivery';
 
     protected $fillable = [
         'user_id',
         'comercio_id',
+        'rolecomercio',
+        'vehiculo',
     ];
 
     public function telefono()

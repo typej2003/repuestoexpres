@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Pedidos Solicitados</h1>
+                    <h1 class="m-0 text-dark">Estados de los Pedidos</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -48,8 +48,9 @@
                                         </th>
                                         <th scope="col">Cédula</th>
                                         <th scope="col">Cliente</th>
+                                        <th scope="col">Telefono</th>
                                         <th scope="col">Productos</th>
-                                        <th scope="col">Fecha de Registro</th>
+                                        <th scope="col">Asignar Delivery Boy</th>
                                         <th scope="col">Opciones</th>
                                     </tr>
                                 </thead>
@@ -67,8 +68,17 @@
                                         <td>{{ $pedido->reference }}</td>
                                         <td>{{ $pedido->client->identificationNumber }}</td>
                                         <td>{{ $pedido->client->name }}</td>
+                                        <td>{{ $pedido->client->datosbasicos->telefono() }}</td>
                                         <td></td>
-                                        <td>{{ $pedido->created_at ?? 'N/A' }}</td>
+                                        <td>
+                                            <select class="form-control" wire:change="changeDeliveryBoy({{ $pedido }}, $event.target.value)">
+                                                <option value="0">Seleccione</option>
+                                                @foreach($deliveryboys as $boy)
+                                                    <option value="{{$boy->id}}" {{ ($pedido->userdelivery_id === $boy->id) ? 'selected' : '' }}>{{ $boy->user->names }} {{ $boy->user->names }}</option>
+                                                @endforeach
+                                                
+                                            </select>
+                                        </td>
                                         <td>
                                             
                                             <a href="" wire:click.prevent="edit({{ $pedido }})">
@@ -193,7 +203,7 @@
     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header text-white" style="background-color: #6C2689;">
+                <div class="modal-header text-white">
                     <h5>Eliminar Pedido</h5>
                 </div>
 

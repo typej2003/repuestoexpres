@@ -47,7 +47,10 @@ class PedidoTemporal extends Model
         'deliveryarea_id',
         'zipcode',
         //delivery
-        
+        'userdelivery_id',
+        'pedidoentregado',
+        'valoracionpedido',
+        'valoraciondelivery',
     ];
 
     public function comercio()

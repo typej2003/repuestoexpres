@@ -45,6 +45,10 @@ class CreatePedidosTable extends Migration
             $table->string('city_id')->nullable();
             $table->string('deliveryarea_id')->nullable();
             $table->string('zipcode')->nullable();
+            $table->bigInteger('userdelivery_id')->nullable();
+            $table->string('pedidoentregado')->nullable();
+            $table->text('valoracionpedido')->nullable();
+            $table->text('valoraciondelivery')->nullable();
             $table->timestamps();
         });
     }

@@ -311,3 +311,7 @@
     justify-content: center !important;
     align-items: center !important;
   }
+
+  .nav-link-sub {
+    background-color: #2d34f0 !important;
+  }

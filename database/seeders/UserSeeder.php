@@ -36,6 +36,20 @@ class UserSeeder extends Seeder
             'updated_at' => '2022-05-16 12:20:36'
         ]);
 
+        DB::table('clients')->insert([
+            'user_id' => 1,
+            'comercio_id' => 1,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);
+
+        DB::table('clients')->insert([
+            'user_id' => 2,
+            'comercio_id' => 1,
+            'created_at' => '2022-05-16 12:20:36',
+            'updated_at' => '2022-05-16 12:20:36'
+        ]);        
+
         DB::table('users')->insert([
             'identificationNac' => 'V',
             'identificationNumber' => '22111222',

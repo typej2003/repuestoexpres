@@ -12,6 +12,9 @@ class Pedido extends Model
     const CONFIRMED = '1';
     const NOTCONFIRMED = '0';
 
+    const DELIVERED = 'delivered';
+    const NOTDELIVERED = 'notdelivered';
+
     protected $fillable = [
         'nropedido',
         'reference',
@@ -50,7 +53,10 @@ class Pedido extends Model
         'deliveryarea_id',
         'zipcode',
         //delivery
-        
+        'userdelivery_id',
+        'pedidoentregado',
+        'valoracionpedido',
+        'valoraciondelivery',
     ];
 
     public function comercio()

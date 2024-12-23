@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
 
-class ListPedidos extends AdminComponent
+class ListPedidosDelivery extends AdminComponent
 {
 	use WithFileUploads;
 
@@ -33,9 +33,8 @@ class ListPedidos extends AdminComponent
 
     public $sortDirection = 'desc';
 
-    public function mount($comercioId)
+    public function mount()
     {
-    	$this->comercio_id = $comercioId;
     	
     }
 
@@ -44,11 +43,11 @@ class ListPedidos extends AdminComponent
 		Validator::make(['confirmed' => $confirmed], [
 			'confirmed' => [
 				'required',
-				Rule::in(Pedido::CONFIRMED, Pedido::NOTCONFIRMED),
+				Rule::in(Pedido::DELIVERED, Pedido::NOTDELIVERED),
 			],
 		])->validate();
 
-		$pedido->update(['confirmed' => $confirmed]);
+		$pedido->update(['pedidoentregado' => $confirmed]);
 
 		switch ($confirmed) {
 			case '1':
@@ -185,7 +184,7 @@ class ListPedidos extends AdminComponent
 
             $comercio = Comercio::find($this->comercio_id);
 
-        return view('livewire.afiliado.list-pedidos', [
+        return view('livewire.afiliado.list-pedidos-delivery', [
         	'pedidos' => $pedidos,
             'comercio' => $comercio,
         ]);

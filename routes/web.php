@@ -28,6 +28,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 use App\Http\Livewire\Error\ShowError;
 
+use App\Http\Controllers\SmsTwilioController;
+
 Route::get('/star', Star::class)->name('star'); 
 
 /*
@@ -144,3 +146,5 @@ Route::get('/google-callback', function () {
 });
 
 Route::get('/errorFound/{error}', ShowError::class)->name('errorFound');
+
+Route::get('sms/send', [SmsTwilioController::class, 'sendSms']);

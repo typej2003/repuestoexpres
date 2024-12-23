@@ -21,6 +21,11 @@ class DatosBasicos extends Model
         'cellphone',
     ];
 
+    public function telefono()
+    {
+        return $this->cellphonecode . $this->cellphone;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

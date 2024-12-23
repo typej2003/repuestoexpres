@@ -8,7 +8,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/admin/dashboard">Escritorio</a></li>
-                        <li class="breadcrumb-item active"><a href="/listComercios/{{$comercio->id}}">Comercios</a></li>
+                        <li class="breadcrumb-item active">Pedidos</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -31,7 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Confirmado</th>
+                                        <th scope="col">Estado Pedido</th>
                                         <th scope="col">
                                             Pedido
                                             <span wire:click="sortBy('pedido')" class="float-right text-sm" style="cursor: pointer;">
@@ -59,8 +59,9 @@
                                         <th scope="row">{{ $pedidos->firstItem() + $index }}</th>
                                         <td>
                                             <select class="form-control" wire:change="changeConfirmation({{ $pedido }}, $event.target.value)">
-                                                <option value="1" {{ ($pedido->confirmed === 1) ? 'selected' : '' }}>CONFIRMADO</option>
-                                                <option value="0" {{ ($pedido->confirmed === 0) ? 'selected' : '' }}>NO CONFIRMADO</option>
+                                                <option value="0">Seleccione</option>
+                                                <option value="delivered" {{ ($pedido->pedidoentregado === 'delivered') ? 'selected' : '' }}>ENTREGADO</option>
+                                                <option value="notdelivered" {{ ($pedido->pedidoentregado === 'notdelivered') ? 'selected' : '' }}>NO ENTREGADO</option>
                                             </select>
                                         </td>
                                         <td><a href="/pasarela/{{ $pedido->pedido }}/{{ $pedido->comercio_id }}">{{ $pedido->nropedido }}</a></td>

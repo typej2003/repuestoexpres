@@ -35,67 +35,6 @@
         <?php if(auth()->guard()->check()): ?>
           <?php if(auth()->user()->role == 'admin'): ?>
             <li class="nav-item">
-              <a href="<?php echo e(route('star')); ?>" class="nav-link <?php echo e(request()->is('star') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Star
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo e(route('admin.listAreas')); ?>" class="nav-link <?php echo e(request()->is('admin/listAreas') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Área Económica
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/listTasas/1" class="nav-link <?php echo e(request()->is('listTasas') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Tasa de cambio
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('emailexample')); ?>" class="nav-link <?php echo e(request()->is('emailexample') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Prueba de Email
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="/api/apicontroller" class="nav-link <?php echo e(request()->is('api.apicontroller') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                  Probar Api
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="/pasarela" class="nav-link <?php echo e(request()->is('pasarela') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                  Pasarela
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('admin.users')); ?>" class="nav-link <?php echo e(request()->is('admin/users') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                  Usuarios
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
               <a href="<?php echo e(route('listPedidosCliente')); ?>" class="nav-link <?php echo e(request()->is('listPedidosCliente') ? 'active' : ''); ?>">
                 <i class="fa fa-solid fa-file-invoice-dollar"></i>
                 <p>
@@ -112,109 +51,293 @@
                 </p>
               </a>
             </li>
-
+            
+            <!-- arbol -->
             <li class="nav-item">
-              <a href="<?php echo e(route('listMetodosPagos')); ?>" class="nav-link <?php echo e(request()->is('listMetodosPagos') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
                 <p>
-                  Métodos de Pagos
+                  Configurar Sitio
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
-            </li>
+              <ul class="nav nav-treeview nav-link-sub">
+                <li class="nav-item">
+                  <a href="<?php echo e(route('star')); ?>" class="nav-link <?php echo e(request()->is('star') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                      Star
+                    </p>
+                  </a>
+                </li>
 
+                <li class="nav-item">
+                  <a href="<?php echo e(route('admin.listAreas')); ?>" class="nav-link <?php echo e(request()->is('admin/listAreas') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Área Económica
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="/listTasas/1" class="nav-link <?php echo e(request()->is('listTasas') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Tasa de cambio
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('emailexample')); ?>" class="nav-link <?php echo e(request()->is('emailexample') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Prueba de Email
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="/api/apicontroller" class="nav-link <?php echo e(request()->is('api.apicontroller') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                      Probar Api
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">                  
+                  <a href="<?php echo e(route('listMetodosPagos')); ?>" class="nav-link <?php echo e(request()->is('listMetodosPagos') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Métodos de Pagos
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="/pasarela" class="nav-link <?php echo e(request()->is('pasarela') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                      Pasarela
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('admin.users')); ?>" class="nav-link <?php echo e(request()->is('admin/users') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                      Usuarios
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- fin arbol -->
+
+            <!-- arbol -->
             <li class="nav-item">
-              <a href="<?php echo e(route('listComercios', 1)); ?>" class="nav-link <?php echo e(request()->is('listComercios') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
                 <p>
-                  Comercios
+                  Comercio
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
-            </li>
+              <ul class="nav nav-treeview nav-link-sub">
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listComercios', 1)); ?>" class="nav-link <?php echo e(request()->is('listComercios') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Comercios
+                    </p>
+                  </a>
+                </li>
 
+                <li class="nav-item">
+                  <a href="<?php echo e(route('settingComercio', 1)); ?>" class="nav-link <?php echo e(request()->is('settingComercio') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Configurar Comercio
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listDeliveryArea', 1)); ?>" class="nav-link <?php echo e(request()->is('listDeliveryArea') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Zona de entrega Delivery
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listCentrodistribucion', 1)); ?>" class="nav-link <?php echo e(request()->is('listCentrodistribucion') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Centro de Pickup
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listImpuestos', 1)); ?>" class="nav-link <?php echo e(request()->is('listImpuestos') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Listar Impuestos
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listMetodosPagosC', 1)); ?>" class="nav-link <?php echo e(request()->is('listMetodosPagosC') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Métodos de Pagos
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listMenus', 1)); ?>" class="nav-link <?php echo e(request()->is('listMenus') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Menú
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listTransacciones', 1)); ?>" class="nav-link <?php echo e(request()->is('listTransacciones') ? 'active' : ''); ?>">
+                    <i class="fa fa-solid fa-file-invoice-dollar"></i>
+                    <p>
+                      Transacciones
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listPedidos', 1)); ?>" class="nav-link <?php echo e(request()->is('listPedidos') ? 'active' : ''); ?>">
+                    <i class="fa fa-solid fa-file-invoice-dollar"></i>
+                    <p>
+                      Pedidos
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listStatusPedidos', 1)); ?>" class="nav-link <?php echo e(request()->is('listStatusPedidos') ? 'active' : ''); ?>">
+                    <i class="fa fa-solid fa-file-invoice-dollar"></i>
+                    <p>
+                      Estado de Pedidos
+                    </p>
+                  </a>
+                </li>
+                
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listClientesComercio', 1)); ?>" class="nav-link <?php echo e(request()->is('listClientesComercio') ? 'active' : ''); ?>">
+                    <i class="fa fa-solid fa-car-side"></i>
+                    <i class="fa fa-solid fa-motorcycle"></i>
+                    <p>
+                      Delivery
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listClientesComercio', 1)); ?>" class="nav-link <?php echo e(request()->is('listClientesComercio') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                      Clientes
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listUsersComercio', 1)); ?>" class="nav-link <?php echo e(request()->is('listUsersComercio') ? 'active' : ''); ?>">
+                    <i class="fa fa-regular fa-user"></i>
+                    <p>
+                      Usuarios
+                    </p>
+                  </a>
+                </li>
+                
+              </ul>
+            </li>
+            <!-- fin arbol -->
+
+            <!-- arbol -->
             <li class="nav-item">
-              <a href="<?php echo e(route('settingComercio', 1)); ?>" class="nav-link <?php echo e(request()->is('settingComercio') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
                 <p>
-                  Configurar Comercio
+                  Producto
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview nav-link-sub">
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listProducts', 1)); ?>" class="nav-link <?php echo e(request()->is('listProducts') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Afiliado / Productos
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listCombos', 1)); ?>" class="nav-link <?php echo e(request()->is('listCombos') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Afiliado / Combos
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listManufacturers', 1)); ?>" class="nav-link <?php echo e(request()->is('listManufacturers') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Fabricantes
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/listCategories/1" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>CATEGORIA</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listBrand', 1)); ?>" class="nav-link <?php echo e(request()->is('listBrand') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Afiliado / Marca
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="<?php echo e(route('listContainers', 1)); ?>" class="nav-link <?php echo e(request()->is('listContainers') ? 'active' : ''); ?>">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                      Afiliado / Contenedor
+                    </p>
+                  </a>
+                </li>
+              </ul>
             </li>
+            <!-- fin arbol -->
 
             <li class="nav-item">
-              <a href="<?php echo e(route('listDeliveryArea', 1)); ?>" class="nav-link <?php echo e(request()->is('listDeliveryArea') ? 'active' : ''); ?>">
+              <a href="<?php echo e(route('listNotificaciones', 1)); ?>" class="nav-link <?php echo e(request()->is('listNotificaciones') ? 'active' : ''); ?>">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
-                  Zona de entrega Delivery
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listCentrodistribucion', 1)); ?>" class="nav-link <?php echo e(request()->is('listCentrodistribucion') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Centro de Pickup
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listImpuestos', 1)); ?>" class="nav-link <?php echo e(request()->is('listImpuestos') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Listar Impuestos
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listManufacturers', 1)); ?>" class="nav-link <?php echo e(request()->is('listManufacturers') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Fabricantes
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="/listCategories/1" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>CATEGORIA</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listBrand', 1)); ?>" class="nav-link <?php echo e(request()->is('listBrand') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Afiliado / Marca
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listContainers', 1)); ?>" class="nav-link <?php echo e(request()->is('listContainers') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Afiliado / Contenedor
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listProducts', 1)); ?>" class="nav-link <?php echo e(request()->is('listProducts') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Afiliado / Productos
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listCombos', 1)); ?>" class="nav-link <?php echo e(request()->is('listCombos') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Afiliado / Combos
+                  Notificaciones
                 </p>
               </a>
             </li>
@@ -224,42 +347,6 @@
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
                   Categorieslist
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listMetodosPagosC', 1)); ?>" class="nav-link <?php echo e(request()->is('listMetodosPagosC') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Comercio / Métodos de Pagos
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listMenus', 1)); ?>" class="nav-link <?php echo e(request()->is('listMenus') ? 'active' : ''); ?>">
-                <i class="nav-icon fas fa-comments"></i>
-                <p>
-                  Menú
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listPedidos', 1)); ?>" class="nav-link <?php echo e(request()->is('listPedidos') ? 'active' : ''); ?>">
-                <i class="fa fa-solid fa-file-invoice-dollar"></i>
-                <p>
-                  Pedidos
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="<?php echo e(route('listTransacciones', 1)); ?>" class="nav-link <?php echo e(request()->is('listTransacciones') ? 'active' : ''); ?>">
-                <i class="fa fa-solid fa-file-invoice-dollar"></i>
-                <p>
-                  Transacciones
                 </p>
               </a>
             </li>
@@ -283,6 +370,7 @@
                 </p>
               </a>
             </li>
+            <!-- arbol -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
@@ -312,6 +400,49 @@
                 </li>
               </ul>
             </li>
+            <!-- fin arbol -->
+          <?php endif; ?>
+
+          <?php if(auth()->user()->role == 'delivery'): ?>
+            <li class="nav-item">
+              <a href="<?php echo e(route('listPedidosDelivery')); ?>" class="nav-link <?php echo e(request()->is('listPedidosDelivery') ? 'active' : ''); ?>">
+                <i class="fa fa-solid fa-file-invoice-dollar"></i>
+                <p>
+                  Pedidos Delivery
+                </p>
+              </a>
+            </li>
+            <!-- arbol -->
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                  Tables
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="../tables/simple.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Simple Tables</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../tables/data.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>DataTables</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../tables/jsgrid.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>jsGrid</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- fin arbol -->
           <?php endif; ?>
 
           <?php if(auth()->user()->role == 'afiliado'): ?>
@@ -422,6 +553,39 @@
             </a>
           </form>
         </li>
+
+        <!-- arbol -->
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-table"></i>
+            <p>
+              Tables
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="../tables/simple.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Simple Tables</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../tables/data.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>DataTables</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../tables/jsgrid.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>jsGrid</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- fin arbol -->
+          
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

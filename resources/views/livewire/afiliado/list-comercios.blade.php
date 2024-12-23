@@ -95,6 +95,10 @@
                                                 <img width="35px" src="/img/icon-motor.png" alt="">
                                             </a>
 
+                                            <a href="/listProducts/{{$comercio->id }}">
+                                                <i class="fa fa-solid fa-motorcycle mx-2"></i>
+                                            </a>
+
                                             <a href="/listMetodosPagosC/{{$comercio->id }}">
                                                 <i class="fa fa-regular fa-credit-card mx-2"></i>
                                             </a>
