@@ -24,7 +24,7 @@ use App\Http\Livewire\Afiliado\Repuestoexpres\ListClients;
 use App\Http\Livewire\Afiliado\Repuestoexpres\UpdateSettingComercio;
 use App\Http\Livewire\Afiliado\Repuestoexpres\ListImpuestos;
 use App\Http\Livewire\Afiliado\MetodosPagos;
-use App\Http\Livewire\Afiliado\listDeliveryArea;
+use App\Http\Livewire\Afiliado\ListDeliveryArea;
 use App\Http\Livewire\Afiliado\Repuestoexpres\ListUsersComercio;
 
 use App\Models\Comercio;
@@ -101,7 +101,7 @@ Route::get('/listImpuestos/{comercioId}', ListImpuestos::class)->name('listImpue
 
 Route::get('/metodospagos/{pedido}', MetodosPagos::class)->name('metodospagos')->middleware('auth');
 
-Route::get('/listDeliveryArea/{comercioId}', listDeliveryArea::class)->name('listDeliveryArea')->middleware('auth');
+Route::get('/listDeliveryArea/{comercioId}', ListDeliveryArea::class)->name('listDeliveryArea')->middleware('auth');
 
 Route::get('/listUsersComercio/{comercioId}', ListUsersComercio::class)->name('listUsersComercio')->middleware('auth');
 
