@@ -16,7 +16,7 @@ class EmailFile extends Component
         
         $sendFile->sendMailWithAttachment($user);
 
-        $this->dispatchBrowserEvent('hide-form', ['message' => 'Usuario agregado satisfactoriamente!']);
+        $this->dispatchBrowserEvent('hide-form', ['message' => 'Email enviado satisfactoriamente!']);
     }
 
     public function render()
