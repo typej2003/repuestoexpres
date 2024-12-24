@@ -379,7 +379,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="description">Descripción</label>
-                                                <input type="text" wire:model.defer="state.description" autofocus class="font-costo form-control @error('description') is-invalid @enderror" id="description">
+                                                <textarea  wire:model.defer="state.description" autofocus class="font-costo form-control @error('description') is-invalid @enderror" id="description" rows="5"></textarea>
                                                 @error('description')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

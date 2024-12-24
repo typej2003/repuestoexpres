@@ -40,7 +40,7 @@ class ListSubcategories extends AdminComponent
     {
         $this->comercio_id = $comercioId;
         $this->category_id = $categoryId;
-        if($comercioId > 1){
+        if($comercioId > 0){
             $comercio = Comercio::find($comercioId);
 			$this->user_id = $comercio->user_id;
         }
