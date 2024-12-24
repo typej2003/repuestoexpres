@@ -45,7 +45,7 @@
                                                 <i class="fa fa-arrow-down {{ $sortColumnName === 'email' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
                                             </span>
                                         </th>
-                                        <th scope="col">Telélefono</th>
+                                        <th scope="col">Teléfono</th>
                                         <th scope="col">Registerd Date</th>
                                         <th scope="col">Rol</th>
                                         <th scope="col">Opciones</th>

@@ -25,8 +25,8 @@ class Notificacion extends Model
 
     public function getFileUrlAttribute()
     {
-        if ($this->avatar && Storage::disk('avatars')->exists($this->avatar)) {
-            return Storage::disk('avatars')->url($this->avatar);
+        if ($this->avatar && Storage::disk('filesnotificaciones')->exists($this->avatar)) {
+            return Storage::disk('filesnotificaciones')->url($this->avatar);
         }
 
         return asset('noimage.png');

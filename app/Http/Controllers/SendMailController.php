@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mail\TestMail;
+use App\Models\Notificacion;
 use Mail;
 class SendMailController extends Controller
 {
@@ -38,5 +39,29 @@ class SendMailController extends Controller
            
         // Mail::to('to@gmail.com')->send(new TestMail($mailData));
  
+    }
+
+
+    public function sendMailNotificacion($user, Notificacion $notificacion)
+    {
+        // Laravel 8
+
+        $data["email"] = $user->email;
+        $data["title"] = $notificacion->title;
+        $data["body"] = $notificacion->content;
+ 
+        $files = [
+            $notificacion->file_url,
+        ];
+  
+        Mail::send('emails.test_mail', $data, function($message) use ($data, $files) {
+            $message->to($data["email"])
+                    ->subject($data["title"]);
+ 
+            foreach ($files as $file){
+                $message->attach($file);
+            }            
+        });
+
     }
 }

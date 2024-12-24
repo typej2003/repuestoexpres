@@ -108,6 +108,15 @@
                 </li>
 
                 <li class="nav-item">
+                  <a href="{{ route('file-import') }}" class="nav-link {{ request()->is('file-import') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>
+                        Importar Usuarios
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
                   <a href="/api/apicontroller" class="nav-link {{ request()->is('api.apicontroller') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-users"></i>
                     <p>

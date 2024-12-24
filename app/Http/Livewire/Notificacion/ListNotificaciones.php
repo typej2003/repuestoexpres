@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Notificacion;
 
 use App\Http\Livewire\Admin\AdminComponent;
+use Illuminate\Http\Request;
 use App\Http\Controllers\SmsTwilioController;
 
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +24,8 @@ class ListNotificaciones extends AdminComponent
 
     public $file;
 
+	public $d_none = 'd-none';
+
 	public $notificacion;
 
 	public $comercio_id;
@@ -39,9 +42,14 @@ class ListNotificaciones extends AdminComponent
 
     public $sortDirection = 'desc';
 
+	protected $rules = [
+        'file' => 'nullable|mimes:pdf,xlsx,xls,csv,txt,png,gif,jpg,jpeg|max:8192',
+    ];
+
     public function mount($comercioId)
     {
     	$this->comercio_id = $comercioId;
+
     	
     }
 
@@ -50,6 +58,13 @@ class ListNotificaciones extends AdminComponent
 		$comercio_id = $this->comercio_id;
 		$this->reset();
 		$this->comercio_id = $comercio_id;
+
+		
+		$this->state['medio'] = 'email';
+		$this->state['title'] = 'archivo';
+		$this->state['content'] = 'contenido del archivo';
+
+		$this->d_none = '';
 
 		$this->showEditModal = false;
 
@@ -69,10 +84,14 @@ class ListNotificaciones extends AdminComponent
         $filename = $validatedData['title'].'-'.$this->comercio_id;
 
 		if ($this->file) {
+			dd('entro');
             $validatedData['adjunto'] = 1;
-            $validatedData['file'] = $this->photo1->storeAs(null,
+            $validatedData['file'] = $this->file->storeAs(null,
                 $filename . '-1.png', 'filesnotificaciones'
             );     
+		}
+		else{
+			dd('no entro');
 		}
 
 		Notificacion::create($validatedData);
@@ -149,11 +168,18 @@ class ListNotificaciones extends AdminComponent
 
 					foreach ($clientes as $key => $cliente) {
 						$messageTwilio = $twilioSms->sendSms($cliente->telefono(), $notificacion->title, $notificacion->content);
-
 					}
-
 					break;				
 				
+				case 'email':
+					$sendFile = new  SendMailController();
+        
+					$clientes = Client::where('comercio_id', $notificacion->comercio_id)->get();
+
+					foreach ($clientes as $key => $cliente) {
+						$sendFile->sendMailNotificacion($cliente, $notificacion);
+					}
+					break;
 			}
 			
 			
@@ -169,7 +195,39 @@ class ListNotificaciones extends AdminComponent
         } catch (Exception $e) {
             return 'Error: ' . $e->getMessage();
         }
+	}
 
+	public function saveNotificacion(Request $request)
+	{
+
+		$this->validate();
+
+		$validatedData = Validator::make($this->state, [
+			'medio' => 'required',
+            'title' => 'required',
+            'content' => 'required',
+		])->validate();
+
+		dd($request->all());
+
+		$validatedData['comercio_id']=$this->comercio_id;
+
+       // Handle file upload
+        if ($this->file) {
+            // Generate a unique filename with microtime
+            $filename = $validatedData['title'].'-'.$this->comercio_id;
+
+            // Save the file to the storage directory
+			// $validatedData['file'] = $this->file->storeAs(null,  $filename. '.' . $this->file->getClientOriginalExtension() , 'filesnotificaciones');
+
+			$validatedData['file'] = $this->file->store('/', 'filesnotificaciones');
+            
+            $this->file = null;
+        }
+		
+		Notificacion::create($validatedData);
+
+        $this->dispatchBrowserEvent('hide-form', ['message' => 'Notificación agregada satisfactoriamente!']);        
 		
 	}
 

@@ -21,7 +21,11 @@ class DatosBasicos extends Model
         'cellphone',
     ];
 
-    public function telefono()
+    protected $appends = [
+        'telefono',
+    ];
+
+    public function getTelefonoAttribute()
     {
         return $this->cellphonecode . $this->cellphone;
     }

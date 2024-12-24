@@ -18,3 +18,5 @@ Route::get('/emailFiles', EmailFile::class)->name('emailFiles');
 Route::get('sms/send', [SmsTwilioController::class, 'sendSms']);
 
 Route::get('/listNotificaciones/{comercioId}', ListNotificaciones::class)->name('listNotificaciones')->middleware('auth');
+
+Route::post('saveNotificacion', [ListNotificaciones::class, 'saveNotificacion'])->middleware('auth');

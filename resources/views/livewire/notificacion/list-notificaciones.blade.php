@@ -102,7 +102,9 @@
     <!-- Modal -->
     <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
-            <form autocomplete="off" wire:submit.prevent="{{ $showEditModal ? 'updateNotificacion' : 'createNotificacion' }}">
+            <!-- <form autocomplete="off" wire:submit.prevent="{{ $showEditModal ? 'updateNotificacion' : 'createNotificacion' }}"> -->
+            <form wire:submit.prevent="saveNotificacion" method="POST"   enctype="multipart/form-data">
+                @csrf
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
@@ -122,7 +124,7 @@
                             <select wire:model.defer="state.medio" id="medio" autofocus class="form-control @error('medio') is-invalid @enderror">
                                 <option value="0">Seleccione</option>
                                 <option value="sms">Sms</option>
-                                <option value="sms">Email</option>
+                                <option value="email">Email</option>
                                 <option value="whatsapp">Whatsapp</option>
                             </select>
                             @error('medio')
@@ -130,6 +132,20 @@
                                 {{ $message }}
                             </div>
                             @enderror
+                            <script>
+                            let select = document.querySelector('#medio')
+                            select.addEventListener('change', function(event){
+                                var selectElement = event.target.value;
+                                let file = document.querySelector('.file')
+                                if(selectElement !== 'sms' && selectElement !== '0'){
+                                    file.classList.remove("d-none");
+                                    @this.d_none = ''
+                                }else{
+                                    file.classList.add("d-none");
+                                    @this.d_none = 'd-none'
+                                }                                
+                            })
+                        </script>
                         </div>
 
                         <div class="form-group">
@@ -152,18 +168,21 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            <label for="customFile">Archivo adjunto</label>
-                            <div class="custom-file">
-                                <div x-data="{ isUploading: false, progress: 5 }" x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false; progress = 5" x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
-                                    <input wire:model="archivo" type="file" class="custom-file-input" id="customFile">
-                                    <div x-show.transition="isUploading" class="progress progress-sm mt-2 rounded">
-                                        <div class="progress-bar bg-primary progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" x-bind:style="`width: ${progress}%`">
-                                            <span class="sr-only">40% Completo (exito)</span>
-                                        </div>
-                                    </div>
+                        <div class="form-group {{ $d_none }} file">
+                                                           
+                                <div class="form-group {{ $d_none }} file">
+                                    <label for="customFile">Archivo </label>
+                                    <input wire:model="file" type="file" class="form-control" id="file" name="file">
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">
+                                        @if($showEditModal)
+                                        <span>Guardar Cambios</span>
+                                        @else
+                                        <span>Guardar</span>
+                                        @endif
+                                    </button>
+                                </div>
                         </div>
                     </div>
                     <div class="modal-footer">

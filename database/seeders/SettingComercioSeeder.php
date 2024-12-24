@@ -17,9 +17,9 @@ class SettingComercioSeeder extends Seeder
         DB::table('setting_comercios')->insert([
             'user_id' => '1',
             'comercio_id' => '1',
-            'site_name' => 'RepuestoExpres',
-            'site_email' => 'repuestoexpres@gmail.com',
-            'site_title' => 'RepuestoExpres',
+            'site_name' => 'PanExpres',
+            'site_email' => 'panexpres@gmail.com',
+            'site_title' => 'PanExpres',
             'footer_text' => '',
             'sidebar_collapse' => false,
             'in_cellphonecontact' => true,  

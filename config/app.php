@@ -15,7 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
-    'site_title' => 'RespuestoExpres',
+    'site_title' => 'PanExpres',
 
     'currencyGlobal' => env('APP_CURRENCY', 'Bs'),
 
@@ -186,6 +186,9 @@ return [
 
         Darryldecode\Cart\CartServiceProvider::class,
 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
+
     ],
 
     /*
@@ -239,6 +242,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
 
     ],
 

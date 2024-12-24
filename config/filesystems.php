@@ -101,6 +101,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'filesnotificaciones' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/filesnotificaciones'),
+            'url' => env('APP_URL').'/storage/filesnotificaciones',
+            'visibility' => 'public',
+        ],        
+
     ],
 
     /*
@@ -123,6 +130,8 @@ return [
         public_path('storage/avatarssubcategories') => storage_path('app/public/avatarssubcategories'),
         public_path('storage/avatarsproducts') => storage_path('app/public/avatarsproducts'),
         public_path('storage/avatarsmanufacturers') => storage_path('app/public/avatarsmanufacturers'),
+        public_path('storage/filesnotificaciones') => storage_path('app/public/filesnotificaciones'),
+        
     ],
 
 ];

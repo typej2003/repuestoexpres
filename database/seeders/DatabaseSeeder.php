@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             ContainerSeeder::class,
             ProductsSeeder::class,
             Products2Seeder::class,
-            Products3Seeder::class,
+            //Products3Seeder::class,
             MenuSeeder::class,
             MetodoPagoComercioSeeder::class,
         ]);

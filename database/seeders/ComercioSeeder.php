@@ -15,10 +15,10 @@ class ComercioSeeder extends Seeder
     public function run()
     {
         DB::table('comercios')->insert([
-            'area_id' => '2',
+            'area_id' => '1',
             'user_id' => '1',
-            'keyword' => 'repuestoexpres',
-            'name' => 'RepuestoExpres',
+            'keyword' => 'panexpres',
+            'name' => 'PanExpres',
             'avatar' => '',
             'banner' => '',
             'contactcellphone' => '04165800403',
@@ -38,16 +38,16 @@ class ComercioSeeder extends Seeder
         ]);
 
         DB::table('comercios')->insert([
-            'area_id' => '2',
+            'area_id' => '1',
             'user_id' => '2',
-            'keyword' => 'comercio2',
-            'name' => 'Comercio 2',
-            'avatar' => '',
-            'banner' => '',
+            'keyword' => 'panaderiaexpreso',
+            'name' => 'Panaderia expreso',
+            'avatar' => 'nickpanaderia.png',
+            'banner' => 'nickpanaderia.png',
             'contactcellphone' => '04162222222',
             'contactphone'  => '0212-222-22-22',
             'horario'  => 'Lunes a Domingo hora: 6:30 am a 8:00 pm',
-            'email'  => 'comercio2@gmail.com',
+            'email'  => 'panaderiaexpreso@gmail.com',
             'youtube'  => 'https://www.youtube.com/@ddrsistemas',
             'twitter'  => 'https://www.youtube.com/@ddrsistemas',
             'facebook'  => 'https://www.youtube.com/@ddrsistemas',
